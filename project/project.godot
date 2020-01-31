@@ -12,122 +12,132 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "GSTAgentLocation",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/GSTAgentLocation.gd"
+"path": "res://src/Systems/godot-steering-toolkit/GSTAgentLocation.gd"
 }, {
 "base": "Reference",
 "class": "GSTArrive",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTArrive.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTArrive.gd"
 }, {
 "base": "Reference",
 "class": "GSTAvoidCollisions",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTAvoidCollisions.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTAvoidCollisions.gd"
 }, {
 "base": "Reference",
 "class": "GSTBlend",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTBlend.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTBlend.gd"
 }, {
 "base": "Reference",
 "class": "GSTCohesion",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTCohesion.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTCohesion.gd"
 }, {
 "base": "Reference",
 "class": "GSTEvade",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTEvade.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTEvade.gd"
 }, {
 "base": "Reference",
 "class": "GSTFace",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTFace.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTFace.gd"
 }, {
 "base": "Reference",
 "class": "GSTFlee",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTFlee.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTFlee.gd"
 }, {
 "base": "Reference",
 "class": "GSTFollowPath",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTFollowPath.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTFollowPath.gd"
 }, {
 "base": "Reference",
 "class": "GSTGroupBehavior",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/GSTGroupBehavior.gd"
+"path": "res://src/Systems/godot-steering-toolkit/GSTGroupBehavior.gd"
 }, {
 "base": "GSTProximity",
 "class": "GSTInfiniteProximity",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Proximities/GSTInfiniteProximity.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Proximities/GSTInfiniteProximity.gd"
 }, {
 "base": "Reference",
 "class": "GSTLookWhereYouGo",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTLookWhereYouGo.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTLookWhereYouGo.gd"
 }, {
 "base": "Reference",
 "class": "GSTMatchOrientation",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTMatchOrientation.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTMatchOrientation.gd"
 }, {
 "base": "Reference",
 "class": "GSTPath",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/GSTPath.gd"
+"path": "res://src/Systems/godot-steering-toolkit/GSTPath.gd"
 }, {
 "base": "Reference",
 "class": "GSTPriority",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTPriority.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTPriority.gd"
 }, {
 "base": "Reference",
 "class": "GSTProximity",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Proximities/GSTProximity.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Proximities/GSTProximity.gd"
 }, {
 "base": "Reference",
 "class": "GSTPursue",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTPursue.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTPursue.gd"
 }, {
 "base": "GSTProximity",
 "class": "GSTRadiusProximity",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Proximities/GSTRadiusProximity.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Proximities/GSTRadiusProximity.gd"
 }, {
 "base": "Reference",
 "class": "GSTSeek",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTSeek.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTSeek.gd"
 }, {
 "base": "Reference",
 "class": "GSTSeparation",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/Behaviors/GSTSeparation.gd"
+"path": "res://src/Systems/godot-steering-toolkit/Behaviors/GSTSeparation.gd"
 }, {
 "base": "GSTAgentLocation",
 "class": "GSTSteeringAgent",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/GSTSteeringAgent.gd"
+"path": "res://src/Systems/godot-steering-toolkit/GSTSteeringAgent.gd"
 }, {
 "base": "Reference",
 "class": "GSTSteeringBehavior",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/GSTSteeringBehavior.gd"
+"path": "res://src/Systems/godot-steering-toolkit/GSTSteeringBehavior.gd"
 }, {
 "base": "Reference",
 "class": "GSTTargetAcceleration",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/GSTTargetAcceleration.gd"
+"path": "res://src/Systems/godot-steering-toolkit/GSTTargetAcceleration.gd"
 }, {
 "base": "Reference",
 "class": "GSTUtils",
 "language": "GDScript",
-"path": "res://src/godot-steering-toolkit/GSTUtils.gd"
+"path": "res://src/Systems/godot-steering-toolkit/GSTUtils.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://src/Systems/StateMachine/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://src/Systems/StateMachine/StateMachine.gd"
 } ]
 _global_script_class_icons={
 "GSTAgentLocation": "",
@@ -153,7 +163,9 @@ _global_script_class_icons={
 "GSTSteeringAgent": "",
 "GSTSteeringBehavior": "",
 "GSTTargetAcceleration": "",
-"GSTUtils": ""
+"GSTUtils": "",
+"State": "",
+"StateMachine": ""
 }
 
 [application]
@@ -169,16 +181,16 @@ window/size/height=720
 
 [input]
 
-up={
+thrust_forwards={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-down={
+thrust_back={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 left={
@@ -209,6 +221,18 @@ toggle_map={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":77,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+ ]
+}
+down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
  ]
 }
 
