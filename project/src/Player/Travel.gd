@@ -15,6 +15,7 @@ func physics_process(delta: float) -> void:
 			_parent.linear_accel_max * (_parent.reverse_multiplier if reversing else 1)
 	)
 	_parent.angular_velocity += movement.x * _parent.angular_accel_max
+	
 	_parent.physics_process(delta)
 
 

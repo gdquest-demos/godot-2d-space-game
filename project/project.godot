@@ -242,6 +242,13 @@ down={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="world_body"
+2d_physics/layer_3="pirates"
+2d_physics/layer_4="dockable"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

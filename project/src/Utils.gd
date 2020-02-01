@@ -4,7 +4,7 @@ class_name Utils
 
 # Returns the radius of a circumcircle for a triangle.
 # Adapted from algorithm by (mutoo)[https://gist.github.com/mutoo/5617691]
-static func triangle_circumcircle_radius(points: PoolVector2Array) -> float:
+static func get_triangle_circumcircle_radius(points: PoolVector2Array) -> float:
 	var a := points[0]
 	var b := points[1]
 	var c := points[2]

@@ -12,12 +12,19 @@ var radius: float
 
 onready var docking_shape := $DockingArea/CollisionShape2D
 onready var collision_shape := $KinematicBody2D/CollisionShape2D
+onready var agent_location := GSTSteeringAgent.new()
 
 
 func _ready() -> void:
+	radius = collision_shape.shape.radius
+	agent_location.position.x = global_position.x
+	agent_location.position.y = global_position.y
+	agent_location.orientation = rotation
+	agent_location.bounding_radius = radius
+	
 	$DockingArea.connect("body_entered", self, "_on_DockingArea_body_entered")
 	$DockingArea.connect("body_exited", self, "_on_DockingArea_body_exited")
-	radius = collision_shape.shape.radius
+	
 
 
 func _draw() -> void:

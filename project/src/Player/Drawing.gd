@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export var color := Color.skyblue
+export var color := Color.white
 
 onready var collision_shape: CollisionPolygon2D = owner.get_node("CollisionShape")
 

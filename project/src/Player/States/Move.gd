@@ -23,7 +23,7 @@ func _ready() -> void:
 	agent.linear_speed_max = linear_speed_max
 	agent.angular_acceleration_max = angular_accel_max
 	agent.angular_speed_max = angular_speed_max
-	agent.bounding_radius = Utils.triangle_circumcircle_radius(owner.shape.polygon)
+	agent.bounding_radius = Utils.get_triangle_circumcircle_radius(owner.shape.polygon)
 	_update_agent()
 
 
