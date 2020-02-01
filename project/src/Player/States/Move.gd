@@ -1,29 +1,29 @@
 extends State
 
 
-export var linear_accel_max := 15.0
+export var acceleration_max := 15.0
 export var linear_speed_max := 350.0
 export var drag_linear_coeff := 0.05
 export var reverse_multiplier := 0.25
 
 export var angular_speed_max := 120
-export var angular_accel_max := 45
+export var angular_acceleration_max := 45
 export var drag_angular_coeff := 0.1
 
 var linear_velocity := Vector2.ZERO
 var angular_velocity := 0.0
-var reversing := false
+var is_reversing := false
 
 onready var agent := GSTSteeringAgent.new()
 
 
 func _ready() -> void:
 	yield(owner, "ready")
-	agent.linear_acceleration_max = linear_accel_max * reverse_multiplier
+	agent.linear_acceleration_max = acceleration_max * reverse_multiplier
 	agent.linear_speed_max = linear_speed_max
-	agent.angular_acceleration_max = angular_accel_max
+	agent.angular_acceleration_max = angular_acceleration_max
 	agent.angular_speed_max = angular_speed_max
-	agent.bounding_radius = Utils.get_triangle_circumcircle_radius(owner.shape.polygon)
+	agent.bounding_radius = MathUtils.get_triangle_circumcircle_radius(owner.shape.polygon)
 	_update_agent()
 
 

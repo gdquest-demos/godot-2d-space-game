@@ -11,7 +11,7 @@ extends GSTSteeringBehavior
 
 
 var _behaviors := []
-var _accel := GSTTargetAcceleration.new()
+var _acceleration := GSTTargetAcceleration.new()
 
 
 func _init(agent: GSTSteeringAgent).(agent) -> void:
@@ -33,20 +33,20 @@ func get_behavior_at(index: int) -> Dictionary:
 	return {}
 
 
-func _calculate_steering(blended_accel: GSTTargetAcceleration) -> GSTTargetAcceleration:
-	blended_accel.set_zero()
+func _calculate_steering(blended_acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
+	blended_acceleration.set_zero()
 
 	for i in range(_behaviors.size()):
 		var bw: Dictionary = _behaviors[i]
-		bw.behavior.calculate_steering(_accel)
+		bw.behavior.calculate_steering(_acceleration)
 
-		blended_accel.add_scaled_accel(_accel, bw.weight)
+		blended_acceleration.add_scaled_accel(_acceleration, bw.weight)
 
-	blended_accel.linear = GSTUtils.clampedv3(blended_accel.linear, agent.linear_acceleration_max)
-	blended_accel.angular = clamp(
-			blended_accel.angular,
+	blended_acceleration.linear = GSTUtils.clampedv3(blended_acceleration.linear, agent.linear_acceleration_max)
+	blended_acceleration.angular = clamp(
+			blended_acceleration.angular,
 			-agent.angular_acceleration_max,
 			agent.angular_acceleration_max
 	)
 
-	return blended_accel
+	return blended_acceleration

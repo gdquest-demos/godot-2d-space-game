@@ -3,9 +3,10 @@
 [ext_resource path="res://src/Common/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Systems/StateMachine/StateMachine.gd" type="Script" id=2]
 [ext_resource path="res://src/Player/States/Move.gd" type="Script" id=3]
-[ext_resource path="res://src/Player/Travel.gd" type="Script" id=4]
+[ext_resource path="res://src/Player/States/Travel.gd" type="Script" id=4]
 [ext_resource path="res://src/Player/States/Dock.gd" type="Script" id=5]
 [ext_resource path="res://src/Player/PlayerShip.gd" type="Script" id=6]
+
 
 [node name="PlayerShip" groups=[
 "Player",
@@ -22,11 +23,11 @@ initial_state = NodePath("Move/Travel")
 
 [node name="Move" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 3 )
-linear_accel_max = 13.0
+acceleration_max = 13.0
 linear_speed_max = 325.0
 drag_linear_coeff = 0.04
 angular_speed_max = 270
-angular_accel_max = 15
+angular_acceleration_max = 15
 
 [node name="Travel" type="Node" parent="StateMachine/Move" index="0"]
 script = ExtResource( 4 )

@@ -3,7 +3,7 @@ extends State
 
 export var docking_release_speed := 150.0
 
-var _accel := GSTTargetAcceleration.new()
+var _acceleration := GSTTargetAcceleration.new()
 var _agent: GSTSteeringAgent
 
 var _reverse_face_position := GSTAgentLocation.new()
@@ -80,10 +80,10 @@ func physics_process(delta: float) -> void:
 	
 	_reverse_face_position.position = reverse_face
 	
-	_priority.calculate_steering(_accel)
-	_parent.linear_velocity.x += _accel.linear.x
-	_parent.linear_velocity.y += _accel.linear.y
-	_parent.angular_velocity += _accel.angular
+	_priority.calculate_steering(_acceleration)
+	_parent.linear_velocity.x += _acceleration.linear.x
+	_parent.linear_velocity.y += _acceleration.linear.y
+	_parent.angular_velocity += _acceleration.angular
 	_parent.physics_process(delta)
 	
 	if _is_on_final_approach:
