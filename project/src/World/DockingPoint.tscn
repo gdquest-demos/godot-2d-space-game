@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/World/Drawing.gd" type="Script" id=1]
+[ext_resource path="res://src/World/DockingPoint.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 100.0
+
+[node name="DockingPoint" type="Node2D" groups=[
+"World_Objects",
+]]
+script = ExtResource( 2 )
+
+[node name="Drawing" type="Node2D" parent="."]
+script = ExtResource( 1 )
+color = Color( 0.592157, 0.560784, 0.435294, 1 )
+
+[node name="DockingArea" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DockingArea"]
+shape = SubResource( 1 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+collision_layer = 2
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 2 )

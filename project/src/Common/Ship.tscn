@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Player/Drawing.gd" type="Script" id=1]
+
+[node name="Ship" type="KinematicBody2D"]
+
+[node name="CollisionShape" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, -20, -15, 15, 15, 15 )
+
+[node name="Drawing" type="Node2D" parent="."]
+script = ExtResource( 1 )
+color = Color( 1, 1, 1, 1 )
