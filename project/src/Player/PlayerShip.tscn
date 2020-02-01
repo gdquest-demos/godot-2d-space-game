@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Player/Drawing.gd" type="Script" id=1]
 [ext_resource path="res://src/Systems/StateMachine/StateMachine.gd" type="Script" id=2]
 [ext_resource path="res://src/Player/States/Move.gd" type="Script" id=3]
 [ext_resource path="res://src/Player/Travel.gd" type="Script" id=4]
+[ext_resource path="res://src/Player/States/Dock.gd" type="Script" id=5]
+[ext_resource path="res://src/Player/PlayerShip.gd" type="Script" id=6]
 
 [node name="PlayerShip" type="KinematicBody2D"]
+collision_mask = 2
+script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( 0, -20, -15, 15, 15, 15 )
@@ -27,3 +31,6 @@ angular_accel_max = 15
 
 [node name="Travel" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 4 )
+
+[node name="Dock" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 5 )

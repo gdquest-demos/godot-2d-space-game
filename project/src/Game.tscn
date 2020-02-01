@@ -1,27 +1,38 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Player/PlayerShip.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/World/DockingPoint.tscn" type="PackedScene" id=2]
 
 [node name="Game" type="Node"]
 
 [node name="World" type="Node2D" parent="."]
 
 [node name="PlayerShip" parent="World" instance=ExtResource( 1 )]
-position = Vector2( 89.809, 216.941 )
+position = Vector2( 157.517, 191.885 )
+
+[node name="DockingPoint" parent="World" instance=ExtResource( 2 )]
+position = Vector2( 385.201, 445.345 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 margin_right = 1280.0
 margin_bottom = 50.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer"]
-margin_right = 1280.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 225, 50 )
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 85.0
+rect_min_size = Vector2( 225, 75 )
 text = "AD or left stick to rotate
 W or gamepad A to thrust forwards
-S or gamepad B to thrust back"
+S or gamepad B to thrust back
+E or d-pad up to begin/abort docking"

@@ -7,7 +7,7 @@ var reversing := false
 func physics_process(delta: float) -> void:
 	var movement := get_movement()
 	reversing = movement.y > 0
-	var direction := GSTUtils.angle_to_vector2(owner.rotation)
+	var direction := GSTUtils.angle_to_vector2(_parent.agent.orientation)
 	
 	_parent.linear_velocity += (
 			movement.y *
@@ -26,3 +26,7 @@ func get_movement() -> Vector2:
 					Input.get_action_strength("thrust_forwards")
 			)
 	)
+
+
+func unhandled_input(event: InputEvent) -> void:
+	_parent.unhandled_input(event)
