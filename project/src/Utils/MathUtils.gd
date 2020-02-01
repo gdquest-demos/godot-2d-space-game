@@ -1,13 +1,17 @@
 extends Node
-class_name Utils
+class_name MathUtils
 
 
 # Returns the radius of a circumcircle for a triangle.
+# The circumscribed circle or circumcircle of a polygon is a circle that passes
+# through all the vertices of the polygon.
 # Adapted from algorithm by (mutoo)[https://gist.github.com/mutoo/5617691]
-static func get_triangle_circumcircle_radius(points: PoolVector2Array) -> float:
-	var a := points[0]
-	var b := points[1]
-	var c := points[2]
+static func get_triangle_circumcircle_radius(vertices: PoolVector2Array) -> float:
+	assert(vertices.size() == 3)
+	
+	var a := vertices[0]
+	var b := vertices[1]
+	var c := vertices[2]
 	
 	var A := b.x - a.x
 	var B := b.y - a.y

@@ -130,6 +130,11 @@ _global_script_classes=[ {
 "path": "res://src/Systems/godot-steering-toolkit/GSTUtils.gd"
 }, {
 "base": "Node",
+"class": "MathUtils",
+"language": "GDScript",
+"path": "res://src/Utils/MathUtils.gd"
+}, {
+"base": "Node",
 "class": "State",
 "language": "GDScript",
 "path": "res://src/Systems/StateMachine/State.gd"
@@ -138,11 +143,6 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://src/Systems/StateMachine/StateMachine.gd"
-}, {
-"base": "Node",
-"class": "Utils",
-"language": "GDScript",
-"path": "res://src/Utils.gd"
 } ]
 _global_script_class_icons={
 "GSTAgentLocation": "",
@@ -169,9 +169,9 @@ _global_script_class_icons={
 "GSTSteeringBehavior": "",
 "GSTTargetAcceleration": "",
 "GSTUtils": "",
+"MathUtils": "",
 "State": "",
-"StateMachine": "",
-"Utils": ""
+"StateMachine": ""
 }
 
 [application]
