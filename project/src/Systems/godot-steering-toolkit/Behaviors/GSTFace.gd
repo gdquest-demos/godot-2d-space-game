@@ -4,6 +4,7 @@ class_name GSTFace
 extends GSTMatchOrientation
 
 
+# Nyan ya nya
 func _init(agent: GSTSteeringAgent, target: GSTAgentLocation).(agent, target) -> void:
 	pass
 

@@ -53,6 +53,14 @@ func unhandled_input(event: InputEvent) -> void:
 						).radius 
 				}
 		)
+	elif (
+			event.is_action_pressed("precision_mode") 
+			or event.is_action_pressed("precision_mode_toggle")
+	):
+		_state_machine.transition_to(
+				"Move/Precision",
+				{ toggled = event.is_action_pressed("precision_mode_toggle") }
+		)
 
 
 func _update_agent() -> void:
