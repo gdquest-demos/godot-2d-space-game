@@ -20,8 +20,12 @@ position = Vector2( 1162.76, 200.477 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-margin_right = 1280.0
-margin_bottom = 50.0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -245.0
+grow_horizontal = 0
+rect_min_size = Vector2( 400, 0 )
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -33,10 +37,17 @@ __meta__ = {
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 1270.0
-margin_bottom = 85.0
+margin_right = 390.0
+margin_bottom = 710.0
 rect_min_size = Vector2( 225, 75 )
-text = "AD or left stick to rotate
-W or gamepad A to thrust forwards
-S or gamepad B to thrust back
-E or d-pad up to begin/abort docking"
+text = "Common:
+	E or d-pad up to dock, abort docking, and undock
+	Hold down right click to enter precision mode
+	Select\\share\\- on gamepad to toggle precision mode
+Travel mode:
+	AD or left stick to rotate
+	W or gamepad A to thrust forwards
+	S or gamepad B to thrust back
+Precision mode:
+	Ship faces mouse, or right stick to rotate
+	WASD or left stick to move"
