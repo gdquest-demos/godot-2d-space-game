@@ -30,6 +30,7 @@ anchor_bottom = 1.0
 margin_left = -245.0
 grow_horizontal = 0
 rect_min_size = Vector2( 400, 0 )
+mouse_filter = 2
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -44,6 +45,7 @@ margin_top = 10.0
 margin_right = 390.0
 margin_bottom = 710.0
 rect_min_size = Vector2( 225, 75 )
+mouse_filter = 2
 text = "Common:
 	E or d-pad up to dock, abort docking, and undock
 	Hold down right click to enter precision mode
