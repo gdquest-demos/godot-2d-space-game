@@ -13,8 +13,10 @@ export var drag_angular_coeff := 0.1
 var linear_velocity := Vector2.ZERO
 var angular_velocity := 0.0
 var is_reversing := false
+var can_fire := true
 
 onready var agent := GSTSteeringAgent.new()
+onready var gun: Node2D = owner.get_node("Gun")
 
 
 func _ready() -> void:
@@ -38,6 +40,9 @@ func physics_process(delta: float) -> void:
 	
 	linear_velocity = owner.move_and_slide(linear_velocity)
 	owner.rotation += deg2rad(angular_velocity) * delta
+	
+	if can_fire and Input.is_action_pressed("fire"):
+		gun.fire(gun.global_position, owner.rotation, owner.projectile_mask)
 
 
 # TODO: Replace find_node with actual detection

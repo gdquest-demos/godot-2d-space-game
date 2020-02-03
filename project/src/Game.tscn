@@ -17,6 +17,10 @@ position = Vector2( 385.201, 445.345 )
 [node name="PirateShip" parent="World" instance=ExtResource( 3 )]
 position = Vector2( 1162.76, 200.477 )
 
+[node name="Projectiles" type="Node2D" parent="World" groups=[
+"Projectiles",
+]]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
