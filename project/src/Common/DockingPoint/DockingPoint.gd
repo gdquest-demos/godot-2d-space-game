@@ -43,13 +43,17 @@ func _set_debug_draw_docking_radius(value: bool) -> void:
 
 func _set_docking_distance(value: float) -> void:
 	docking_distance = value
-	collision_shape.shape.radius = value
+	if not is_inside_tree():
+		yield(self, "ready")
+	
+	docking_shape.shape.radius = value
 	update()
 
 
 func _on_DockingArea_body_entered(body: Node) -> void:
 	player_inside = true
 	body.can_dock = true
+	body.dockable = self
 	update()
 
 
