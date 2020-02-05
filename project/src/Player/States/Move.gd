@@ -50,12 +50,8 @@ func unhandled_input(event: InputEvent) -> void:
 	if event.get_action_strength("toggle_dock") == 1 and owner.can_dock:
 		_state_machine.transition_to("Move/Dock", 
 				{
-						position_docking_partner = get_tree().root.find_node(
-								"DockingPoint", true, false
-						).global_position,
-						radius_docking_partner = get_tree().root.find_node(
-								"DockingPoint", true, false
-						).radius 
+						position_docking_partner = owner.dockable.global_position,
+						radius_docking_partner = owner.dockable.radius
 				}
 		)
 	elif (
