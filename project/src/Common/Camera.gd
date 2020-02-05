@@ -13,9 +13,15 @@ func _physics_process(delta: float) -> void:
 	)
 
 
-func setup_player(player: Node2D):
+func setup_player(player: Node2D) -> void:
+	if player:
+		player.connect("died", self, "_on_Player_died")
 	self.player = player
 	if not player:
 		set_physics_process(false)
 	else:
 		set_physics_process(true)
+
+
+func _on_Player_died() -> void:
+	setup_player(null)

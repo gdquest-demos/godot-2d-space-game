@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 signal damaged(amount)
-signal player_dead
+signal died
 
 
 export var health_max := 100
@@ -27,7 +27,7 @@ func die() -> void:
 	effect.global_position = global_position
 	ObjectRegistry.register_effect(effect)
 
-	emit_signal("player_dead")
+	emit_signal("died")
 
 	queue_free()
 

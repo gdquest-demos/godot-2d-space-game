@@ -91,8 +91,12 @@ func setup_world_objects(world_objects: Array) -> void:
 			world_proximity.agents.append(object_agent)
 
 
-func setup_target(target_agent: GSTSteeringAgent) -> void:
-	self.target_agent = target_agent
+func setup_target(target: Node) -> void:
+	if target:
+		target.connect("died", self, "_on_Target_died")
+		target_agent = target.agent
+	else:
+		target_agent = null
 	
 	var pursue: GSTPursue = _pursue_face_blend.get_behavior_at(0).behavior as GSTPursue
 	var face: GSTFace = _pursue_face_blend.get_behavior_at(1).behavior as GSTFace
@@ -192,3 +196,7 @@ func _on_self_damaged(amount: int) -> void:
 	if _health <= 0:
 		_pursue_face_blend.is_enabled = false
 		_arrive_home_blend.is_enabled = true
+
+
+func _on_Target_died() -> void:
+	setup_target(null)

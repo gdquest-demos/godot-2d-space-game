@@ -6,9 +6,9 @@
 [ext_resource path="res://src/Common/PopEffect.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Player/Station.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Common/Camera.gd" type="Script" id=6]
-[ext_resource path="res://src/Systems/GameManager.gd" type="Script" id=7]
+[ext_resource path="res://src/Systems/GameInitializer.gd" type="Script" id=7]
 
-[node name="GameManager" type="Node"]
+[node name="GameInitializer" type="Node"]
 script = ExtResource( 7 )
 
 [node name="World" type="Node2D" parent="."]
@@ -17,7 +17,9 @@ script = ExtResource( 7 )
 position = Vector2( -544.171, -298.661 )
 PopEffect = ExtResource( 4 )
 
-[node name="Camera" type="Camera2D" parent="World"]
+[node name="Camera" type="Camera2D" parent="World" groups=[
+"Camera",
+]]
 current = true
 zoom = Vector2( 1.5, 1.5 )
 script = ExtResource( 6 )
