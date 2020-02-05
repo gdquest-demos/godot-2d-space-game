@@ -31,16 +31,16 @@ func _ready() -> void:
 
 func physics_process(delta: float) -> void:
 	_update_agent()
-	
+
 	linear_velocity = linear_velocity.clamped(linear_speed_max)
 	linear_velocity = linear_velocity.linear_interpolate(Vector2.ZERO, drag_linear_coeff)
-	
+
 	angular_velocity = clamp(angular_velocity, -angular_speed_max, angular_speed_max)
 	angular_velocity = lerp(angular_velocity, 0, drag_angular_coeff)
-	
+
 	linear_velocity = owner.move_and_slide(linear_velocity)
 	owner.rotation += deg2rad(angular_velocity) * delta
-	
+
 	if can_fire and Input.is_action_pressed("fire"):
 		gun.fire(gun.global_position, owner.rotation, owner.projectile_mask)
 
@@ -48,19 +48,17 @@ func physics_process(delta: float) -> void:
 # TODO: Replace find_node with actual detection
 func unhandled_input(event: InputEvent) -> void:
 	if event.get_action_strength("toggle_dock") == 1 and owner.can_dock:
-		_state_machine.transition_to("Move/Dock", 
-				{
-						position_docking_partner = owner.dockable.global_position,
-						radius_docking_partner = owner.dockable.radius
-				}
-		)
-	elif (
-			event.is_action_pressed("precision_mode") 
-			or event.is_action_pressed("precision_mode_toggle")
-	):
 		_state_machine.transition_to(
-				"Move/Precision",
-				{ toggled = event.is_action_pressed("precision_mode_toggle") }
+			"Move/Dock",
+			{
+				position_docking_partner = owner.dockable.global_position,
+				radius_docking_partner = owner.dockable.radius
+			}
+		)
+	elif event.is_action_pressed("precision_mode") or event.is_action_pressed("precision_mode_toggle"):
+		_state_machine.transition_to(
+			"Move/Precision",
+			{ toggled = event.is_action_pressed("precision_mode_toggle") }
 		)
 
 

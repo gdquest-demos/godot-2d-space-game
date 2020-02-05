@@ -28,10 +28,6 @@ position = Vector2( 35.3373, 288.733 )
 [node name="PirateShip3" parent="World/Pirates" instance=ExtResource( 3 )]
 position = Vector2( -127.296, 154.8 )
 
-[node name="Projectiles" type="Node2D" parent="World" groups=[
-"Projectiles",
-]]
-
 [node name="Effects" type="Node2D" parent="World" groups=[
 "Effects",
 ]]

@@ -129,10 +129,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Systems/godot-steering-toolkit/GSTUtils.gd"
 }, {
+"base": "Node2D",
+"class": "Gun",
+"language": "GDScript",
+"path": "res://src/Common/Gun.gd"
+}, {
 "base": "Node",
 "class": "MathUtils",
 "language": "GDScript",
 "path": "res://src/Utils/MathUtils.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://src/Common/Projectiles/Projectile.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -169,7 +179,9 @@ _global_script_class_icons={
 "GSTSteeringBehavior": "",
 "GSTTargetAcceleration": "",
 "GSTUtils": "",
+"Gun": "",
 "MathUtils": "",
+"Projectile": "",
 "State": "",
 "StateMachine": ""
 }

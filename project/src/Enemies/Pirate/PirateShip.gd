@@ -4,7 +4,7 @@ extends KinematicBody2D
 signal damaged(amount)
 
 
-export var health := 100
+export var health_max := 100
 export var linear_speed_max := 200.0
 export var acceleration_max := 15.0
 export var drag_factor := 0.04
@@ -24,7 +24,7 @@ var _velocity := Vector2.ZERO
 var _angular_velocity := 0.0
 var _arrive_home_blend: GSTBlend
 var _pursue_face_blend : GSTBlend
-var _current_health := health
+var _health := health_max
 
 onready var agent := GSTSteeringAgent.new()
 onready var player_agent: GSTSteeringAgent = (
@@ -44,7 +44,7 @@ onready var world_proximity := GSTRadiusProximity.new(
 		distance_from_obstacles_min
 )
 onready var spawn_location := GSTAgentLocation.new()
-onready var gun = $Gun
+onready var gun: Gun = $Gun
 
 
 func _ready() -> void:
@@ -54,27 +54,27 @@ func _ready() -> void:
 	agent.angular_speed_max = angular_speed_max
 	agent.bounding_radius = MathUtils.get_triangle_circumcircle_radius($CollisionShape.polygon)
 	_update_agent()
-	
+
 	spawn_location.position.x = global_position.x
 	spawn_location.position.y = global_position.y
-	
+
 	# ----- Steering behaviors config -----
 	var pursue := GSTPursue.new(agent, player_agent)
-	
+
 	var face := GSTFace.new(agent, player_agent)
 	face.alignment_tolerance = deg2rad(5)
 	face.deceleration_radius = deg2rad(45)
-	
+
 	_pursue_face_blend = GSTBlend.new(agent)
 	_pursue_face_blend.add(pursue, 1)
 	_pursue_face_blend.add(face, 1)
 	_pursue_face_blend.is_enabled = false
-	
+
 	var separation := GSTSeparation.new(agent, player_proximity)
 	separation.decay_coefficient = pow(player_proximity.radius, 2)/0.15
-	
+
 	_pursue_face_blend.add(separation, 2)
-	
+
 	var avoid := GSTAvoidCollisions.new(agent, world_proximity)
 
 	var arrive := GSTArrive.new(agent, spawn_location)
@@ -88,21 +88,18 @@ func _ready() -> void:
 	_arrive_home_blend.add(arrive, 1)
 	_arrive_home_blend.add(look, 1)
 	_arrive_home_blend.is_enabled = false
-	
+
 	priority.add(avoid)
 	priority.add(_arrive_home_blend)
 	priority.add(_pursue_face_blend)
-	
-		# ----- Signals -----
+
+	# ----- Signals -----
 	connect("damaged", self, "_on_self_damaged")
-	(
-			get_tree().get_nodes_in_group("Player")[0].connect(
-					"player_dead", self, "_on_Player_dead"
-			)
-					if get_tree().get_nodes_in_group("Player").size() > 0
-					else null
-	)
-	
+	var player_node_group = get_tree().get_nodes_in_group("Player")
+	if player_node_group.size() > 0:
+		var player = player_node_group[0]
+		player.connect("player_dead", self, "_on_Player_dead")
+
 	# ----- Proximity config -----
 	# Make sure all world objects are in the tree by skipping a frame
 	yield(get_tree(), "idle_frame")
@@ -120,21 +117,18 @@ func _physics_process(delta: float) -> void:
 	_set_firing_on_player()
 
 	priority.calculate_steering(_acceleration)
-	
-	_velocity = (
-			(
-					_velocity + Vector2(_acceleration.linear.x, _acceleration.linear.y)
-			).clamped(agent.linear_speed_max)
-	)
+
+	_velocity += Vector2(_acceleration.linear.x, _acceleration.linear.y)
+	_velocity = _velocity.clamped(agent.linear_speed_max)
 	_velocity = _velocity.linear_interpolate(Vector2.ZERO, drag_factor)
-	
+
 	_angular_velocity = clamp(
-			_angular_velocity + _acceleration.angular,
-			-agent.angular_speed_max,
-			agent.angular_speed_max
+		_angular_velocity + _acceleration.angular,
+		-agent.angular_speed_max,
+		agent.angular_speed_max
 	)
 	_angular_velocity = lerp(_angular_velocity, 0, angular_drag_factor)
-	
+
 	_velocity = move_and_slide(_velocity)
 	rotation += deg2rad(_angular_velocity) * delta
 
@@ -165,18 +159,10 @@ func _set_behaviors_on_distances() -> void:
 func _set_firing_on_player() -> void:
 	if not player_agent:
 		return
-	
+
 	if _pursue_face_blend.is_enabled:
-		var to_player := (
-				Vector2(
-						agent.position.x,
-						agent.position.y
-				) -
-				Vector2(
-						player_agent.position.x,
-						player_agent.position.y
-				)
-		)
+		var to_player := Vector2(agent.position.x, agent.position.y) - Vector2(player_agent.position.x, player_agent.position.y)
+
 		var angle_to_player: = to_player.angle_to(GSTUtils.angle_to_vector2(rotation))
 		var comfortable_angle := deg2rad(firing_angle_to_player)
 		if abs(angle_to_player) <= comfortable_angle:
@@ -184,15 +170,15 @@ func _set_firing_on_player() -> void:
 
 
 func _on_self_damaged(amount: int) -> void:
-	_current_health -= amount
-	if _current_health <= 0:
+	_health -= amount
+	if _health <= 0:
 		var effect: Node2D = PopEffect.instance()
 		effect.global_position = global_position
 		get_tree().get_nodes_in_group("Effects")[0].add_child(effect)
 		queue_free()
 
 
-func _on_Player_dead() -> void:
-	player_agent = null
-	_pursue_face_blend.is_enabled = false
-	_arrive_home_blend.is_enabled = true
+	_health -= amount
+	if _health <= 0:
+		_pursue_face_blend.is_enabled = false
+		_arrive_home_blend.is_enabled = true

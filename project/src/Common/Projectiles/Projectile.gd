@@ -1,3 +1,4 @@
+class_name Projectile
 extends KinematicBody2D
 
 
@@ -7,6 +8,10 @@ export var damage := 10
 var direction := Vector2.ZERO
 
 onready var lifespan_timer := $Lifespan
+
+
+func _init() -> void:
+	set_as_toplevel(true)
 
 
 func _ready() -> void:
