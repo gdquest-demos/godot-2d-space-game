@@ -15,15 +15,15 @@ func _ready() -> void:
 	_parent = get_parent() as State
 
 
-func unhandled_input(event: InputEvent) -> void:
+func unhandled_input(_event: InputEvent) -> void:
 	pass
 
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
 	pass
 
 
-func enter(msg: Dictionary = {}) -> void:
+func enter(_msg: Dictionary = {}) -> void:
 	pass
 
 
