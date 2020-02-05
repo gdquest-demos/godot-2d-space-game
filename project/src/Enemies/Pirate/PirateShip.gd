@@ -1,6 +1,10 @@
 extends KinematicBody2D
 
 
+signal damaged(amount)
+
+
+export var health := 100
 export var linear_speed_max := 200.0
 export var acceleration_max := 15.0
 export var drag_factor := 0.04
@@ -11,14 +15,16 @@ export var distance_from_player_min := 200.0
 export var distance_from_obstacles_min := 200.0
 export var aggro_radius := 300.0
 export var distance_from_spawn_max := 600.0
-export var firing_angle_to_player := 3
+export var firing_angle_to_player := 4
 export(int, LAYERS_2D_PHYSICS) var projectile_mask := 0
+export var PopEffect: PackedScene
 
 var _acceleration := GSTTargetAcceleration.new()
 var _velocity := Vector2.ZERO
 var _angular_velocity := 0.0
 var _arrive_home_blend: GSTBlend
 var _pursue_face_blend : GSTBlend
+var _current_health := health
 
 onready var agent := GSTSteeringAgent.new()
 onready var player_agent: GSTSteeringAgent = get_tree().get_nodes_in_group("Player")[0].agent
@@ -89,6 +95,10 @@ func _ready() -> void:
 		var object_agent: GSTAgentLocation = wo.agent_location
 		if object_agent:
 			world_proximity.agents.append(object_agent)
+	
+	# ----- Signals -----
+	connect("damaged", self, "_on_self_damaged")
+	get_tree().get_nodes_in_group("Player")[0].connect("player_dead", self, "_on_Player_dead")
 
 
 func _physics_process(delta: float) -> void:
@@ -133,13 +143,17 @@ func _set_behaviors_on_distances() -> void:
 		_arrive_home_blend.is_enabled = true
 		_pursue_face_blend.is_enabled = false
 	else:
-		var distance_from_player := agent.position.distance_to(player_agent.position)
-		if distance_from_player < aggro_radius:
-			_pursue_face_blend.is_enabled = true
-			_arrive_home_blend.is_enabled = false
+		if player_agent:
+			var distance_from_player := agent.position.distance_to(player_agent.position)
+			if distance_from_player < aggro_radius:
+				_pursue_face_blend.is_enabled = true
+				_arrive_home_blend.is_enabled = false
 
 
 func _set_firing_on_player() -> void:
+	if not player_agent:
+		return
+	
 	if _pursue_face_blend.is_enabled:
 		var to_player := (
 				Vector2(
@@ -155,3 +169,18 @@ func _set_firing_on_player() -> void:
 		var comfortable_angle := deg2rad(firing_angle_to_player)
 		if abs(angle_to_player) <= comfortable_angle:
 			gun.fire(gun.global_position, rotation, projectile_mask)
+
+
+func _on_self_damaged(amount: int) -> void:
+	_current_health -= amount
+	if _current_health <= 0:
+		var effect: Node2D = PopEffect.instance()
+		effect.global_position = global_position
+		get_tree().get_nodes_in_group("Effects")[0].add_child(effect)
+		queue_free()
+
+
+func _on_Player_dead() -> void:
+	player_agent = null
+	_pursue_face_blend.is_enabled = false
+	_arrive_home_blend.is_enabled = true

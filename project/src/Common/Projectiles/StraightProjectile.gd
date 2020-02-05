@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 export var speed := 750.0
-export var damage := 5
+export var damage := 10
 
 var direction := Vector2.ZERO
 
