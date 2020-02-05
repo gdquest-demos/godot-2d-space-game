@@ -11,6 +11,8 @@ export var distance_from_player_min := 200.0
 export var distance_from_obstacles_min := 200.0
 export var aggro_radius := 300.0
 export var distance_from_spawn_max := 600.0
+export var firing_angle_to_player := 3
+export(int, LAYERS_2D_PHYSICS) var projectile_mask := 0
 
 var _acceleration := GSTTargetAcceleration.new()
 var _velocity := Vector2.ZERO
@@ -32,6 +34,7 @@ onready var world_proximity := GSTRadiusProximity.new(
 		distance_from_obstacles_min
 )
 onready var spawn_location := GSTAgentLocation.new()
+onready var gun = $Gun
 
 
 func _ready() -> void:
@@ -41,9 +44,11 @@ func _ready() -> void:
 	agent.angular_speed_max = angular_speed_max
 	agent.bounding_radius = MathUtils.get_triangle_circumcircle_radius($CollisionShape.polygon)
 	_update_agent()
+	
 	spawn_location.position.x = global_position.x
 	spawn_location.position.y = global_position.y
 	
+	# ----- Steering behaviors config -----
 	var pursue := GSTPursue.new(agent, player_agent)
 	
 	var face := GSTFace.new(agent, player_agent)
@@ -78,6 +83,7 @@ func _ready() -> void:
 	priority.add(_arrive_home_blend)
 	priority.add(_pursue_face_blend)
 	
+	# ----- Proximity config -----
 	var world_objects := get_tree().get_nodes_in_group("World_Objects")
 	for wo in world_objects:
 		var object_agent: GSTAgentLocation = wo.agent_location
@@ -88,16 +94,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_update_agent()
 
-	var distance_from_spawn := agent.position.distance_to(spawn_location.position)
-
-	if distance_from_spawn > distance_from_spawn_max:
-		_arrive_home_blend.is_enabled = true
-		_pursue_face_blend.is_enabled = false
-	else:
-		var distance_from_player := agent.position.distance_to(player_agent.position)
-		if distance_from_player < aggro_radius:
-			_pursue_face_blend.is_enabled = true
-			_arrive_home_blend.is_enabled = false
+	_set_behaviors_on_distances()
+	_set_firing_on_player()
 
 	priority.calculate_steering(_acceleration)
 	
@@ -126,3 +124,34 @@ func _update_agent() -> void:
 	agent.linear_velocity.x = _velocity.x
 	agent.linear_velocity.y = _velocity.y
 	agent.angular_velocity = _angular_velocity
+
+
+func _set_behaviors_on_distances() -> void:
+	var distance_from_spawn := agent.position.distance_to(spawn_location.position)
+
+	if distance_from_spawn > distance_from_spawn_max:
+		_arrive_home_blend.is_enabled = true
+		_pursue_face_blend.is_enabled = false
+	else:
+		var distance_from_player := agent.position.distance_to(player_agent.position)
+		if distance_from_player < aggro_radius:
+			_pursue_face_blend.is_enabled = true
+			_arrive_home_blend.is_enabled = false
+
+
+func _set_firing_on_player() -> void:
+	if _pursue_face_blend.is_enabled:
+		var to_player := (
+				Vector2(
+						agent.position.x,
+						agent.position.y
+				) -
+				Vector2(
+						player_agent.position.x,
+						player_agent.position.y
+				)
+		)
+		var angle_to_player: = to_player.angle_to(GSTUtils.angle_to_vector2(rotation))
+		var comfortable_angle := deg2rad(firing_angle_to_player)
+		if abs(angle_to_player) <= comfortable_angle:
+			gun.fire(gun.global_position, rotation, projectile_mask)
