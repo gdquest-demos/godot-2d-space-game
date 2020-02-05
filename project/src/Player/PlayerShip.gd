@@ -20,7 +20,6 @@ onready var camera := $Camera2D
 
 func _ready() -> void:
 	connect("damaged", self, "_on_self_damaged")
-	ObjectRegistry.register_node(self, "Player")
 
 
 func die() -> void:
@@ -29,8 +28,6 @@ func die() -> void:
 	ObjectRegistry.register_effect(effect)
 
 	emit_signal("player_dead")
-	
-	ObjectRegistry.unregister_node_from(self, "Player")
 
 	queue_free()
 

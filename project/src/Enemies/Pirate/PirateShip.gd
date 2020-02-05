@@ -11,11 +11,11 @@ export var drag_factor := 0.04
 export var angular_speed_max := 270
 export var angular_acceleration_max := 15
 export var angular_drag_factor := 0.1
-export var distance_from_player_min := 200.0
+export var distance_from_target_min := 200.0
 export var distance_from_obstacles_min := 200.0
 export var aggro_radius := 300.0
 export var distance_from_spawn_max := 600.0
-export var firing_angle_to_player := 4
+export var firing_angle_to_target := 4
 export(int, LAYERS_2D_PHYSICS) var projectile_mask := 0
 export var PopEffect: PackedScene
 
@@ -25,16 +25,16 @@ var _angular_velocity := 0.0
 var _arrive_home_blend: GSTBlend
 var _pursue_face_blend : GSTBlend
 var _health := health_max
-var player_agent: GSTSteeringAgent
+var target_agent: GSTSteeringAgent
 
 onready var gun: Gun = $Gun
 
 onready var agent := GSTSteeringAgent.new()
 onready var priority := GSTPriority.new(agent)
-onready var player_proximity := GSTRadiusProximity.new(
+onready var target_proximity := GSTRadiusProximity.new(
 		agent,
 		[],
-		distance_from_player_min
+		distance_from_target_min
 )
 onready var world_proximity := GSTRadiusProximity.new(
 		agent,
@@ -56,36 +56,16 @@ func _ready() -> void:
 	spawn_location.position.x = global_position.x
 	spawn_location.position.y = global_position.y
 
-	# ----- Steering behaviors config -----
-	_set_behaviors()
+	_setup_behaviors()
 
-	# ----- Signals -----
 	connect("damaged", self, "_on_self_damaged")
-	
-	var player_node_group: = ObjectRegistry.get_nodes_from_group("Player")
-	
-	if player_node_group.size() > 0:
-		var player = player_node_group[0]
-		player.connect("player_dead", self, "_on_Player_dead")
-	
-	ObjectRegistry.connect(
-			"registry_group_changed",
-			self,
-			"_on_ObjectRegistry_registry_group_changed"
-	)
-
-	# ----- Proximity config -----
-	_set_world_proximity()
-	
-	if ObjectRegistry.has_group("Player"):
-		_set_player_proximity()
 
 
 func _physics_process(delta: float) -> void:
 	_update_agent()
 
 	_set_behaviors_on_distances()
-	_set_firing_on_player()
+	_set_firing_on_target()
 
 	priority.calculate_steering(_acceleration)
 
@@ -102,6 +82,23 @@ func _physics_process(delta: float) -> void:
 
 	_velocity = move_and_slide(_velocity)
 	rotation += deg2rad(_angular_velocity) * delta
+
+
+func setup_world_objects(world_objects: Array) -> void:
+	for wo in world_objects:
+		var object_agent: GSTAgentLocation = wo.agent_location
+		if object_agent and not world_proximity.agents.has(object_agent):
+			world_proximity.agents.append(object_agent)
+
+
+func setup_target(target_agent: GSTSteeringAgent) -> void:
+	self.target_agent = target_agent
+	
+	var pursue: GSTPursue = _pursue_face_blend.get_behavior_at(0).behavior as GSTPursue
+	var face: GSTFace = _pursue_face_blend.get_behavior_at(1).behavior as GSTFace
+	target_proximity.agents.append(target_agent)
+	pursue.target = target_agent
+	face.target = target_agent
 
 
 func _update_agent() -> void:
@@ -123,37 +120,37 @@ func _die() -> void:
 func _set_behaviors_on_distances() -> void:
 	var distance_from_spawn := agent.position.distance_to(spawn_location.position)
 
-	if distance_from_spawn > distance_from_spawn_max or not player_agent:
+	if distance_from_spawn > distance_from_spawn_max or not target_agent:
 		_arrive_home_blend.is_enabled = true
 		_pursue_face_blend.is_enabled = false
 	else:
-		if player_agent:
-			var distance_from_player := agent.position.distance_to(player_agent.position)
-			if distance_from_player < aggro_radius:
+		if target_agent:
+			var distance_from_target := agent.position.distance_to(target_agent.position)
+			if distance_from_target < aggro_radius:
 				_pursue_face_blend.is_enabled = true
 				_arrive_home_blend.is_enabled = false
 
 
-func _set_firing_on_player() -> void:
-	if not player_agent:
+func _set_firing_on_target() -> void:
+	if not target_agent:
 		return
 
 	if _pursue_face_blend.is_enabled:
-		var to_player := (
+		var to_target := (
 				Vector2(agent.position.x, agent.position.y) -
-				Vector2(player_agent.position.x, player_agent.position.y)
+				Vector2(target_agent.position.x, target_agent.position.y)
 		)
 
-		var angle_to_player: = to_player.angle_to(GSTUtils.angle_to_vector2(rotation))
-		var comfortable_angle := deg2rad(firing_angle_to_player)
-		if abs(angle_to_player) <= comfortable_angle:
+		var angle_to_target: = to_target.angle_to(GSTUtils.angle_to_vector2(rotation))
+		var comfortable_angle := deg2rad(firing_angle_to_target)
+		if abs(angle_to_target) <= comfortable_angle:
 			gun.fire(gun.global_position, rotation, projectile_mask)
 
 
-func _set_behaviors() -> void:
-	var pursue := GSTPursue.new(agent, player_agent)
+func _setup_behaviors() -> void:
+	var pursue := GSTPursue.new(agent, target_agent)
 
-	var face := GSTFace.new(agent, player_agent)
+	var face := GSTFace.new(agent, target_agent)
 	face.alignment_tolerance = deg2rad(5)
 	face.deceleration_radius = deg2rad(45)
 
@@ -162,8 +159,8 @@ func _set_behaviors() -> void:
 	_pursue_face_blend.add(face, 1)
 	_pursue_face_blend.is_enabled = false
 
-	var separation := GSTSeparation.new(agent, player_proximity)
-	separation.decay_coefficient = pow(player_proximity.radius, 2)/0.15
+	var separation := GSTSeparation.new(agent, target_proximity)
+	separation.decay_coefficient = pow(target_proximity.radius, 2)/0.15
 
 	_pursue_face_blend.add(separation, 2)
 
@@ -184,39 +181,6 @@ func _set_behaviors() -> void:
 	priority.add(avoid)
 	priority.add(_arrive_home_blend)
 	priority.add(_pursue_face_blend)
-
-
-func _set_world_proximity() -> void:
-	var world_objects: = ObjectRegistry.get_nodes_from_group("WorldObjects")
-	for wo in world_objects:
-		var object_agent: GSTAgentLocation = wo.agent_location
-		if object_agent and not world_proximity.agents.has(object_agent):
-			world_proximity.agents.append(object_agent)
-
-
-func _set_player_proximity() -> void:
-	var pursue: GSTPursue = _pursue_face_blend.get_behavior_at(0).behavior as GSTPursue
-	var face: GSTFace = _pursue_face_blend.get_behavior_at(1).behavior as GSTFace
-	
-	if ObjectRegistry.has_group("Player"):
-		var player_group := ObjectRegistry.get_nodes_from_group("Player")
-		player_agent = player_group[0].agent
-		
-		player_proximity.agents.append(player_agent)
-		pursue.target = player_agent
-		face.target = player_agent
-	else:
-		player_proximity.agents.clear()
-		pursue.target = null
-		face.target = null
-		player_agent = null
-
-
-func _on_ObjectRegistry_registry_group_changed(group: String) -> void:
-	if group == "WorldObjects":
-		_set_world_proximity()
-	elif group == "Player":
-		_set_player_proximity()
 
 
 func _on_self_damaged(amount: int) -> void:

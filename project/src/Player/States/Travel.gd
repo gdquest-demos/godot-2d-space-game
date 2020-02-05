@@ -22,10 +22,7 @@ func physics_process(delta: float) -> void:
 func get_movement() -> Vector2:
 	return Vector2(
 			Input.get_action_strength("right") - Input.get_action_strength("left"),
-			(
-					Input.get_action_strength("thrust_back") -
-					Input.get_action_strength("thrust_forwards")
-			)
+			Input.get_action_strength("thrust_back") - Input.get_action_strength("thrust_forwards")
 	)
 
 

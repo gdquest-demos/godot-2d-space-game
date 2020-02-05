@@ -10,7 +10,7 @@ radius = 200.0
 radius = 100.0
 
 [node name="DockingPoint" type="Node2D" groups=[
-"World_Objects",
+"WorldObjects",
 ]]
 script = ExtResource( 1 )
 
