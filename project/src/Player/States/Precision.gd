@@ -67,7 +67,7 @@ func get_direction() -> Vector2:
 		Input.get_action_strength("face_down") - Input.get_action_strength("face_up")
 	)
 
-		
+
 func _update_mouse_target() -> void:	
 	var mouse_position: Vector2 = owner.get_global_mouse_position()
 	_target_location.position.x = mouse_position.x

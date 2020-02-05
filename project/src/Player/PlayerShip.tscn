@@ -42,7 +42,3 @@ script = ExtResource( 5 )
 
 [node name="Precision" type="Node" parent="StateMachine/Move" index="2"]
 script = ExtResource( 7 )
-
-[node name="Camera2D" type="Camera2D" parent="." index="4"]
-current = true
-zoom = Vector2( 1.5, 1.5 )

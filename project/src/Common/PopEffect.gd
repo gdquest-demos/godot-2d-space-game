@@ -15,6 +15,10 @@ var current_distance := 10.0
 var elapsed := 0.0
 
 
+func _ready() -> void:
+	set_as_toplevel(true)
+
+
 func _draw() -> void:
 	var angle_iteration := 360 / lines
 	for i in range(lines):

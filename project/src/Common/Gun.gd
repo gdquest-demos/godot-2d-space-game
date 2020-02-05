@@ -20,5 +20,5 @@ func fire(spawn_position: Vector2, spawn_orientation: float, projectile_mask: in
 	projectile.rotation = spawn_orientation
 	projectile.collision_mask = projectile_mask
 
-	add_child(projectile)
+	ObjectRegistry.register_projectile(projectile)
 	cooldown.start()

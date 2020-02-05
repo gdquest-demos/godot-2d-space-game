@@ -10,10 +10,6 @@ var direction := Vector2.ZERO
 onready var lifespan_timer := $Lifespan
 
 
-func _init() -> void:
-	set_as_toplevel(true)
-
-
 func _ready() -> void:
 	direction = -GSTUtils.angle_to_vector2(rotation)
 	lifespan_timer.connect("timeout", self, "_on_Lifespan_timeout")

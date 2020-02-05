@@ -192,6 +192,10 @@ config/name="Harvester"
 run/main_scene="res://src/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+ObjectRegistry="*res://src/Autoload/ObjectRegistry.gd"
+
 [display]
 
 window/size/width=1280

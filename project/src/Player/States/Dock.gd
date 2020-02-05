@@ -58,7 +58,6 @@ func enter(msg := {}) -> void:
 
 func exit() -> void:
 	_is_on_final_approach = false
-	
 
 
 func physics_process(delta: float) -> void:

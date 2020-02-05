@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Player/PlayerShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Common/Asteroid.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Enemies/Pirate/PirateShip.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Common/PopEffect.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Player/Station.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Common/Camera.gd" type="Script" id=6]
 
 [node name="Game" type="Node"]
 
@@ -13,6 +14,12 @@
 [node name="PlayerShip" parent="World" instance=ExtResource( 1 )]
 position = Vector2( -544.171, -298.661 )
 PopEffect = ExtResource( 4 )
+
+[node name="Camera" type="Camera2D" parent="World"]
+current = true
+zoom = Vector2( 1.5, 1.5 )
+script = ExtResource( 6 )
+elastic_strength = 0.075
 
 [node name="Station" parent="World" instance=ExtResource( 5 )]
 position = Vector2( -875.205, -520.568 )
