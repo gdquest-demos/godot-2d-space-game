@@ -4,12 +4,16 @@ extends Node2D
 export var Projectile: PackedScene
 
 var cooling_down := false
+var projectile_parent: Node2D
 
-onready var projectile_parent: Node = get_tree().get_nodes_in_group("Projectiles")[0]
 onready var cooldown := $Cooldown
 
 
 func _ready() -> void:
+	var parents = get_tree().get_nodes_in_group("Projectiles")
+	if parents.size() > 0:
+		projectile_parent = parents[0]
+	
 	cooldown.connect("timeout", self, "_on_Cooldown_timeout")
 
 

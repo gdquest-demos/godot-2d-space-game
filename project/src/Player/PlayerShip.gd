@@ -15,7 +15,11 @@ var dockable: Node2D
 
 onready var shape := $CollisionShape
 onready var agent: GSTSteeringAgent = $StateMachine/Move.agent
-onready var effects_parent: Node2D = get_tree().get_nodes_in_group("Effects")[0]
+onready var effects_parent: Node2D = (
+		get_tree().get_nodes_in_group("Effects")[0]
+				if get_tree().get_nodes_in_group("Effects").size() > 0
+				else null
+)
 onready var camera := $Camera2D
 
 

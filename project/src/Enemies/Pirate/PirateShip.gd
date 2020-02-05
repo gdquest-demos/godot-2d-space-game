@@ -27,7 +27,11 @@ var _pursue_face_blend : GSTBlend
 var _current_health := health
 
 onready var agent := GSTSteeringAgent.new()
-onready var player_agent: GSTSteeringAgent = get_tree().get_nodes_in_group("Player")[0].agent
+onready var player_agent: GSTSteeringAgent = (
+		get_tree().get_nodes_in_group("Player")[0].agent
+				if get_tree().get_nodes_in_group("Player").size() > 0
+				else null
+)
 onready var priority := GSTPriority.new(agent)
 onready var player_proximity := GSTRadiusProximity.new(
 		agent,
@@ -89,16 +93,24 @@ func _ready() -> void:
 	priority.add(_arrive_home_blend)
 	priority.add(_pursue_face_blend)
 	
+		# ----- Signals -----
+	connect("damaged", self, "_on_self_damaged")
+	(
+			get_tree().get_nodes_in_group("Player")[0].connect(
+					"player_dead", self, "_on_Player_dead"
+			)
+					if get_tree().get_nodes_in_group("Player").size() > 0
+					else null
+	)
+	
 	# ----- Proximity config -----
+	# Make sure all world objects are in the tree by skipping a frame
+	yield(get_tree(), "idle_frame")
 	var world_objects := get_tree().get_nodes_in_group("World_Objects")
 	for wo in world_objects:
 		var object_agent: GSTAgentLocation = wo.agent_location
 		if object_agent:
 			world_proximity.agents.append(object_agent)
-	
-	# ----- Signals -----
-	connect("damaged", self, "_on_self_damaged")
-	get_tree().get_nodes_in_group("Player")[0].connect("player_dead", self, "_on_Player_dead")
 
 
 func _physics_process(delta: float) -> void:
