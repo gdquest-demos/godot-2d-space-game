@@ -15,7 +15,6 @@ var dockable: Node2D
 
 onready var shape := $CollisionShape
 onready var agent: GSTSteeringAgent = $StateMachine/Move.agent
-onready var camera := $Camera2D
 
 
 func _ready() -> void:

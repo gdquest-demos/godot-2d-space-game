@@ -1,6 +1,7 @@
 extends Node2D
 
 
+export var color := Color.beige
 export var docking_distance := 200.0 setget _set_docking_distance
 export var debug_draw_docking_radius := true setget _set_debug_draw_docking_radius
 export var debug_docking_color_normal := Color(0, 1, 0, 0.05)
@@ -34,6 +35,8 @@ func _draw() -> void:
 				debug_docking_color_highlight
 		)
 		draw_circle(Vector2.ZERO, docking_distance, color)
+	
+	draw_circle(Vector2.ZERO, collision_shape.shape.radius, color)
 
 
 func _set_debug_draw_docking_radius(value: bool) -> void:
