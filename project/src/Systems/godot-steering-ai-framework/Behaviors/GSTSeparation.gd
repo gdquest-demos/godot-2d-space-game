@@ -18,16 +18,15 @@ func _init(agent: GSTSteeringAgent, proximity: GSTProximity).(agent, proximity) 
 	pass
 
 
-func _calculate_steering(acceleration: GSTTargetAcceleration) -> GSTTargetAcceleration:
+func _calculate_steering(acceleration: GSTTargetAcceleration) -> void:
 	acceleration.set_zero()
 	self._acceleration = acceleration
 	proximity._find_neighbors(_callback)
-	return acceleration
 
 
 # Callback for the proximity to call when finding neighbors. Determines the amount of
 # acceleration that `neighbor` imposes based on its distance from the owner agent.
-# virtual
+# tags: virtual
 func _report_neighbor(neighbor: GSTSteeringAgent) -> bool:
 	var to_agent := agent.position - neighbor.position
 
