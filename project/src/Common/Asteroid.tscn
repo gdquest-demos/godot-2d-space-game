@@ -9,10 +9,8 @@ radius = 100.0
 radius = 40.0
 
 [node name="Asteroid" instance=ExtResource( 1 )]
-docking_distance = 100.0
-
-[node name="Drawing" parent="." index="0"]
 color = Color( 0.278431, 0.203922, 0.0980392, 1 )
+docking_distance = 100.0
 
 [node name="CollisionShape2D" parent="DockingArea" index="0"]
 shape = SubResource( 1 )

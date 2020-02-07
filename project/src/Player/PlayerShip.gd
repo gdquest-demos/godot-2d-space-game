@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 signal damaged(amount)
-signal player_dead
+signal died
 
 
 export var health_max := 100
@@ -15,12 +15,10 @@ var dockable: Node2D
 
 onready var shape := $CollisionShape
 onready var agent: GSTSteeringAgent = $StateMachine/Move.agent
-onready var camera := $Camera2D
 
 
 func _ready() -> void:
 	connect("damaged", self, "_on_self_damaged")
-	ObjectRegistry.register_node(self, "Player")
 
 
 func die() -> void:
@@ -28,9 +26,7 @@ func die() -> void:
 	effect.global_position = global_position
 	ObjectRegistry.register_effect(effect)
 
-	emit_signal("player_dead")
-	
-	ObjectRegistry.unregister_node_from(self, "Player")
+	emit_signal("died")
 
 	queue_free()
 

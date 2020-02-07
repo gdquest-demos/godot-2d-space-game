@@ -5,7 +5,10 @@
 [ext_resource path="res://src/Common/Projectiles/PlasmaShot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Common/PopEffect.tscn" type="PackedScene" id=4]
 
-[node name="PirateShip" instance=ExtResource( 1 )]
+[node name="PirateShip" groups=[
+"Enemies",
+"Pirates",
+] instance=ExtResource( 1 )]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource( 2 )
@@ -14,8 +17,8 @@ distance_from_spawn_max = 900.0
 projectile_mask = 3
 PopEffect = ExtResource( 4 )
 
-[node name="Drawing" parent="." index="1"]
+[node name="CollisionShape" parent="." index="0"]
 color = Color( 0.823529, 0.254902, 0.121569, 1 )
 
-[node name="Gun" parent="." index="2"]
+[node name="Gun" parent="." index="1"]
 Projectile = ExtResource( 3 )

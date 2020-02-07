@@ -16,13 +16,13 @@ collision_mask = 14
 script = ExtResource( 6 )
 projectile_mask = 6
 
-[node name="Drawing" parent="." index="1"]
+[node name="CollisionShape" parent="." index="0"]
 color = Color( 0.529412, 0.764706, 0.796078, 1 )
 
-[node name="Gun" parent="." index="2"]
+[node name="Gun" parent="." index="1"]
 Projectile = ExtResource( 8 )
 
-[node name="StateMachine" type="Node" parent="." index="3"]
+[node name="StateMachine" type="Node" parent="." index="2"]
 script = ExtResource( 2 )
 initial_state = NodePath("Move/Travel")
 
