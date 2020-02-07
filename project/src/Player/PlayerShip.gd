@@ -19,6 +19,7 @@ onready var agent: GSTSteeringAgent = $StateMachine/Move.agent
 
 func _ready() -> void:
 	connect("damaged", self, "_on_self_damaged")
+	$Gun.projectile_mask = projectile_mask
 
 
 func die() -> void:
