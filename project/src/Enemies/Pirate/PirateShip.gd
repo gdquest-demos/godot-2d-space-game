@@ -29,7 +29,7 @@ var target_agent: GSTSteeringAgent
 
 onready var gun: Gun = $Gun
 
-onready var agent := GSTSteeringAgent.new()
+onready var agent := GSTKinematicBody2DAgent.new(self)
 onready var priority := GSTPriority.new(agent)
 onready var target_proximity := GSTRadiusProximity.new(
 		agent,
@@ -48,10 +48,13 @@ func _ready() -> void:
 	# ----- Agent config -----
 	agent.linear_acceleration_max = acceleration_max
 	agent.linear_speed_max = linear_speed_max
-	agent.angular_acceleration_max = angular_acceleration_max
-	agent.angular_speed_max = angular_speed_max
-	agent.bounding_radius = MathUtils.get_triangle_circumcircle_radius($CollisionShape.polygon)
-	_update_agent()
+	agent.angular_acceleration_max = deg2rad(angular_acceleration_max)
+	agent.angular_speed_max = deg2rad(angular_speed_max)
+	agent.bounding_radius = (
+		MathUtils.get_triangle_circumcircle_radius($CollisionShape.polygon)
+	)
+	agent.linear_drag_percentage = drag_factor
+	agent.angular_drag_percentage = angular_drag_factor
 
 	spawn_location.position.x = global_position.x
 	spawn_location.position.y = global_position.y
@@ -62,26 +65,11 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_update_agent()
-
 	_set_behaviors_on_distances()
 	_set_firing_on_target()
 
 	priority.calculate_steering(_acceleration)
-
-	_velocity += Vector2(_acceleration.linear.x, _acceleration.linear.y)
-	_velocity = _velocity.clamped(agent.linear_speed_max)
-	_velocity = _velocity.linear_interpolate(Vector2.ZERO, drag_factor)
-
-	_angular_velocity = clamp(
-		_angular_velocity + _acceleration.angular,
-		-agent.angular_speed_max,
-		agent.angular_speed_max
-	)
-	_angular_velocity = lerp(_angular_velocity, 0, angular_drag_factor)
-
-	_velocity = move_and_slide(_velocity)
-	rotation += deg2rad(_angular_velocity) * delta
+	agent._apply_steering(_acceleration, delta)
 
 
 func setup_world_objects(world_objects: Array) -> void:
@@ -103,15 +91,6 @@ func setup_target(target: Node) -> void:
 	target_proximity.agents.append(target_agent)
 	pursue.target = target_agent
 	face.target = target_agent
-
-
-func _update_agent() -> void:
-	agent.position.x = global_position.x
-	agent.position.y = global_position.y
-	agent.orientation = rotation
-	agent.linear_velocity.x = _velocity.x
-	agent.linear_velocity.y = _velocity.y
-	agent.angular_velocity = _angular_velocity
 
 
 func _die() -> void:

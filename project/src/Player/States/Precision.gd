@@ -37,7 +37,7 @@ func physics_process(delta: float) -> void:
 		
 	_parent.linear_velocity += direction * _parent.acceleration_max * speed_multiplier
 
-	acceleration = _face.calculate_steering(acceleration)
+	_face.calculate_steering(acceleration)
 	_parent.angular_velocity += acceleration.angular
 	
 	_parent.physics_process(delta)
