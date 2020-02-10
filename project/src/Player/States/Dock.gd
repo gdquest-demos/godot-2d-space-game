@@ -1,7 +1,11 @@
 extends State
 
 
+enum DockingProcess { CLEARING, DOCKING, DOCKED }
+
+
 export var docking_release_speed := 150.0
+export var docking_speed_multiplier := 0.65
 
 var _acceleration := GSTTargetAcceleration.new()
 var _agent: GSTSteeringAgent
@@ -12,10 +16,9 @@ var _dock_position := GSTSteeringAgent.new()
 var _priority: GSTPriority
 var _flee_blend: GSTBlend
 
-var _is_docked := false
-var _is_on_final_approach := false
+var _docking_phase := 0
 
-onready var previous_parent: = owner.get_parent()
+var _current_docking_point: Node2D
 
 
 func _ready() -> void:
@@ -23,27 +26,23 @@ func _ready() -> void:
 	
 	_agent = _parent.agent
 	
-	var face := GSTFace.new(_parent.agent, _reverse_face_position)
+	var seek := GSTSeek.new(_agent, _dock_position)
+	
+	# Flee makes sure we will have a minimum distance from the docking point to
+	# prevent docking sideways
+	var flee := GSTFlee.new(_agent, _dock_position)
+	# Face makes sure we face away from the docking point
+	var face := GSTFace.new(_agent, _reverse_face_position)
 	face.alignment_tolerance = deg2rad(15)
 	face.deceleration_radius = deg2rad(45)
 	
-	var seek := GSTSeek.new(_parent.agent, _dock_position)
-	
-	# Flee will be used to ensure a minimum distance from the docking point to
-	# prevent docking sideways
-	var flee := GSTFlee.new(_parent.agent, _dock_position)
-	var look := GSTLookWhereYouGo.new(_parent.agent)
-	look.alignment_tolerance = deg2rad(15)
-	look.deceleration_radius = deg2rad(45)
-	
-	_flee_blend = GSTBlend.new(_parent.agent)
+	_flee_blend = GSTBlend.new(_agent)
 	_flee_blend.add(flee, 1)
-	_flee_blend.add(look, 1)
+	_flee_blend.add(face, 1)
 	_flee_blend.is_enabled = false
 	
-	_priority = GSTPriority.new(_parent.agent)
+	_priority = GSTPriority.new(_agent)
 	_priority.add(_flee_blend)
-	_priority.add(face)
 	_priority.add(seek)
 
 
@@ -54,50 +53,57 @@ func enter(msg := {}) -> void:
 	_dock_position.position.x = dock_position.x
 	_dock_position.position.y = dock_position.y
 	_dock_position.bounding_radius = dock_radius
-
-
-func exit() -> void:
-	_is_on_final_approach = false
+	
+	_docking_phase = DockingProcess.CLEARING
+	_flee_blend.is_enabled = true
 
 
 func physics_process(delta: float) -> void:
-	if _is_docked:
+	if _docking_phase == DockingProcess.DOCKED:
 		return
 	
 	var current_position := _agent.position
 	var dock_position := _dock_position.position
+	
+	var to_dock := GSTUtils.to_vector2(current_position - dock_position).normalized()
+	var facing_direction := GSTUtils.angle_to_vector2(owner.rotation).normalized()
+	
+	var dot_face = to_dock.dot(facing_direction)
+	
 	var total_radius := _agent.bounding_radius+_dock_position.bounding_radius
 	
-	_flee_blend.is_enabled = (
-			current_position.distance_to(dock_position) < total_radius and
-			not _is_on_final_approach
+	if dot_face <= -0.9 and current_position.distance_to(dock_position) > total_radius:
+		_flee_blend.is_enabled = false
+		_docking_phase = DockingProcess.DOCKING
+	
+	_reverse_face_position.position = (
+			current_position + GSTUtils.to_vector3(to_dock)
 	)
 	
-	_is_on_final_approach = not _flee_blend.is_enabled
-	
-	var reverse_face := current_position + (current_position - dock_position).normalized()
-	
-	_reverse_face_position.position = reverse_face
-	
 	_priority.calculate_steering(_acceleration)
-	_parent.linear_velocity.x += _acceleration.linear.x
-	_parent.linear_velocity.y += _acceleration.linear.y
+	_parent.linear_velocity += GSTUtils.to_vector2(
+			_acceleration.linear * docking_speed_multiplier
+	)
 	_parent.angular_velocity += _acceleration.angular
 	_parent.physics_process(delta)
 	
-	if _is_on_final_approach:
+	if _docking_phase == DockingProcess.DOCKING:
 		var slide_count: int = owner.get_slide_count()
+		
 		for s in range(slide_count):
 			var collision: KinematicCollision2D = owner.get_slide_collision(s)
+			
 			if collision.collider.collision_layer == 2:
-				_is_docked = true
-				collision.collider.add_child(owner)
+				_docking_phase = DockingProcess.DOCKED
+				_current_docking_point = collision.collider.owner
+				_current_docking_point.set_docking_remote(
+						owner, _agent.bounding_radius*0.75
+				)
 
 
 func unhandled_input(event: InputEvent) -> void:
-	if event.get_action_strength("toggle_dock") == 1:
-		if _is_docked:
-			_is_docked = false
+	if event.is_action_pressed("toggle_dock"):
+		if _docking_phase == DockingProcess.DOCKED:
 			
 			var direction: Vector2 = (
 					owner.global_position - 
@@ -105,8 +111,7 @@ func unhandled_input(event: InputEvent) -> void:
 							_dock_position.position.x, _dock_position.position.y)
 			).normalized()
 			
-			previous_parent.add_child(owner)
-			
+			_current_docking_point.undock()
 			_parent.linear_velocity += direction * docking_release_speed
 		
 		_state_machine.transition_to("Move/Travel")

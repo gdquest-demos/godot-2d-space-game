@@ -10,10 +10,13 @@ export var debug_docking_color_highlight := Color(0, 1, 0, 0.2)
 var angle_proportion := 1.0
 var player_inside := false
 var radius: float
+var docking_point_edge: Vector2
 
 onready var docking_shape := $DockingArea/CollisionShape2D
 onready var collision_shape := $KinematicBody2D/CollisionShape2D
 onready var agent_location := GSTSteeringAgent.new()
+onready var remote_rig := $RemoteRig
+onready var remote_transform := $RemoteRig/RemoteTransform2D
 
 
 func _ready() -> void:
@@ -22,10 +25,10 @@ func _ready() -> void:
 	agent_location.position.y = global_position.y
 	agent_location.orientation = rotation
 	agent_location.bounding_radius = radius
+	docking_point_edge = Vector2.UP * radius
 	
 	$DockingArea.connect("body_entered", self, "_on_DockingArea_body_entered")
 	$DockingArea.connect("body_exited", self, "_on_DockingArea_body_exited")
-	
 
 
 func _draw() -> void:
@@ -37,6 +40,18 @@ func _draw() -> void:
 		draw_circle(Vector2.ZERO, docking_distance, color)
 	
 	draw_circle(Vector2.ZERO, collision_shape.shape.radius, color)
+
+
+func set_docking_remote(node: Node2D, docker_distance: float) -> void:
+	remote_rig.rotation = GSTUtils.vector3_to_angle(
+			GSTUtils.to_vector3(node.global_position - global_position)
+	)
+	remote_transform.position = docking_point_edge + Vector2.UP*docker_distance
+	remote_transform.remote_path = node.get_path()
+
+
+func undock() -> void:
+	remote_transform.remote_path = ""
 
 
 func _set_debug_draw_docking_radius(value: bool) -> void:
