@@ -1,6 +1,10 @@
 extends State
 
 
+signal docked
+signal undocked
+
+
 enum DockingProcess { CLEARING, DOCKING, DOCKED }
 
 
@@ -96,6 +100,7 @@ func physics_process(delta: float) -> void:
 			if collision.collider.collision_layer == 2:
 				_docking_phase = DockingProcess.DOCKED
 				_current_docking_point = collision.collider.owner
+				emit_signal("docked", _current_docking_point)
 				_current_docking_point.set_docking_remote(
 						owner, _agent.bounding_radius*0.75
 				)
@@ -104,6 +109,7 @@ func physics_process(delta: float) -> void:
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_dock"):
 		if _docking_phase == DockingProcess.DOCKED:
+			emit_signal("undocked")
 			
 			var direction: Vector2 = (
 					owner.global_position - 

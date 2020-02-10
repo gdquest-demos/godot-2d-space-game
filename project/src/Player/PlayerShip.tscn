@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Common/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Systems/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/Player/States/Precision.gd" type="Script" id=7]
 [ext_resource path="res://src/Common/Projectiles/PlasmaShot.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Player/PlayerGun.gd" type="Script" id=9]
+[ext_resource path="res://src/Player/Cargo.gd" type="Script" id=10]
 
 [node name="PlayerShip" groups=[
 "Player",
@@ -44,3 +45,6 @@ script = ExtResource( 5 )
 
 [node name="Precision" type="Node" parent="StateMachine/Move" index="2"]
 script = ExtResource( 7 )
+
+[node name="Cargo" type="Node" parent="." index="4"]
+script = ExtResource( 10 )
