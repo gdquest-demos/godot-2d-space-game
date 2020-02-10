@@ -9,6 +9,7 @@ radius = 200.0
 radius = 100.0
 
 [node name="DockingPoint" type="Node2D" groups=[
+"MappableObjects",
 "WorldObjects",
 ]]
 script = ExtResource( 1 )
@@ -29,3 +30,5 @@ shape = SubResource( 2 )
 [node name="RemoteRig" type="Node2D" parent="."]
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="RemoteRig"]
+
+[node name="MapTransform" type="RemoteTransform2D" parent="."]

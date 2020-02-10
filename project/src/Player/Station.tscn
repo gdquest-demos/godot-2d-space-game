@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Common/DockingPoint/DockingPoint.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/topdown-portal-orange.svg" type="Texture" id=2]
 
-[node name="Station" instance=ExtResource( 1 )]
-docking_color = Color( 0.592157, 0.560784, 0.435294, 1 )
+[node name="Station" groups=[
+"Depositables",
+] instance=ExtResource( 1 )]
+map_icon = ExtResource( 2 )

@@ -2,8 +2,10 @@ extends KinematicBody2D
 
 
 signal damaged(amount)
+signal died
 
 
+export var map_icon: Texture
 export var health_max := 100
 export var linear_speed_max := 200.0
 export var acceleration_max := 15.0
@@ -62,6 +64,7 @@ func _ready() -> void:
 	_setup_behaviors()
 
 	connect("damaged", self, "_on_self_damaged")
+	$AggroArea.connect("body_entered", self, "_on_AggroArea_body_entered")
 
 
 func _physics_process(delta: float) -> void:
@@ -88,15 +91,24 @@ func setup_target(target: Node) -> void:
 	
 	var pursue: GSTPursue = _pursue_face_blend.get_behavior_at(0).behavior as GSTPursue
 	var face: GSTFace = _pursue_face_blend.get_behavior_at(1).behavior as GSTFace
-	target_proximity.agents.append(target_agent)
+	if target_agent:
+		target_proximity.agents.append(target_agent)
+	else:
+		target_proximity.agents.clear()
 	pursue.target = target_agent
 	face.target = target_agent
+
+
+func register_on_map(map: Viewport) -> void:
+	var id: int = map.register_map_object($MapTransform, map_icon)
+	connect("died", map, "remove_map_object", [id])
 
 
 func _die() -> void:
 	var effect: Node2D = PopEffect.instance()
 	effect.global_position = global_position
 	ObjectRegistry.register_effect(effect)
+	emit_signal("died")
 	queue_free()
 
 
@@ -106,6 +118,7 @@ func _set_behaviors_on_distances() -> void:
 	if distance_from_spawn > distance_from_spawn_max or not target_agent:
 		_arrive_home_blend.is_enabled = true
 		_pursue_face_blend.is_enabled = false
+		setup_target(null)
 	else:
 		if target_agent:
 			var distance_from_target := agent.position.distance_to(target_agent.position)
@@ -179,3 +192,8 @@ func _on_self_damaged(amount: int) -> void:
 
 func _on_Target_died() -> void:
 	setup_target(null)
+
+
+func _on_AggroArea_body_entered(body: PhysicsBody2D) -> void:
+	if not target_agent:
+		setup_target(body)

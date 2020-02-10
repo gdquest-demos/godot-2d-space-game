@@ -1,6 +1,7 @@
 extends Node2D
 
 
+export var map_icon: Texture
 export var color := Color.beige
 export var docking_distance := 200.0 setget _set_docking_distance
 export var debug_draw_docking_radius := true setget _set_debug_draw_docking_radius
@@ -52,6 +53,10 @@ func set_docking_remote(node: Node2D, docker_distance: float) -> void:
 
 func undock() -> void:
 	remote_transform.remote_path = ""
+
+
+func register_on_map(map: Viewport) -> void:
+	var id: int = map.register_map_object($MapTransform, map_icon)
 
 
 func _set_debug_draw_docking_radius(value: bool) -> void:
