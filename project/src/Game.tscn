@@ -47,7 +47,7 @@ remote_path = NodePath("../../Camera")
 ]]
 position = Vector2( -544.171, -298.661 )
 current = true
-zoom = Vector2( 1.5, 1.5 )
+zoom = Vector2( 1.2, 1.2 )
 smoothing_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource( 12 )
@@ -97,7 +97,7 @@ MapObject = ExtResource( 8 )
 ]]
 position = Vector2( -544.171, -298.661 )
 current = true
-zoom = Vector2( 1.5, 1.5 )
+zoom = Vector2( 1.2, 1.2 )
 script = ExtResource( 12 )
 do_position_when_map_up = false
 do_position_when_map_down = false
