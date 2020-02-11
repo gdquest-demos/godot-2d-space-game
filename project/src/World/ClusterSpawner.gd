@@ -46,7 +46,7 @@ func _spawn_object_cluster(
 	existing_clusters.append(spawn_position)
 	var objects := []
 	var immunity_radius := object_radius * object_radius
-	for i in range(count):
+	for _i in range(count):
 		while true:
 			var angle := rng.randf()*2*PI
 			var radius := spawn_radius * sqrt(rng.randf())
@@ -60,16 +60,15 @@ func _spawn_object_cluster(
 					valid = false
 					break
 			if valid:
-				var object := _spawn_object(object_pos)
+				_spawn_object(object_pos)
 				objects.append(object_pos)
 				break
 
 
-func _spawn_object(position: Vector2) -> Node:
+func _spawn_object(position: Vector2) -> void:
 	var object = ObjectScene.instance()
 	object.global_position = position
 	if randomize_rotation:
 		object.rotation = rng.randf_range(-PI, PI)
 	add_child(object)
 	emit_signal("object_spawned", object)
-	return object

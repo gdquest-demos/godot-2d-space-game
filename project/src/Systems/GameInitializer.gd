@@ -26,14 +26,14 @@ func _ready() -> void:
 	
 	station_spawner.spawn_station(world_size, _spawned_positions)
 	
-	for i in range(asteroid_clusters):
+	for _i in range(asteroid_clusters):
 		asteroid_spawner.spawn_random_cluster(
 				world_size,
 				_spawned_positions,
 				radius_around_clusters
 		)
 	
-	for i in range(pirate_clusters):
+	for _i in range(pirate_clusters):
 		pirate_spawner.spawn_random_cluster(
 				world_size,
 				_spawned_positions,

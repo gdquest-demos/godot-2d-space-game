@@ -20,7 +20,7 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	var angle_iteration := 360 / lines
+	var angle_iteration := 360.0 / lines
 	for i in range(lines):
 		var angle := i*angle_iteration
 		var direction := GSTUtils.angle_to_vector2(deg2rad(angle))

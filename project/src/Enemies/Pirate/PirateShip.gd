@@ -27,6 +27,7 @@ var _angular_velocity := 0.0
 var _arrive_home_blend: GSTBlend
 var _pursue_face_blend : GSTBlend
 var _health := health_max
+var current_target: Node
 var target_agent: GSTSteeringAgent
 
 onready var gun: Gun = $Gun
@@ -83,11 +84,15 @@ func setup_world_objects(world_objects: Array) -> void:
 
 
 func setup_target(target: Node) -> void:
+	if current_target == target:
+		return
 	if target:
 		target.connect("died", self, "_on_Target_died")
 		target_agent = target.agent
+		current_target = target
 	else:
 		target_agent = null
+		current_target = null
 	
 	var pursue: GSTPursue = _pursue_face_blend.get_behavior_at(0).behavior as GSTPursue
 	var face: GSTFace = _pursue_face_blend.get_behavior_at(1).behavior as GSTFace

@@ -8,8 +8,14 @@ export var max_zoom := 5.0
 var _start_zoom := zoom
 var _start_position := Vector2.ZERO
 
+var remote_transform: RemoteTransform2D
+
 onready var tween := $Tween
-onready var remote_transform := $RemoteTransform2D
+
+
+func _ready() -> void:
+	if has_node("RemoteTransform2D"):
+		remote_transform = $RemoteTransform2D
 
 
 func toggle_map(map_up: bool, tween_time: float) -> void:

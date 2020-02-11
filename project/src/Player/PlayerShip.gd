@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-signal damaged(amount)
+signal damaged(amount, origin)
 signal died
 
 
@@ -17,7 +17,7 @@ var _health := health_max
 onready var shape := $CollisionShape
 onready var agent: GSTSteeringAgent = $StateMachine/Move.agent
 onready var camera_transform := $CameraTransform
-onready var timer := $Timer
+onready var timer := $MapTimer
 onready var cargo := $Cargo
 
 
@@ -54,7 +54,7 @@ func grab_camera(camera: Camera2D) -> void:
 	camera_transform.remote_path = camera.get_path()
 
 
-func _on_self_damaged(amount: int) -> void:
+func _on_self_damaged(amount: int, _origin: Node) -> void:
 	_health -= amount
 	if _health <= 0:
 		die()

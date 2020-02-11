@@ -1,6 +1,9 @@
 extends Node2D
 
 
+signal emptied
+
+
 export var map_icon: Texture
 export var color := Color.beige
 export var docking_distance := 200.0 setget _set_docking_distance
@@ -57,6 +60,7 @@ func undock() -> void:
 
 func register_on_map(map: Viewport) -> void:
 	var id: int = map.register_map_object($MapTransform, map_icon)
+	connect("emptied", map, "remove_map_object", [id])
 
 
 func _set_debug_draw_docking_radius(value: bool) -> void:

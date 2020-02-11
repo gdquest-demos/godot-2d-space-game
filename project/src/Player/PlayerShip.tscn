@@ -76,7 +76,9 @@ script = ExtResource( 7 )
 remote_path = NodePath("../Cargo/BarRig")
 update_rotation = false
 
-[node name="Cargo" type="Node" parent="." index="6"]
+[node name="MapTimer" type="Timer" parent="." index="6"]
+
+[node name="Cargo" type="Node" parent="." index="7"]
 script = ExtResource( 10 )
 
 [node name="BarRig" type="Node2D" parent="Cargo" index="0"]
