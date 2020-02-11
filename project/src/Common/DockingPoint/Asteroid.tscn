@@ -4,10 +4,10 @@
 [ext_resource path="res://assets/coin.svg" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 100.0
+radius = 117.956
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 40.0
+radius = 48.0012
 
 [node name="Asteroid" groups=[
 "Mineables",
@@ -15,6 +15,9 @@ radius = 40.0
 map_icon = ExtResource( 2 )
 color = Color( 0.278431, 0.203922, 0.0980392, 1 )
 docking_distance = 100.0
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.58, 0.6 )
 
 [node name="CollisionShape2D" parent="DockingArea" index="0"]
 shape = SubResource( 1 )

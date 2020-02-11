@@ -42,8 +42,6 @@ func _draw() -> void:
 				debug_docking_color_highlight
 		)
 		draw_circle(Vector2.ZERO, docking_distance, color)
-	
-	draw_circle(Vector2.ZERO, collision_shape.shape.radius, color)
 
 
 func set_docking_remote(node: Node2D, docker_distance: float) -> void:

@@ -6,6 +6,8 @@ signal died
 
 
 export var map_icon: Texture
+export var color_map_icon := Color.white
+export var scale_map_icon := 0.5
 export var health_max := 100
 export(int, LAYERS_2D_PHYSICS) var projectile_mask := 0
 export var PopEffect: PackedScene
@@ -46,7 +48,7 @@ func die() -> void:
 
 
 func register_on_map(map: Viewport) -> void:
-	var id: int = map.register_map_object($MapTransform, map_icon)
+	var id: int = map.register_map_object($MapTransform, map_icon, color_map_icon, scale_map_icon)
 	connect("died", map, "remove_map_object", [id])
 
 

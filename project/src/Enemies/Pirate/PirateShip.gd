@@ -6,6 +6,9 @@ signal died
 
 
 export var map_icon: Texture
+export var color_map_icon := Color.white
+export var scale_map_icon := 0.75
+
 export var health_max := 100
 export var linear_speed_max := 200.0
 export var acceleration_max := 15.0
@@ -105,7 +108,7 @@ func setup_target(target: Node) -> void:
 
 
 func register_on_map(map: Viewport) -> void:
-	var id: int = map.register_map_object($MapTransform, map_icon)
+	var id: int = map.register_map_object($MapTransform, map_icon, color_map_icon, scale_map_icon)
 	connect("died", map, "remove_map_object", [id])
 
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Common/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Enemies/Pirate/PirateShip.gd" type="Script" id=2]
+[ext_resource path="res://assets/spike.svg" type="Texture" id=3]
 [ext_resource path="res://src/World/PopEffect.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/topdown-enemy.svg" type="Texture" id=5]
 
@@ -15,14 +16,15 @@ radius = 200.0
 collision_layer = 4
 collision_mask = 3
 script = ExtResource( 2 )
-map_icon = ExtResource( 5 )
+map_icon = ExtResource( 3 )
+color_map_icon = Color( 0.882353, 0.0980392, 0.0980392, 1 )
 aggro_radius = 400.0
 distance_from_spawn_max = 900.0
 projectile_mask = 3
 PopEffect = ExtResource( 4 )
 
-[node name="CollisionShape" parent="." index="0"]
-color = Color( 0.823529, 0.254902, 0.121569, 1 )
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 5 )
 
 [node name="AggroArea" type="Area2D" parent="." index="2"]
 collision_layer = 0
