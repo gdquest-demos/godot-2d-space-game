@@ -8,6 +8,7 @@ export var ObjectScene: PackedScene
 export var count_min := 1
 export var count_max := 5
 export var spawn_radius := 150.0
+export var object_radius := 75.0
 export var randomize_rotation := true
 
 onready var rng := RandomNumberGenerator.new()
@@ -43,18 +44,32 @@ func _spawn_object_cluster(
 	) -> void:
 	var count = rng.randi_range(count_min, count_max)
 	existing_clusters.append(spawn_position)
+	var objects := []
+	var immunity_radius := object_radius * object_radius
 	for i in range(count):
-		var angle := rng.randf()*2*PI
-		var radius := spawn_radius * sqrt(rng.randf())
-		var x := spawn_position.x + (radius * cos(angle))
-		var y := spawn_position.y + (radius * sin(angle))
-		_spawn_object(Vector2(x,y))
+		while true:
+			var angle := rng.randf()*2*PI
+			var radius := spawn_radius * sqrt(rng.randf())
+			var object_pos := Vector2(
+					spawn_position.x + (radius * cos(angle)),
+					spawn_position.y + (radius * sin(angle))
+			)
+			var valid := true
+			for o in objects:
+				if object_pos.distance_squared_to(o) < immunity_radius:
+					valid = false
+					break
+			if valid:
+				var object := _spawn_object(object_pos)
+				objects.append(object_pos)
+				break
 
 
-func _spawn_object(position: Vector2) -> void:
+func _spawn_object(position: Vector2) -> Node:
 	var object = ObjectScene.instance()
 	object.global_position = position
 	if randomize_rotation:
 		object.rotation = rng.randf_range(-PI, PI)
 	add_child(object)
 	emit_signal("object_spawned", object)
+	return object

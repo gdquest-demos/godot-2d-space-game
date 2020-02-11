@@ -57,6 +57,8 @@ ObjectScene = ExtResource( 3 )
 [node name="AsteroidSpawner" type="Node2D" parent="World"]
 script = ExtResource( 1 )
 ObjectScene = ExtResource( 9 )
+spawn_radius = 300.0
+object_radius = 125.0
 randomize_rotation = false
 
 [node name="MapViewport" type="Viewport" parent="."]

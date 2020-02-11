@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-signal damaged(amount)
+signal damaged(amount, origin)
 signal died
 
 
@@ -179,8 +179,10 @@ func _setup_behaviors() -> void:
 	priority.add(_pursue_face_blend)
 
 
-func _on_self_damaged(amount: int) -> void:
+func _on_self_damaged(amount: int, origin: Node) -> void:
 	_health -= amount
+	setup_target(origin)
+	
 	if _health <= 0:
 		_die()
 
