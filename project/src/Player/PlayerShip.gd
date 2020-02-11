@@ -16,7 +16,7 @@ var _health := health_max
 
 onready var shape := $CollisionShape
 onready var agent: GSTSteeringAgent = $StateMachine/Move.agent
-onready var remote_transform := $RemoteTransform2D
+onready var camera_transform := $CameraTransform
 onready var timer := $Timer
 onready var cargo := $Cargo
 
@@ -32,7 +32,7 @@ func toggle_map(map_up: bool, tween_time: float) -> void:
 	if not map_up:
 		timer.start(tween_time)
 		yield(timer, "timeout")
-	remote_transform.update_position = not map_up
+	camera_transform.update_position = not map_up
 
 
 func die() -> void:
@@ -48,6 +48,10 @@ func die() -> void:
 func register_on_map(map: Viewport) -> void:
 	var id: int = map.register_map_object($MapTransform, map_icon)
 	connect("died", map, "remove_map_object", [id])
+
+
+func grab_camera(camera: Camera2D) -> void:
+	camera_transform.remote_path = camera.get_path()
 
 
 func _on_self_damaged(amount: int) -> void:

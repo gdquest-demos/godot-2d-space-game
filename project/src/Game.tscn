@@ -1,51 +1,38 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://src/Player/PlayerShip.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Common/Asteroid.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/World/ClusterSpawner.gd" type="Script" id=1]
+[ext_resource path="res://src/World/StationSpawner.gd" type="Script" id=2]
 [ext_resource path="res://src/Enemies/Pirate/PirateShip.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Common/PopEffect.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Player/Station.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Common/MapViewport.gd" type="Script" id=6]
+[ext_resource path="res://src/Player/Station.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Player/PlayerShip.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Common/Map/MapViewport.gd" type="Script" id=6]
 [ext_resource path="res://src/Systems/GameInitializer.gd" type="Script" id=7]
-[ext_resource path="res://src/Common/MapObject.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/topdown-player.svg" type="Texture" id=9]
-[ext_resource path="res://src/Common/MapTexture.gd" type="Script" id=11]
+[ext_resource path="res://src/Common/Map/MapObject.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Common/DockingPoint/Asteroid.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Common/Map/MapTexture.gd" type="Script" id=11]
 [ext_resource path="res://src/Player/PlayerCamera.gd" type="Script" id=12]
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
 colors = PoolColorArray( 0, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 width = 1
 
-[sub_resource type="ViewportTexture" id=1]
+[sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("MapViewport")
 
 [node name="GameInitializer" type="Node"]
 script = ExtResource( 7 )
-map_transition_time = 0.35
+radius_around_clusters = 500.0
 
 [node name="World" type="Node2D" parent="."]
-
-[node name="PlayerShip" parent="World" groups=[
-"MapControls",
-] instance=ExtResource( 1 )]
-position = Vector2( -544.171, -298.661 )
-map_icon = ExtResource( 9 )
-PopEffect = ExtResource( 4 )
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="World/PlayerShip"]
-remote_path = NodePath("../../Camera")
-
-[node name="Timer" type="Timer" parent="World/PlayerShip"]
 
 [node name="Camera" type="Camera2D" parent="World" groups=[
 "Camera",
 "MapControls",
 ]]
-position = Vector2( -544.171, -298.661 )
 current = true
 zoom = Vector2( 1.2, 1.2 )
 smoothing_enabled = true
@@ -58,30 +45,19 @@ playback_process_mode = 0
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="World/Camera"]
 remote_path = NodePath("../../../MapViewport/Camera2D")
 
-[node name="Station" parent="World" instance=ExtResource( 5 )]
-position = Vector2( -875.205, -520.568 )
+[node name="StationSpawner" type="Node2D" parent="World"]
+script = ExtResource( 2 )
+Station = ExtResource( 4 )
+Player = ExtResource( 5 )
 
-[node name="Pirates" type="Node2D" parent="World"]
+[node name="PirateSpawner" type="Node2D" parent="World"]
+script = ExtResource( 1 )
+ObjectScene = ExtResource( 3 )
 
-[node name="PirateShip" parent="World/Pirates" instance=ExtResource( 3 )]
-position = Vector2( 44.9039, 109.359 )
-
-[node name="PirateShip2" parent="World/Pirates" instance=ExtResource( 3 )]
-position = Vector2( 35.3373, 288.733 )
-
-[node name="PirateShip3" parent="World/Pirates" instance=ExtResource( 3 )]
-position = Vector2( -127.296, 154.8 )
-
-[node name="Asteroids" type="Node2D" parent="World"]
-
-[node name="Asteroid" parent="World/Asteroids" instance=ExtResource( 2 )]
-position = Vector2( 670.937, 476.996 )
-
-[node name="Asteroid2" parent="World/Asteroids" instance=ExtResource( 2 )]
-position = Vector2( 537.541, 727.519 )
-
-[node name="Asteroid3" parent="World/Asteroids" instance=ExtResource( 2 )]
-position = Vector2( 911.699, 815.365 )
+[node name="AsteroidSpawner" type="Node2D" parent="World"]
+script = ExtResource( 1 )
+ObjectScene = ExtResource( 9 )
+randomize_rotation = false
 
 [node name="MapViewport" type="Viewport" parent="."]
 size = Vector2( 1280, 720 )
@@ -95,7 +71,6 @@ MapObject = ExtResource( 8 )
 [node name="Camera2D" type="Camera2D" parent="MapViewport" groups=[
 "MapControls",
 ]]
-position = Vector2( -544.171, -298.661 )
 current = true
 zoom = Vector2( 1.2, 1.2 )
 script = ExtResource( 12 )
@@ -112,7 +87,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 40.0
 margin_bottom = 40.0
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 expand = true
 stretch_mode = 1
 
@@ -125,7 +100,7 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-texture = SubResource( 1 )
+texture = SubResource( 3 )
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false

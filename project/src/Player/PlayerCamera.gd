@@ -3,6 +3,7 @@ extends Camera2D
 
 export var do_position_when_map_up := true
 export var do_position_when_map_down := true
+export var max_zoom := 5.0
 
 var _start_zoom := zoom
 var _start_position := Vector2.ZERO
@@ -22,8 +23,8 @@ func set_tween(map_up: bool, tween_time: float) -> void:
 		tween.interpolate_property(
 				self,
 				"zoom",
-				_start_zoom,
-				Vector2(4,4),
+				zoom,
+				Vector2(max_zoom,max_zoom),
 				tween_time,
 				Tween.TRANS_LINEAR,
 				Tween.EASE_OUT_IN
@@ -32,7 +33,7 @@ func set_tween(map_up: bool, tween_time: float) -> void:
 			tween.interpolate_property(
 					self,
 					"position",
-					_start_position,
+					position,
 					Vector2.ZERO,
 					tween_time,
 					Tween.TRANS_LINEAR,
@@ -42,7 +43,7 @@ func set_tween(map_up: bool, tween_time: float) -> void:
 		tween.interpolate_property(
 				self,
 				"zoom",
-				Vector2(4,4),
+				zoom,
 				_start_zoom,
 				tween_time,
 				Tween.TRANS_LINEAR,
@@ -52,7 +53,7 @@ func set_tween(map_up: bool, tween_time: float) -> void:
 			tween.interpolate_property(
 					self,
 					"position",
-					Vector2.ZERO,
+					position,
 					_start_position,
 					tween_time,
 					Tween.TRANS_LINEAR,

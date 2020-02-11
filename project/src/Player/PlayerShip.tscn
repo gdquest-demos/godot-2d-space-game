@@ -7,11 +7,11 @@
 [ext_resource path="res://src/Player/States/Dock.gd" type="Script" id=5]
 [ext_resource path="res://src/Player/PlayerShip.gd" type="Script" id=6]
 [ext_resource path="res://src/Player/States/Precision.gd" type="Script" id=7]
-[ext_resource path="res://src/Common/Projectiles/PlasmaShot.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/topdown-player.svg" type="Texture" id=8]
 [ext_resource path="res://src/Player/PlayerGun.gd" type="Script" id=9]
 [ext_resource path="res://src/Player/Cargo.gd" type="Script" id=10]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.152941, 0.835294, 0.517647, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -40,6 +40,7 @@ corner_radius_bottom_left = 20
 ] instance=ExtResource( 1 )]
 collision_mask = 14
 script = ExtResource( 6 )
+map_icon = ExtResource( 8 )
 projectile_mask = 6
 
 [node name="CollisionShape" parent="." index="0"]
@@ -47,7 +48,6 @@ color = Color( 0.529412, 0.764706, 0.796078, 1 )
 
 [node name="Gun" parent="." index="1"]
 script = ExtResource( 9 )
-Projectile = ExtResource( 8 )
 
 [node name="StateMachine" type="Node" parent="." index="2"]
 script = ExtResource( 2 )
@@ -70,11 +70,13 @@ script = ExtResource( 5 )
 [node name="Precision" type="Node" parent="StateMachine/Move" index="2"]
 script = ExtResource( 7 )
 
-[node name="BarTransform" type="RemoteTransform2D" parent="." index="4"]
+[node name="CameraTransform" type="RemoteTransform2D" parent="." index="4"]
+
+[node name="BarTransform" type="RemoteTransform2D" parent="." index="5"]
 remote_path = NodePath("../Cargo/BarRig")
 update_rotation = false
 
-[node name="Cargo" type="Node" parent="." index="5"]
+[node name="Cargo" type="Node" parent="." index="6"]
 script = ExtResource( 10 )
 
 [node name="BarRig" type="Node2D" parent="Cargo" index="0"]
@@ -85,7 +87,7 @@ margin_top = 30.0
 margin_right = 25.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
-custom_styles/fg = SubResource( 3 )
+custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 percent_visible = false
 __meta__ = {

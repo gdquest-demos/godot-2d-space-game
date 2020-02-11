@@ -157,7 +157,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Gun",
 "language": "GDScript",
-"path": "res://src/Common/Gun.gd"
+"path": "res://src/Common/Guns/Gun.gd"
 }, {
 "base": "Node",
 "class": "MathUtils",
@@ -167,7 +167,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Projectile",
 "language": "GDScript",
-"path": "res://src/Common/Projectiles/Projectile.gd"
+"path": "res://src/Common/Guns/Projectiles/Projectile.gd"
 }, {
 "base": "Node",
 "class": "State",
