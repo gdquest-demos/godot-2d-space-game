@@ -44,7 +44,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_map"):
 		_map_up = not _map_up
-		get_tree().call_group("MapControls", "toggle_map", _map_up, map_transition_time)
+		get_tree().call_group("MapControls", "_toggle_map", _map_up, map_transition_time)
 
 
 func _on_Spawner_pirate_spawned(pirate: Node) -> void:

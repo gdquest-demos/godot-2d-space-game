@@ -18,7 +18,7 @@ func _ready() -> void:
 		remote_transform = $RemoteTransform2D
 
 
-func toggle_map(map_up: bool, tween_time: float) -> void:
+func _toggle_map(map_up: bool, tween_time: float) -> void:
 	set_tween(map_up, tween_time)
 	tween.start()
 

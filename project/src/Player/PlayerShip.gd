@@ -30,7 +30,7 @@ func _ready() -> void:
 	$StateMachine/Move/Dock.connect("undocked", cargo, "_on_Player_undocked")
 
 
-func toggle_map(map_up: bool, tween_time: float) -> void:
+func _toggle_map(map_up: bool, tween_time: float) -> void:
 	if not map_up:
 		timer.start(tween_time)
 		yield(timer, "timeout")

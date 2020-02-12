@@ -3,7 +3,6 @@ extends Node2D
 
 signal emptied
 
-
 export var map_icon: Texture
 export var color := Color.beige
 export var docking_distance := 200.0 setget _set_docking_distance
@@ -12,15 +11,16 @@ export var debug_docking_color_normal := Color(0, 1, 0, 0.05)
 export var debug_docking_color_highlight := Color(0, 1, 0, 0.2)
 
 var angle_proportion := 1.0
-var player_inside := false
-var radius: float
-var docking_point_edge: Vector2
+var is_player_inside := false
+var radius := 0.0
+var docking_point_edge := Vector2.ZERO
 
-onready var docking_shape := $DockingArea/CollisionShape2D
-onready var collision_shape := $KinematicBody2D/CollisionShape2D
+onready var docking_shape: CollisionShape2D = $DockingArea/CollisionShape2D
+onready var docking_area: Area2D = $DockingArea
+onready var collision_shape: CollisionShape2D = $KinematicBody2D/CollisionShape2D
 onready var agent_location := GSTSteeringAgent.new()
-onready var remote_rig := $RemoteRig
-onready var remote_transform := $RemoteRig/RemoteTransform2D
+onready var remote_rig: Node2D = $RemoteRig
+onready var remote_transform: RemoteTransform2D = $RemoteRig/RemoteTransform2D
 
 
 func _ready() -> void:
@@ -30,23 +30,23 @@ func _ready() -> void:
 	agent_location.orientation = rotation
 	agent_location.bounding_radius = radius
 	docking_point_edge = Vector2.UP * radius
-	
-	$DockingArea.connect("body_entered", self, "_on_DockingArea_body_entered")
-	$DockingArea.connect("body_exited", self, "_on_DockingArea_body_exited")
+
+	docking_area.connect("body_entered", self, "_on_DockingArea_body_entered")
+	docking_area.connect("body_exited", self, "_on_DockingArea_body_exited")
 
 
 func _draw() -> void:
 	if debug_draw_docking_radius:
 		var color := (
-				debug_docking_color_normal if not player_inside else
-				debug_docking_color_highlight
+			debug_docking_color_normal if not is_player_inside else
+			debug_docking_color_highlight
 		)
 		draw_circle(Vector2.ZERO, docking_distance, color)
 
 
 func set_docking_remote(node: Node2D, docker_distance: float) -> void:
 	remote_rig.rotation = GSTUtils.vector3_to_angle(
-			GSTUtils.to_vector3(node.global_position - global_position)
+		GSTUtils.to_vector3(node.global_position - global_position)
 	)
 	remote_transform.position = docking_point_edge + Vector2.UP*docker_distance
 	remote_transform.remote_path = node.get_path()
@@ -70,19 +70,19 @@ func _set_docking_distance(value: float) -> void:
 	docking_distance = value
 	if not is_inside_tree():
 		yield(self, "ready")
-	
+
 	docking_shape.shape.radius = value
 	update()
 
 
 func _on_DockingArea_body_entered(body: Node) -> void:
-	player_inside = true
+	is_player_inside = true
 	body.can_dock = true
 	body.dockable = self
 	update()
 
 
 func _on_DockingArea_body_exited(body: Node) -> void:
-	player_inside = false
+	is_player_inside = false
 	body.can_dock = false
 	update()

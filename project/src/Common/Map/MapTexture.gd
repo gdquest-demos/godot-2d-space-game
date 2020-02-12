@@ -4,7 +4,7 @@ extends TextureRect
 onready var tween := $Tween
 
 
-func toggle_map(map_up: bool, tween_time: float) -> void:
+func _toggle_map(map_up: bool, tween_time: float) -> void:
 	if map_up:
 		visible = true
 		tween.interpolate_property(
