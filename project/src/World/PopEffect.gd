@@ -23,7 +23,7 @@ func _draw() -> void:
 	var angle_iteration := 360.0 / lines
 	for i in range(lines):
 		var angle := i*angle_iteration
-		var direction := GSTUtils.angle_to_vector2(deg2rad(angle))
+		var direction := GSAIUtils.angle_to_vector2(deg2rad(angle))
 		draw_line(
 				direction * current_distance,
 				(direction * current_distance) + direction * current_length,

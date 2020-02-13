@@ -17,7 +17,7 @@ var dockable: Node2D
 var _health := health_max
 
 onready var shape := $CollisionShape
-onready var agent: GSTSteeringAgent = $StateMachine/Move.agent
+onready var agent: GSAISteeringAgent = $StateMachine/Move.agent
 onready var camera_transform := $CameraTransform
 onready var timer := $MapTimer
 onready var cargo := $Cargo

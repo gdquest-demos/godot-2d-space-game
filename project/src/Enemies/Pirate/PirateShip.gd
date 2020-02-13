@@ -24,30 +24,30 @@ export var firing_angle_to_target := 4
 export(int, LAYERS_2D_PHYSICS) var projectile_mask := 0
 export var PopEffect: PackedScene
 
-var _acceleration := GSTTargetAcceleration.new()
+var _acceleration := GSAITargetAcceleration.new()
 var _velocity := Vector2.ZERO
 var _angular_velocity := 0.0
-var _arrive_home_blend: GSTBlend
-var _pursue_face_blend : GSTBlend
+var _arrive_home_blend: GSAIBlend
+var _pursue_face_blend : GSAIBlend
 var _health := health_max
 var current_target: Node
-var target_agent: GSTSteeringAgent
+var target_agent: GSAISteeringAgent
 
 onready var gun: Gun = $Gun
 
-onready var agent := GSTKinematicBody2DAgent.new(self)
-onready var priority := GSTPriority.new(agent)
-onready var target_proximity := GSTRadiusProximity.new(
+onready var agent := GSAIKinematicBody2DAgent.new(self)
+onready var priority := GSAIPriority.new(agent)
+onready var target_proximity := GSAIRadiusProximity.new(
 		agent,
 		[],
 		distance_from_target_min
 )
-onready var world_proximity := GSTRadiusProximity.new(
+onready var world_proximity := GSAIRadiusProximity.new(
 		agent,
 		[],
 		distance_from_obstacles_min
 )
-onready var spawn_location := GSTAgentLocation.new()
+onready var spawn_location := GSAIAgentLocation.new()
 
 
 func _ready() -> void:
@@ -81,7 +81,7 @@ func _physics_process(delta: float) -> void:
 
 func setup_world_objects(world_objects: Array) -> void:
 	for wo in world_objects:
-		var object_agent: GSTAgentLocation = wo.agent_location
+		var object_agent: GSAIAgentLocation = wo.agent_location
 		if object_agent and not world_proximity.agents.has(object_agent):
 			world_proximity.agents.append(object_agent)
 
@@ -97,8 +97,8 @@ func setup_target(target: Node) -> void:
 		target_agent = null
 		current_target = null
 	
-	var pursue: GSTPursue = _pursue_face_blend.get_behavior_at(0).behavior as GSTPursue
-	var face: GSTFace = _pursue_face_blend.get_behavior_at(1).behavior as GSTFace
+	var pursue: GSAIPursue = _pursue_face_blend.get_behavior_at(0).behavior as GSAIPursue
+	var face: GSAIFace = _pursue_face_blend.get_behavior_at(1).behavior as GSAIFace
 	if target_agent:
 		target_proximity.agents.append(target_agent)
 	else:
@@ -145,39 +145,39 @@ func _set_firing_on_target() -> void:
 				Vector2(target_agent.position.x, target_agent.position.y)
 		)
 
-		var angle_to_target: = to_target.angle_to(GSTUtils.angle_to_vector2(rotation))
+		var angle_to_target: = to_target.angle_to(GSAIUtils.angle_to_vector2(rotation))
 		var comfortable_angle := deg2rad(firing_angle_to_target)
 		if abs(angle_to_target) <= comfortable_angle:
 			gun.fire(gun.global_position, rotation, projectile_mask)
 
 
 func _setup_behaviors() -> void:
-	var pursue := GSTPursue.new(agent, target_agent)
+	var pursue := GSAIPursue.new(agent, target_agent)
 
-	var face := GSTFace.new(agent, target_agent)
+	var face := GSAIFace.new(agent, target_agent)
 	face.alignment_tolerance = deg2rad(5)
 	face.deceleration_radius = deg2rad(45)
 
-	_pursue_face_blend = GSTBlend.new(agent)
+	_pursue_face_blend = GSAIBlend.new(agent)
 	_pursue_face_blend.add(pursue, 1)
 	_pursue_face_blend.add(face, 1)
 	_pursue_face_blend.is_enabled = false
 
-	var separation := GSTSeparation.new(agent, target_proximity)
+	var separation := GSAISeparation.new(agent, target_proximity)
 	separation.decay_coefficient = pow(target_proximity.radius, 2)/0.15
 
 	_pursue_face_blend.add(separation, 2)
 
-	var avoid := GSTAvoidCollisions.new(agent, world_proximity)
+	var avoid := GSAIAvoidCollisions.new(agent, world_proximity)
 
-	var arrive := GSTArrive.new(agent, spawn_location)
+	var arrive := GSAIArrive.new(agent, spawn_location)
 	arrive.arrival_tolerance = 200
 	arrive.deceleration_radius = 300
-	var look := GSTLookWhereYouGo.new(agent)
+	var look := GSAILookWhereYouGo.new(agent)
 	look.alignment_tolerance = deg2rad(5)
 	look.deceleration_radius = deg2rad(45)
 
-	_arrive_home_blend = GSTBlend.new(agent)
+	_arrive_home_blend = GSAIBlend.new(agent)
 	_arrive_home_blend.add(arrive, 1)
 	_arrive_home_blend.add(look, 1)
 	_arrive_home_blend.is_enabled = false

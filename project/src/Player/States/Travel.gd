@@ -7,7 +7,7 @@ var reversing := false
 func physics_process(delta: float) -> void:
 	var movement := get_movement()
 	reversing = movement.y > 0
-	var direction := GSTUtils.angle_to_vector2(_parent.agent.orientation)
+	var direction := GSAIUtils.angle_to_vector2(_parent.agent.orientation)
 	
 	_parent.linear_velocity += (
 			movement.y *

@@ -3,16 +3,16 @@ extends State
 
 export var speed_multiplier := 0.75
 
-var _face: GSTFace
+var _face: GSAIFace
 var _toggled := false
 
-onready var _target_location := GSTAgentLocation.new()
-onready var acceleration := GSTTargetAcceleration.new()
+onready var _target_location := GSAIAgentLocation.new()
+onready var acceleration := GSAITargetAcceleration.new()
 
 
 func _ready() -> void:
 	yield(owner, "ready")
-	_face = GSTFace.new(_parent.agent, _target_location)
+	_face = GSAIFace.new(_parent.agent, _target_location)
 	_face.alignment_tolerance = deg2rad(5)
 	_face.deceleration_radius = deg2rad(45)
 
@@ -20,7 +20,7 @@ func _ready() -> void:
 func enter(msg := {}) -> void:
 	_toggled = msg.toggled
 	if _toggled:
-		var direction := GSTUtils.angle_to_vector2(_parent.agent.orientation)
+		var direction := GSAIUtils.angle_to_vector2(_parent.agent.orientation)
 		_target_location.position.x = direction.x + _parent.agent.position.x
 		_target_location.position.y = direction.y + _parent.agent.position.y
 	else:

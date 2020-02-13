@@ -1,7 +1,7 @@
 # A specialized steering agent that updates itself every frame so the user does
 # not have to using a KinematicBody
-extends GSTSpecializedAgent
-class_name GSTKinematicBodyAgent
+extends GSAISpecializedAgent
+class_name GSAIKinematicBody3DAgent
 
 # SLIDE uses `move_and_slide`
 # COLLIDE uses `move_and_collide`
@@ -18,19 +18,20 @@ var movement_type: int
 var _last_position: Vector3
 
 
-func _init(body: KinematicBody, movement_type: int = MovementType.SLIDE) -> void:
-	if not body.is_inside_tree():
-		yield(body, "ready")
+func _init(_body: KinematicBody, _movement_type: int = MovementType.SLIDE) -> void:
+	if not _body.is_inside_tree():
+		yield(_body, "ready")
 	
-	self.body = body
-	self.movement_type = movement_type
+	self.body = _body
+	self.movement_type = _movement_type
 	
-	body.get_tree().connect("physics_frame", self, "_on_SceneTree_physics_frame")
+	# warning-ignore:return_value_discarded
+	self.body.get_tree().connect("physics_frame", self, "_on_SceneTree_physics_frame")
 
 
 # Moves the agent's `body` by target `acceleration`.
 # tags: virtual
-func _apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
+func _apply_steering(acceleration: GSAITargetAcceleration, delta: float) -> void:
 	_applied_steering = true
 	match movement_type:
 		MovementType.COLLIDE:
@@ -44,7 +45,7 @@ func _apply_steering(acceleration: GSTTargetAcceleration, delta: float) -> void:
 
 
 func _apply_sliding_steering(accel: Vector3) -> void:
-	var velocity := GSTUtils.clampedv3(linear_velocity + accel, linear_speed_max)
+	var velocity := GSAIUtils.clampedv3(linear_velocity + accel, linear_speed_max)
 	if apply_linear_drag:
 		velocity = velocity.linear_interpolate(Vector3.ZERO, linear_drag_percentage)
 	velocity = body.move_and_slide(velocity)
@@ -53,19 +54,20 @@ func _apply_sliding_steering(accel: Vector3) -> void:
 
 
 func _apply_collide_steering(accel: Vector3, delta: float) -> void:
-	var velocity := GSTUtils.clampedv3(linear_velocity + accel, linear_speed_max)
+	var velocity := GSAIUtils.clampedv3(linear_velocity + accel, linear_speed_max)
 	if apply_linear_drag:
 		velocity = velocity.linear_interpolate(
 				Vector3.ZERO,
 				linear_drag_percentage
 		)
+	# warning-ignore:return_value_discarded
 	body.move_and_collide(velocity * delta)
 	if calculate_velocities:
 		linear_velocity = velocity
 
 
 func _apply_position_steering(accel: Vector3, delta: float) -> void:
-	var velocity := GSTUtils.clampedv3(linear_velocity + accel, linear_speed_max)
+	var velocity := GSAIUtils.clampedv3(linear_velocity + accel, linear_speed_max)
 	if apply_linear_drag:
 		velocity = velocity.linear_interpolate(
 				Vector3.ZERO,
@@ -106,7 +108,7 @@ func _on_SceneTree_physics_frame() -> void:
 		if _applied_steering:
 			_applied_steering = false
 		else:
-			linear_velocity = GSTUtils.clampedv3(
+			linear_velocity = GSAIUtils.clampedv3(
 				_last_position - current_position,
 				linear_speed_max
 			)

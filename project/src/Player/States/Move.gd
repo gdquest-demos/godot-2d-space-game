@@ -15,7 +15,7 @@ var angular_velocity := 0.0
 var is_reversing := false
 var can_fire := true
 
-onready var agent := GSTKinematicBody2DAgent.new(owner)
+onready var agent := GSAIKinematicBody2DAgent.new(owner)
 
 
 func _ready() -> void:

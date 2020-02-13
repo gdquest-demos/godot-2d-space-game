@@ -18,7 +18,7 @@ var docking_point_edge := Vector2.ZERO
 onready var docking_shape: CollisionShape2D = $DockingArea/CollisionShape2D
 onready var docking_area: Area2D = $DockingArea
 onready var collision_shape: CollisionShape2D = $KinematicBody2D/CollisionShape2D
-onready var agent_location := GSTSteeringAgent.new()
+onready var agent_location := GSAISteeringAgent.new()
 onready var remote_rig: Node2D = $RemoteRig
 onready var remote_transform: RemoteTransform2D = $RemoteRig/RemoteTransform2D
 
@@ -45,8 +45,8 @@ func _draw() -> void:
 
 
 func set_docking_remote(node: Node2D, docker_distance: float) -> void:
-	remote_rig.rotation = GSTUtils.vector3_to_angle(
-		GSTUtils.to_vector3(node.global_position - global_position)
+	remote_rig.rotation = GSAIUtils.vector3_to_angle(
+		GSAIUtils.to_vector3(node.global_position - global_position)
 	)
 	remote_transform.position = docking_point_edge + Vector2.UP*docker_distance
 	remote_transform.remote_path = node.get_path()
