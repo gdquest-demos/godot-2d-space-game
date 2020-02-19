@@ -26,6 +26,7 @@ func remove_map_object(id: int) -> void:
 	if map_objects.has(id):
 		map_objects[id].clear()
 		map_objects[id].queue_free()
+		# warning-ignore:return_value_discarded
 		map_objects.erase(id)
 
 

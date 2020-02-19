@@ -1,7 +1,6 @@
 class_name Gun
 extends Node2D
 
-
 export var Projectile: PackedScene
 
 onready var cooldown: Timer = $Cooldown

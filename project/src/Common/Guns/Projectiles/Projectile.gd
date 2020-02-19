@@ -13,6 +13,7 @@ onready var lifespan_timer := $Lifespan
 
 func _ready() -> void:
 	direction = -GSAIUtils.angle_to_vector2(rotation)
+	# warning-ignore:return_value_discarded
 	lifespan_timer.connect("timeout", self, "_on_Lifespan_timeout")
 
 

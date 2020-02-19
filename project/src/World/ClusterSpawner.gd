@@ -2,6 +2,7 @@ extends Node2D
 
 
 signal object_spawned(object)
+signal cluster_spawned(object)
 
 
 export var ObjectScene: PackedScene
@@ -45,6 +46,7 @@ func _spawn_object_cluster(
 	var count = rng.randi_range(count_min, count_max)
 	existing_clusters.append(spawn_position)
 	var objects := []
+	var spawned := []
 	var immunity_radius := object_radius * object_radius
 	for _i in range(count):
 		while true:
@@ -60,15 +62,18 @@ func _spawn_object_cluster(
 					valid = false
 					break
 			if valid:
-				_spawn_object(object_pos)
+				var object = _spawn_object(object_pos)
+				spawned.append(object)
 				objects.append(object_pos)
 				break
+	emit_signal("cluster_spawned", spawned)
 
 
-func _spawn_object(position: Vector2) -> void:
+func _spawn_object(position: Vector2) -> Node2D:
 	var object = ObjectScene.instance()
 	object.global_position = position
 	if randomize_rotation:
 		object.rotation = rng.randf_range(-PI, PI)
 	add_child(object)
 	emit_signal("object_spawned", object)
+	return object

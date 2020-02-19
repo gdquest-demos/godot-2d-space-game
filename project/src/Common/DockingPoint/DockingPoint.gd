@@ -1,6 +1,5 @@
 extends Node2D
 
-
 signal emptied
 
 export var map_icon: Texture
@@ -31,15 +30,18 @@ func _ready() -> void:
 	agent_location.bounding_radius = radius
 	docking_point_edge = Vector2.UP * radius
 
+	# warning-ignore:return_value_discarded
 	docking_area.connect("body_entered", self, "_on_DockingArea_body_entered")
+	# warning-ignore:return_value_discarded
 	docking_area.connect("body_exited", self, "_on_DockingArea_body_exited")
 
 
 func _draw() -> void:
 	if debug_draw_docking_radius:
 		var color := (
-			debug_docking_color_normal if not is_player_inside else
-			debug_docking_color_highlight
+			debug_docking_color_normal
+			if not is_player_inside
+			else debug_docking_color_highlight
 		)
 		draw_circle(Vector2.ZERO, docking_distance, color)
 
@@ -48,7 +50,7 @@ func set_docking_remote(node: Node2D, docker_distance: float) -> void:
 	remote_rig.rotation = GSAIUtils.vector3_to_angle(
 		GSAIUtils.to_vector3(node.global_position - global_position)
 	)
-	remote_transform.position = docking_point_edge + Vector2.UP*docker_distance
+	remote_transform.position = docking_point_edge + Vector2.UP * docker_distance
 	remote_transform.remote_path = node.get_path()
 
 
@@ -58,6 +60,7 @@ func undock() -> void:
 
 func register_on_map(map: Viewport) -> void:
 	var id: int = map.register_map_object($MapTransform, map_icon)
+	# warning-ignore:return_value_discarded
 	connect("emptied", map, "remove_map_object", [id])
 
 
