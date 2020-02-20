@@ -3,6 +3,7 @@ extends KinematicBody2D
 # warning-ignore:unused_signal
 signal damaged(amount, origin)
 signal died
+#warning-ignore: unused_signal
 signal force_undock
 
 
@@ -13,8 +14,8 @@ export var health_max := 100
 export(int, LAYERS_2D_PHYSICS) var projectile_mask := 0
 export var PopEffect: PackedScene
 
-var can_dock := false
-var dockable: Node2D
+var can_dock := 0
+var dockables := []
 var _health := health_max
 
 onready var shape := $CollisionShape

@@ -104,7 +104,9 @@ func physics_process(delta: float) -> void:
 				_current_docking_point.set_docking_remote(
 						owner, _agent.bounding_radius*0.75
 				)
-				owner.connect("force_undock", self, "_on_Ship_force_undock")
+				if not owner.is_connected("force_undock", self, "_on_Ship_force_undock"):
+					#warning-ignore:return_value_discarded
+					owner.connect("force_undock", self, "_on_Ship_force_undock")
 
 
 func unhandled_input(event: InputEvent) -> void:

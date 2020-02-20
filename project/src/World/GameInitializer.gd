@@ -18,11 +18,7 @@ func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	station_spawner.connect("station_spawned", self, "_on_Spawner_station_spawned")
 	# warning-ignore:return_value_discarded
-	pirate_spawner.connect("object_spawned", self, "_on_Spawner_pirate_spawned")
-	# warning-ignore:return_value_discarded
-	pirate_spawner.connect("cluster_spawned", self, "_on_Pirate_cluster_spawned")
-	# warning-ignore:return_value_discarded
-	asteroid_spawner.connect("object_spawned", self, "_on_Spawner_asteroid_spawned")
+	asteroid_spawner.connect("asteroid_spawned", self, "_on_Spawner_asteroid_spawned")
 	
 	camera.setup_camera_map(map)
 

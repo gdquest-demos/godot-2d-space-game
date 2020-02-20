@@ -1,25 +1,32 @@
 extends Node2D
 
-
+#warning-ignore:unused_signal
 signal died
 
 export var map_icon: Texture
 export var docking_distance := 200.0 setget _set_docking_distance
-export var debug_draw_docking_radius := true setget _set_debug_draw_docking_radius
-export var debug_docking_color_normal := Color(0, 1, 0, 0.05)
-export var debug_docking_color_highlight := Color(0, 1, 0, 0.2)
+export var docking_color_highlight := Color(0, 1, 0, 0.2)
 
 var angle_proportion := 1.0
 var is_player_inside := false
 var radius := 0.0
 var docking_point_edge := Vector2.ZERO
 
+onready var docking_color_normal := Color(
+	docking_color_highlight.r,
+	docking_color_highlight.g,
+	docking_color_highlight.b,
+	0
+)
+onready var current_color := docking_color_normal
 onready var docking_shape: CollisionShape2D = $DockingArea/CollisionShape2D
 onready var docking_area: Area2D = $DockingArea
 onready var collision_shape: CollisionShape2D = $KinematicBody2D/CollisionShape2D
 onready var agent_location := GSAISteeringAgent.new()
 onready var remote_rig: Node2D = $RemoteRig
 onready var remote_transform: RemoteTransform2D = $RemoteRig/RemoteTransform2D
+onready var ref_to := weakref(self)
+onready var tween := $Tween
 
 
 func _ready() -> void:
@@ -37,13 +44,7 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	if debug_draw_docking_radius:
-		var color := (
-			debug_docking_color_normal
-			if not is_player_inside
-			else debug_docking_color_highlight
-		)
-		draw_circle(Vector2.ZERO, docking_distance, color)
+	draw_circle(Vector2.ZERO, docking_distance, current_color)
 
 
 func set_docking_remote(node: Node2D, docker_distance: float) -> void:
@@ -64,11 +65,6 @@ func register_on_map(map: Viewport) -> void:
 	connect("died", map, "remove_map_object", [id])
 
 
-func _set_debug_draw_docking_radius(value: bool) -> void:
-	debug_draw_docking_radius = value
-	update()
-
-
 func _set_docking_distance(value: float) -> void:
 	docking_distance = value
 	if not is_inside_tree():
@@ -80,12 +76,31 @@ func _set_docking_distance(value: float) -> void:
 
 func _on_DockingArea_body_entered(body: Node) -> void:
 	is_player_inside = true
-	body.can_dock = true
-	body.dockable = self
-	update()
+	body.can_dock += 1
+	body.dockables.append(ref_to)
+	tween.interpolate_method(
+		self, "_on_Tween_color_callback",
+		current_color, docking_color_highlight,
+		0.5,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
+	)
+	tween.start()
 
 
 func _on_DockingArea_body_exited(body: Node) -> void:
 	is_player_inside = false
-	body.can_dock = false
+	body.can_dock -= 1
+	var index: int = body.dockables.find(ref_to)
+	if index > -1:
+		body.dockables.remove(index)
+	tween.interpolate_method(
+		self, "_on_Tween_color_callback",
+		current_color, docking_color_normal,
+		0.5,Tween.TRANS_LINEAR, Tween.EASE_OUT_IN
+	)
+	tween.start()
+	
+
+
+func _on_Tween_color_callback(current: Color) -> void:
+	current_color = current
 	update()

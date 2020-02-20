@@ -1,15 +1,15 @@
 extends Node2D
 
 
-signal object_spawned(object)
+signal asteroid_spawned(object)
 signal cluster_spawned(object)
 
 
-export var ObjectScene: PackedScene
+export var AsteroidScene: PackedScene
 export var count_min := 1
 export var count_max := 5
 export var spawn_radius := 150.0
-export var object_radius := 75.0
+export var asteroid_radius := 75.0
 export var randomize_rotation := true
 
 onready var rng := RandomNumberGenerator.new()
@@ -39,11 +39,11 @@ func spawn_random_cluster(
 				impedes_cluster = true
 				break
 		if not impedes_cluster:
-			_spawn_object_cluster(spawn_position, existing_clusters, world)
+			_spawn_asteroid_cluster(spawn_position, existing_clusters, world)
 			break
 
 
-func _spawn_object_cluster(
+func _spawn_asteroid_cluster(
 			spawn_position: Vector2,
 			existing_clusters: Array,
 			world: Node2D
@@ -52,34 +52,34 @@ func _spawn_object_cluster(
 	existing_clusters.append(spawn_position)
 	var objects := []
 	var spawned := []
-	var immunity_radius := object_radius * object_radius
+	var immunity_radius := pow(asteroid_radius, 2)
 	for _i in range(count):
 		while true:
 			var angle := rng.randf()*2*PI
 			var radius := spawn_radius * sqrt(rng.randf())
-			var object_pos := Vector2(
+			var asteroid_pos := Vector2(
 					spawn_position.x + (radius * cos(angle)),
 					spawn_position.y + (radius * sin(angle))
 			)
 			var valid := true
 			for o in objects:
-				if object_pos.distance_squared_to(o) < immunity_radius:
+				if asteroid_pos.distance_squared_to(o) < immunity_radius:
 					valid = false
 					break
 			if valid:
-				var object = _spawn_object(object_pos, world)
-				spawned.append(object)
-				objects.append(object_pos)
+				var asteroid = _spawn_asteroid(asteroid_pos, world)
+				spawned.append(asteroid)
+				objects.append(asteroid_pos)
 				break
 	emit_signal("cluster_spawned", spawned)
 
 
-func _spawn_object(position: Vector2, world: Node2D) -> Node2D:
-	var object = ObjectScene.instance()
-	object.setup(rng, world)
-	object.global_position = position
+func _spawn_asteroid(position: Vector2, world: Node2D) -> Node2D:
+	var asteroid = AsteroidScene.instance()
+	asteroid.setup(rng, world)
+	asteroid.global_position = position
 	if randomize_rotation:
-		object.rotation = rng.randf_range(-PI, PI)
-	add_child(object)
-	emit_signal("object_spawned", object)
-	return object
+		asteroid.rotation = rng.randf_range(-PI, PI)
+	add_child(asteroid)
+	emit_signal("asteroid_spawned", asteroid)
+	return asteroid

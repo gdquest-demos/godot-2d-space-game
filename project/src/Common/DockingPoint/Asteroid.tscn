@@ -16,7 +16,7 @@ radius = 48.0012
 script = ExtResource( 2 )
 map_icon = ExtResource( 3 )
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="1"]
 scale = Vector2( 0.58, 0.6 )
 
 [node name="CollisionShape2D" parent="DockingArea" index="0"]

@@ -12,10 +12,12 @@ var _spawned_positions := []
 var _world_objects := []
 
 onready var asteroid_spawner := $AsteroidSpawner
+onready var pirate_spawner := $PirateSpawner
 
 
 func setup() -> void:
 	_refresh_iron()
+	
 
 
 func remove_iron(amount: float) -> void:
@@ -25,6 +27,7 @@ func remove_iron(amount: float) -> void:
 
 
 func _refresh_iron() -> void:
+	#warning-ignore:return_value_discarded
 	asteroid_spawner.connect("cluster_spawned", self, "_on_Spawner_spawned_asteroid")
 	while iron_amount < iron_amount_balance_level:
 		asteroid_spawner.spawn_random_cluster(

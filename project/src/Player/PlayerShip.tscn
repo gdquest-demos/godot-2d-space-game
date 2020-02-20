@@ -13,24 +13,24 @@
 [ext_resource path="res://src/World/PopEffect.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.152941, 0.835294, 0.517647, 1 )
+bg_color = Color( 0.129412, 0.870588, 0.52549, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0.0196078, 0.152941, 0.0823529, 1 )
+border_color = Color( 0.054902, 0.243137, 0.141176, 1 )
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0352941, 0.239216, 0.121569, 1 )
+bg_color = Color( 0.0588235, 0.34902, 0.192157, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0.0196078, 0.152941, 0.0823529, 1 )
+border_color = Color( 0.054902, 0.243137, 0.141176, 1 )
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -57,7 +57,7 @@ acceleration_max = 13.0
 linear_speed_max = 325.0
 drag_linear_coeff = 0.04
 angular_speed_max = 140
-angular_acceleration_max = 15
+angular_acceleration_max = 0.25
 
 [node name="Travel" type="Node" parent="StateMachine/Move" index="0"]
 script = ExtResource( 4 )

@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://src/World/ClusterSpawner.gd" type="Script" id=1]
+[ext_resource path="res://src/World/AsteroidSpawner.gd" type="Script" id=1]
 [ext_resource path="res://src/World/StationSpawner.gd" type="Script" id=2]
 [ext_resource path="res://src/Enemies/Pirate/PirateShip.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Player/Station.tscn" type="PackedScene" id=4]
@@ -14,6 +14,7 @@
 [ext_resource path="res://src/Player/PlayerCamera.gd" type="Script" id=12]
 [ext_resource path="res://assets/starfield.png" type="Texture" id=13]
 [ext_resource path="res://src/World.gd" type="Script" id=14]
+[ext_resource path="res://src/World/PirateSpawner.gd" type="Script" id=15]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -113,14 +114,13 @@ Station = ExtResource( 4 )
 Player = ExtResource( 5 )
 
 [node name="PirateSpawner" type="Node2D" parent="World"]
-script = ExtResource( 1 )
-ObjectScene = ExtResource( 3 )
+script = ExtResource( 15 )
+PirateScene = ExtResource( 3 )
 
 [node name="AsteroidSpawner" type="Node2D" parent="World"]
 script = ExtResource( 1 )
-ObjectScene = ExtResource( 9 )
+AsteroidScene = ExtResource( 9 )
 spawn_radius = 300.0
-object_radius = 125.0
 
 [node name="MapViewport" type="Viewport" parent="."]
 size = Vector2( 1280, 720 )
