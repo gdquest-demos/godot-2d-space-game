@@ -104,6 +104,7 @@ func physics_process(delta: float) -> void:
 				_current_docking_point.set_docking_remote(
 						owner, _agent.bounding_radius*0.75
 				)
+				owner.connect("force_undock", self, "_on_Ship_force_undock")
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -121,3 +122,7 @@ func unhandled_input(event: InputEvent) -> void:
 			_parent.linear_velocity += direction * docking_release_speed
 		
 		_state_machine.transition_to("Move/Travel")
+
+
+func _on_Ship_force_undock() -> void:
+	_state_machine.transition_to("Move/Travel")

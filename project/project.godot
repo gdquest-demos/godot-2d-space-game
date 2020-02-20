@@ -219,6 +219,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Harvester"
+config/description="Harvester is a top down space mining game meant to showcase the Godot Steering Toolkit for AI agents."
 run/main_scene="res://src/Game.tscn"
 config/icon="res://icon.png"
 

@@ -3,7 +3,9 @@ extends KinematicBody2D
 # warning-ignore:unused_signal
 signal damaged(amount, origin)
 signal died
+# warning-ignore:unused_signal
 signal begin_patrol
+# warning-ignore:unused_signal
 signal end_patrol
 signal initialized
 
@@ -107,7 +109,7 @@ func _die() -> void:
 	queue_free()
 
 
-func _on_self_damaged(amount: int, origin: Node) -> void:
+func _on_self_damaged(amount: int, _origin: Node) -> void:
 	_health -= amount
 
 	if _health <= 0:

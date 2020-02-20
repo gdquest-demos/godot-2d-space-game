@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/World/ClusterSpawner.gd" type="Script" id=1]
 [ext_resource path="res://src/World/StationSpawner.gd" type="Script" id=2]
@@ -9,8 +9,11 @@
 [ext_resource path="res://src/World/GameInitializer.gd" type="Script" id=7]
 [ext_resource path="res://src/Common/Map/MapObject.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Common/DockingPoint/Asteroid.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/black.png" type="Texture" id=10]
 [ext_resource path="res://src/Common/Map/MapTexture.gd" type="Script" id=11]
 [ext_resource path="res://src/Player/PlayerCamera.gd" type="Script" id=12]
+[ext_resource path="res://assets/starfield.png" type="Texture" id=13]
+[ext_resource path="res://src/World.gd" type="Script" id=14]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -25,11 +28,67 @@ viewport_path = NodePath("MapViewport")
 
 [node name="GameInitializer" type="Node"]
 script = ExtResource( 7 )
-radius_around_clusters = 500.0
-pirate_clusters = 5
-asteroid_clusters = 4
 
 [node name="World" type="Node2D" parent="."]
+script = ExtResource( 14 )
+world_radius = 4000.0
+iron_amount_balance_level = 500.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="World"]
+scroll_ignore_camera_zoom = true
+
+[node name="Background" type="ParallaxLayer" parent="World/ParallaxBackground"]
+motion_scale = Vector2( 0, 0 )
+
+[node name="Black" type="Sprite" parent="World/ParallaxBackground/Background"]
+scale = Vector2( 1920, 1080 )
+texture = ExtResource( 10 )
+
+[node name="StarsBack" type="ParallaxLayer" parent="World/ParallaxBackground"]
+motion_scale = Vector2( 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="World/ParallaxBackground/StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( -400, -300 )
+texture = ExtResource( 13 )
+
+[node name="Sprite2" type="Sprite" parent="World/ParallaxBackground/StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( 400, -300 )
+texture = ExtResource( 13 )
+
+[node name="Sprite3" type="Sprite" parent="World/ParallaxBackground/StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( 400, 300 )
+texture = ExtResource( 13 )
+
+[node name="Sprite4" type="Sprite" parent="World/ParallaxBackground/StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( -400, 300 )
+texture = ExtResource( 13 )
+
+[node name="StarsFore" type="ParallaxLayer" parent="World/ParallaxBackground"]
+motion_scale = Vector2( 0.025, 0.025 )
+
+[node name="Sprite" type="Sprite" parent="World/ParallaxBackground/StarsFore"]
+position = Vector2( -400, -300 )
+rotation = 3.14159
+texture = ExtResource( 13 )
+
+[node name="Sprite2" type="Sprite" parent="World/ParallaxBackground/StarsFore"]
+position = Vector2( 400, -300 )
+rotation = 3.14159
+texture = ExtResource( 13 )
+
+[node name="Sprite3" type="Sprite" parent="World/ParallaxBackground/StarsFore"]
+position = Vector2( 400, 300 )
+rotation = 3.14159
+texture = ExtResource( 13 )
+
+[node name="Sprite4" type="Sprite" parent="World/ParallaxBackground/StarsFore"]
+position = Vector2( -400, 300 )
+rotation = 3.14159
+texture = ExtResource( 13 )
 
 [node name="Camera" type="Camera2D" parent="World" groups=[
 "Camera",
@@ -40,6 +99,7 @@ zoom = Vector2( 1.2, 1.2 )
 smoothing_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource( 12 )
+max_zoom = 7.5
 
 [node name="Tween" type="Tween" parent="World/Camera"]
 playback_process_mode = 0
@@ -61,7 +121,6 @@ script = ExtResource( 1 )
 ObjectScene = ExtResource( 9 )
 spawn_radius = 300.0
 object_radius = 125.0
-randomize_rotation = false
 
 [node name="MapViewport" type="Viewport" parent="."]
 size = Vector2( 1280, 720 )
@@ -71,17 +130,6 @@ render_target_v_flip = true
 render_target_update_mode = 3
 script = ExtResource( 6 )
 MapObject = ExtResource( 8 )
-
-[node name="Camera2D" type="Camera2D" parent="MapViewport" groups=[
-"MapControls",
-]]
-current = true
-zoom = Vector2( 1.2, 1.2 )
-script = ExtResource( 12 )
-do_position_when_map_up = false
-do_position_when_map_down = false
-
-[node name="Tween" type="Tween" parent="MapViewport/Camera2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MapViewport"]
 layer = -1
@@ -95,9 +143,9 @@ texture = SubResource( 2 )
 expand = true
 stretch_mode = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="MapTexture" type="TextureRect" parent="CanvasLayer" groups=[
+[node name="MapTexture" type="TextureRect" parent="UI" groups=[
 "MapControls",
 ]]
 modulate = Color( 1, 1, 1, 0 )
@@ -110,9 +158,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tween" type="Tween" parent="CanvasLayer/MapTexture"]
+[node name="Tween" type="Tween" parent="UI/MapTexture"]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -128,7 +176,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 390.0

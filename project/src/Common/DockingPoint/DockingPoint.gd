@@ -1,9 +1,9 @@
 extends Node2D
 
-signal emptied
+
+signal died
 
 export var map_icon: Texture
-export var color := Color.beige
 export var docking_distance := 200.0 setget _set_docking_distance
 export var debug_draw_docking_radius := true setget _set_debug_draw_docking_radius
 export var debug_docking_color_normal := Color(0, 1, 0, 0.05)
@@ -47,10 +47,10 @@ func _draw() -> void:
 
 
 func set_docking_remote(node: Node2D, docker_distance: float) -> void:
-	remote_rig.rotation = GSAIUtils.vector3_to_angle(
-		GSAIUtils.to_vector3(node.global_position - global_position)
+	remote_rig.global_rotation = GSAIUtils.vector2_to_angle(
+		node.global_position - global_position
 	)
-	remote_transform.position = docking_point_edge + Vector2.UP * docker_distance
+	remote_transform.position = docking_point_edge + Vector2.UP * (docker_distance/scale.x)
 	remote_transform.remote_path = node.get_path()
 
 
@@ -61,7 +61,7 @@ func undock() -> void:
 func register_on_map(map: Viewport) -> void:
 	var id: int = map.register_map_object($MapTransform, map_icon)
 	# warning-ignore:return_value_discarded
-	connect("emptied", map, "remove_map_object", [id])
+	connect("died", map, "remove_map_object", [id])
 
 
 func _set_debug_draw_docking_radius(value: bool) -> void:

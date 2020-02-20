@@ -1,8 +1,9 @@
 extends KinematicBody2D
 
-
+# warning-ignore:unused_signal
 signal damaged(amount, origin)
 signal died
+signal force_undock
 
 
 export var map_icon: Texture
@@ -24,9 +25,12 @@ onready var cargo := $Cargo
 
 
 func _ready() -> void:
+	#warning-ignore:return_value_discarded
 	connect("damaged", self, "_on_self_damaged")
 	$Gun.projectile_mask = projectile_mask
+	#warning-ignore:return_value_discarded
 	$StateMachine/Move/Dock.connect("docked", cargo, "_on_Player_docked")
+	#warning-ignore:return_value_discarded
 	$StateMachine/Move/Dock.connect("undocked", cargo, "_on_Player_undocked")
 
 
@@ -49,6 +53,7 @@ func die() -> void:
 
 func register_on_map(map: Viewport) -> void:
 	var id: int = map.register_map_object($MapTransform, map_icon, color_map_icon, scale_map_icon)
+	#warning-ignore:return_value_discarded
 	connect("died", map, "remove_map_object", [id])
 
 

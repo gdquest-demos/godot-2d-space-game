@@ -21,16 +21,16 @@ func _init(_body: RigidBody) -> void:
 # Moves the agent's `body` by target `acceleration`.
 # tags: virtual
 func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> void:
-	var body: RigidBody = _body_ref.get_ref()
-	if not body:
+	var _body: RigidBody = _body_ref.get_ref()
+	if not _body:
 		return
 		
 	_applied_steering = true
-	body.apply_central_impulse(acceleration.linear)
-	body.apply_torque_impulse(Vector3.UP * acceleration.angular)
+	_body.apply_central_impulse(acceleration.linear)
+	_body.apply_torque_impulse(Vector3.UP * acceleration.angular)
 	if calculate_velocities:
-		linear_velocity = body.linear_velocity
-		angular_velocity = body.angular_velocity.y
+		linear_velocity = _body.linear_velocity
+		angular_velocity = _body.angular_velocity.y
 
 
 func _set_body(value: RigidBody) -> void:
@@ -44,12 +44,12 @@ func _set_body(value: RigidBody) -> void:
 
 
 func _on_SceneTree_frame() -> void:
-	var body: RigidBody = _body_ref.get_ref()
-	if not body:
+	var _body: RigidBody = _body_ref.get_ref()
+	if not _body:
 		return
 		
-	var current_position := body.transform.origin
-	var current_orientation := body.rotation.y
+	var current_position := _body.transform.origin
+	var current_orientation := _body.rotation.y
 
 	position = current_position
 	orientation = current_orientation
@@ -58,5 +58,5 @@ func _on_SceneTree_frame() -> void:
 		if _applied_steering:
 			_applied_steering = false
 		else:
-			linear_velocity = body.linear_velocity
-			angular_velocity = body.angular_velocity.y
+			linear_velocity = _body.linear_velocity
+			angular_velocity = _body.angular_velocity.y

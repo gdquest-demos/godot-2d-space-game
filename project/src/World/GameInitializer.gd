@@ -1,14 +1,9 @@
 extends Node
 
 export var map_transition_time := 0.35
-export var radius_around_clusters := 600.0
-export var world_size := Vector2(4000, 2000)
-export var pirate_clusters := 10
-export var asteroid_clusters := 3
 
 var _spawned_positions := []
 var _world_objects := []
-var player: KinematicBody2D
 var _map_up := false
 
 onready var pirate_spawner := $World/PirateSpawner
@@ -16,6 +11,7 @@ onready var station_spawner := $World/StationSpawner
 onready var asteroid_spawner := $World/AsteroidSpawner
 onready var map := $MapViewport
 onready var camera := $World/Camera
+onready var world := $World
 
 
 func _ready() -> void:
@@ -27,19 +23,13 @@ func _ready() -> void:
 	pirate_spawner.connect("cluster_spawned", self, "_on_Pirate_cluster_spawned")
 	# warning-ignore:return_value_discarded
 	asteroid_spawner.connect("object_spawned", self, "_on_Spawner_asteroid_spawned")
+	
+	camera.setup_camera_map(map)
 
-	station_spawner.spawn_station(world_size, _spawned_positions)
+	station_spawner.spawn_station()
 
-	for _i in range(asteroid_clusters):
-		asteroid_spawner.spawn_random_cluster(
-			world_size, _spawned_positions, radius_around_clusters
-		)
+	world.setup()
 
-	for _i in range(pirate_clusters):
-		pirate_spawner.spawn_random_cluster(world_size, _spawned_positions, radius_around_clusters)
-	for p in pirate_spawner.get_children():
-		p.setup_faction(pirate_spawner.get_children())
-		
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_map"):
@@ -73,7 +63,6 @@ func _on_Spawner_station_spawned(station: Node, _player: KinematicBody2D) -> voi
 
 	_player.register_on_map(map)
 	_player.grab_camera(camera)
-	self.player = _player
 
 
 func _on_Spawner_asteroid_spawned(asteroid: Node) -> void:

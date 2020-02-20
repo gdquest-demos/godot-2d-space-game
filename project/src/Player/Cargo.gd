@@ -8,6 +8,7 @@ export var export_strength := 35.0
 var current_cargo := 0.0 setget _set_current_cargo
 var is_mining := false
 var is_exporting := false
+var dockee: WeakRef
 
 onready var bar = $BarRig/ProgressBar
 
@@ -22,10 +23,20 @@ func _physics_process(delta: float) -> void:
 			is_mining = false
 			
 		if is_mining:
-			_set_current_cargo(min(
-					cargo_size,
-					current_cargo + mining_strength * delta
-			))
+			var _dockee = dockee.get_ref()
+			if not _dockee:
+				is_mining = false
+				owner.emit_signal("force_undock")
+			else:
+				var mined: float = _dockee.mine_amount(
+					min(
+						cargo_size, mining_strength * delta
+					)
+				)
+				if mined == 0:
+					is_mining = false
+				else:
+					_set_current_cargo(current_cargo + mined)
 	elif is_exporting:
 		if current_cargo == 0:
 			is_exporting = false
@@ -34,10 +45,11 @@ func _physics_process(delta: float) -> void:
 			_set_current_cargo(max(0, current_cargo - export_strength * delta))
 
 
-func _on_Player_docked(dockee: Node) -> void:
-	if dockee.is_in_group("Depositables"):
+func _on_Player_docked(_dockee: Node) -> void:
+	dockee = weakref(_dockee)
+	if _dockee.is_in_group("Depositables"):
 		is_exporting = true
-	elif dockee.is_in_group("Mineables"):
+	elif _dockee.is_in_group("Mineables"):
 		is_mining = true
 
 

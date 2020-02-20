@@ -22,16 +22,16 @@ func _init(_body: RigidBody2D) -> void:
 # Moves the agent's `body` by target `acceleration`.
 # tags: virtual
 func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> void:
-	var body: RigidBody2D = _body_ref.get_ref()
-	if not body:
+	var _body: RigidBody2D = _body_ref.get_ref()
+	if not _body:
 		return
 		
 	_applied_steering = true
-	body.apply_central_impulse(GSAIUtils.to_vector2(acceleration.linear))
-	body.apply_torque_impulse(acceleration.angular)
+	_body.apply_central_impulse(GSAIUtils.to_vector2(acceleration.linear))
+	_body.apply_torque_impulse(acceleration.angular)
 	if calculate_velocities:
-		linear_velocity = GSAIUtils.to_vector3(body.linear_velocity)
-		angular_velocity = body.angular_velocity
+		linear_velocity = GSAIUtils.to_vector3(_body.linear_velocity)
+		angular_velocity = _body.angular_velocity
 
 
 func _set_body(value: RigidBody2D) -> void:
@@ -45,8 +45,8 @@ func _set_body(value: RigidBody2D) -> void:
 
 
 func _on_SceneTree_frame() -> void:
-	var body: RigidBody2D = _body_ref.get_ref()
-	if not body:
+	var _body: RigidBody2D = _body_ref.get_ref()
+	if not _body:
 		return
 		
 	var current_position := body.global_position

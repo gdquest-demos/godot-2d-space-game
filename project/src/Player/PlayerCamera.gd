@@ -8,14 +8,16 @@ export var max_zoom := 5.0
 var _start_zoom := zoom
 var _start_position := Vector2.ZERO
 
-var remote_transform: RemoteTransform2D
-
+onready var remote_transform := $RemoteTransform2D
 onready var tween := $Tween
 
 
-func _ready() -> void:
-	if has_node("RemoteTransform2D"):
-		remote_transform = $RemoteTransform2D
+func setup_camera_map(map: Viewport) -> void:
+	var camera_map = self.duplicate()
+	camera_map.do_position_when_map_down = false
+	camera_map.do_position_when_map_up = false
+	map.add_child(camera_map)
+	remote_transform.remote_path = camera_map.get_path()
 
 
 func _toggle_map(map_up: bool, tween_time: float) -> void:
