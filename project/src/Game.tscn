@@ -26,6 +26,8 @@ viewport_path = NodePath("MapViewport")
 [node name="GameInitializer" type="Node"]
 script = ExtResource( 7 )
 radius_around_clusters = 500.0
+pirate_clusters = 5
+asteroid_clusters = 4
 
 [node name="World" type="Node2D" parent="."]
 

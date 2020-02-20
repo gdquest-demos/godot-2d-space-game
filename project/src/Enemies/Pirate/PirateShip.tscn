@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Common/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Enemies/Pirate/PirateShip.gd" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://src/Enemies/Pirate/States/Rest.gd" type="Script" id=7]
 [ext_resource path="res://src/Enemies/Pirate/States/Attack.gd" type="Script" id=8]
 [ext_resource path="res://src/Enemies/Pirate/States/Patrol.gd" type="Script" id=9]
-[ext_resource path="res://src/Enemies/Pirate/States/Work.gd" type="Script" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 200.0
@@ -23,8 +22,6 @@ collision_mask = 3
 script = ExtResource( 2 )
 map_icon = ExtResource( 3 )
 color_map_icon = Color( 0.882353, 0.0980392, 0.0980392, 1 )
-aggro_radius = 400.0
-distance_from_spawn_max = 900.0
 projectile_mask = 3
 PopEffect = ExtResource( 4 )
 
@@ -44,11 +41,8 @@ initial_state = NodePath("Rest")
 [node name="Rest" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 7 )
 
-[node name="Work" type="Node" parent="StateMachine" index="1"]
-script = ExtResource( 10 )
-
-[node name="Patrol" type="Node" parent="StateMachine" index="2"]
+[node name="Patrol" type="Node" parent="StateMachine" index="1"]
 script = ExtResource( 9 )
 
-[node name="Attack" type="Node" parent="StateMachine" index="3"]
+[node name="Attack" type="Node" parent="StateMachine" index="2"]
 script = ExtResource( 8 )

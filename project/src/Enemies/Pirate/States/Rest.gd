@@ -1,13 +1,19 @@
 extends State
 
-const REST_TIME_MIN := 2.0
-const REST_TIME_MAX := 5.0
+var initialized := false
+
+const REST_TIME_MIN := 15.0
+const REST_TIME_MAX := 30.0
 
 var _timer: Timer
+var _accel := GSAITargetAcceleration.new()
 
 
 func enter(_msg := {}) -> void:
-	yield(owner, "initialized")
+	if not initialized:
+		yield(owner, "initialized")
+		initialized = true
+	
 	if owner.is_squad_leader:
 		if not _timer:
 			_timer = Timer.new()
@@ -27,10 +33,14 @@ func exit() -> void:
 		owner.squad_leader.disconnect("begin_patrol", self, "_on_SquadLeader_begin_patrol")
 
 
+func physics_process(delta: float) -> void:
+	owner.agent._apply_steering(_accel, delta)
+
+
 func _on_Timer_timeout() -> void:
-	owner.emit_signal("begin_patrol", owner.patrol_point)
+	owner.emit_signal("begin_patrol")
 	_state_machine.transition_to("Patrol", {patrol_point = owner.patrol_point})
 
 
-func _on_SquadLeader_begin_patrol(patrol_point: Vector2) -> void:
-	_state_machine.transition_to("Patrol", {patrol_point = patrol_point})
+func _on_SquadLeader_begin_patrol() -> void:
+	_state_machine.transition_to("Patrol")

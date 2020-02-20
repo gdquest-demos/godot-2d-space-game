@@ -15,17 +15,18 @@ var body: KinematicBody2D setget _set_body
 var movement_type: int
 
 var _last_position: Vector2
+var _body_ref: WeakRef
 
 
 func _init(_body: KinematicBody2D, _movement_type: int = MovementType.SLIDE) -> void:
 	if not _body.is_inside_tree():
 		yield(_body, "ready")
 
-	self.body = _body
+	_body_ref = weakref(_body)
 	self.movement_type = _movement_type
 
 	# warning-ignore:return_value_discarded
-	body.get_tree().connect("physics_frame", self, "_on_SceneTree_physics_frame")
+	_body.get_tree().connect("physics_frame", self, "_on_SceneTree_physics_frame")
 
 
 # Moves the agent's `body` by target `acceleration`.
@@ -44,6 +45,10 @@ func _apply_steering(acceleration: GSAITargetAcceleration, delta: float) -> void
 
 
 func _apply_sliding_steering(accel: Vector3) -> void:
+	var body: KinematicBody2D = _body_ref.get_ref()
+	if not body:
+		return
+		
 	var velocity := GSAIUtils.to_vector2(linear_velocity + accel).clamped(linear_speed_max)
 	if apply_linear_drag:
 		velocity = velocity.linear_interpolate(Vector2.ZERO, linear_drag_percentage)
@@ -53,6 +58,10 @@ func _apply_sliding_steering(accel: Vector3) -> void:
 
 
 func _apply_collide_steering(accel: Vector3, delta: float) -> void:
+	var body: KinematicBody2D = _body_ref.get_ref()
+	if not body:
+		return
+		
 	var velocity := GSAIUtils.clampedv3(linear_velocity + accel, linear_speed_max)
 	if apply_linear_drag:
 		velocity = velocity.linear_interpolate(Vector3.ZERO, linear_drag_percentage)
@@ -63,6 +72,10 @@ func _apply_collide_steering(accel: Vector3, delta: float) -> void:
 
 
 func _apply_position_steering(accel: Vector3, delta: float) -> void:
+	var body: KinematicBody2D = _body_ref.get_ref()
+	if not body:
+		return
+		
 	var velocity := GSAIUtils.clampedv3(linear_velocity + accel, linear_speed_max)
 	if apply_linear_drag:
 		velocity = velocity.linear_interpolate(Vector3.ZERO, linear_drag_percentage)
@@ -72,6 +85,10 @@ func _apply_position_steering(accel: Vector3, delta: float) -> void:
 
 
 func _apply_orientation_steering(angular_acceleration: float, delta: float) -> void:
+	var body: KinematicBody2D = _body_ref.get_ref()
+	if not body:
+		return
+		
 	var velocity = angular_velocity + angular_acceleration
 	if apply_angular_drag:
 		velocity = lerp(velocity, 0, angular_drag_percentage)
@@ -81,16 +98,20 @@ func _apply_orientation_steering(angular_acceleration: float, delta: float) -> v
 
 
 func _set_body(value: KinematicBody2D) -> void:
-	body = value
+	_body_ref = weakref(body)
 
-	_last_position = body.global_position
-	_last_orientation = body.rotation
+	_last_position = value.global_position
+	_last_orientation = value.rotation
 
 	position = GSAIUtils.to_vector3(_last_position)
 	orientation = _last_orientation
 
 
 func _on_SceneTree_physics_frame() -> void:
+	var body: KinematicBody2D = _body_ref.get_ref()
+	if not body:
+		return
+	
 	var current_position := body.global_position
 	var current_orientation := body.rotation
 
