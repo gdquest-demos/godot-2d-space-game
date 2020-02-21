@@ -30,7 +30,7 @@ func spawn_random_cluster(
 	
 	while true:
 		var spawn_position := (
-			Vector2.UP.rotated(rng.randf_range(-PI, PI)) * 
+			Vector2.UP.rotated(rng.randf_range(0, PI*2)) * 
 			rng.randf_range(radius_from_spawn, world_radius)
 		)
 		var impedes_cluster := false
@@ -79,7 +79,7 @@ func _spawn_asteroid(position: Vector2, world: Node2D) -> Node2D:
 	asteroid.setup(rng, world)
 	asteroid.global_position = position
 	if randomize_rotation:
-		asteroid.rotation = rng.randf_range(-PI, PI)
+		asteroid.rotation = rng.randf_range(0, PI*2)
 	add_child(asteroid)
 	emit_signal("asteroid_spawned", asteroid)
 	return asteroid

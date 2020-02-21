@@ -9,11 +9,11 @@ var _timer: Timer
 var _accel := GSAITargetAcceleration.new()
 
 
+func _ready() -> void:
+	owner.connect("leader_changed", self, "_on_Leader_changed")
+
+
 func enter(_msg := {}) -> void:
-	if not initialized:
-		yield(owner, "initialized")
-		initialized = true
-	
 	if owner.is_squad_leader:
 		if not _timer:
 			_timer = Timer.new()
@@ -28,7 +28,8 @@ func enter(_msg := {}) -> void:
 
 func exit() -> void:
 	if owner.is_squad_leader:
-		_timer.disconnect("timeout", self, "_on_Timer_timeout")
+		if _timer:
+			_timer.disconnect("timeout", self, "_on_Timer_timeout")
 	else:
 		owner.squad_leader.disconnect("begin_patrol", self, "_on_SquadLeader_begin_patrol")
 
@@ -44,3 +45,11 @@ func _on_Timer_timeout() -> void:
 
 func _on_SquadLeader_begin_patrol() -> void:
 	_state_machine.transition_to("Patrol")
+
+
+func _on_Leader_changed(
+		old_leader: KinematicBody2D,
+		new_leader: KinematicBody2D,
+		current_patrol_point: Vector2
+	) -> void:
+	_state_machine.transition_to("Rest", {patrol_point = current_patrol_point})

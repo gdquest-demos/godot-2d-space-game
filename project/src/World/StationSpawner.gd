@@ -21,6 +21,6 @@ func spawn_station() -> void:
 	add_child(player)
 	add_child(station)
 	player.global_position = station.global_position + (
-			Vector2.UP.rotated(rng.randf_range(-PI, PI)) * radius_player_near_station
+			Vector2.UP.rotated(rng.randf_range(0, PI*2)) * radius_player_near_station
 	)
 	emit_signal("station_spawned", station, player)

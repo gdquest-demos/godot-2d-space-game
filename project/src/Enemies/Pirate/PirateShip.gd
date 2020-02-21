@@ -8,6 +8,9 @@ signal begin_patrol
 # warning-ignore:unused_signal
 signal end_patrol
 signal initialized
+# warning-ignore:unused_signal
+signal reached_cluster
+signal leader_changed(old_leader, new_leader, current_patrol_point)
 
 const DECELERATION_RADIUS := deg2rad(45)
 const ALIGNMENT_TOLERANCE := deg2rad(5)
@@ -29,14 +32,16 @@ export var distance_from_obstacles_min := 200.0
 export (int, LAYERS_2D_PHYSICS) var projectile_mask := 0
 export var PopEffect: PackedScene
 
+var current_target: Node
+var target_agent: GSAISteeringAgent
+var squaddies: Array
+
 var _acceleration := GSAITargetAcceleration.new()
 var _velocity := Vector2.ZERO
 var _angular_velocity := 0.0
 var _arrive_home_blend: GSAIBlend
 var _pursue_face_blend: GSAIBlend
 var _health := health_max
-var current_target: Node
-var target_agent: GSAISteeringAgent
 
 var is_squad_leader := false
 var patrol_point := Vector2.ZERO
@@ -80,13 +85,16 @@ func setup_world_objects(world_objects: Array) -> void:
 
 
 func setup_squad(
-	_is_squad_leader: bool, _squad_leader: KinematicBody2D, _patrol_point: Vector2, squaddies: Array
+	_is_squad_leader: bool, _squad_leader: KinematicBody2D, _patrol_point: Vector2, _squaddies: Array
 ) -> void:
 	is_squad_leader = _is_squad_leader
 	squad_leader = _squad_leader
 	patrol_point = _patrol_point
-	for s in squaddies:
+	for s in _squaddies:
 		squad_proximity.agents.append(s.agent)
+	squaddies = _squaddies
+	if not is_squad_leader:
+		connect("leader_changed", self, "_on_Leader_changed")
 
 
 func setup_faction(pirates: Array) -> void:
@@ -106,6 +114,15 @@ func _die() -> void:
 	effect.global_position = global_position
 	ObjectRegistry.register_effect(effect)
 	emit_signal("died")
+	var new_leader: KinematicBody2D
+	for squaddie in squaddies:
+		if squaddie._health > 0:
+			new_leader = squaddie
+			break
+	if new_leader:
+		for squaddie in squaddies:
+			squaddie.emit_signal("leader_changed", self, new_leader, patrol_point)
+	
 	queue_free()
 
 
@@ -115,7 +132,15 @@ func _on_self_damaged(amount: int, _origin: Node) -> void:
 	if _health <= 0:
 		_die()
 
-	_health -= amount
-	if _health <= 0:
-		_pursue_face_blend.is_enabled = false
-		_arrive_home_blend.is_enabled = true
+
+func _on_Leader_changed(
+		old_leader: KinematicBody2D,
+		new_leader: KinematicBody2D,
+		current_patrol_point: Vector2
+	) -> void:
+	squaddies.erase(old_leader)
+	squad_proximity.agents.erase(old_leader.agent)
+	squad_leader = new_leader
+	if new_leader == self:
+		is_squad_leader = true
+		patrol_point = current_patrol_point

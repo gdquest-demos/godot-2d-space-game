@@ -18,7 +18,7 @@ func mine_amount(value: float) -> float:
 	var mined := value
 	if iron_amount - mined < 0:
 		mined = iron_amount
-	world.remove_iron(mined)
+	world.remove_iron(mined, self)
 	iron_amount = iron_amount - mined
 	if iron_amount == 0:
 		emit_signal("died")
