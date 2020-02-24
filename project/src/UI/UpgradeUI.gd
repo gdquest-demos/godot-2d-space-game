@@ -8,11 +8,16 @@ onready var weapon_up_button := $HBoxContainer/WeaponUpgrade
 
 
 func _ready() -> void:
-		health_up_button.connect("button_down", self, "_on_Health_button_down")
-		speed_up_button.connect("button_down", self, "_on_Speed_button_down")
-		cargo_up_button.connect("button_down", self, "_on_Cargo_button_down")
-		mine_up_button.connect("button_down", self, "_on_Mine_button_down")
-		weapon_up_button.connect("button_down", self, "_on_Weapon_button_down")
+	health_up_button.connect("button_down", self, "_on_Health_button_down")
+	speed_up_button.connect("button_down", self, "_on_Speed_button_down")
+	cargo_up_button.connect("button_down", self, "_on_Cargo_button_down")
+	mine_up_button.connect("button_down", self, "_on_Mine_button_down")
+	weapon_up_button.connect("button_down", self, "_on_Weapon_button_down")
+	Events.connect("upgrade_point_hit", self, "focus")
+
+
+func focus() -> void:
+	health_up_button.grab_focus()
 
 
 func _on_Health_button_down() -> void:

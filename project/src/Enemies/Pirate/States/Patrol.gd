@@ -1,7 +1,7 @@
 extends State
 
 const PATROL_TIME_MIN := 15.0
-const PATROL_TIME_MAX := 45.0
+const PATROL_TIME_MAX := 30.0
 
 export var patrol_radius := 500.0
 
@@ -112,7 +112,7 @@ func set_behaviors() -> void:
 
 
 func _on_Timer_timeout() -> void:
-	owner.emit_signal("end_patrol", owner)
+	Events.emit_signal("end_patrol", owner)
 	_state_machine.transition_to("Rest")
 
 

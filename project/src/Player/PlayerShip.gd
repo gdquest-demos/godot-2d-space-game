@@ -20,6 +20,8 @@ onready var timer := $MapTimer
 onready var cargo := $Cargo
 onready var cargo_bar := $BarRig/PlayerUI/Cargo
 onready var health_bar := $BarRig/PlayerUI/Health
+onready var move_state := $StateMachine/Move
+onready var gun := $Gun
 
 
 func _ready() -> void:
@@ -29,6 +31,7 @@ func _ready() -> void:
 	Events.connect("undocked", cargo, "_on_Player_undocked")
 	health_bar.max_value = health_max
 	health_bar.value = _health
+	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
 
 
 func _toggle_map(map_up: bool, tween_time: float) -> void:
@@ -65,3 +68,24 @@ func _on_self_damaged(target: Node, amount: int, _origin: Node) -> void:
 	health_bar.value = _health
 	if _health <= 0:
 		die()
+
+
+func _on_Upgrade_Choice_made(choice: int) -> void:
+	match choice:
+		Events.UpgradeChoices.HEALTH:
+			health_max += 15
+			_health = health_max
+			health_bar.max_value = health_max
+			health_bar.value = _health
+		Events.UpgradeChoices.SPEED:
+			move_state.linear_speed_max += 75
+			agent.linear_speed_max += 75
+		Events.UpgradeChoices.CARGO:
+			cargo.cargo_size += 50
+			cargo_bar.max_value += 50
+		Events.UpgradeChoices.MINING:
+			cargo.mining_strength += 10
+			cargo.export_strength = max(cargo.export_strength+5, cargo.mining_strength)
+		Events.UpgradeChoices.WEAPON:
+			gun.damage_bonus += 2
+			gun.cooldown.wait_time *= 0.9

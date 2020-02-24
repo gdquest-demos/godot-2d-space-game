@@ -13,12 +13,12 @@ func _ready() -> void:
 	owner.connect("squad_leader_changed", self, "_on_Leader_changed")
 
 
-func enter(_msg := {}) -> void:	
+func enter(_msg := {}) -> void:
 	if owner.is_squad_leader:
 		if not _timer:
 			_timer = Timer.new()
 			add_child(_timer)
-			_timer.connect("timeout", self, "_on_Timer_timeout")
+		_timer.connect("timeout", self, "_on_Timer_timeout")
 		_timer.start(owner.rng.randf_range(REST_TIME_MIN, REST_TIME_MAX))
 	else:
 		Events.connect("begin_patrol", self, "_on_SquadLeader_begin_patrol")

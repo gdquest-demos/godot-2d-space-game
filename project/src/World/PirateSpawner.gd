@@ -12,7 +12,7 @@ func _ready() -> void:
 	rng.randomize()
 
 
-func spawn_pirate_group(world_radius: float, world: Node2D) -> void:
+func spawn_pirate_group(_choice: int, world_radius: float, world: Node2D) -> void:
 	var cluster_position: Vector2 = world.find_freshest_iron_cluster()
 	var spawn_position := cluster_position.normalized() * world_radius*1.25
 	

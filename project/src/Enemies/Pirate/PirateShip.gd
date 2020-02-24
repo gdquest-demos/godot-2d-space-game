@@ -45,7 +45,8 @@ var _arrive_home_blend: GSAIBlend
 var _pursue_face_blend: GSAIBlend
 var _health := health_max
 
-onready var gun: Gun = $Gun
+onready var gun := $Gun
+onready var state_machine := $StateMachine
 
 func _ready() -> void:
 	rng.randomize()
@@ -62,13 +63,24 @@ func _ready() -> void:
 	agent.angular_drag_percentage = angular_drag_factor
 
 	Events.connect("damaged", self, "_on_self_damaged")
+	
+	$AggroArea.connect("body_entered", self, "_on_Body_entered_aggro_radius")
+	
+	Events.connect("target_aggroed", self, "_on_Target_Aggroed")
 
 
 func setup_world_objects(world_objects: Array) -> void:
-	for wo in world_objects:
+	var removals := []
+	for wo_ref in world_objects:
+		var wo: Node2D = wo_ref.get_ref()
+		if not wo:
+			removals.append(wo_ref)
+			continue
 		var object_agent: GSAIAgentLocation = wo.agent_location
 		if object_agent and not world_proximity.agents.has(object_agent):
 			world_proximity.agents.append(object_agent)
+	for wo in removals:
+		world_objects.remove(world_objects.find(wo))
 
 
 func setup_squad(
@@ -133,3 +145,12 @@ func _on_Leader_changed(
 			is_squad_leader = true
 			patrol_point = current_patrol_point
 		emit_signal("squad_leader_changed", current_patrol_point)
+
+
+func _on_Body_entered_aggro_radius(collider: PhysicsBody2D) -> void:
+	Events.emit_signal("target_aggroed", squad_leader, collider)
+
+
+func _on_Target_Aggroed(leader: Node, target: PhysicsBody2D) -> void:
+	if squad_leader == leader:
+		state_machine.transition_to("Attack", {target= target})

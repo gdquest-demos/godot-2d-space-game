@@ -23,7 +23,7 @@ func setup(_upgrade_ui: Control) -> void:
 	rng.randomize()
 	_refresh_iron()
 	upgrade_ui = _upgrade_ui
-	pirate_spawner.spawn_pirate_group(world_radius, self)
+	Events.connect("upgrade_choice_made", pirate_spawner, "spawn_pirate_group", [world_radius, self])
 
 
 func remove_iron(amount: float, asteroid: Node2D) -> void:
@@ -98,10 +98,7 @@ func _on_Upgrade_Point_hit() -> void:
 	upgrade_ui.visible = true
 
 
-func _on_Upgrade_Choice_made(choice: int) -> void:
+func _on_Upgrade_Choice_made(_choice: int) -> void:
 	Events.disconnect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
 	Engine.time_scale = 1
 	upgrade_ui.visible = false
-	match choice:
-		_:
-			pass

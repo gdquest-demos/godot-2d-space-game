@@ -94,8 +94,10 @@ func physics_process(delta: float) -> void:
 				Events.emit_signal("docked", _current_docking_point)
 				_current_docking_point.set_docking_remote(owner, _agent.bounding_radius * 0.75)
 				Events.connect("force_undock", self, "_on_Ship_force_undock")
-				Events.connect("upgrade_point_hit", self, "_on_Upgrade_Point_hit")
-				Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+				if not Events.is_connected("upgrade_point_hit", self, "_on_Upgrade_Point_hit"):
+					Events.connect("upgrade_point_hit", self, "_on_Upgrade_Point_hit")
+				if not Events.is_connected("upgrade_choice_made", self, "_on_Upgrade_Choice_made"):
+					Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
 				return
 
 
@@ -105,7 +107,11 @@ func unhandled_input(event: InputEvent) -> void:
 			Events.emit_signal("undocked")
 			Events.disconnect("force_undock", self, "_on_Ship_force_undock")
 
-			var direction: Vector2 = (owner.global_position - Vector2(_dock_position.position.x, _dock_position.position.y)).normalized()
+			var direction: Vector2 = (
+				owner.global_position - Vector2(
+					_dock_position.position.x, _dock_position.position.y
+				)
+			).normalized()
 
 			_current_docking_point.undock()
 			_parent.linear_velocity += direction * docking_release_speed

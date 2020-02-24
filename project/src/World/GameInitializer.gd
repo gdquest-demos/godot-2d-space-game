@@ -57,7 +57,7 @@ func _on_Pirate_cluster_spawned(pirates: Array) -> void:
 
 
 func _on_Spawner_station_spawned(station: Node, _player: KinematicBody2D) -> void:
-	_world_objects.append(station)
+	_world_objects.append(weakref(station))
 	station.register_on_map(map)
 	Events.connect("upgrade_point_hit", world, "_on_Upgrade_Point_hit")
 	Events.connect("upgrade_point_hit", self, "_on_Upgrade_Point_hit")
@@ -69,7 +69,7 @@ func _on_Spawner_station_spawned(station: Node, _player: KinematicBody2D) -> voi
 
 func _on_Spawner_asteroid_spawned(asteroid: Node) -> void:
 	asteroid.register_on_map(map)
-	_world_objects.append(asteroid)
+	_world_objects.append(weakref(asteroid))
 
 
 func _on_Upgrade_Choice_made(_choice: int) -> void:

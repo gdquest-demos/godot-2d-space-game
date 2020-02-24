@@ -10,7 +10,7 @@
 script = ExtResource( 2 )
 map_icon = ExtResource( 3 )
 docking_color_highlight = Color( 0, 1, 0, 0.2 )
-upgrade_iron_amount = 100.0
+upgrade_iron_amount = 99.0
 
 [node name="Sprite" parent="." index="1"]
 scale = Vector2( 0.977, 1 )

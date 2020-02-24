@@ -2,7 +2,7 @@ class_name Projectile
 extends KinematicBody2D
 
 export var speed := 750.0
-export var damage := 10
+export var damage := 10.0
 
 var direction := Vector2.ZERO
 var shooter: Node
