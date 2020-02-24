@@ -17,12 +17,9 @@ onready var priority: GSAIPriority
 
 
 func _ready() -> void:
-	if not initialized:
-		yield(owner, "initialized")
-		initialized = true
+	yield(owner, "ready")
 	set_behaviors()
-	#warning-ignore: return_value_discarded
-	owner.connect("leader_changed", self, "_on_Leader_changed")
+	owner.connect("squad_leader_changed", self, "_on_Leader_changed")
 
 
 func enter(msg := {}) -> void:
@@ -55,19 +52,18 @@ func enter(msg := {}) -> void:
 		else:
 			path.create_path(patrol_points)
 
-		#warning-ignore:return_value_discarded
 		_timer.connect("timeout", self, "_on_Timer_timeout")
 		_timer.start(owner.rng.randf_range(PATROL_TIME_MIN, PATROL_TIME_MAX))
 	else:
-		owner.squad_leader.connect("end_patrol", self, "_on_SquadLeader_end_patrol")
+		Events.connect("end_patrol", self, "_on_SquadLeader_end_patrol")
 
 
 func exit() -> void:
 	if owner.is_squad_leader:
-		#warning-ignore:return_value_discarded
-		_timer.disconnect("timeout", self, "_on_Timer_timeout")
+		if _timer:
+			_timer.disconnect("timeout", self, "_on_Timer_timeout")
 	else:
-		owner.squad_leader.disconnect("end_patrol", self, "_on_SquadLeader_end_patrol")
+		Events.disconnect("end_patrol", self, "_on_SquadLeader_end_patrol")
 
 
 func physics_process(_delta: float) -> void:
@@ -116,16 +112,16 @@ func set_behaviors() -> void:
 
 
 func _on_Timer_timeout() -> void:
-	owner.emit_signal("end_patrol")
+	owner.emit_signal("end_patrol", owner)
 	_state_machine.transition_to("Rest")
 
 
-func _on_SquadLeader_end_patrol() -> void:
-	_state_machine.transition_to("Rest")
+func _on_SquadLeader_end_patrol(leader: Node) -> void:
+	if owner.squad_leader == leader:
+		_state_machine.transition_to("Rest")
 
 
-func _on_Leader_changed(
-	_old_leader: KinematicBody2D, _new_leader: KinematicBody2D, current_patrol_point: Vector2
-) -> void:
+func _on_Leader_changed(current_patrol_point: Vector2) -> void:
 	set_behaviors()
-	_state_machine.transition_to("Patrol", {patrol_point = current_patrol_point})
+	if _state_machine.state == self:
+		_state_machine.transition_to("Patrol", {patrol_point = current_patrol_point})

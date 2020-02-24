@@ -1,6 +1,5 @@
 extends Node2D
 
-#warning-ignore:unused_signal
 signal died
 
 export var map_icon: Texture
@@ -37,6 +36,7 @@ func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	docking_area.connect("body_entered", self, "_on_DockingArea_body_entered")
 	# warning-ignore:return_value_discarded
+	docking_area.connect("body_exited", self, "_on_DockingArea_body_exited")
 
 
 func _draw() -> void:
@@ -65,6 +65,7 @@ func _set_docking_distance(value: float) -> void:
 		yield(self, "ready")
 
 	docking_shape.shape.radius = value
+	update()
 
 
 func _on_DockingArea_body_entered(body: Node) -> void:

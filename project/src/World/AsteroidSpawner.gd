@@ -1,10 +1,5 @@
 extends Node2D
 
-
-signal asteroid_spawned(object)
-signal cluster_spawned(object)
-
-
 export var AsteroidScene: PackedScene
 export var count_min := 1
 export var count_max := 5
@@ -71,7 +66,7 @@ func _spawn_asteroid_cluster(
 				spawned.append(asteroid)
 				objects.append(asteroid_pos)
 				break
-	emit_signal("cluster_spawned", spawned)
+	Events.emit_signal("cluster_spawned", spawned)
 
 
 func _spawn_asteroid(position: Vector2, world: Node2D) -> Node2D:
@@ -81,5 +76,5 @@ func _spawn_asteroid(position: Vector2, world: Node2D) -> Node2D:
 	if randomize_rotation:
 		asteroid.rotation = rng.randf_range(0, PI*2)
 	add_child(asteroid)
-	emit_signal("asteroid_spawned", asteroid)
+	Events.emit_signal("asteroid_spawned", asteroid)
 	return asteroid

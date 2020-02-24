@@ -10,21 +10,18 @@ var _accel := GSAITargetAcceleration.new()
 
 
 func _ready() -> void:
-	#warning-ignore: return_value_discarded
-	owner.connect("leader_changed", self, "_on_Leader_changed")
+	owner.connect("squad_leader_changed", self, "_on_Leader_changed")
 
 
-func enter(_msg := {}) -> void:
+func enter(_msg := {}) -> void:	
 	if owner.is_squad_leader:
 		if not _timer:
 			_timer = Timer.new()
 			add_child(_timer)
-		#warning-ignore:return_value_discarded
-		_timer.connect("timeout", self, "_on_Timer_timeout")
+			_timer.connect("timeout", self, "_on_Timer_timeout")
 		_timer.start(owner.rng.randf_range(REST_TIME_MIN, REST_TIME_MAX))
 	else:
-		#warning-ignore:return_value_discarded
-		owner.squad_leader.connect("begin_patrol", self, "_on_SquadLeader_begin_patrol")
+		Events.connect("begin_patrol", self, "_on_SquadLeader_begin_patrol")
 
 
 func exit() -> void:
@@ -32,7 +29,7 @@ func exit() -> void:
 		if _timer:
 			_timer.disconnect("timeout", self, "_on_Timer_timeout")
 	else:
-		owner.squad_leader.disconnect("begin_patrol", self, "_on_SquadLeader_begin_patrol")
+		Events.disconnect("begin_patrol", self, "_on_SquadLeader_begin_patrol")
 
 
 func physics_process(delta: float) -> void:
@@ -40,15 +37,15 @@ func physics_process(delta: float) -> void:
 
 
 func _on_Timer_timeout() -> void:
-	owner.emit_signal("begin_patrol")
+	Events.emit_signal("begin_patrol", owner)
 	_state_machine.transition_to("Patrol", {patrol_point = owner.patrol_point})
 
 
-func _on_SquadLeader_begin_patrol() -> void:
-	_state_machine.transition_to("Patrol")
+func _on_SquadLeader_begin_patrol(leader: Node) -> void:
+	if owner.squad_leader == leader:
+		_state_machine.transition_to("Patrol", {patrol_point = owner.patrol_point})
 
 
-func _on_Leader_changed(
-	_old_leader: KinematicBody2D, _new_leader: KinematicBody2D, current_patrol_point: Vector2
-) -> void:
-	_state_machine.transition_to("Rest", {patrol_point = current_patrol_point})
+func _on_Leader_changed(current_patrol_point: Vector2) -> void:
+	if _state_machine.state == self:
+		_state_machine.transition_to("Rest", {patrol_point = current_patrol_point})

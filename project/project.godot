@@ -226,6 +226,12 @@ config/icon="res://icon.png"
 [autoload]
 
 ObjectRegistry="*res://src/Autoload/ObjectRegistry.gd"
+Events="*res://src/Autoload/Events.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 

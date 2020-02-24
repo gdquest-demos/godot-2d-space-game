@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 			var _dockee: Node2D = dockee.get_ref()
 			if not _dockee:
 				is_mining = false
-				owner.emit_signal("force_undock")
+				Events.emit_signal("force_undock")
 			else:
 				var mined: float = _dockee.mine_amount(min(cargo_size, mining_strength * delta))
 				if mined == 0:
@@ -40,10 +40,10 @@ func _physics_process(delta: float) -> void:
 			var _dockee: Node2D = dockee.get_ref()
 			if not _dockee:
 				is_exporting = false
-				owner.emit_signal("force_undock")
+				Events.emit_signal("force_undock")
 			else:
-				var export_amount := current_cargo - export_strength * delta
-				_set_current_cargo(max(0, export_amount))
+				var export_amount := min(export_strength * delta, current_cargo)
+				_set_current_cargo(max(0, current_cargo - export_amount))
 				_dockee.accumulated_iron += export_amount
 
 

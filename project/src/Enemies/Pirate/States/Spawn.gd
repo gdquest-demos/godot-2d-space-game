@@ -10,23 +10,15 @@ onready var acceleration := GSAITargetAcceleration.new()
 
 
 func _ready() -> void:
-	if not _initialized:
-		yield(owner, "initialized")
-		_initialized = true
-
-	#warning-ignore: return_value_discarded
-	owner.connect("leader_changed", self, "_on_Leader_changed")
+	yield(owner, "ready")
+	owner.connect("squad_leader_changed", self, "_on_Leader_changed")
 	set_behaviors()
-
-
-func enter(_msg := {}) -> void:
-	yield(owner, "initialized")
+	
 	if not owner.is_squad_leader:
-		owner.squad_leader.connect("reached_cluster", self, "_on_Leader_reached_cluster")
+		Events.connect("reached_cluster", self, "_on_Leader_reached_cluster")
 	else:
 		var timer := Timer.new()
 		add_child(timer)
-		#warning-ignore:return_value_discarded
 		timer.connect("timeout", self, "_on_Timer_timeout")
 		timer.start(30)
 
@@ -41,7 +33,7 @@ func physics_process(delta: float) -> void:
 			GSAIUtils.to_vector3(owner.global_position)
 		)
 		if distance_to <= ARRIVAL_TOLERANCE:
-			owner.emit_signal("reached_cluster")
+			Events.emit_signal("reached_cluster", owner)
 			_state_machine.transition_to("Rest")
 
 	priority.calculate_steering(acceleration)
@@ -88,12 +80,15 @@ func set_behaviors() -> void:
 		priority.add(group_blend)
 
 
-func _on_Leader_reached_cluster() -> void:
+func _on_Leader_reached_cluster(leader: Node) -> void:
+	if not leader == owner.squad_leader:
+		return
+	
 	_state_machine.transition_to("Rest")
 
 
 func _on_Timer_timeout() -> void:
-	owner.emit_signal("reached_cluster")
+	Events.emit_signal("reached_cluster", owner)
 	_state_machine.transition_to("Rest")
 
 

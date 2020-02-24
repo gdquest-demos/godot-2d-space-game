@@ -8,6 +8,7 @@ export var iron_amount_balance_level := 100.0
 export var refresh_threshold_range := 25.0
 
 var iron_amount := 0.0
+var upgrade_ui: Control
 var _spawned_positions := []
 var _world_objects := []
 var _iron_clusters := {}
@@ -18,17 +19,17 @@ onready var asteroid_spawner := $AsteroidSpawner
 onready var pirate_spawner := $PirateSpawner
 
 
-func setup() -> void:
+func setup(_upgrade_ui: Control) -> void:
 	rng.randomize()
 	_refresh_iron()
-	pirate_spawner.spawn_pirate_group(world_radius, self)
+	upgrade_ui = _upgrade_ui
 	pirate_spawner.spawn_pirate_group(world_radius, self)
 
 
 func remove_iron(amount: float, asteroid: Node2D) -> void:
 	iron_amount = max(iron_amount - amount, 0)
 	_remove_cluster_iron(amount, asteroid)
-	
+
 	if iron_amount < refresh_threshold_range:
 		_refresh_iron()
 
@@ -42,15 +43,18 @@ func find_freshest_iron_cluster() -> Vector2:
 			largest_cluster = cluster.iron_amount
 			largest_position = cluster_position
 			cluster.occupied = true
-	
+
 	if largest_cluster == -INF:
-		largest_position = Vector2.UP.rotated(rng.randf_range(-PI, PI)) * world_radius*rng.randf_range(0.5, 1)
+		largest_position = (
+			Vector2.UP.rotated(rng.randf_range(-PI, PI))
+			* world_radius
+			* rng.randf_range(0.5, 1)
+		)
 	return largest_position
 
 
 func _refresh_iron() -> void:
-	#warning-ignore:return_value_discarded
-	asteroid_spawner.connect("cluster_spawned", self, "_on_Spawner_spawned_asteroid")
+	Events.connect("cluster_spawned", self, "_on_Spawner_spawned_asteroid")
 	while iron_amount < iron_amount_balance_level:
 		asteroid_spawner.spawn_random_cluster(
 			world_radius,
@@ -68,7 +72,6 @@ func _remove_cluster_iron(amount: float, asteroid: Node2D) -> void:
 			if ast == asteroid:
 				cluster.iron_amount -= amount
 				if cluster.iron_amount <= 0:
-					#warning-ignore:return_value_discarded
 					_iron_clusters.erase(cluster_position)
 					return
 
@@ -76,12 +79,29 @@ func _remove_cluster_iron(amount: float, asteroid: Node2D) -> void:
 func _on_Spawner_spawned_asteroid(asteroids: Array) -> void:
 	var cluster_position := Vector2.ZERO
 	var iron_amount_local := 0
-	
+
 	for asteroid in asteroids:
 		iron_amount += asteroid.iron_amount
 		iron_amount_local += asteroid.iron_amount
 		cluster_position += asteroid.global_position
-	
+
 	cluster_position /= asteroids.size()
-	
-	_iron_clusters[cluster_position] = {iron_amount= iron_amount_local, asteroids= asteroids, occupied= false}
+
+	_iron_clusters[cluster_position] = {
+		iron_amount = iron_amount_local, asteroids = asteroids, occupied = false
+	}
+
+
+func _on_Upgrade_Point_hit() -> void:
+	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+	Engine.time_scale = 0
+	upgrade_ui.visible = true
+
+
+func _on_Upgrade_Choice_made(choice: int) -> void:
+	Events.disconnect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+	Engine.time_scale = 1
+	upgrade_ui.visible = false
+	match choice:
+		_:
+			pass

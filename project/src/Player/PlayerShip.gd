@@ -1,10 +1,6 @@
 extends KinematicBody2D
 
-# warning-ignore:unused_signal
-signal damaged(amount, origin)
 signal died
-#warning-ignore: unused_signal
-signal force_undock
 
 export var map_icon: Texture
 export var color_map_icon := Color.white
@@ -27,13 +23,10 @@ onready var health_bar := $BarRig/PlayerUI/Health
 
 
 func _ready() -> void:
-	#warning-ignore:return_value_discarded
-	connect("damaged", self, "_on_self_damaged")
+	Events.connect("damaged", self, "_on_self_damaged")
 	$Gun.projectile_mask = projectile_mask
-	#warning-ignore:return_value_discarded
-	$StateMachine/Move/Dock.connect("docked", cargo, "_on_Player_docked")
-	#warning-ignore:return_value_discarded
-	$StateMachine/Move/Dock.connect("undocked", cargo, "_on_Player_undocked")
+	Events.connect("docked", cargo, "_on_Player_docked")
+	Events.connect("undocked", cargo, "_on_Player_undocked")
 	health_bar.max_value = health_max
 	health_bar.value = _health
 
@@ -57,15 +50,17 @@ func die() -> void:
 
 func register_on_map(map: Viewport) -> void:
 	var id: int = map.register_map_object($MapTransform, map_icon, color_map_icon, scale_map_icon)
-	#warning-ignore:return_value_discarded
-	connect("died", map, "remove_map_object", [id])
+	connect("died", map, "remove_map_object", [self, id])
 
 
 func grab_camera(camera: Camera2D) -> void:
 	camera_transform.remote_path = camera.get_path()
 
 
-func _on_self_damaged(amount: int, _origin: Node) -> void:
+func _on_self_damaged(target: Node, amount: int, _origin: Node) -> void:
+	if not target == self:
+		return
+	
 	_health -= amount
 	health_bar.value = _health
 	if _health <= 0:

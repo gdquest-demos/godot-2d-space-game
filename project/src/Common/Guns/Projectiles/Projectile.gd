@@ -19,7 +19,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var collision := move_and_collide(direction * speed * delta)
 	if collision:
-		collision.collider.emit_signal("damaged", damage, shooter)
+		Events.emit_signal("damaged", collision.collider, damage, shooter)
 		queue_free()
 
 

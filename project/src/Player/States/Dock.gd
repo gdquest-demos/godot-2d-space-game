@@ -1,8 +1,5 @@
 extends State
 
-signal docked
-signal undocked
-
 enum DockingProcess { CLEARING, DOCKING, DOCKED }
 
 export var docking_release_speed := 150.0
@@ -20,6 +17,7 @@ var _flee_blend: GSAIBlend
 var _docking_phase := 0
 
 var _current_docking_point: Node2D
+var _controls_disabled := false
 
 
 func _ready() -> void:
@@ -93,17 +91,19 @@ func physics_process(delta: float) -> void:
 			if collision.collider.collision_layer == 2:
 				_docking_phase = DockingProcess.DOCKED
 				_current_docking_point = collision.collider.owner
-				emit_signal("docked", _current_docking_point)
+				Events.emit_signal("docked", _current_docking_point)
 				_current_docking_point.set_docking_remote(owner, _agent.bounding_radius * 0.75)
-				if not owner.is_connected("force_undock", self, "_on_Ship_force_undock"):
-					#warning-ignore:return_value_discarded
-					owner.connect("force_undock", self, "_on_Ship_force_undock")
+				Events.connect("force_undock", self, "_on_Ship_force_undock")
+				Events.connect("upgrade_point_hit", self, "_on_Upgrade_Point_hit")
+				Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+				return
 
 
 func unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("toggle_dock"):
+	if event.is_action_pressed("toggle_dock") and not _controls_disabled:
 		if _docking_phase == DockingProcess.DOCKED:
-			emit_signal("undocked")
+			Events.emit_signal("undocked")
+			Events.disconnect("force_undock", self, "_on_Ship_force_undock")
 
 			var direction: Vector2 = (owner.global_position - Vector2(_dock_position.position.x, _dock_position.position.y)).normalized()
 
@@ -114,4 +114,15 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func _on_Ship_force_undock() -> void:
+	Events.disconnect("force_undock", self, "_on_Ship_force_undock")
 	_state_machine.transition_to("Move/Travel")
+
+
+func _on_Upgrade_Point_hit() -> void:
+	Events.disconnect("upgrade_point_hit", self, "_on_Upgrade_Point_hit")
+	_controls_disabled = true
+
+
+func _on_Upgrade_Choice_made(_choice: int) -> void:
+	Events.disconnect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+	_controls_disabled = false

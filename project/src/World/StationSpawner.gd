@@ -1,9 +1,6 @@
 extends Node2D
 
 
-signal station_spawned(station, player)
-
-
 export var Station: PackedScene
 export var Player: PackedScene
 export var radius_player_near_station := 300.0
@@ -23,4 +20,4 @@ func spawn_station() -> void:
 	player.global_position = station.global_position + (
 			Vector2.UP.rotated(rng.randf_range(0, PI*2)) * radius_player_near_station
 	)
-	emit_signal("station_spawned", station, player)
+	Events.emit_signal("station_spawned", station, player)

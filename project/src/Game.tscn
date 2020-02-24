@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/World/AsteroidSpawner.gd" type="Script" id=1]
 [ext_resource path="res://src/World/StationSpawner.gd" type="Script" id=2]
@@ -13,8 +13,9 @@
 [ext_resource path="res://src/Common/Map/MapTexture.gd" type="Script" id=11]
 [ext_resource path="res://src/Player/PlayerCamera.gd" type="Script" id=12]
 [ext_resource path="res://assets/starfield.png" type="Texture" id=13]
-[ext_resource path="res://src/World.gd" type="Script" id=14]
+[ext_resource path="res://src/World/World.gd" type="Script" id=14]
 [ext_resource path="res://src/World/PirateSpawner.gd" type="Script" id=15]
+[ext_resource path="res://src/UI/UpgradeUI.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -101,7 +102,7 @@ zoom = Vector2( 1.2, 1.2 )
 smoothing_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource( 12 )
-max_zoom = 6.0
+max_zoom = 12.0
 
 [node name="Tween" type="Tween" parent="World/Camera"]
 playback_process_mode = 0
@@ -161,3 +162,6 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="UI/MapTexture"]
+
+[node name="UpgradeUI" parent="UI" instance=ExtResource( 16 )]
+visible = false
