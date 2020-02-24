@@ -1,24 +1,24 @@
 extends Viewport
 
-
 export var MapObject: PackedScene
-
 
 var map_objects := {}
 
 var _id := 0
 
 
-func register_map_object(remote_transform: RemoteTransform2D, icon: Texture, modulate := Color.white, scale := 1.0) -> int:
+func register_map_object(
+	remote_transform: RemoteTransform2D, icon: Texture, modulate := Color.white, scale := 1.0
+) -> int:
 	var map_object := MapObject.instance()
 	map_object.global_position = remote_transform.global_position
-	
+
 	var id := _get_next_id()
 	map_objects[id] = map_object
-	
+
 	add_child(map_object)
 	map_object.setup(remote_transform, icon, modulate, scale)
-	
+
 	return id
 
 

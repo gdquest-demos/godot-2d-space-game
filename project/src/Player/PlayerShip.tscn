@@ -11,30 +11,8 @@
 [ext_resource path="res://src/Player/PlayerGun.gd" type="Script" id=9]
 [ext_resource path="res://src/Player/Cargo.gd" type="Script" id=10]
 [ext_resource path="res://src/World/PopEffect.tscn" type="PackedScene" id=11]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.129412, 0.870588, 0.52549, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.054902, 0.243137, 0.141176, 1 )
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0588235, 0.34902, 0.192157, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.054902, 0.243137, 0.141176, 1 )
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+[ext_resource path="res://src/UI/PlayerUI.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/Player/UIBarRig.gd" type="Script" id=13]
 
 [node name="PlayerShip" groups=[
 "Player",
@@ -73,26 +51,18 @@ script = ExtResource( 9 )
 
 [node name="CameraTransform" type="RemoteTransform2D" parent="." index="4"]
 
-[node name="BarTransform" type="RemoteTransform2D" parent="." index="5"]
-remote_path = NodePath("../Cargo/BarRig")
+[node name="UITransform" type="RemoteTransform2D" parent="." index="5"]
+remote_path = NodePath("../BarRig")
 update_rotation = false
 
 [node name="MapTimer" type="Timer" parent="." index="6"]
 
-[node name="Cargo" type="Node" parent="." index="7"]
-script = ExtResource( 10 )
+[node name="BarRig" type="Node2D" parent="." index="7"]
+script = ExtResource( 13 )
 
-[node name="BarRig" type="Node2D" parent="Cargo" index="0"]
-
-[node name="ProgressBar" type="ProgressBar" parent="Cargo/BarRig" index="0"]
-margin_left = -25.0
+[node name="PlayerUI" parent="BarRig" index="0" instance=ExtResource( 12 )]
 margin_top = 30.0
-margin_right = 25.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 50, 0 )
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_bottom = 42.0
+
+[node name="Cargo" type="Node" parent="." index="8"]
+script = ExtResource( 10 )

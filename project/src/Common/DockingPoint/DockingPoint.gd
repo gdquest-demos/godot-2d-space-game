@@ -13,10 +13,7 @@ var radius := 0.0
 var docking_point_edge := Vector2.ZERO
 
 onready var docking_color_normal := Color(
-	docking_color_highlight.r,
-	docking_color_highlight.g,
-	docking_color_highlight.b,
-	0
+	docking_color_highlight.r, docking_color_highlight.g, docking_color_highlight.b, 0
 )
 onready var current_color := docking_color_normal
 onready var docking_shape: CollisionShape2D = $DockingArea/CollisionShape2D
@@ -40,7 +37,6 @@ func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	docking_area.connect("body_entered", self, "_on_DockingArea_body_entered")
 	# warning-ignore:return_value_discarded
-	docking_area.connect("body_exited", self, "_on_DockingArea_body_exited")
 
 
 func _draw() -> void:
@@ -48,10 +44,8 @@ func _draw() -> void:
 
 
 func set_docking_remote(node: Node2D, docker_distance: float) -> void:
-	remote_rig.global_rotation = GSAIUtils.vector2_to_angle(
-		node.global_position - global_position
-	)
-	remote_transform.position = docking_point_edge + Vector2.UP * (docker_distance/scale.x)
+	remote_rig.global_rotation = GSAIUtils.vector2_to_angle(node.global_position - global_position)
+	remote_transform.position = docking_point_edge + Vector2.UP * (docker_distance / scale.x)
 	remote_transform.remote_path = node.get_path()
 
 
@@ -71,7 +65,6 @@ func _set_docking_distance(value: float) -> void:
 		yield(self, "ready")
 
 	docking_shape.shape.radius = value
-	update()
 
 
 func _on_DockingArea_body_entered(body: Node) -> void:
@@ -79,9 +72,13 @@ func _on_DockingArea_body_entered(body: Node) -> void:
 	body.can_dock += 1
 	body.dockables.append(ref_to)
 	tween.interpolate_method(
-		self, "_on_Tween_color_callback",
-		current_color, docking_color_highlight,
-		0.5,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
+		self,
+		"_on_Tween_color_callback",
+		current_color,
+		docking_color_highlight,
+		0.5,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT
 	)
 	tween.start()
 
@@ -93,12 +90,15 @@ func _on_DockingArea_body_exited(body: Node) -> void:
 	if index > -1:
 		body.dockables.remove(index)
 	tween.interpolate_method(
-		self, "_on_Tween_color_callback",
-		current_color, docking_color_normal,
-		0.5,Tween.TRANS_LINEAR, Tween.EASE_OUT_IN
+		self,
+		"_on_Tween_color_callback",
+		current_color,
+		docking_color_normal,
+		0.5,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_OUT_IN
 	)
 	tween.start()
-	
 
 
 func _on_Tween_color_callback(current: Color) -> void:

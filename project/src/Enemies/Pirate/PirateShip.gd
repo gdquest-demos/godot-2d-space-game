@@ -10,6 +10,7 @@ signal end_patrol
 signal initialized
 # warning-ignore:unused_signal
 signal reached_cluster
+#warning-ignore:unused_signal
 signal leader_changed(old_leader, new_leader, current_patrol_point)
 
 const DECELERATION_RADIUS := deg2rad(45)
@@ -94,6 +95,7 @@ func setup_squad(
 		squad_proximity.agents.append(s.agent)
 	squaddies = _squaddies
 	if not is_squad_leader:
+		#warning-ignore: return_value_discarded
 		connect("leader_changed", self, "_on_Leader_changed")
 
 

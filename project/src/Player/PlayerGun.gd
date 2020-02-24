@@ -1,6 +1,5 @@
 extends Gun
 
-
 var projectile_mask: int = 0
 
 

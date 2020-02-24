@@ -1,6 +1,5 @@
 extends "res://src/Common/DockingPoint/DockingPoint.gd"
 
-
 export var min_iron_amount := 5.0
 export var max_iron_amount := 100.0
 

@@ -6,12 +6,11 @@ signal died
 #warning-ignore: unused_signal
 signal force_undock
 
-
 export var map_icon: Texture
 export var color_map_icon := Color.white
 export var scale_map_icon := 0.5
 export var health_max := 100
-export(int, LAYERS_2D_PHYSICS) var projectile_mask := 0
+export (int, LAYERS_2D_PHYSICS) var projectile_mask := 0
 export var PopEffect: PackedScene
 
 var can_dock := 0
@@ -23,6 +22,8 @@ onready var agent: GSAISteeringAgent = $StateMachine/Move.agent
 onready var camera_transform := $CameraTransform
 onready var timer := $MapTimer
 onready var cargo := $Cargo
+onready var cargo_bar := $BarRig/PlayerUI/Cargo
+onready var health_bar := $BarRig/PlayerUI/Health
 
 
 func _ready() -> void:
@@ -33,6 +34,8 @@ func _ready() -> void:
 	$StateMachine/Move/Dock.connect("docked", cargo, "_on_Player_docked")
 	#warning-ignore:return_value_discarded
 	$StateMachine/Move/Dock.connect("undocked", cargo, "_on_Player_undocked")
+	health_bar.max_value = health_max
+	health_bar.value = _health
 
 
 func _toggle_map(map_up: bool, tween_time: float) -> void:
@@ -64,5 +67,6 @@ func grab_camera(camera: Camera2D) -> void:
 
 func _on_self_damaged(amount: int, _origin: Node) -> void:
 	_health -= amount
+	health_bar.value = _health
 	if _health <= 0:
 		die()

@@ -10,6 +10,7 @@ var _accel := GSAITargetAcceleration.new()
 
 
 func _ready() -> void:
+	#warning-ignore: return_value_discarded
 	owner.connect("leader_changed", self, "_on_Leader_changed")
 
 
@@ -48,8 +49,6 @@ func _on_SquadLeader_begin_patrol() -> void:
 
 
 func _on_Leader_changed(
-		old_leader: KinematicBody2D,
-		new_leader: KinematicBody2D,
-		current_patrol_point: Vector2
-	) -> void:
+	_old_leader: KinematicBody2D, _new_leader: KinematicBody2D, current_patrol_point: Vector2
+) -> void:
 	_state_machine.transition_to("Rest", {patrol_point = current_patrol_point})
