@@ -38,6 +38,11 @@ func enter(msg := {}) -> void:
 		Events.connect("call_off_pursuit", self, "_on_Leader_call_off_pursuit")
 
 
+func exit() -> void:
+	if not owner.is_squad_leader:
+		Events.disconnect("call_off_pursuit", self, "_on_Leader_call_off_pursuit")
+
+
 func physics_process(delta: float) -> void:
 	blend.calculate_steering(accel)
 	owner.agent._apply_steering(accel, delta)
