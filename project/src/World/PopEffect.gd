@@ -1,6 +1,5 @@
 extends Node2D
 
-
 export var color := Color.blue
 export var radius := 200.0
 export var lines := 12

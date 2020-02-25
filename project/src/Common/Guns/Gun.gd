@@ -1,8 +1,9 @@
 class_name Gun
 extends Node2D
 
-
 export var Projectile: PackedScene
+
+var damage_bonus := 0.0
 
 onready var cooldown: Timer = $Cooldown
 
@@ -20,6 +21,7 @@ func fire(spawn_position: Vector2, spawn_orientation: float, projectile_mask: in
 	projectile.rotation = spawn_orientation
 	projectile.collision_mask = projectile_mask
 	projectile.shooter = owner
+	projectile.damage += damage_bonus
 
 	ObjectRegistry.register_projectile(projectile)
 	cooldown.start()

@@ -1,6 +1,5 @@
 extends State
 
-
 export var speed_multiplier := 0.75
 
 var _face: GSAIFace
@@ -32,25 +31,25 @@ func physics_process(delta: float) -> void:
 		_update_stick_target()
 	else:
 		_update_mouse_target()
-	
+
 	var direction := get_movement()
-		
+
 	_parent.linear_velocity += direction * _parent.acceleration_max * speed_multiplier
 
 	_face.calculate_steering(acceleration)
 	_parent.angular_velocity += acceleration.angular
-	
+
 	_parent.physics_process(delta)
 
 
 func unhandled_input(event: InputEvent) -> void:
 	if (
-			event.is_action_released("precision_mode") 
-			or event.is_action_pressed("precision_mode_toggle")
+		event.is_action_released("precision_mode")
+		or event.is_action_pressed("precision_mode_toggle")
 	):
 		_state_machine.transition_to("Move/Travel")
 		return
-	
+
 	_parent.unhandled_input(event)
 
 
@@ -68,7 +67,7 @@ func get_direction() -> Vector2:
 	)
 
 
-func _update_mouse_target() -> void:	
+func _update_mouse_target() -> void:
 	var mouse_position: Vector2 = owner.get_global_mouse_position()
 	_target_location.position.x = mouse_position.x
 	_target_location.position.y = mouse_position.y

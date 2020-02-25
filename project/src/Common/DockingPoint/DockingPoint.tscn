@@ -14,6 +14,9 @@ radius = 81.3653
 "WorldObjects",
 ]]
 script = ExtResource( 1 )
+docking_color_highlight = Color( 0, 1, 0, 0.137255 )
+
+[node name="Tween" type="Tween" parent="."]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -34,5 +37,6 @@ shape = SubResource( 2 )
 [node name="RemoteRig" type="Node2D" parent="."]
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="RemoteRig"]
+update_scale = false
 
 [node name="MapTransform" type="RemoteTransform2D" parent="."]

@@ -1,6 +1,5 @@
 extends CollisionShape2D
 
-
 export var color := Color.red
 
 

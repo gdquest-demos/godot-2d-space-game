@@ -12,147 +12,147 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "GSAIAgentLocation",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/GSAIAgentLocation.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/GSAIAgentLocation.gd"
 }, {
 "base": "GSAISteeringBehavior",
 "class": "GSAIArrive",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAIArrive.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAIArrive.gd"
 }, {
 "base": "GSAIGroupBehavior",
 "class": "GSAIAvoidCollisions",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAIAvoidCollisions.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAIAvoidCollisions.gd"
 }, {
 "base": "GSAISteeringBehavior",
 "class": "GSAIBlend",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAIBlend.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAIBlend.gd"
 }, {
 "base": "GSAIGroupBehavior",
 "class": "GSAICohesion",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAICohesion.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAICohesion.gd"
 }, {
 "base": "GSAIPursue",
 "class": "GSAIEvade",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAIEvade.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAIEvade.gd"
 }, {
 "base": "GSAIMatchOrientation",
 "class": "GSAIFace",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAIFace.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAIFace.gd"
 }, {
 "base": "GSAISeek",
 "class": "GSAIFlee",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAIFlee.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAIFlee.gd"
 }, {
 "base": "GSAIArrive",
 "class": "GSAIFollowPath",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAIFollowPath.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAIFollowPath.gd"
 }, {
 "base": "GSAISteeringBehavior",
 "class": "GSAIGroupBehavior",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/GSAIGroupBehavior.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/GSAIGroupBehavior.gd"
 }, {
 "base": "GSAIProximity",
 "class": "GSAIInfiniteProximity",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Proximities/GSAIInfiniteProximity.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Proximities/GSAIInfiniteProximity.gd"
 }, {
 "base": "GSAISpecializedAgent",
 "class": "GSAIKinematicBody2DAgent",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Agents/GSAIKinematicBody2DAgent.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Agents/GSAIKinematicBody2DAgent.gd"
 }, {
 "base": "GSAISpecializedAgent",
 "class": "GSAIKinematicBody3DAgent",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Agents/GSAIKinematicBody3DAgent.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Agents/GSAIKinematicBody3DAgent.gd"
 }, {
 "base": "GSAIMatchOrientation",
 "class": "GSAILookWhereYouGo",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAILookWhereYouGo.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAILookWhereYouGo.gd"
 }, {
 "base": "GSAISteeringBehavior",
 "class": "GSAIMatchOrientation",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAIMatchOrientation.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAIMatchOrientation.gd"
 }, {
 "base": "Reference",
 "class": "GSAIPath",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/GSAIPath.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/GSAIPath.gd"
 }, {
 "base": "GSAISteeringBehavior",
 "class": "GSAIPriority",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAIPriority.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAIPriority.gd"
 }, {
 "base": "Reference",
 "class": "GSAIProximity",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Proximities/GSAIProximity.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Proximities/GSAIProximity.gd"
 }, {
 "base": "GSAISteeringBehavior",
 "class": "GSAIPursue",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAIPursue.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAIPursue.gd"
 }, {
 "base": "GSAIProximity",
 "class": "GSAIRadiusProximity",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Proximities/GSAIRadiusProximity.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Proximities/GSAIRadiusProximity.gd"
 }, {
 "base": "GSAISpecializedAgent",
 "class": "GSAIRigidBody2DAgent",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Agents/GSAIRigidBody2DAgent.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Agents/GSAIRigidBody2DAgent.gd"
 }, {
 "base": "GSAISpecializedAgent",
 "class": "GSAIRigidBody3DAgent",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Agents/GSAIRigidBody3DAgent.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Agents/GSAIRigidBody3DAgent.gd"
 }, {
 "base": "GSAISteeringBehavior",
 "class": "GSAISeek",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAISeek.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAISeek.gd"
 }, {
 "base": "GSAIGroupBehavior",
 "class": "GSAISeparation",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Behaviors/GSAISeparation.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Behaviors/GSAISeparation.gd"
 }, {
 "base": "GSAISteeringAgent",
 "class": "GSAISpecializedAgent",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/Agents/GSAISpecializedAgent.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/Agents/GSAISpecializedAgent.gd"
 }, {
 "base": "GSAIAgentLocation",
 "class": "GSAISteeringAgent",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/GSAISteeringAgent.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/GSAISteeringAgent.gd"
 }, {
 "base": "Reference",
 "class": "GSAISteeringBehavior",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/GSAISteeringBehavior.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/GSAISteeringBehavior.gd"
 }, {
 "base": "Reference",
 "class": "GSAITargetAcceleration",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/GSAITargetAcceleration.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/GSAITargetAcceleration.gd"
 }, {
 "base": "Reference",
 "class": "GSAIUtils",
 "language": "GDScript",
-"path": "res://src/Systems/godot-steering-ai-framework/GSAIUtils.gd"
+"path": "res://src/Libraries/godot-steering-ai-framework/GSAIUtils.gd"
 }, {
 "base": "Node2D",
 "class": "Gun",
@@ -172,12 +172,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://src/Systems/StateMachine/State.gd"
+"path": "res://src/Libraries/StateMachine/State.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://src/Systems/StateMachine/StateMachine.gd"
+"path": "res://src/Libraries/StateMachine/StateMachine.gd"
 } ]
 _global_script_class_icons={
 "GSAIAgentLocation": "",
@@ -219,12 +219,19 @@ _global_script_class_icons={
 [application]
 
 config/name="Harvester"
+config/description="Harvester is a top down space mining game meant to showcase the Godot Steering Toolkit for AI agents."
 run/main_scene="res://src/Game.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 ObjectRegistry="*res://src/Autoload/ObjectRegistry.gd"
+Events="*res://src/Autoload/Events.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 

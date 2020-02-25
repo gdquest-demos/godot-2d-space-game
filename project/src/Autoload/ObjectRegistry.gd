@@ -1,5 +1,6 @@
+# Creates, maintains, and organizes spawned objects that should be untied from
+# their spawners' lifespan.
 extends Node
-
 
 var _effects: Node2D
 var _projectiles: Node2D
