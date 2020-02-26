@@ -27,7 +27,7 @@ gradient = SubResource( 1 )
 width = 1
 
 [sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("MapViewport")
+viewport_path = NodePath("ViewportContainer/MapViewport")
 
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0 )
@@ -133,7 +133,16 @@ script = ExtResource( 1 )
 AsteroidScene = ExtResource( 9 )
 spawn_radius = 300.0
 
-[node name="MapViewport" type="Viewport" parent="."]
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapViewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1280, 720 )
 handle_input_locally = false
 usage = 0
@@ -142,10 +151,10 @@ render_target_update_mode = 3
 script = ExtResource( 6 )
 MapObject = ExtResource( 8 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="MapViewport"]
+[node name="CanvasLayer" type="CanvasLayer" parent="ViewportContainer/MapViewport"]
 layer = -1
 
-[node name="BlackBackground" type="TextureRect" parent="MapViewport/CanvasLayer"]
+[node name="BlackBackground" type="TextureRect" parent="ViewportContainer/MapViewport/CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 40.0
