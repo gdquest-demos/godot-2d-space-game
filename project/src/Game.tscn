@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/World/AsteroidSpawner.gd" type="Script" id=1]
 [ext_resource path="res://src/World/StationSpawner.gd" type="Script" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://src/World/World.gd" type="Script" id=14]
 [ext_resource path="res://src/World/PirateSpawner.gd" type="Script" id=15]
 [ext_resource path="res://src/UI/UpgradeUI.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/UI.gd" type="Script" id=17]
+[ext_resource path="res://src/UI/ConfirmQuit.tscn" type="PackedScene" id=18]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -26,7 +28,14 @@ gradient = SubResource( 1 )
 width = 1
 
 [sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("MapViewport")
+viewport_path = NodePath("ViewportContainer/MapViewport")
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
 [node name="GameInitializer" type="Node"]
 script = ExtResource( 7 )
@@ -125,7 +134,16 @@ script = ExtResource( 1 )
 AsteroidScene = ExtResource( 9 )
 spawn_radius = 300.0
 
-[node name="MapViewport" type="Viewport" parent="."]
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapViewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1280, 720 )
 handle_input_locally = false
 usage = 0
@@ -134,10 +152,10 @@ render_target_update_mode = 3
 script = ExtResource( 6 )
 MapObject = ExtResource( 8 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="MapViewport"]
+[node name="CanvasLayer" type="CanvasLayer" parent="ViewportContainer/MapViewport"]
 layer = -1
 
-[node name="BlackBackground" type="TextureRect" parent="MapViewport/CanvasLayer"]
+[node name="BlackBackground" type="TextureRect" parent="ViewportContainer/MapViewport/CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 40.0
@@ -147,6 +165,7 @@ expand = true
 stretch_mode = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource( 17 )
 
 [node name="MapTexture" type="TextureRect" parent="UI" groups=[
 "MapControls",
@@ -164,4 +183,21 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="UI/MapTexture"]
 
 [node name="UpgradeUI" parent="UI" instance=ExtResource( 16 )]
+visible = false
+
+[node name="FadeOut" type="TextureRect" parent="UI"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = SubResource( 5 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="UI"]
+
+[node name="QuitConfirm" parent="UI" instance=ExtResource( 18 )]
 visible = false

@@ -1,11 +1,14 @@
 extends Node
 
+signal player_died
+
 signal station_spawned(station, player)
 signal pirate_spawned(pirate)
 signal asteroid_spawned(object)
 signal cluster_spawned(object)
 
-signal upgrade_point_hit
+signal ui_interrupted(type)
+signal ui_removed
 signal upgrade_choice_made(choice)
 
 signal damaged(target, damage, shooter)
@@ -22,3 +25,5 @@ signal docked
 signal undocked
 
 enum UpgradeChoices { HEALTH, SPEED, CARGO, MINING, WEAPON }
+
+enum UITypes { UPGRADE, QUIT }

@@ -92,13 +92,14 @@ func _on_Spawner_spawned_asteroid(asteroids: Array) -> void:
 	}
 
 
-func _on_Upgrade_Point_hit() -> void:
-	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+func _on_UI_Interrupted(_type: int) -> void:
+	Events.connect("ui_removed", self, "_on_UI_Removed")
 	Engine.time_scale = 0
-	upgrade_ui.visible = true
+	if _type == Events.UITypes.UPGRADE:
+		upgrade_ui.visible = true
 
 
-func _on_Upgrade_Choice_made(_choice: int) -> void:
-	Events.disconnect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+func _on_UI_Removed() -> void:
+	Events.disconnect("ui_removed", self, "_on_UI_Removed")
 	Engine.time_scale = 1
 	upgrade_ui.visible = false

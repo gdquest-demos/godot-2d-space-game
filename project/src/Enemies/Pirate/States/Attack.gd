@@ -1,6 +1,7 @@
 extends State
 
 
+export var distance_from_player_min := 200.0
 export var firing_angle := 25.0
 export var pursuit_distance_max := 800.0
 
@@ -11,6 +12,8 @@ var blend: GSAIBlend
 var face: GSAIFace
 var accel := GSAITargetAcceleration.new()
 var starting_position: Vector2
+var target_separate: GSAIRadiusProximity
+
 
 
 func _ready() -> void:
@@ -20,17 +23,25 @@ func _ready() -> void:
 	var squad_avoid := GSAIAvoidCollisions.new(owner.agent, owner.squad_proximity)
 	face = GSAIFace.new(owner.agent, target)
 	
+	target_separate = GSAIRadiusProximity.new(owner.agent, [], distance_from_player_min)
+	
+	var separate := GSAISeparation.new(owner.agent, target_separate)
+	separate.decay_coefficient = 20000
+	
 	blend = GSAIBlend.new(owner.agent)
 	blend.add(avoid, 2)
 	blend.add(squad_avoid, 1)
 	blend.add(pursue, 1)
 	blend.add(face, 1)
+	blend.add(separate, 8)
 
 
 func enter(msg := {}) -> void:
 	target = msg.target.agent
 	pursue.target = target
 	face.target = target
+	if not target_separate.agents.has(target):
+		target_separate.agents.append(target)
 	
 	if owner.is_squad_leader:
 		starting_position = owner.global_position

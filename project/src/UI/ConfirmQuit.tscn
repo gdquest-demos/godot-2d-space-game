@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/ui/fonts/default_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/ui/button_pressed.svg" type="Texture" id=2]
+[ext_resource path="res://assets/ui/button_normal.svg" type="Texture" id=3]
+[ext_resource path="res://assets/ui/button_hover.svg" type="Texture" id=4]
+[ext_resource path="res://assets/ui/fonts/default_font_bold.tres" type="DynamicFont" id=5]
+[ext_resource path="res://src/UI/ConfirmQuit.gd" type="Script" id=6]
+
+[node name="QuitConfirm" type="MarginContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -155.0
+margin_top = -60.0
+margin_right = 155.0
+margin_bottom = 60.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 290.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 270, 80 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 290.0
+margin_bottom = 100.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 270.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "Really quit?"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 36.0
+margin_right = 270.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 0, 32 )
+alignment = 1
+
+[node name="Yes" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 5.0
+margin_right = 133.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 128, 0 )
+focus_neighbour_left = NodePath("../No")
+focus_neighbour_right = NodePath("../No")
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 4 )
+expand = true
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Yes"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 5 )
+text = "Yes"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="No" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 137.0
+margin_right = 265.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 128, 0 )
+focus_neighbour_left = NodePath("../Yes")
+focus_neighbour_right = NodePath("../Yes")
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 4 )
+expand = true
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/No"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 5 )
+text = "No"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

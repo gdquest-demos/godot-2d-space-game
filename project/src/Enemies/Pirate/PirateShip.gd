@@ -93,7 +93,7 @@ func setup_squad(
 		squad_proximity.agents.append(s.agent)
 	squaddies = _squaddies
 	if not is_squad_leader:
-				Events.connect("squad_leader_changed", self, "_on_Leader_changed")
+		Events.connect("squad_leader_changed", self, "_on_Leader_changed")
 
 
 func setup_faction(pirates: Array) -> void:
