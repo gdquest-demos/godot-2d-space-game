@@ -94,10 +94,10 @@ func physics_process(delta: float) -> void:
 				Events.emit_signal("docked", _current_docking_point)
 				_current_docking_point.set_docking_remote(owner, _agent.bounding_radius * 0.75)
 				Events.connect("force_undock", self, "_on_Ship_force_undock")
-				if not Events.is_connected("upgrade_point_hit", self, "_on_Upgrade_Point_hit"):
-					Events.connect("upgrade_point_hit", self, "_on_Upgrade_Point_hit")
-				if not Events.is_connected("upgrade_choice_made", self, "_on_Upgrade_Choice_made"):
-					Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+				if not Events.is_connected("ui_interrupted", self, "_on_UI_Interrupted"):
+					Events.connect("ui_interrupted", self, "_on_UI_Interrupted")
+				if not Events.is_connected("ui_removed", self, "_on_UI_Removed"):
+					Events.connect("ui_removed", self, "_on_UI_Removed")
 				return
 
 
@@ -124,11 +124,11 @@ func _on_Ship_force_undock() -> void:
 	_state_machine.transition_to("Move/Travel")
 
 
-func _on_Upgrade_Point_hit() -> void:
-	Events.disconnect("upgrade_point_hit", self, "_on_Upgrade_Point_hit")
+func _on_UI_Interrupted(_type: int) -> void:
+	Events.disconnect("ui_interrupted", self, "_on_UI_Interrupted")
 	_controls_disabled = true
 
 
-func _on_Upgrade_Choice_made(_choice: int) -> void:
-	Events.disconnect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+func _on_UI_Removed() -> void:
+	Events.disconnect("ui_removed", self, "_on_UI_Removed")
 	_controls_disabled = false

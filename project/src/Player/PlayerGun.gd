@@ -5,8 +5,8 @@ var projectile_mask: int = 0
 var _input_disabled := false
 
 func _ready() -> void:
-	Events.connect("upgrade_point_hit", self, "_on_Upgrade_Point_hit")
-	Events.connect("upgrade_choice_made", self, "_on_Upgrade_choice_made")
+	Events.connect("ui_interrupted", self, "_on_UI_Interrupted")
+	Events.connect("ui_removed", self, "_on_UI_Removed")
 
 
 func _get_configuration_warning() -> String:
@@ -19,8 +19,9 @@ func _physics_process(_delta: float) -> void:
 			fire(global_position, global_rotation, projectile_mask)
 
 
-func _on_Upgrade_Point_hit() -> void:
+func _on_UI_Interrupted(_type: int) -> void:
 	_input_disabled = true
 
-func _on_Upgrade_choice_made(_choice: int) -> void:
+
+func _on_UI_Removed() -> void:
 	_input_disabled = false

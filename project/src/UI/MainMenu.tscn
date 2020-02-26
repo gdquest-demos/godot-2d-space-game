@@ -82,7 +82,6 @@ __meta__ = {
 }
 
 [node name="Keyboard" type="RichTextLabel" parent="Context/Texts"]
-modulate = Color( 1, 1, 1, 0 )
 margin_left = 104.0
 margin_top = 56.0
 margin_right = 384.0
@@ -91,8 +90,8 @@ rect_min_size = Vector2( 280, 34 )
 rect_clip_content = false
 custom_fonts/bold_font = ExtResource( 3 )
 bbcode_enabled = true
-bbcode_text = "[b]Press     [color=red]W[/color]     to start[/b]"
-text = "Press     W     to start"
+bbcode_text = "[b]Press [color=red]any key[/color] to start[/b]"
+text = "Press any key to start"
 
 [node name="Xbox" type="RichTextLabel" parent="Context/Texts"]
 modulate = Color( 1, 1, 1, 0 )

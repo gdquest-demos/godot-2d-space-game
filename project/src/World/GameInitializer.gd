@@ -13,6 +13,7 @@ onready var asteroid_spawner := $World/AsteroidSpawner
 onready var map := $ViewportContainer/MapViewport
 onready var camera := $World/Camera
 onready var world := $World
+onready var quit_confirm := $UI/QuitConfirm
 
 
 func _ready() -> void:
@@ -34,6 +35,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_map") and not _map_disabled:
 		_map_up = not _map_up
 		get_tree().call_group("MapControls", "_toggle_map", _map_up, map_transition_time)
+	elif event.is_action_pressed("ui_cancel"):
+		quit_confirm.visible = true
+		quit_confirm.focus()
+		Events.emit_signal("ui_interrupted", Events.UITypes.QUIT)
 
 
 func _on_Spawner_pirate_spawned(pirate: Node) -> void:
@@ -59,9 +64,9 @@ func _on_Pirate_cluster_spawned(pirates: Array) -> void:
 func _on_Spawner_station_spawned(station: Node, _player: KinematicBody2D) -> void:
 	_world_objects.append(weakref(station))
 	station.register_on_map(map)
-	Events.connect("upgrade_point_hit", world, "_on_Upgrade_Point_hit")
-	Events.connect("upgrade_point_hit", self, "_on_Upgrade_Point_hit")
-	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+	Events.connect("ui_interrupted", world, "_on_UI_Interrupted")
+	Events.connect("ui_interrupted", self, "_on_UI_Interrupted")
+	Events.connect("ui_removed", self, "_on_UI_Removed")
 
 	_player.register_on_map(map)
 	_player.grab_camera(camera)
@@ -72,9 +77,9 @@ func _on_Spawner_asteroid_spawned(asteroid: Node) -> void:
 	_world_objects.append(weakref(asteroid))
 
 
-func _on_Upgrade_Choice_made(_choice: int) -> void:
+func _on_UI_Removed() -> void:
 	_map_disabled = false
 
 
-func _on_Upgrade_Point_hit() -> void:
+func _on_UI_Interrupted(_type: int) -> void:
 	_map_disabled = true

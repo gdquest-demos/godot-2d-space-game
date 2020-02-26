@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not _transitioning:
-		if event.is_action_pressed("thrust_forwards"):
+		if event is InputEventKey or event.is_action_pressed("thrust_forwards"):
 			_transitioning = true
 			tween.interpolate_property(
 				fadeout,

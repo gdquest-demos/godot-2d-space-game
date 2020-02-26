@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/World/AsteroidSpawner.gd" type="Script" id=1]
 [ext_resource path="res://src/World/StationSpawner.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://src/World/PirateSpawner.gd" type="Script" id=15]
 [ext_resource path="res://src/UI/UpgradeUI.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/UI.gd" type="Script" id=17]
+[ext_resource path="res://src/UI/ConfirmQuit.tscn" type="PackedScene" id=18]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -197,3 +198,6 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="UI"]
+
+[node name="QuitConfirm" parent="UI" instance=ExtResource( 18 )]
+visible = false
