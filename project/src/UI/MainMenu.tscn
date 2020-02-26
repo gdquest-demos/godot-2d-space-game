@@ -1,0 +1,177 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/starfield.png" type="Texture" id=1]
+[ext_resource path="res://assets/ui/splash.svg" type="Texture" id=2]
+[ext_resource path="res://assets/ui/fonts/default_font_bold.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/ui/a_button.svg" type="Texture" id=4]
+[ext_resource path="res://assets/ui/cross_buttton.svg" type="Texture" id=5]
+[ext_resource path="res://assets/ui/b_button.svg" type="Texture" id=6]
+[ext_resource path="res://src/UI/MainMenuTexts.gd" type="Script" id=7]
+[ext_resource path="res://src/UI/MainMenu.gd" type="Script" id=8]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 2 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stars" type="TextureRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Splash" type="TextureRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Context" type="Control" parent="."]
+anchor_left = 0.6
+anchor_top = 0.6
+anchor_right = 0.95
+anchor_bottom = 0.75
+margin_left = -40.0
+margin_top = -20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texts" type="CenterContainer" parent="Context"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Keyboard" type="RichTextLabel" parent="Context/Texts"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 104.0
+margin_top = 56.0
+margin_right = 384.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 280, 34 )
+rect_clip_content = false
+custom_fonts/bold_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[b]Press     [color=red]W[/color]     to start[/b]"
+text = "Press     W     to start"
+
+[node name="Xbox" type="RichTextLabel" parent="Context/Texts"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 104.0
+margin_top = 56.0
+margin_right = 384.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 280, 34 )
+rect_clip_content = false
+custom_fonts/bold_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[b]Press              to start[/b]"
+text = "Press              to start"
+
+[node name="TextureRect" type="TextureRect" parent="Context/Texts/Xbox"]
+margin_left = 100.0
+margin_right = 140.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Playstation" type="RichTextLabel" parent="Context/Texts"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 104.0
+margin_top = 56.0
+margin_right = 384.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 280, 34 )
+rect_clip_content = false
+custom_fonts/bold_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[b]Press              to start[/b]"
+text = "Press              to start"
+
+[node name="TextureRect" type="TextureRect" parent="Context/Texts/Playstation"]
+margin_left = 100.0
+margin_right = 140.0
+margin_bottom = 40.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Nintendo" type="RichTextLabel" parent="Context/Texts"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 104.0
+margin_top = 56.0
+margin_right = 384.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 280, 34 )
+rect_clip_content = false
+custom_fonts/bold_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[b]Press              to start[/b]"
+text = "Press              to start"
+
+[node name="TextureRect" type="TextureRect" parent="Context/Texts/Nintendo"]
+margin_left = 100.0
+margin_right = 140.0
+margin_bottom = 40.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Context/Texts"]
+repeat = true
+playback/repeat = true
+
+[node name="FadeOut" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 2 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]

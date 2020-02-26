@@ -1,5 +1,7 @@
 extends Node
 
+signal player_died
+
 signal station_spawned(station, player)
 signal pirate_spawned(pirate)
 signal asteroid_spawned(object)

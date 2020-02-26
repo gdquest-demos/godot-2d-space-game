@@ -47,6 +47,7 @@ func die() -> void:
 	ObjectRegistry.register_effect(effect)
 
 	emit_signal("died")
+	Events.emit_signal("player_died")
 
 	queue_free()
 

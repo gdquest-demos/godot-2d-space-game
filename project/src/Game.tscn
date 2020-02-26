@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/World/AsteroidSpawner.gd" type="Script" id=1]
 [ext_resource path="res://src/World/StationSpawner.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://src/World/World.gd" type="Script" id=14]
 [ext_resource path="res://src/World/PirateSpawner.gd" type="Script" id=15]
 [ext_resource path="res://src/UI/UpgradeUI.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/UI.gd" type="Script" id=17]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -27,6 +28,13 @@ width = 1
 
 [sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("MapViewport")
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
 [node name="GameInitializer" type="Node"]
 script = ExtResource( 7 )
@@ -147,6 +155,7 @@ expand = true
 stretch_mode = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource( 17 )
 
 [node name="MapTexture" type="TextureRect" parent="UI" groups=[
 "MapControls",
@@ -165,3 +174,15 @@ __meta__ = {
 
 [node name="UpgradeUI" parent="UI" instance=ExtResource( 16 )]
 visible = false
+
+[node name="FadeOut" type="TextureRect" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 5 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="UI"]
