@@ -176,8 +176,10 @@ __meta__ = {
 visible = false
 
 [node name="FadeOut" type="TextureRect" parent="UI"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 texture = SubResource( 5 )
 expand = true
 stretch_mode = 1
