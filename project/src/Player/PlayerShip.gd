@@ -64,7 +64,7 @@ func grab_camera(camera: Camera2D) -> void:
 func _on_self_damaged(target: Node, amount: int, _origin: Node) -> void:
 	if not target == self:
 		return
-	
+
 	_health -= amount
 	health_bar.value = _health
 	if _health <= 0:
@@ -86,7 +86,7 @@ func _on_Upgrade_Choice_made(choice: int) -> void:
 			cargo_bar.max_value += 50
 		Events.UpgradeChoices.MINING:
 			cargo.mining_strength += 10
-			cargo.export_strength = max(cargo.export_strength+5, cargo.mining_strength)
+			cargo.export_strength = max(cargo.export_strength + 5, cargo.mining_strength)
 		Events.UpgradeChoices.WEAPON:
 			gun.damage_bonus += 2
 			gun.cooldown.wait_time *= 0.9

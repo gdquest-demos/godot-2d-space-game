@@ -180,7 +180,6 @@ __meta__ = {
 visible = false
 
 [node name="ScreenFader" parent="UI" instance=ExtResource( 19 )]
-modulate = Color( 1, 1, 1, 1 )
 
 [node name="QuitConfirm" parent="UI" instance=ExtResource( 18 )]
 visible = false

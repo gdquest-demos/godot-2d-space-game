@@ -107,11 +107,7 @@ func unhandled_input(event: InputEvent) -> void:
 			Events.emit_signal("undocked")
 			Events.disconnect("force_undock", self, "_on_Ship_force_undock")
 
-			var direction: Vector2 = (
-				owner.global_position - Vector2(
-					_dock_position.position.x, _dock_position.position.y
-				)
-			).normalized()
+			var direction: Vector2 = (owner.global_position - Vector2(_dock_position.position.x, _dock_position.position.y)).normalized()
 
 			_current_docking_point.undock()
 			_parent.linear_velocity += direction * docking_release_speed

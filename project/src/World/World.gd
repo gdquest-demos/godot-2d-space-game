@@ -23,7 +23,9 @@ func setup(_upgrade_ui: Control) -> void:
 	rng.randomize()
 	_refresh_iron()
 	upgrade_ui = _upgrade_ui
-	Events.connect("upgrade_choice_made", pirate_spawner, "spawn_pirate_group", [world_radius, self])
+	Events.connect(
+		"upgrade_choice_made", pirate_spawner, "spawn_pirate_group", [world_radius, self]
+	)
 
 
 func remove_iron(amount: float, asteroid: Node2D) -> void:

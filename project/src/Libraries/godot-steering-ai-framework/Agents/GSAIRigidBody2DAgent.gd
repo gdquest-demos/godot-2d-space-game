@@ -25,7 +25,7 @@ func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> voi
 	var _body: RigidBody2D = _body_ref.get_ref()
 	if not _body:
 		return
-		
+
 	_applied_steering = true
 	_body.apply_central_impulse(GSAIUtils.to_vector2(acceleration.linear))
 	_body.apply_torque_impulse(acceleration.angular)
@@ -48,7 +48,7 @@ func _on_SceneTree_frame() -> void:
 	var _body: RigidBody2D = _body_ref.get_ref()
 	if not _body:
 		return
-		
+
 	var current_position := body.global_position
 	var current_orientation := body.rotation
 

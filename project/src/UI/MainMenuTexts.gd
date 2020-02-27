@@ -1,6 +1,5 @@
 extends CenterContainer
 
-
 const EXPOSE_DURATION := 2.0
 const FADE_DURATION := 0.5
 

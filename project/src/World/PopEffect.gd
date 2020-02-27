@@ -8,7 +8,6 @@ export var distance_start := 10.0
 export var distance_max := 30.0
 export var duration := 0.35
 
-
 var current_length := 0.0
 var current_distance := 10.0
 var elapsed := 0.0
@@ -21,12 +20,12 @@ func _ready() -> void:
 func _draw() -> void:
 	var angle_iteration := 360.0 / lines
 	for i in range(lines):
-		var angle := i*angle_iteration
+		var angle := i * angle_iteration
 		var direction := GSAIUtils.angle_to_vector2(deg2rad(angle))
 		draw_line(
-				direction * current_distance,
-				(direction * current_distance) + direction * current_length,
-				color
+			direction * current_distance,
+			(direction * current_distance) + direction * current_length,
+			color
 		)
 
 

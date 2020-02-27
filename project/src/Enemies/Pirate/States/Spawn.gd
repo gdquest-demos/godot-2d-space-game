@@ -13,7 +13,7 @@ func _ready() -> void:
 	yield(owner, "ready")
 	owner.connect("squad_leader_changed", self, "_on_Leader_changed")
 	set_behaviors()
-	
+
 	if not owner.is_squad_leader:
 		Events.connect("reached_cluster", self, "_on_Leader_reached_cluster")
 	else:
@@ -83,7 +83,7 @@ func set_behaviors() -> void:
 func _on_Leader_reached_cluster(leader: Node) -> void:
 	if not leader == owner.squad_leader:
 		return
-	
+
 	_state_machine.transition_to("Rest")
 
 

@@ -1,6 +1,5 @@
 extends MarginContainer
 
-
 var _is_focused := false
 
 onready var yes := $VBoxContainer/HBoxContainer/Yes

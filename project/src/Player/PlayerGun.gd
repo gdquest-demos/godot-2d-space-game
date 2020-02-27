@@ -4,6 +4,7 @@ var projectile_mask: int = 0
 
 var _input_disabled := false
 
+
 func _ready() -> void:
 	Events.connect("ui_interrupted", self, "_on_UI_Interrupted")
 	Events.connect("ui_removed", self, "_on_UI_Removed")

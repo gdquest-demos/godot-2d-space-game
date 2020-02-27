@@ -36,7 +36,7 @@ func set_tween(map_up: bool, tween_time: float) -> void:
 			Tween.TRANS_LINEAR,
 			Tween.EASE_OUT_IN
 		)
-		
+
 	else:
 		tween.interpolate_property(
 			self, "zoom", zoom, _start_zoom, tween_time, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN
