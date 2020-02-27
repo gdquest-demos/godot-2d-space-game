@@ -1,0 +1,100 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/starfield.png" type="Texture" id=1]
+[ext_resource path="res://assets/black.png" type="Texture" id=2]
+
+[node name="BackgroundStars" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
+
+[node name="Background" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0, 0 )
+
+[node name="Black" type="Sprite" parent="Background"]
+scale = Vector2( 3385.9, 1904.57 )
+texture = ExtResource( 2 )
+
+[node name="StarsBack" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( -400, -300 )
+texture = ExtResource( 1 )
+
+[node name="Sprite8" type="Sprite" parent="StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( -1194.07, -300 )
+texture = ExtResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( 400, -300 )
+texture = ExtResource( 1 )
+
+[node name="Sprite3" type="Sprite" parent="StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( 400, 300 )
+texture = ExtResource( 1 )
+
+[node name="Sprite6" type="Sprite" parent="StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( 1170, -300 )
+texture = ExtResource( 1 )
+
+[node name="Sprite5" type="Sprite" parent="StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( 1170, 300 )
+texture = ExtResource( 1 )
+
+[node name="Sprite4" type="Sprite" parent="StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( -400, 300 )
+texture = ExtResource( 1 )
+
+[node name="Sprite7" type="Sprite" parent="StarsBack"]
+modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
+position = Vector2( -1194.07, 300 )
+texture = ExtResource( 1 )
+
+[node name="StarsFore" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.025, 0.025 )
+
+[node name="Sprite" type="Sprite" parent="StarsFore"]
+position = Vector2( -400, -300 )
+rotation = 3.14159
+texture = ExtResource( 1 )
+
+[node name="Sprite8" type="Sprite" parent="StarsFore"]
+position = Vector2( -1168.68, -300 )
+rotation = 3.14159
+texture = ExtResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="StarsFore"]
+position = Vector2( 400, -300 )
+rotation = 3.14159
+texture = ExtResource( 1 )
+
+[node name="Sprite3" type="Sprite" parent="StarsFore"]
+position = Vector2( 400, 300 )
+rotation = 3.14159
+texture = ExtResource( 1 )
+
+[node name="Sprite6" type="Sprite" parent="StarsFore"]
+position = Vector2( 1170, -299.999 )
+rotation = 3.14159
+texture = ExtResource( 1 )
+
+[node name="Sprite5" type="Sprite" parent="StarsFore"]
+position = Vector2( 1170, 300.001 )
+rotation = 3.14159
+texture = ExtResource( 1 )
+
+[node name="Sprite4" type="Sprite" parent="StarsFore"]
+position = Vector2( -400, 300 )
+rotation = 3.14159
+texture = ExtResource( 1 )
+
+[node name="Sprite7" type="Sprite" parent="StarsFore"]
+position = Vector2( -1168.68, 300 )
+rotation = 3.14159
+texture = ExtResource( 1 )

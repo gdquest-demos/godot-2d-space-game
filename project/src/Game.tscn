@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/World/AsteroidSpawner.gd" type="Script" id=1]
 [ext_resource path="res://src/World/StationSpawner.gd" type="Script" id=2]
@@ -7,11 +7,10 @@
 [ext_resource path="res://src/Player/PlayerShip.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Common/Map/MapView.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/World/GameInitializer.gd" type="Script" id=7]
+[ext_resource path="res://src/World/BackgroundStars.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Common/DockingPoint/Asteroid.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/black.png" type="Texture" id=10]
 [ext_resource path="res://src/Common/Map/MapTexture.gd" type="Script" id=11]
 [ext_resource path="res://src/Player/PlayerCamera.gd" type="Script" id=12]
-[ext_resource path="res://assets/starfield.png" type="Texture" id=13]
 [ext_resource path="res://src/World/World.gd" type="Script" id=14]
 [ext_resource path="res://src/World/PirateSpawner.gd" type="Script" id=15]
 [ext_resource path="res://src/UI/UpgradeUI.tscn" type="PackedScene" id=16]
@@ -19,7 +18,7 @@
 [ext_resource path="res://src/UI/ConfirmQuit.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/UI/ScreenFader.tscn" type="PackedScene" id=19]
 
-[sub_resource type="ViewportTexture" id=3]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("MapView/Viewport")
 
 [node name="GameInitializer" type="Node"]
@@ -31,61 +30,7 @@ world_radius = 4000.0
 iron_amount_balance_level = 750.0
 refresh_threshold_range = 350.0
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="World"]
-scroll_ignore_camera_zoom = true
-
-[node name="Background" type="ParallaxLayer" parent="World/ParallaxBackground"]
-motion_scale = Vector2( 0, 0 )
-
-[node name="Black" type="Sprite" parent="World/ParallaxBackground/Background"]
-scale = Vector2( 1920, 1080 )
-texture = ExtResource( 10 )
-
-[node name="StarsBack" type="ParallaxLayer" parent="World/ParallaxBackground"]
-motion_scale = Vector2( 0, 0 )
-
-[node name="Sprite" type="Sprite" parent="World/ParallaxBackground/StarsBack"]
-modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
-position = Vector2( -400, -300 )
-texture = ExtResource( 13 )
-
-[node name="Sprite2" type="Sprite" parent="World/ParallaxBackground/StarsBack"]
-modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
-position = Vector2( 400, -300 )
-texture = ExtResource( 13 )
-
-[node name="Sprite3" type="Sprite" parent="World/ParallaxBackground/StarsBack"]
-modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
-position = Vector2( 400, 300 )
-texture = ExtResource( 13 )
-
-[node name="Sprite4" type="Sprite" parent="World/ParallaxBackground/StarsBack"]
-modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
-position = Vector2( -400, 300 )
-texture = ExtResource( 13 )
-
-[node name="StarsFore" type="ParallaxLayer" parent="World/ParallaxBackground"]
-motion_scale = Vector2( 0.025, 0.025 )
-
-[node name="Sprite" type="Sprite" parent="World/ParallaxBackground/StarsFore"]
-position = Vector2( -400, -300 )
-rotation = 3.14159
-texture = ExtResource( 13 )
-
-[node name="Sprite2" type="Sprite" parent="World/ParallaxBackground/StarsFore"]
-position = Vector2( 400, -300 )
-rotation = 3.14159
-texture = ExtResource( 13 )
-
-[node name="Sprite3" type="Sprite" parent="World/ParallaxBackground/StarsFore"]
-position = Vector2( 400, 300 )
-rotation = 3.14159
-texture = ExtResource( 13 )
-
-[node name="Sprite4" type="Sprite" parent="World/ParallaxBackground/StarsFore"]
-position = Vector2( -400, 300 )
-rotation = 3.14159
-texture = ExtResource( 13 )
+[node name="BackgroundStars" parent="World" instance=ExtResource( 8 )]
 
 [node name="Camera" type="Camera2D" parent="World" groups=[
 "Camera",
@@ -131,7 +76,7 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-texture = SubResource( 3 )
+texture = SubResource( 1 )
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
