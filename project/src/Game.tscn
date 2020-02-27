@@ -1,13 +1,12 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/World/AsteroidSpawner.gd" type="Script" id=1]
 [ext_resource path="res://src/World/StationSpawner.gd" type="Script" id=2]
 [ext_resource path="res://src/Enemies/Pirate/PirateShip.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Player/Station.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Player/PlayerShip.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Common/Map/MapViewport.gd" type="Script" id=6]
+[ext_resource path="res://src/Common/Map/MapView.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/World/GameInitializer.gd" type="Script" id=7]
-[ext_resource path="res://src/Common/Map/MapObject.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Common/DockingPoint/Asteroid.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/black.png" type="Texture" id=10]
 [ext_resource path="res://src/Common/Map/MapTexture.gd" type="Script" id=11]
@@ -20,16 +19,8 @@
 [ext_resource path="res://src/UI/ConfirmQuit.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/UI/ScreenFader.tscn" type="PackedScene" id=19]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 0, 0, 0, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-width = 1
-
 [sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("ViewportContainer/MapViewport")
+viewport_path = NodePath("MapView/Viewport")
 
 [node name="GameInitializer" type="Node"]
 script = ExtResource( 7 )
@@ -128,35 +119,7 @@ script = ExtResource( 1 )
 AsteroidScene = ExtResource( 9 )
 spawn_radius = 300.0
 
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MapViewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1280, 720 )
-handle_input_locally = false
-usage = 0
-render_target_v_flip = true
-render_target_update_mode = 3
-script = ExtResource( 6 )
-MapObject = ExtResource( 8 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="ViewportContainer/MapViewport"]
-layer = -1
-
-[node name="BlackBackground" type="TextureRect" parent="ViewportContainer/MapViewport/CanvasLayer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 40.0
-margin_bottom = 40.0
-texture = SubResource( 2 )
-expand = true
-stretch_mode = 1
+[node name="MapView" parent="." instance=ExtResource( 6 )]
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 17 )
