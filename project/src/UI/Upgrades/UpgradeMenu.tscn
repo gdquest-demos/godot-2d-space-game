@@ -52,4 +52,4 @@ text = "Mining"
 margin_left = 528.0
 margin_right = 656.0
 texture = ExtResource( 5 )
-text = "Shooting"
+text = "Weapon"

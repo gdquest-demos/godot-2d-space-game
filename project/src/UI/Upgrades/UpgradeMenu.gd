@@ -1,10 +1,10 @@
-extends MarginContainer
+extends Control
 # TODO: in the future, build the menu from available upgrades and related data?
 
 onready var health_button := $HBoxContainer/HealthUpgrade
 onready var speed_button := $HBoxContainer/SpeedUpgrade
 onready var cargo_button := $HBoxContainer/CargoUpgrade
-onready var mine_button := $HBoxContainer/MineSpeedUpgrade
+onready var mine_button := $HBoxContainer/MiningUpgrade
 onready var weapon_button := $HBoxContainer/WeaponUpgrade
 
 

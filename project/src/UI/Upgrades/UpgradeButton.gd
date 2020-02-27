@@ -10,10 +10,14 @@ onready var label := $VBoxContainer/Label
 
 func set_texture(value: Texture) -> void:
 	texture = value
+	if not texture_rect:
+		yield(self, "ready")
 	texture_rect.texture = value
 
 
 func set_text(value: String) -> void:
 	text = value
+	if not texture_rect:
+		yield(self, "ready")
 	label.text = value
 	label.visible = text != ""

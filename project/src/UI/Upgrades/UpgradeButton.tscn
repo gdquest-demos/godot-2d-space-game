@@ -1,20 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/ui/button_normal.svg" type="Texture" id=2]
 [ext_resource path="res://assets/ui/button_pressed.svg" type="Texture" id=3]
 [ext_resource path="res://assets/ui/button_hover.svg" type="Texture" id=4]
 [ext_resource path="res://assets/ui/fonts/default_font_bold.tres" type="DynamicFont" id=5]
 [ext_resource path="res://src/UI/Upgrades/UpgradeButton.gd" type="Script" id=6]
-
-[sub_resource type="GDScript" id=1]
-script/source = "tool
-extends TextureRect
-"
-
-[sub_resource type="GDScript" id=2]
-script/source = "tool
-extends Label
-"
 
 [node name="UpgradeButton" type="TextureButton"]
 margin_right = 128.0
@@ -48,7 +38,6 @@ margin_bottom = 95.0
 rect_min_size = Vector2( 80, 80 )
 expand = true
 stretch_mode = 6
-script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -60,4 +49,3 @@ margin_right = 90.0
 margin_bottom = 107.0
 custom_fonts/font = ExtResource( 5 )
 align = 1
-script = SubResource( 2 )
