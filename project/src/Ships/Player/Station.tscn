@@ -1,8 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/Common/DockingPoint/DockingPoint.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Player/Station.gd" type="Script" id=2]
+[ext_resource path="res://src/World/DockingPoint/DockingPoint.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Ships/Player/Station.gd" type="Script" id=2]
 [ext_resource path="res://assets/topdown-portal-blue.svg" type="Texture" id=3]
+
+
 
 [node name="Station" groups=[
 "Depositables",

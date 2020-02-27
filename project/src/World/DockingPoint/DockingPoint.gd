@@ -1,3 +1,4 @@
+class_name DockingPoint
 extends Node2D
 
 signal died

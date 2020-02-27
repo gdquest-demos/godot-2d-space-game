@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "DockingPoint",
+"language": "GDScript",
+"path": "res://src/World/DockingPoint/DockingPoint.gd"
+}, {
 "base": "Reference",
 "class": "GSAIAgentLocation",
 "language": "GDScript",
@@ -157,7 +162,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Gun",
 "language": "GDScript",
-"path": "res://src/Common/Guns/Gun.gd"
+"path": "res://src/Ships/Guns/Gun.gd"
 }, {
 "base": "Node",
 "class": "MathUtils",
@@ -167,7 +172,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Projectile",
 "language": "GDScript",
-"path": "res://src/Common/Guns/Projectiles/Projectile.gd"
+"path": "res://src/Ships/Guns/Projectiles/Projectile.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -180,6 +185,7 @@ _global_script_classes=[ {
 "path": "res://src/Libraries/StateMachine/StateMachine.gd"
 } ]
 _global_script_class_icons={
+"DockingPoint": "",
 "GSAIAgentLocation": "",
 "GSAIArrive": "",
 "GSAIAvoidCollisions": "",

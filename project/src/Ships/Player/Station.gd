@@ -1,4 +1,4 @@
-extends "res://src/Common/DockingPoint/DockingPoint.gd"
+extends DockingPoint
 
 export var upgrade_iron_amount := 99.0
 
