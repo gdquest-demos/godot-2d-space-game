@@ -1,7 +1,5 @@
 extends Camera2D
 
-export var do_position_when_map_up := true
-export var do_position_when_map_down := true
 export var max_zoom := 5.0
 
 var _start_zoom := zoom
@@ -17,8 +15,6 @@ func _ready() -> void:
 
 func setup_camera_map(map: Viewport) -> void:
 	var camera_map = self.duplicate()
-	camera_map.do_position_when_map_down = false
-	camera_map.do_position_when_map_up = false
 	map.add_child(camera_map)
 	remote_transform.remote_path = camera_map.get_path()
 
