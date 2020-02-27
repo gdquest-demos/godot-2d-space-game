@@ -1,3 +1,4 @@
+# Displays the MapView viewport on the screen, and animates it appearing and disappearing
 extends TextureRect
 
 onready var _anim_player := $AnimationPlayer

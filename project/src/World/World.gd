@@ -92,16 +92,3 @@ func _on_Spawner_spawned_asteroid(asteroids: Array) -> void:
 	_iron_clusters[cluster_position] = {
 		iron_amount = iron_amount_local, asteroids = asteroids, occupied = false
 	}
-
-
-func _on_UI_Interrupted(_type: int) -> void:
-	Events.connect("ui_removed", self, "_on_UI_Removed")
-	Engine.time_scale = 0
-	if _type == Events.UITypes.UPGRADE:
-		upgrade_ui.visible = true
-
-
-func _on_UI_Removed() -> void:
-	Events.disconnect("ui_removed", self, "_on_UI_Removed")
-	Engine.time_scale = 1
-	upgrade_ui.visible = false

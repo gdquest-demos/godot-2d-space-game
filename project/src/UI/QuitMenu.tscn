@@ -1,13 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/ui/fonts/default_font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/ui/button_pressed.svg" type="Texture" id=2]
-[ext_resource path="res://assets/ui/button_normal.svg" type="Texture" id=3]
-[ext_resource path="res://assets/ui/button_hover.svg" type="Texture" id=4]
 [ext_resource path="res://assets/ui/fonts/default_font_bold.tres" type="DynamicFont" id=5]
-[ext_resource path="res://src/UI/ConfirmQuit.gd" type="Script" id=6]
+[ext_resource path="res://src/UI/QuitMenu.gd" type="Script" id=6]
 
-[node name="QuitConfirm" type="MarginContainer"]
+[node name="QuitMenu" type="MarginContainer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -56,19 +53,13 @@ margin_bottom = 68.0
 rect_min_size = Vector2( 0, 32 )
 alignment = 1
 
-[node name="Yes" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+[node name="YesButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 margin_left = 5.0
 margin_right = 133.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 128, 0 )
-focus_neighbour_left = NodePath("../No")
-focus_neighbour_right = NodePath("../No")
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 2 )
-texture_hover = ExtResource( 4 )
-expand = true
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Yes"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/YesButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 5 )
@@ -79,19 +70,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="No" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+[node name="NoButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 margin_left = 137.0
 margin_right = 265.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 128, 0 )
-focus_neighbour_left = NodePath("../Yes")
-focus_neighbour_right = NodePath("../Yes")
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 2 )
-texture_hover = ExtResource( 4 )
-expand = true
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/No"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NoButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 5 )

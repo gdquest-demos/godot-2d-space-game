@@ -11,7 +11,6 @@ onready var asteroid_spawner := $World/AsteroidSpawner
 onready var map := $MapView/Viewport
 onready var camera := $World/Camera
 onready var world := $World
-onready var quit_confirm := $UI/QuitConfirm
 
 
 func _ready() -> void:
@@ -27,13 +26,6 @@ func _ready() -> void:
 	station_spawner.spawn_station()
 
 	world.setup($UI/UpgradeUI)
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		quit_confirm.visible = true
-		quit_confirm.focus()
-		Events.emit_signal("ui_interrupted", Events.UITypes.QUIT)
 
 
 func _on_Spawner_pirate_spawned(pirate: Node) -> void:
@@ -59,9 +51,6 @@ func _on_Pirate_cluster_spawned(pirates: Array) -> void:
 func _on_Spawner_station_spawned(station: Node, _player: KinematicBody2D) -> void:
 	_world_objects.append(weakref(station))
 	station.register_on_map(map)
-	Events.connect("ui_interrupted", world, "_on_UI_Interrupted")
-	Events.connect("ui_interrupted", self, "_on_UI_Interrupted")
-	Events.connect("ui_removed", self, "_on_UI_Removed")
 
 	_player.register_on_map(map)
 	_player.grab_camera(camera)

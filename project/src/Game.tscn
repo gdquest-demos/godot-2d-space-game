@@ -15,7 +15,7 @@
 [ext_resource path="res://src/World/Spawners/PirateSpawner.gd" type="Script" id=15]
 [ext_resource path="res://src/UI/Upgrades/UpgradeMenu.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/UI/UI.gd" type="Script" id=17]
-[ext_resource path="res://src/UI/ConfirmQuit.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/UI/QuitMenu.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/UI/ScreenFader.tscn" type="PackedScene" id=19]
 
 [sub_resource type="ViewportTexture" id=1]
@@ -66,9 +66,11 @@ spawn_radius = 300.0
 [node name="MapView" parent="." instance=ExtResource( 6 )]
 
 [node name="UI" type="CanvasLayer" parent="."]
+pause_mode = 2
 script = ExtResource( 17 )
 
 [node name="MapDisplay" parent="UI" instance=ExtResource( 10 )]
+pause_mode = 1
 visible = true
 texture = SubResource( 1 )
 
@@ -77,7 +79,7 @@ visible = false
 
 [node name="ScreenFader" parent="UI" instance=ExtResource( 19 )]
 
-[node name="QuitConfirm" parent="UI" instance=ExtResource( 18 )]
+[node name="QuitMenu" parent="UI" instance=ExtResource( 18 )]
 visible = false
 
 [editable path="MapView"]

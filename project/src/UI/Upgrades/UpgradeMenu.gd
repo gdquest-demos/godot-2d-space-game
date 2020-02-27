@@ -17,11 +17,13 @@ func _ready() -> void:
 
 
 func open() -> void:
+	get_tree().paused = true
 	show()
 	health_button.grab_focus()
 
 
 # Emit a signal through the Events signal bus to transfer the upgrade selected by the player.
 func select_upgrade(type: int) -> void:
-	Events.emit_signal("upgrade_choice_made", type)
+	get_tree().paused = false
 	hide()
+	Events.emit_signal("upgrade_choice_made", type)

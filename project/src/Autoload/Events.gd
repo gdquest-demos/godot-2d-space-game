@@ -1,6 +1,7 @@
 extends Node
 
 signal player_died
+signal quit_requested
 
 signal station_spawned(station, player)
 signal pirate_spawned(pirate)
@@ -9,8 +10,6 @@ signal cluster_spawned(object)
 
 signal map_toggled(is_visible, animation_length)
 
-signal ui_interrupted(type)
-signal ui_removed
 signal upgrade_choice_made(choice)
 
 signal damaged(target, damage, shooter)
