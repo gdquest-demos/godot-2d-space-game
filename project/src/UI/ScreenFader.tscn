@@ -10,6 +10,7 @@ colors = PoolColorArray( 0, 0, 0, 1 )
 gradient = SubResource( 1 )
 
 [node name="ScreenFader" type="TextureRect"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
