@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/starfield.png" type="Texture" id=1]
 [ext_resource path="res://assets/ui/splash.svg" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/ui/b_button.svg" type="Texture" id=6]
 [ext_resource path="res://src/UI/MainMenuTexts.gd" type="Script" id=7]
 [ext_resource path="res://src/UI/MainMenu.gd" type="Script" id=8]
+[ext_resource path="res://src/UI/ScreenFader.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -163,15 +164,6 @@ __meta__ = {
 repeat = true
 playback/repeat = true
 
-[node name="FadeOut" type="TextureRect" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = SubResource( 2 )
-expand = true
-stretch_mode = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ScreenFader" parent="." instance=ExtResource( 9 )]
 
 [node name="Tween" type="Tween" parent="."]
