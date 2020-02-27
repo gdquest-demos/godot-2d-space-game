@@ -9,7 +9,7 @@
 [ext_resource path="res://src/World/GameInitializer.gd" type="Script" id=7]
 [ext_resource path="res://src/World/BackgroundStars.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/World/DockingPoint/Asteroid.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/UI/Minimap/MapTexture.gd" type="Script" id=11]
+[ext_resource path="res://src/UI/Minimap/MapDisplay.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Ships/Player/PlayerCamera.gd" type="Script" id=12]
 [ext_resource path="res://src/World/World.gd" type="Script" id=14]
 [ext_resource path="res://src/World/Spawners/PirateSpawner.gd" type="Script" id=15]
@@ -69,20 +69,8 @@ spawn_radius = 300.0
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 17 )
 
-[node name="MapTexture" type="TextureRect" parent="UI" groups=[
-"MapControls",
-]]
-modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
+[node name="MapDisplay" parent="UI" instance=ExtResource( 10 )]
 texture = SubResource( 1 )
-script = ExtResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Tween" type="Tween" parent="UI/MapTexture"]
 
 [node name="UpgradeUI" parent="UI" instance=ExtResource( 16 )]
 visible = false
