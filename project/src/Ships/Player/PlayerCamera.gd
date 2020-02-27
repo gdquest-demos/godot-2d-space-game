@@ -11,6 +11,10 @@ onready var remote_transform := $RemoteTransform2D
 onready var tween := $Tween
 
 
+func _ready() -> void:
+	Events.connect("map_toggled", self, "_toggle_map")
+
+
 func setup_camera_map(map: Viewport) -> void:
 	var camera_map = self.duplicate()
 	camera_map.do_position_when_map_down = false
@@ -19,25 +23,20 @@ func setup_camera_map(map: Viewport) -> void:
 	remote_transform.remote_path = camera_map.get_path()
 
 
-func _toggle_map(map_up: bool, tween_time: float) -> void:
-	set_tween(map_up, tween_time)
-	tween.start()
-
-
-func set_tween(map_up: bool, tween_time: float) -> void:
-	if map_up:
+func _toggle_map(show: bool, duration: float) -> void:
+	if show:
+		tween.interpolate_property(
+			self, "zoom", zoom, _start_zoom, duration, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN
+		)
+	else:
 		_start_position = position
 		tween.interpolate_property(
 			self,
 			"zoom",
 			zoom,
 			Vector2(max_zoom, max_zoom),
-			tween_time,
+			duration,
 			Tween.TRANS_LINEAR,
 			Tween.EASE_OUT_IN
 		)
-
-	else:
-		tween.interpolate_property(
-			self, "zoom", zoom, _start_zoom, tween_time, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN
-		)
+	tween.start()

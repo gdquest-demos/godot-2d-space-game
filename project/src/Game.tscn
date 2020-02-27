@@ -34,7 +34,6 @@ refresh_threshold_range = 350.0
 
 [node name="Camera" type="Camera2D" parent="World" groups=[
 "Camera",
-"MapControls",
 ]]
 current = true
 zoom = Vector2( 1.2, 1.2 )
@@ -70,6 +69,7 @@ spawn_radius = 300.0
 script = ExtResource( 17 )
 
 [node name="MapDisplay" parent="UI" instance=ExtResource( 10 )]
+visible = true
 texture = SubResource( 1 )
 
 [node name="UpgradeUI" parent="UI" instance=ExtResource( 16 )]
@@ -79,3 +79,5 @@ visible = false
 
 [node name="QuitConfirm" parent="UI" instance=ExtResource( 18 )]
 visible = false
+
+[editable path="MapView"]

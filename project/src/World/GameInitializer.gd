@@ -4,8 +4,6 @@ export var map_transition_time := 0.35
 
 var _spawned_positions := []
 var _world_objects := []
-var _map_up := false
-var _map_disabled := false
 
 onready var pirate_spawner := $World/PirateSpawner
 onready var station_spawner := $World/StationSpawner
@@ -32,10 +30,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("toggle_map") and not _map_disabled:
-		_map_up = not _map_up
-		get_tree().call_group("MapControls", "_toggle_map", _map_up, map_transition_time)
-	elif event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel"):
 		quit_confirm.visible = true
 		quit_confirm.focus()
 		Events.emit_signal("ui_interrupted", Events.UITypes.QUIT)
@@ -75,11 +70,3 @@ func _on_Spawner_station_spawned(station: Node, _player: KinematicBody2D) -> voi
 func _on_Spawner_asteroid_spawned(asteroid: Node) -> void:
 	asteroid.register_on_map(map)
 	_world_objects.append(weakref(asteroid))
-
-
-func _on_UI_Removed() -> void:
-	_map_disabled = false
-
-
-func _on_UI_Interrupted(_type: int) -> void:
-	_map_disabled = true

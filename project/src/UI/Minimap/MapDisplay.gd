@@ -1,11 +1,15 @@
 extends TextureRect
 
-onready var anim_player := $AnimationPlayer
+onready var _anim_player := $AnimationPlayer
 
 
-# TODO: remove duration and move map toggle logic, see all instances of the function in the project
-func _toggle_map(map_up: bool, duration: float) -> void:
-	if map_up:
-		anim_player.play("appear")
+func toggle() -> void:
+	if visible:
+		_anim_player.play("disappear")
 	else:
-		anim_player.play("disappear")
+		_anim_player.play("appear")
+	Events.emit_signal("map_toggled", visible, _anim_player.current_animation_length)
+
+
+func is_animating() -> bool:
+	return _anim_player.is_playing()
