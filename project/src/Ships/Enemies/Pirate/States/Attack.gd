@@ -58,12 +58,11 @@ func physics_process(delta: float) -> void:
 	blend.calculate_steering(accel)
 	owner.agent._apply_steering(accel, delta)
 	var facing_direction := GSAIUtils.angle_to_vector2(owner.agent.orientation)
-	var to_player := GSAIUtils.to_vector2(target.position - owner.agent.position)
+	var to_player := GSAIUtils.to_vector2(owner.agent.position - target.position).normalized()
 	var player_dot_facing := facing_direction.dot(to_player)
 	
 	if (
-		player_dot_facing > -firing_alignment_tolerance_percentage or
-		player_dot_facing < firing_alignment_tolerance_percentage
+		player_dot_facing > 1-firing_alignment_tolerance_percentage
 	):
 		owner.gun.fire(owner.gun.global_position, owner.agent.orientation, owner.projectile_mask)
 	if owner.is_squad_leader:
