@@ -42,7 +42,7 @@ func physics_process(delta: float) -> void:
 
 
 func unhandled_input(event: InputEvent) -> void:
-	if event.get_action_strength("toggle_dock") == 1 and owner.dockables.size() > 0:
+	if event.is_action_pressed("toggle_dock") and owner.dockables.size() > 0:
 		var dockable: Node2D
 		while not dockable and owner.dockables.size() > 0:
 			dockable = owner.dockables.back().get_ref()

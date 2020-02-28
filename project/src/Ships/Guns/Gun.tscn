@@ -3,8 +3,6 @@
 [ext_resource path="res://src/Ships/Guns/Gun.gd" type="Script" id=1]
 [ext_resource path="res://assets/world/projectile-enemy.svg" type="Texture" id=2]
 
-
-
 [sub_resource type="GDScript" id=1]
 script/source = "class_name Projectile
 extends KinematicBody2D

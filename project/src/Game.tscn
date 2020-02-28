@@ -64,6 +64,10 @@ AsteroidScene = ExtResource( 9 )
 spawn_radius = 300.0
 
 [node name="MapView" parent="." instance=ExtResource( 6 )]
+mouse_filter = 2
+
+[node name="BlackBackground" parent="MapView/Viewport/CanvasLayer" index="0"]
+mouse_filter = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -71,7 +75,6 @@ script = ExtResource( 17 )
 
 [node name="MapDisplay" parent="UI" instance=ExtResource( 10 )]
 pause_mode = 1
-visible = true
 texture = SubResource( 1 )
 
 [node name="UpgradeUI" parent="UI" instance=ExtResource( 16 )]
