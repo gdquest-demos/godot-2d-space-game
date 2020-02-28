@@ -5,6 +5,7 @@ onready var map: TextureRect = $MapDisplay
 onready var upgrade_menu := $UpgradeUI
 onready var quit_menu := $QuitMenu
 
+
 func _ready() -> void:
 	Events.connect("player_died", self, "quit", [true])
 	Events.connect("quit_requested", self, "quit", [false])

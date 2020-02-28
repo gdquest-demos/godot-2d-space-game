@@ -10,7 +10,7 @@ signal cluster_spawned(object)
 
 signal map_toggled(is_visible, animation_length)
 
-signal upgrade_unlocked()
+signal upgrade_unlocked
 signal upgrade_choice_made(choice)
 
 signal damaged(target, damage, shooter)

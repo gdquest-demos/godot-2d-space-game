@@ -7,9 +7,7 @@ var map_objects := {}
 var _id := 0
 
 
-func register_map_object(
-	remote_transform: RemoteTransform2D, icon: MapIcon
-) -> int:
+func register_map_object(remote_transform: RemoteTransform2D, icon: MapIcon) -> int:
 	var map_object := MapObject.instance()
 	map_object.global_position = remote_transform.global_position
 

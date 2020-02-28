@@ -5,9 +5,7 @@ var acting_remote_transform: RemoteTransform2D
 onready var sprite: Sprite = $Sprite
 
 
-func setup(
-	remote_transform: RemoteTransform2D, icon: MapIcon
-) -> void:
+func setup(remote_transform: RemoteTransform2D, icon: MapIcon) -> void:
 	acting_remote_transform = remote_transform
 	remote_transform.remote_path = get_path()
 	sprite.texture = icon.texture
