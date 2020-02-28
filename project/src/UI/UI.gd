@@ -2,11 +2,13 @@ extends CanvasLayer
 
 onready var screen_fader: TextureRect = $ScreenFader
 onready var map: TextureRect = $MapDisplay
+onready var upgrade_menu := $UpgradeUI
 onready var quit_menu := $QuitMenu
 
 func _ready() -> void:
 	Events.connect("player_died", self, "quit", [true])
 	Events.connect("quit_requested", self, "quit", [false])
+	Events.connect("upgrade_unlocked", upgrade_menu, "open")
 	screen_fader.fade_in()
 
 
