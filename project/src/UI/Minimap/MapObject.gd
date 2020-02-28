@@ -6,13 +6,13 @@ onready var sprite: Sprite = $Sprite
 
 
 func setup(
-	remote_transform: RemoteTransform2D, icon: Texture, modulate := Color.white, scale := 1.0
+	remote_transform: RemoteTransform2D, icon: MapIcon
 ) -> void:
 	acting_remote_transform = remote_transform
 	remote_transform.remote_path = get_path()
-	sprite.texture = icon
-	sprite.modulate = modulate
-	sprite.scale = Vector2(scale, scale)
+	sprite.texture = icon.texture
+	sprite.modulate = icon.color
+	sprite.scale = Vector2(icon.scale, icon.scale)
 
 
 func clear() -> void:

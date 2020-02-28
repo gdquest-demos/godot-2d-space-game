@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/World/DockingPoint/DockingPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Ships/Player/Station.gd" type="Script" id=2]
 [ext_resource path="res://assets/topdown-portal-blue.svg" type="Texture" id=3]
+[ext_resource path="res://src/Ships/Player/station_map_icon.tres" type="Resource" id=4]
 
 [node name="Station" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-map_icon = ExtResource( 3 )
+map_icon = ExtResource( 4 )
 docking_color_highlight = Color( 0, 1, 0, 0.2 )
 
 [node name="Sprite" parent="." index="1"]

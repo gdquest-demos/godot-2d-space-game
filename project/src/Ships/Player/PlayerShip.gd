@@ -2,12 +2,11 @@ extends KinematicBody2D
 
 signal died
 
-export var map_icon: Texture
-export var color_map_icon := Color.white
-export var scale_map_icon := 0.5
 export var health_max := 100
 export (int, LAYERS_2D_PHYSICS) var projectile_mask := 0
 export var PopEffect: PackedScene
+# Represents the ship on the minimap. Use a MapIcon resource.
+export var map_icon: Resource
 
 var can_dock := 0
 var dockables := []
@@ -53,7 +52,7 @@ func die() -> void:
 
 
 func register_on_map(map: Viewport) -> void:
-	var id: int = map.register_map_object($MapTransform, map_icon, color_map_icon, scale_map_icon)
+	var id: int = map.register_map_object($MapTransform, map_icon)
 	connect("died", map, "remove_map_object", [self, id])
 
 

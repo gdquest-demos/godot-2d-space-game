@@ -3,7 +3,7 @@ extends Node2D
 
 signal died
 
-export var map_icon: Texture
+export(Resource) var map_icon = MapIcon.new()
 export var docking_distance := 200.0 setget _set_docking_distance
 export var docking_color_highlight := Color(0, 1, 0, 0.2)
 

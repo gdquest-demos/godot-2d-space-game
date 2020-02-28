@@ -6,9 +6,8 @@ signal squad_leader_changed(current_patrol_point)
 const DECELERATION_RADIUS := deg2rad(45)
 const ALIGNMENT_TOLERANCE := deg2rad(5)
 
-export var map_icon: Texture
-export var color_map_icon := Color.white
-export var scale_map_icon := 0.75
+# Represents the ship on the minimap. Use a MapIcon resource.
+export var map_icon: Resource
 
 export var health_max := 100
 
@@ -106,7 +105,7 @@ func setup_faction(pirates: Array) -> void:
 
 
 func register_on_map(map: Viewport) -> void:
-	var id: int = map.register_map_object($MapTransform, map_icon, color_map_icon, scale_map_icon)
+	var id: int = map.register_map_object($MapTransform, map_icon)
 	# warning-ignore:return_value_discarded
 	connect("died", map, "remove_map_object", [id])
 
