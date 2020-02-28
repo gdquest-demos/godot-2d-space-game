@@ -82,11 +82,11 @@ func _on_Upgrade_Choice_made(choice: int) -> void:
 			move_state.linear_speed_max += 75
 			agent.linear_speed_max += 75
 		Events.UpgradeChoices.CARGO:
-			cargo.cargo_size += 50
+			cargo.max_cargo += 50
 			cargo_bar.max_value += 50
 		Events.UpgradeChoices.MINING:
-			cargo.mining_strength += 10
-			cargo.export_strength = max(cargo.export_strength + 5, cargo.mining_strength)
+			cargo.mining_rate += 10
+			cargo.unload_rate = max(cargo.unload_rate + 5, cargo.mining_rate)
 		Events.UpgradeChoices.WEAPON:
 			gun.damage_bonus += 2
 			gun.cooldown.wait_time *= 0.9

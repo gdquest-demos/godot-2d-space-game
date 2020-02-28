@@ -1,3 +1,4 @@
+class_name Asteroid
 extends DockingPoint
 
 export var min_iron_amount := 5.0

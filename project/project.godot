@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "DockingPoint",
+"class": "Asteroid",
+"language": "GDScript",
+"path": "res://src/World/DockingPoint/Asteroid.gd"
+}, {
 "base": "Node2D",
 "class": "DockingPoint",
 "language": "GDScript",
@@ -183,8 +188,14 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://src/Libraries/StateMachine/StateMachine.gd"
+}, {
+"base": "DockingPoint",
+"class": "Station",
+"language": "GDScript",
+"path": "res://src/Ships/Player/Station.gd"
 } ]
 _global_script_class_icons={
+"Asteroid": "",
 "DockingPoint": "",
 "GSAIAgentLocation": "",
 "GSAIArrive": "",
@@ -219,7 +230,8 @@ _global_script_class_icons={
 "MathUtils": "",
 "Projectile": "",
 "State": "",
-"StateMachine": ""
+"StateMachine": "",
+"Station": ""
 }
 
 [application]

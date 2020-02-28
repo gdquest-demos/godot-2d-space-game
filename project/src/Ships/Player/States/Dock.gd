@@ -94,10 +94,6 @@ func physics_process(delta: float) -> void:
 				Events.emit_signal("docked", _current_docking_point)
 				_current_docking_point.set_docking_remote(owner, _agent.bounding_radius * 0.75)
 				Events.connect("force_undock", self, "_on_Ship_force_undock")
-				if not Events.is_connected("ui_interrupted", self, "_on_UI_Interrupted"):
-					Events.connect("ui_interrupted", self, "_on_UI_Interrupted")
-				if not Events.is_connected("ui_removed", self, "_on_UI_Removed"):
-					Events.connect("ui_removed", self, "_on_UI_Removed")
 				return
 
 

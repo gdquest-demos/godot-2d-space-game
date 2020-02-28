@@ -1,3 +1,4 @@
+class_name Station
 extends DockingPoint
 
 export var upgrade_iron_amount := 99.0

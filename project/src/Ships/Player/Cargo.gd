@@ -1,13 +1,16 @@
 extends Node
 
-export var cargo_size := 100.0
-export var mining_strength := 10.0
-export var export_strength := 35.0
+enum States { IDLE, MINING, UNLOADING }
 
-var current_cargo := 0.0 setget _set_current_cargo
+export var max_cargo := 100.0
+export var mining_rate := 10.0
+export var unload_rate := 35.0
+
+var state: int = States.IDLE
+var cargo := 0.0 setget set_cargo
 var is_mining := false
 var is_exporting := false
-var dockee: WeakRef
+var dockable_weakref: WeakRef
 var cargo_bar: ProgressBar
 
 
@@ -17,50 +20,48 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if is_mining:
-		if current_cargo >= cargo_size:
-			is_mining = false
+	match state:
+		States.MINING:
+			if cargo == max_cargo:
+				state = States.IDLE
 
-		if is_mining:
-			var _dockee: Node2D = dockee.get_ref()
-			if not _dockee:
-				is_mining = false
+			var _asteroid: Asteroid = dockable_weakref.get_ref()
+			if not _asteroid:
+				state = States.IDLE
 				Events.emit_signal("force_undock")
 			else:
-				var mined: float = _dockee.mine_amount(min(cargo_size, mining_strength * delta))
+				var mined: float = _asteroid.mine_amount(min(max_cargo, mining_rate * delta))
 				if mined == 0:
-					is_mining = false
+					state = States.IDLE
 				else:
-					_set_current_cargo(current_cargo + mined)
-	elif is_exporting:
-		if current_cargo == 0:
-			is_exporting = false
+					self.cargo += mined
+		States.UNLOADING:
+			if cargo == 0:
+				state = States.IDLE
 
-		if is_exporting:
-			var _dockee: Node2D = dockee.get_ref()
-			if not _dockee:
-				is_exporting = false
+			var _station: Station = dockable_weakref.get_ref()
+			if not _station:
+				state = States.IDLE
 				Events.emit_signal("force_undock")
 			else:
-				var export_amount := min(export_strength * delta, current_cargo)
-				_set_current_cargo(max(0, current_cargo - export_amount))
-				_dockee.accumulated_iron += export_amount
+				var export_amount := min(unload_rate * delta, cargo)
+				set_cargo(max(0, cargo - export_amount))
+				_station.accumulated_iron += export_amount
 
 
-func _on_Player_docked(_dockee: Node) -> void:
-	dockee = weakref(_dockee)
-	if _dockee.is_in_group("Depositables"):
-		is_exporting = true
-	elif _dockee.is_in_group("Mineables"):
-		is_mining = true
+func _on_Player_docked(dockable: Node) -> void:
+	dockable_weakref = weakref(dockable)
+	if dockable is Station:
+		state = States.UNLOADING
+	elif dockable is Asteroid:
+		state = States.MINING
 
 
 func _on_Player_undocked() -> void:
-	is_mining = false
-	is_exporting = false
+	state = States.IDLE
 
 
-func _set_current_cargo(value: float) -> void:
-	current_cargo = value
-	var percentage := current_cargo / cargo_size
+func set_cargo(value: float) -> void:
+	cargo = min(value, max_cargo)
+	var percentage := cargo / max_cargo
 	cargo_bar.value = percentage * cargo_bar.max_value
