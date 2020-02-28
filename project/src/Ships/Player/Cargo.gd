@@ -1,3 +1,5 @@
+# Worker node on the player ship that manages and maintains cargo and mining
+# from mineables.
 extends Node
 
 enum States { IDLE, MINING, UNLOADING }

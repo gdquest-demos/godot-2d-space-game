@@ -1,3 +1,6 @@
+# A state for the pirates' finite state machine. The squad leader sets a timer
+# and emits a signal when it's time to go on patrol, and the squaddies follow
+# based on the signal.
 extends State
 
 var initialized := false

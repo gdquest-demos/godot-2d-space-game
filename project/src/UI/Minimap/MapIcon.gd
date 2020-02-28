@@ -1,4 +1,4 @@
-# Holds properties to draw icons on the map
+# Holds properties to draw icon representations on the mini map
 class_name MapIcon
 extends Resource
 

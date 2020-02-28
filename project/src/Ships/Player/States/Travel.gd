@@ -1,3 +1,6 @@
+# State for the player's finite state machine. Travel mode moves with up meaning
+# forwards relative to the orientation of the player's ship, with rotation done
+# with left and right motion.
 extends State
 
 var reversing := false

@@ -1,3 +1,5 @@
+# Animates a black screen that covers the entire screen - keeps transitions
+# from simply going menu-game or game-menu in an abrupt and jarring way.
 extends TextureRect
 
 signal animation_finished

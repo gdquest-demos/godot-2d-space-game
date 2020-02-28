@@ -1,3 +1,8 @@
+# State for the player's finite state machine. Precision movement mode controls
+# the player ship by setting the keys to be up, down, left and right relative
+# to the screen's orientation. The Face steering behavior will constantly
+# turn to face the mouse, or the direction the right analog stick of
+# a controller is pointing towards.
 extends State
 
 export var speed_multiplier := 0.75

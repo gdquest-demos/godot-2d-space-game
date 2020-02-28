@@ -1,3 +1,5 @@
+# Changes scenes after fading the screen on `any key` or on the A/B/cross
+# buttons on a gamepad.
 extends Control
 
 const FADE_IN_TIME := 0.5

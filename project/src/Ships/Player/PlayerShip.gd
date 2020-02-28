@@ -1,3 +1,5 @@
+# Main class to represent the player's physics body. Controls the player's
+# current health and how to operate when an upgrade choice has been made.
 extends KinematicBody2D
 
 signal died

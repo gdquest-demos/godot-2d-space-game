@@ -1,3 +1,6 @@
+# Class that represents the game world. It keeps track of iron in the world
+# and which asteroid clusters holds it, and spawns more when running low. It
+# also signals the pirate spawner when an upgrade has been made.
 extends Node2D
 
 export var world_radius := 8000.0

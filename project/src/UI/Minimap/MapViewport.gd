@@ -1,3 +1,4 @@
+# Controls the addition and removal of proxy objects on the minimap.
 extends Viewport
 
 export var MapObject: PackedScene
@@ -24,7 +25,6 @@ func remove_map_object(id: int) -> void:
 	if map_objects.has(id):
 		map_objects[id].clear()
 		map_objects[id].queue_free()
-		# warning-ignore:return_value_discarded
 		map_objects.erase(id)
 
 

@@ -1,3 +1,6 @@
+# Connects the press of the various upgrade buttons to emitting a signal that
+# indicates an upgrade - the player reacts by improving what was selected,
+# and pirates spawn.
 extends Control
 # TODO: in the future, build the menu from available upgrades and related data?
 

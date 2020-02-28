@@ -1,3 +1,8 @@
+# State for the pirate's finite state machine. Builds a rounded diamond shaped
+# path for them to patrol around a cluster of asteroids or given point in space.
+# 
+# The squad leader will use the path following steering behavior, while the
+# squaddies will follow the leader using cohesion and separation.
 extends State
 
 const PATROL_TIME_MIN := 15.0

@@ -1,3 +1,7 @@
+# The main camera that follows the location of the player. It manages
+# zooming out when the map button is pressed, and manages the creation
+# of a duplicate itself that will live in the minimap viewport, and will follow
+# the original's position in the world using a `RemoteTransform2D`.
 extends Camera2D
 
 export var max_zoom := 5.0

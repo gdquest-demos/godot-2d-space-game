@@ -1,3 +1,4 @@
+# Handles the input that brings up the minimap or the quit menu.
 extends CanvasLayer
 
 onready var screen_fader: TextureRect = $ScreenFader

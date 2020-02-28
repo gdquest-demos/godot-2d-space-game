@@ -1,3 +1,5 @@
+# Sets and controls the icon and label of the upgrade buttons. The tool keyword
+# makes sure we can see the result in the editor.
 tool
 extends TextureButton
 

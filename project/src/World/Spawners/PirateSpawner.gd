@@ -1,3 +1,7 @@
+# Spawns a group of pirates, then updates their squad and faction. Pirates are
+# spawned outside of the asteroid belt, but are asigned an asteroid cluster
+# or a point in space in the belt for them to path to. This keeps pirates from
+# appearing right on top of the player, or to appear jarringly out of thin air.
 extends Node2D
 
 export var PirateScene: PackedScene

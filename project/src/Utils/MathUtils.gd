@@ -1,10 +1,12 @@
-extends Node
+# Helper global object that holds helpful mathematics functions that are not
+# part of Godot.
 class_name MathUtils
+extends Node
 
 # Returns the radius of a circumcircle for a triangle.
 # The circumscribed circle or circumcircle of a polygon is a circle that passes
 # through all the vertices of the polygon.
-# Adapted from algorithm by (mutoo)[https://gist.github.com/mutoo/5617691]
+# Adapted from an algorithm by [mutoo](https://gist.github.com/mutoo/5617691)
 static func get_triangle_circumcircle_radius(vertices: PoolVector2Array) -> float:
 	assert(vertices.size() == 3)
 

@@ -1,3 +1,4 @@
+# A gun that fires a projectile when user input is provided.
 extends Gun
 
 var projectile_mask: int = 0

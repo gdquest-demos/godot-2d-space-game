@@ -1,3 +1,6 @@
+# State for the player's finite state machine. Controls approaching and
+# attaching to dockable objects, and using steering behaviors to orient away
+# from and back up to a dockable object an detecting when it touches it.
 extends State
 
 enum DockingProcess { CLEARING, DOCKING, DOCKED }

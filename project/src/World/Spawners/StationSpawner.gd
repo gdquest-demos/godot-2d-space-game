@@ -1,3 +1,5 @@
+# Spawns the player and the resource offloading station at the center of the
+# world.
 extends Node2D
 
 export var Station: PackedScene

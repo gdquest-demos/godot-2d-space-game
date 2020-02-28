@@ -1,3 +1,6 @@
+# Spawns, positions and configures a Projectile instance in space and registers
+# it into the global projectiles registry. Firing rate is controlled via a 
+# cooldown timer.
 class_name Gun
 extends Node2D
 

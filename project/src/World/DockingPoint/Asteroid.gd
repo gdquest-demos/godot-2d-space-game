@@ -1,3 +1,5 @@
+# Represents an extended dockable that holds a random amount of mineable
+# resources.
 class_name Asteroid
 extends DockingPoint
 

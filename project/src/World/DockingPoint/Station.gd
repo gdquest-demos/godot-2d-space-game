@@ -1,3 +1,5 @@
+# The player's station - consumes iron until an upgrade threshold is reached,
+# then emits tot the gam that an upgrade has been unlocked.
 class_name Station
 extends DockingPoint
 

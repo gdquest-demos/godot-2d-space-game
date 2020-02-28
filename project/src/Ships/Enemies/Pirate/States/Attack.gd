@@ -1,7 +1,10 @@
+# State for the pirates' finite state machine. Initializes and controls the way
+# the pirate ships will chase and maintain a certain distance from the player,
+# or when to break off pursuit and return to patrol, and when to fire the gun.
 extends State
 
 export var distance_from_player_min := 200.0
-export var firing_angle := 25.0
+export var firing_alignment_tolerance_percentage := 0.15
 export var pursuit_distance_max := 800.0
 
 var target: GSAISteeringAgent
@@ -54,10 +57,14 @@ func exit() -> void:
 func physics_process(delta: float) -> void:
 	blend.calculate_steering(accel)
 	owner.agent._apply_steering(accel, delta)
-	var angle_to_player := GSAIUtils.vector2_to_angle(
-		GSAIUtils.to_vector2(target.position - owner.agent.position)
-	)
-	if abs(angle_to_player) < deg2rad(abs(firing_angle)):
+	var facing_direction := GSAIUtils.angle_to_vector2(owner.agent.orientation)
+	var to_player := GSAIUtils.to_vector2(target.position - owner.agent.position)
+	var player_dot_facing := facing_direction.dot(to_player)
+	
+	if (
+		player_dot_facing > -firing_alignment_tolerance_percentage or
+		player_dot_facing < firing_alignment_tolerance_percentage
+	):
 		owner.gun.fire(owner.gun.global_position, owner.agent.orientation, owner.projectile_mask)
 	if owner.is_squad_leader:
 		var distance_to := starting_position.distance_squared_to(owner.global_position)

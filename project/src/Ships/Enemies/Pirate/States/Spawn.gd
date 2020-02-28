@@ -1,3 +1,7 @@
+# A state for the pirates' finite state machine. The squad leader will use the
+# arrive steering behavior to go from the spawning point to the point in space
+# that the squad will patrol. The squaddies, meanwhile, follow the leader using
+# cohesion and separation.
 extends State
 
 const ARRIVAL_TOLERANCE := 350 * 350

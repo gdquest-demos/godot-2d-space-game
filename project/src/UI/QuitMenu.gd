@@ -1,3 +1,5 @@
+# Presents a confirmation screen whether the player really intends on leaving
+# the game back to the main menu or not.
 extends MarginContainer
 
 onready var yes_button := $VBoxContainer/HBoxContainer/YesButton

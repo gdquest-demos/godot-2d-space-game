@@ -1,5 +1,5 @@
-# Creates, maintains, and organizes spawned objects that should be untied from
-# their spawners' lifespan.
+# Creates, maintains, and organizes spawned special effects or projectiles; 
+# objects that should be untied from their spawners' lifespan when freed.
 extends Node
 
 var _effects: Node2D

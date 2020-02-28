@@ -1,3 +1,8 @@
+# Dots a cluster of asteroids in the world, reporting the amount of iron added
+# to the world via signals. The asteroids are spawned in groups at a random
+# point inside of an asteroid belt that lies a minimum distance from the player
+# station's spawn point. Most of the logic is just making sure that a cluster
+# doesn't appear too close to another.
 extends Node2D
 
 export var AsteroidScene: PackedScene

@@ -1,3 +1,7 @@
+# Primary node that takes care of sending setup instructions to some of the
+# game's sub-systems; passing along the location of the map viewport for
+# mappable objects, informing pirates of obstacles in the world, and 
+# giving the player access to the game camera.
 extends Node
 
 export var map_transition_time := 0.35
@@ -28,21 +32,6 @@ func _ready() -> void:
 func _on_Spawner_pirate_spawned(pirate: Node) -> void:
 	pirate.register_on_map(map)
 	pirate.setup_world_objects(_world_objects)
-
-
-func _on_Pirate_cluster_spawned(pirates: Array) -> void:
-	var leader: KinematicBody2D = pirates[0]
-	leader.is_squad_leader = true
-	var nearest_asteroid: Vector2
-	var min_distance := INF
-	var cluster_position := leader.global_position
-	for a in asteroid_spawner.get_children():
-		var distance := cluster_position.distance_to(a.global_position)
-		if distance < min_distance:
-			nearest_asteroid = a.global_position
-			min_distance = distance
-	for p in pirates:
-		p.setup_squad(p == leader, leader, nearest_asteroid, pirates)
 
 
 func _on_Spawner_station_spawned(station: Node, _player: KinematicBody2D) -> void:

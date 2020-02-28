@@ -1,3 +1,7 @@
+# A class that represents a dockable object in space that the player can attach
+# to. Synchronizes with the docking ship, taking control of it with a remote
+# transform, as well as indicating docking range being achieved or lost by
+# animating a docking range circle.
 class_name DockingPoint
 extends Node2D
 
@@ -34,9 +38,7 @@ func _ready() -> void:
 	agent_location.bounding_radius = radius
 	docking_point_edge = Vector2.UP * radius
 
-	# warning-ignore:return_value_discarded
 	docking_area.connect("body_entered", self, "_on_DockingArea_body_entered")
-	# warning-ignore:return_value_discarded
 	docking_area.connect("body_exited", self, "_on_DockingArea_body_exited")
 
 

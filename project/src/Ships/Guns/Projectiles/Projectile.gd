@@ -1,3 +1,6 @@
+# A physics body that moves in a straight line at a constant speed until it runs
+# into something that it's able to collide with, at which point it signals
+# damage.
 class_name Projectile
 extends KinematicBody2D
 
@@ -12,7 +15,6 @@ onready var lifespan_timer := $Lifespan
 
 func _ready() -> void:
 	direction = -GSAIUtils.angle_to_vector2(rotation)
-	# warning-ignore:return_value_discarded
 	lifespan_timer.connect("timeout", self, "_on_Lifespan_timeout")
 
 

@@ -1,3 +1,5 @@
+# Code-based special effect that animates a set of lines extending out to
+# represent a 'pop'. For full effect, make a popping noise with your mouth.
 extends Node2D
 
 export var color := Color.blue

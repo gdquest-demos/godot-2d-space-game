@@ -1,3 +1,7 @@
+# A parent state for the player's finite state machine. Governs moving and
+# controlling the player using linear and angular velocities, and how to
+# transition through some of its child states, like docking or changing
+# movement style between Travel and Precision.
 extends State
 
 export var acceleration_max := 15.0
@@ -37,7 +41,6 @@ func physics_process(delta: float) -> void:
 	owner.rotation += angular_velocity * delta
 
 
-# TODO: Replace find_node with actual detection
 func unhandled_input(event: InputEvent) -> void:
 	if event.get_action_strength("toggle_dock") == 1 and owner.dockables.size() > 0:
 		var dockable: Node2D
