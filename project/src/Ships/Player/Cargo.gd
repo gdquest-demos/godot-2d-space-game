@@ -15,6 +15,8 @@ var cargo_bar: ProgressBar
 
 
 func _ready() -> void:
+	Events.connect("docked", self, "_on_Player_docked")
+	Events.connect("undocked", self, "_on_Player_undocked")
 	yield(owner, "ready")
 	cargo_bar = owner.cargo_bar
 

@@ -26,8 +26,6 @@ onready var gun := $Gun
 func _ready() -> void:
 	Events.connect("damaged", self, "_on_self_damaged")
 	$Gun.projectile_mask = projectile_mask
-	Events.connect("docked", cargo, "_on_Player_docked")
-	Events.connect("undocked", cargo, "_on_Player_undocked")
 	health_bar.max_value = health_max
 	health_bar.value = _health
 	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
