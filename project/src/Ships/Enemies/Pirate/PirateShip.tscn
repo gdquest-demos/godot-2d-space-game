@@ -11,8 +11,6 @@
 [ext_resource path="res://src/Ships/Enemies/Pirate/States/Patrol.gd" type="Script" id=9]
 [ext_resource path="res://src/Ships/Enemies/Pirate/States/Spawn.gd" type="Script" id=10]
 
-
-
 [sub_resource type="CircleShape2D" id=1]
 radius = 200.0
 

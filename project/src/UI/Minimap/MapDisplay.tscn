@@ -1,11 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/Minimap/MapDisplay.gd" type="Script" id=1]
 
-[sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("MapView/Viewport")
-
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=1]
 resource_name = "SETUP"
 length = 0.001
 tracks/0/type = "value"
@@ -33,7 +30,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -60,7 +57,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -93,7 +90,6 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-texture = SubResource( 1 )
 expand = true
 stretch_mode = 5
 script = ExtResource( 1 )
@@ -103,6 +99,6 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "SETUP"
-anims/SETUP = SubResource( 5 )
-anims/appear = SubResource( 6 )
-anims/disappear = SubResource( 4 )
+anims/SETUP = SubResource( 1 )
+anims/appear = SubResource( 2 )
+anims/disappear = SubResource( 3 )

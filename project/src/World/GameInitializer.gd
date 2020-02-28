@@ -14,11 +14,8 @@ onready var world := $World
 
 
 func _ready() -> void:
-	# warning-ignore:return_value_discarded
 	Events.connect("station_spawned", self, "_on_Spawner_station_spawned")
-	# warning-ignore:return_value_discarded
 	Events.connect("asteroid_spawned", self, "_on_Spawner_asteroid_spawned")
-	# warning-ignore:return_value_discarded
 	Events.connect("pirate_spawned", self, "_on_Spawner_pirate_spawned")
 
 	camera.setup_camera_map(map)

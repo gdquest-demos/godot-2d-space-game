@@ -3,8 +3,6 @@
 [ext_resource path="res://src/UI/Minimap/MapViewport.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Minimap/MapObject.tscn" type="PackedScene" id=2]
 
-
-
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
 colors = PoolColorArray( 0, 0, 0, 1 )
