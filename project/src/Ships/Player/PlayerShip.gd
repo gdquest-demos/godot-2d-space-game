@@ -2,15 +2,14 @@ extends KinematicBody2D
 
 signal died
 
-export var health_max := 100
+export var max_health := 100
 export (int, LAYERS_2D_PHYSICS) var projectile_mask := 0
 export var PopEffect: PackedScene
 # Represents the ship on the minimap. Use a MapIcon resource.
 export var map_icon: Resource
 
-var can_dock := 0
 var dockables := []
-var _health := health_max
+var _health := max_health
 
 onready var shape := $CollisionShape
 onready var agent: GSAISteeringAgent = $StateMachine/Move.agent
@@ -24,11 +23,13 @@ onready var gun := $Gun
 
 
 func _ready() -> void:
-	Events.connect("damaged", self, "_on_self_damaged")
-	$Gun.projectile_mask = projectile_mask
-	health_bar.max_value = health_max
-	health_bar.value = _health
+	Events.connect("damaged", self, "_on_damaged")
 	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+
+	health_bar.max_value = max_health
+	health_bar.value = _health
+
+	gun.projectile_mask = projectile_mask
 
 
 func _toggle_map(map_up: bool, tween_time: float) -> void:
@@ -58,7 +59,7 @@ func grab_camera(camera: Camera2D) -> void:
 	camera_transform.remote_path = camera.get_path()
 
 
-func _on_self_damaged(target: Node, amount: int, _origin: Node) -> void:
+func _on_damaged(target: Node, amount: int, _origin: Node) -> void:
 	if not target == self:
 		return
 
@@ -71,9 +72,9 @@ func _on_self_damaged(target: Node, amount: int, _origin: Node) -> void:
 func _on_Upgrade_Choice_made(choice: int) -> void:
 	match choice:
 		Events.UpgradeChoices.HEALTH:
-			health_max += 15
-			_health = health_max
-			health_bar.max_value = health_max
+			max_health += 15
+			_health = max_health
+			health_bar.max_value = max_health
 			health_bar.value = _health
 		Events.UpgradeChoices.SPEED:
 			move_state.linear_speed_max += 75

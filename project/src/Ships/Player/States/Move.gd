@@ -39,15 +39,13 @@ func physics_process(delta: float) -> void:
 
 # TODO: Replace find_node with actual detection
 func unhandled_input(event: InputEvent) -> void:
-	if event.get_action_strength("toggle_dock") == 1 and owner.can_dock:
+	if event.get_action_strength("toggle_dock") == 1 and owner.dockables.size() > 0:
 		var dockable: Node2D
 		while not dockable and owner.dockables.size() > 0:
 			dockable = owner.dockables.back().get_ref()
 			if not dockable:
 				owner.dockables.pop_back()
-		if not dockable:
-			owner.can_dock = 0
-		else:
+		if dockable:
 			_state_machine.transition_to(
 				"Move/Dock",
 				{
