@@ -1,10 +1,15 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/ui/button_normal.svg" type="Texture" id=2]
-[ext_resource path="res://assets/ui/button_pressed.svg" type="Texture" id=3]
-[ext_resource path="res://assets/ui/button_hover.svg" type="Texture" id=4]
+[ext_resource path="res://assets/ui/button/normal.svg" type="Texture" id=2]
+[ext_resource path="res://assets/ui/button/pressed.svg" type="Texture" id=3]
+[ext_resource path="res://assets/ui/button/hover.svg" type="Texture" id=4]
 [ext_resource path="res://assets/ui/fonts/default_font_bold.tres" type="DynamicFont" id=5]
 [ext_resource path="res://src/UI/Upgrades/UpgradeButton.gd" type="Script" id=6]
+
+
+
+
+
 
 [node name="UpgradeButton" type="TextureButton"]
 margin_right = 128.0

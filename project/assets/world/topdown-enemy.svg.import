@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cross_buttton.svg-58debf9ad7fe13a8a5d260714105cf4e.stex"
+path="res://.import/topdown-enemy.svg-d8f2c1df107e4bd0a75c12fad91e0377.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/cross_buttton.svg"
-dest_files=[ "res://.import/cross_buttton.svg-58debf9ad7fe13a8a5d260714105cf4e.stex" ]
+source_file="res://assets/world/topdown-enemy.svg"
+dest_files=[ "res://.import/topdown-enemy.svg-d8f2c1df107e4bd0a75c12fad91e0377.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/topdown-enemy.svg-5b57a0872a9f06664750342feefe40df.stex"
+path="res://.import/mining_upgrade.svg-5ff442be1c7ebd1911fa52e3d01c749d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/topdown-enemy.svg"
-dest_files=[ "res://.import/topdown-enemy.svg-5b57a0872a9f06664750342feefe40df.stex" ]
+source_file="res://assets/ui/icons/upgrades/mining_upgrade.svg"
+dest_files=[ "res://.import/mining_upgrade.svg-5ff442be1c7ebd1911fa52e3d01c749d.stex" ]
 
 [params]
 

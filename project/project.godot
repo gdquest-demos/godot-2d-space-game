@@ -197,7 +197,7 @@ _global_script_classes=[ {
 "base": "DockingPoint",
 "class": "Station",
 "language": "GDScript",
-"path": "res://src/Ships/Player/Station.gd"
+"path": "res://src/World/DockingPoint/Station.gd"
 } ]
 _global_script_class_icons={
 "Asteroid": "",

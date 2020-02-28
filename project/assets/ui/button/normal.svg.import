@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/splash.svg-ac23d8afba44d652f452c319056c145b.stex"
+path="res://.import/normal.svg-e2bbf4e81088adca625dc0a2a957a2f5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/splash.svg"
-dest_files=[ "res://.import/splash.svg-ac23d8afba44d652f452c319056c145b.stex" ]
+source_file="res://assets/ui/button/normal.svg"
+dest_files=[ "res://.import/normal.svg-e2bbf4e81088adca625dc0a2a957a2f5.stex" ]
 
 [params]
 

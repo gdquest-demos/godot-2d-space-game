@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_speed_upgrade.svg-a646c0476928abd12ce3b09529009ef0.stex"
+path="res://.import/cargo_upgrade.svg-76b8ac8e39935dcb0cfa72c0ce64a248.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/icon_speed_upgrade.svg"
-dest_files=[ "res://.import/icon_speed_upgrade.svg-a646c0476928abd12ce3b09529009ef0.stex" ]
+source_file="res://assets/ui/icons/upgrades/cargo_upgrade.svg"
+dest_files=[ "res://.import/cargo_upgrade.svg-76b8ac8e39935dcb0cfa72c0ce64a248.stex" ]
 
 [params]
 

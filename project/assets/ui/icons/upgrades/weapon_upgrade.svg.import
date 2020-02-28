@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/starfield.png-db0f5afa7ba530996b319b28a90205df.stex"
+path="res://.import/weapon_upgrade.svg-7d90faeeaf7a8dc2cb7f83329517d899.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/starfield.png"
-dest_files=[ "res://.import/starfield.png-db0f5afa7ba530996b319b28a90205df.stex" ]
+source_file="res://assets/ui/icons/upgrades/weapon_upgrade.svg"
+dest_files=[ "res://.import/weapon_upgrade.svg-7d90faeeaf7a8dc2cb7f83329517d899.stex" ]
 
 [params]
 

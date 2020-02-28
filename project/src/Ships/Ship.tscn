@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/topdown-player.svg" type="Texture" id=1]
+[ext_resource path="res://assets/world/topdown-player.svg" type="Texture" id=1]
 [ext_resource path="res://src/Ships/Guns/Gun.tscn" type="PackedScene" id=2]
+
+
 
 
 [node name="Ship" type="KinematicBody2D" groups=[

@@ -4,12 +4,14 @@
 [ext_resource path="res://src/Ships/Enemies/Pirate/PirateShip.gd" type="Script" id=2]
 [ext_resource path="res://src/Ships/Enemies/enemy_map_icon.tres" type="Resource" id=3]
 [ext_resource path="res://src/VFX/PopEffect.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/topdown-enemy.svg" type="Texture" id=5]
+[ext_resource path="res://assets/world/topdown-enemy.svg" type="Texture" id=5]
 [ext_resource path="res://src/Libraries/StateMachine/StateMachine.gd" type="Script" id=6]
 [ext_resource path="res://src/Ships/Enemies/Pirate/States/Rest.gd" type="Script" id=7]
 [ext_resource path="res://src/Ships/Enemies/Pirate/States/Attack.gd" type="Script" id=8]
 [ext_resource path="res://src/Ships/Enemies/Pirate/States/Patrol.gd" type="Script" id=9]
 [ext_resource path="res://src/Ships/Enemies/Pirate/States/Spawn.gd" type="Script" id=10]
+
+
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 200.0

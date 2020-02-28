@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/button_pressed.svg-c11eb422e2f08d11a4494eda0ee8c539.stex"
+path="res://.import/topdown-portal-blue.svg-82b9d0e0c101e9cc645d8b68f64cd690.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/button_pressed.svg"
-dest_files=[ "res://.import/button_pressed.svg-c11eb422e2f08d11a4494eda0ee8c539.stex" ]
+source_file="res://assets/world/topdown-portal-blue.svg"
+dest_files=[ "res://.import/topdown-portal-blue.svg-82b9d0e0c101e9cc645d8b68f64cd690.stex" ]
 
 [params]
 

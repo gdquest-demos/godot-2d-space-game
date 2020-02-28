@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spike.svg-0a8b1d2ba6c50ffe08b4fb50896b11b1.stex"
+path="res://.import/topdown-player.svg-c129e851659fe20f3a9b9934674cb8dd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spike.svg"
-dest_files=[ "res://.import/spike.svg-0a8b1d2ba6c50ffe08b4fb50896b11b1.stex" ]
+source_file="res://assets/world/topdown-player.svg"
+dest_files=[ "res://.import/topdown-player.svg-c129e851659fe20f3a9b9934674cb8dd.stex" ]
 
 [params]
 

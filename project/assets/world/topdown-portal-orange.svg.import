@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coin.svg-4f408cc0c27738ba7d156f441f501d5e.stex"
+path="res://.import/topdown-portal-orange.svg-63915d8016adce94b302bae4c6309d51.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/coin.svg"
-dest_files=[ "res://.import/coin.svg-4f408cc0c27738ba7d156f441f501d5e.stex" ]
+source_file="res://assets/world/topdown-portal-orange.svg"
+dest_files=[ "res://.import/topdown-portal-orange.svg-63915d8016adce94b302bae4c6309d51.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=true
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/starfield.png" type="Texture" id=1]
-[ext_resource path="res://assets/black.png" type="Texture" id=2]
+[ext_resource path="res://assets/world/starfield.png" type="Texture" id=1]
+[ext_resource path="res://assets/world/black.png" type="Texture" id=2]
+
+
 
 [node name="BackgroundStars" type="ParallaxBackground"]
 scroll_ignore_camera_zoom = true

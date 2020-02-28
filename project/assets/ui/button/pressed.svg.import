@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/projectile-player.svg-d1d217e0f20e6d132158ac7d53fac0a0.stex"
+path="res://.import/pressed.svg-e4903dd19ed36074e8248b89f8d9518f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/projectile-player.svg"
-dest_files=[ "res://.import/projectile-player.svg-d1d217e0f20e6d132158ac7d53fac0a0.stex" ]
+source_file="res://assets/ui/button/pressed.svg"
+dest_files=[ "res://.import/pressed.svg-e4903dd19ed36074e8248b89f8d9518f.stex" ]
 
 [params]
 

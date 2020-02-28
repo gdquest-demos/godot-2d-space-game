@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/projectile-enemy.svg-c82359458ac17c444508a3378956edb2.stex"
+path="res://.import/coin.svg-d675b9609127154f7c188dc7b76b15f0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/projectile-enemy.svg"
-dest_files=[ "res://.import/projectile-enemy.svg-c82359458ac17c444508a3378956edb2.stex" ]
+source_file="res://assets/world/coin.svg"
+dest_files=[ "res://.import/coin.svg-d675b9609127154f7c188dc7b76b15f0.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

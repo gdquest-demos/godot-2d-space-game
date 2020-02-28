@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/topdown-portal-orange.svg-09919d92ce4919d0bdd6d6814070f25b.stex"
+path="res://.import/health_upgrade.svg-3fd4e052d54ec0384fd41e70eb7fb045.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/topdown-portal-orange.svg"
-dest_files=[ "res://.import/topdown-portal-orange.svg-09919d92ce4919d0bdd6d6814070f25b.stex" ]
+source_file="res://assets/ui/icons/upgrades/health_upgrade.svg"
+dest_files=[ "res://.import/health_upgrade.svg-3fd4e052d54ec0384fd41e70eb7fb045.stex" ]
 
 [params]
 

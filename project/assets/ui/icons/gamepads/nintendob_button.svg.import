@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_weapon_upgrade.svg-e22afca32d144e3b6ffbdfc4cbf440f9.stex"
+path="res://.import/nintendob_button.svg-0ae652c6c8f607aa3a78c6812a67a815.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/icon_weapon_upgrade.svg"
-dest_files=[ "res://.import/icon_weapon_upgrade.svg-e22afca32d144e3b6ffbdfc4cbf440f9.stex" ]
+source_file="res://assets/ui/icons/gamepads/nintendob_button.svg"
+dest_files=[ "res://.import/nintendob_button.svg-0ae652c6c8f607aa3a78c6812a67a815.stex" ]
 
 [params]
 

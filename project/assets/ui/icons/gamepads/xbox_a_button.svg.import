@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_cargo_upgrade.svg-87147079542a4f9d2a51ab6ad2b3cd3c.stex"
+path="res://.import/xbox_a_button.svg-5de0111a2096193619b1fb3ca94417c1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/icon_cargo_upgrade.svg"
-dest_files=[ "res://.import/icon_cargo_upgrade.svg-87147079542a4f9d2a51ab6ad2b3cd3c.stex" ]
+source_file="res://assets/ui/icons/gamepads/xbox_a_button.svg"
+dest_files=[ "res://.import/xbox_a_button.svg-5de0111a2096193619b1fb3ca94417c1.stex" ]
 
 [params]
 

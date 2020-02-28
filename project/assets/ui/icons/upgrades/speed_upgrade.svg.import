@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/b_button.svg-fcca5e2e05c90fb30a33bcee2dc0973b.stex"
+path="res://.import/speed_upgrade.svg-fbcf495355e73e12ea8ed54af97ba670.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/b_button.svg"
-dest_files=[ "res://.import/b_button.svg-fcca5e2e05c90fb30a33bcee2dc0973b.stex" ]
+source_file="res://assets/ui/icons/upgrades/speed_upgrade.svg"
+dest_files=[ "res://.import/speed_upgrade.svg-fbcf495355e73e12ea8ed54af97ba670.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/button_normal.svg-4341fbc2970d9d12898bda7a8e00c9d0.stex"
+path="res://.import/playstation_cross_buttton.svg-19536a3801e2d5880abfabbf0e7736c9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/button_normal.svg"
-dest_files=[ "res://.import/button_normal.svg-4341fbc2970d9d12898bda7a8e00c9d0.stex" ]
+source_file="res://assets/ui/icons/gamepads/playstation_cross_buttton.svg"
+dest_files=[ "res://.import/playstation_cross_buttton.svg-19536a3801e2d5880abfabbf0e7736c9.stex" ]
 
 [params]
 

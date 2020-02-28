@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_mining_upgrade.svg-9a0f9e20e82bdd2bbaa3b45275f15b0b.stex"
+path="res://.import/title_screen_illustration.svg-07284754ca21b786bd7649af1a5eab58.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/icon_mining_upgrade.svg"
-dest_files=[ "res://.import/icon_mining_upgrade.svg-9a0f9e20e82bdd2bbaa3b45275f15b0b.stex" ]
+source_file="res://assets/ui/title_screen_illustration.svg"
+dest_files=[ "res://.import/title_screen_illustration.svg-07284754ca21b786bd7649af1a5eab58.stex" ]
 
 [params]
 
