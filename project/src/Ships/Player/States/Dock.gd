@@ -114,13 +114,3 @@ func unhandled_input(event: InputEvent) -> void:
 func _on_Ship_force_undock() -> void:
 	Events.disconnect("force_undock", self, "_on_Ship_force_undock")
 	_state_machine.transition_to("Move/Travel")
-
-
-func _on_UI_Interrupted(_type: int) -> void:
-	Events.disconnect("ui_interrupted", self, "_on_UI_Interrupted")
-	_controls_disabled = true
-
-
-func _on_UI_Removed() -> void:
-	Events.disconnect("ui_removed", self, "_on_UI_Removed")
-	_controls_disabled = false
