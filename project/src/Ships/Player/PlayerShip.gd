@@ -31,7 +31,7 @@ func _ready() -> void:
 	stats.connect("health_depleted", self, "die")
 	gun.projectile_mask = projectile_mask
 	ui.initialize(self, cargo)
-	
+
 
 func _toggle_map(map_up: bool, tween_time: float) -> void:
 	if not map_up:
@@ -65,7 +65,6 @@ func _on_damaged(target: Node, amount: int, _origin: Node) -> void:
 		return
 
 	stats.health -= amount
-
 
 # # TODO: Make components subscribe to stat changes and upgrade from there?
 # func _on_Upgrade_Choice_made(choice: int) -> void:

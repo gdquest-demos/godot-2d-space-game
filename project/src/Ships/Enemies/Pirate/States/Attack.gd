@@ -60,10 +60,8 @@ func physics_process(delta: float) -> void:
 	var facing_direction := GSAIUtils.angle_to_vector2(owner.agent.orientation)
 	var to_player := GSAIUtils.to_vector2(owner.agent.position - target.position).normalized()
 	var player_dot_facing := facing_direction.dot(to_player)
-	
-	if (
-		player_dot_facing > 1-firing_alignment_tolerance_percentage
-	):
+
+	if player_dot_facing > 1 - firing_alignment_tolerance_percentage:
 		owner.gun.fire(owner.gun.global_position, owner.agent.orientation, owner.projectile_mask)
 	if owner.is_squad_leader:
 		var distance_to := starting_position.distance_squared_to(owner.global_position)

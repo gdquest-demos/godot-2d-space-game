@@ -77,7 +77,15 @@ func _update_all() -> void:
 
 # Returns a list of stat properties as strings.
 func _get_stats_list() -> PoolStringArray:
-	var ignore := ["resource_local_to_scene", "resource_name", "resource_path", "script", "_stats_list", "_modifiers", "_cache"]
+	var ignore := [
+		"resource_local_to_scene",
+		"resource_name",
+		"resource_path",
+		"script",
+		"_stats_list",
+		"_modifiers",
+		"_cache"
+	]
 	var stats := PoolStringArray()
 	for p in get_property_list():
 		if p.name[0].capitalize() == p.name[0]:
