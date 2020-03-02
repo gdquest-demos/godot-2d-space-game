@@ -30,11 +30,7 @@ initial_state = NodePath("Move/Travel")
 
 [node name="Move" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 3 )
-acceleration_max = 13.0
-linear_speed_max = 325.0
 drag_linear_coeff = 0.04
-angular_speed_max = 140
-angular_acceleration_max = 17.0
 
 [node name="Travel" type="Node" parent="StateMachine/Move" index="0"]
 script = ExtResource( 4 )

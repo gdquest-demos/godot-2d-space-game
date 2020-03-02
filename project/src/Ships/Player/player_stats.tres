@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/Ships/Player/StatsShip.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+max_health = 120.0
+acceleration_max = 50.0

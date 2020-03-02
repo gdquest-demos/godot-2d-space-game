@@ -3,15 +3,18 @@
 extends KinematicBody2D
 
 signal died
+signal health_changed(new_health, old_health)
+signal health_depleted
 
-export var max_health := 100
+export var stats: Resource = preload("res://src/Ships/Player/player_stats.tres")
 export (int, LAYERS_2D_PHYSICS) var projectile_mask := 0
 export var PopEffect: PackedScene
 # Represents the ship on the minimap. Use a MapIcon resource.
 export var map_icon: Resource
 
 var dockables := []
-var _health := max_health
+
+var _health: float = stats.get_max_health() setget _set_health
 
 onready var shape := $CollisionShape
 onready var agent: GSAISteeringAgent = $StateMachine/Move.agent
@@ -27,8 +30,8 @@ onready var gun := $Gun
 func _ready() -> void:
 	Events.connect("damaged", self, "_on_damaged")
 	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
-
-	health_bar.max_value = max_health
+	# TODO: move to health bar
+	health_bar.max_value = stats.get_max_health()
 	health_bar.value = _health
 
 	gun.projectile_mask = projectile_mask
@@ -65,28 +68,41 @@ func _on_damaged(target: Node, amount: int, _origin: Node) -> void:
 	if not target == self:
 		return
 
-	_health -= amount
+	self._health -= amount
+
+
+func _set_health(value: float) -> void:
+	var old_health = _health
+	_health = max(0, value)
+	emit_signal("health_changed", _health, old_health)
+	# TODO: move to health bar
 	health_bar.value = _health
-	if _health <= 0:
+
+	if _health == 0:
 		die()
+		emit_signal("health_depleted")
 
 
+# TODO: Make components subscribe to stat changes and upgrade from there?
 func _on_Upgrade_Choice_made(choice: int) -> void:
 	match choice:
 		Events.UpgradeChoices.HEALTH:
-			max_health += 15
-			_health = max_health
-			health_bar.max_value = max_health
+			stats.add_modifier("max_health", 25.0)
+			_health = stats.get_max_health()
+			health_bar.max_value = stats.get_max_health()
 			health_bar.value = _health
 		Events.UpgradeChoices.SPEED:
-			move_state.linear_speed_max += 75
-			agent.linear_speed_max += 75
+			stats.add_modifier("linear_speed_max", 125.0)
+			move_state.linear_speed_max = stats.get_linear_speed_max()
+			agent.linear_speed_max = stats.get_linear_speed_max()
+		# TODO: Move to the cargo
 		Events.UpgradeChoices.CARGO:
-			cargo.max_cargo += 50
-			cargo_bar.max_value += 50
+			cargo.max_cargo += stats.max_cargo
+			cargo_bar.max_value += stats.max_cargo
 		Events.UpgradeChoices.MINING:
 			cargo.mining_rate += 10
 			cargo.unload_rate = max(cargo.unload_rate + 5, cargo.mining_rate)
+		# TODO: Move to the weapon
 		Events.UpgradeChoices.WEAPON:
 			gun.damage_bonus += 2
 			gun.cooldown.wait_time *= 0.9

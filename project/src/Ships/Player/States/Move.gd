@@ -4,14 +4,15 @@
 # movement style between Travel and Precision.
 extends State
 
-export var acceleration_max := 15.0
-export var linear_speed_max := 350.0
 export var drag_linear_coeff := 0.05
 export var reverse_multiplier := 0.25
 
-export var angular_speed_max := 120
-export var angular_acceleration_max := 45.0
 export var drag_angular_coeff := 0.1
+
+var acceleration_max := 0.0
+var linear_speed_max := 0.0
+var angular_speed_max := 0.0
+var angular_acceleration_max := 0.0
 
 var linear_velocity := Vector2.ZERO
 var angular_velocity := 0.0
@@ -23,6 +24,12 @@ onready var agent := GSAIKinematicBody2DAgent.new(owner)
 
 func _ready() -> void:
 	yield(owner, "ready")
+
+	acceleration_max = owner.stats.get_acceleration_max()
+	linear_speed_max = owner.stats.get_linear_speed_max()
+	angular_speed_max = owner.stats.get_angular_speed_max()
+	angular_acceleration_max = owner.stats.get_angular_acceleration_max()
+
 	agent.linear_acceleration_max = acceleration_max * reverse_multiplier
 	agent.linear_speed_max = linear_speed_max
 	agent.angular_acceleration_max = deg2rad(angular_acceleration_max)

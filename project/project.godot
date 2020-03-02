@@ -198,6 +198,16 @@ _global_script_classes=[ {
 "class": "Station",
 "language": "GDScript",
 "path": "res://src/World/DockingPoint/Station.gd"
+}, {
+"base": "Resource",
+"class": "Stats",
+"language": "GDScript",
+"path": "res://src/Ships/Stats.gd"
+}, {
+"base": "Stats",
+"class": "StatsShip",
+"language": "GDScript",
+"path": "res://src/Ships/Player/StatsShip.gd"
 } ]
 _global_script_class_icons={
 "Asteroid": "",
@@ -237,7 +247,9 @@ _global_script_class_icons={
 "Projectile": "",
 "State": "",
 "StateMachine": "",
-"Station": ""
+"Station": "",
+"Stats": "",
+"StatsShip": ""
 }
 
 [application]
