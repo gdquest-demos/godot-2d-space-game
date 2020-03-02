@@ -27,6 +27,9 @@ func _ready() -> void:
 	station_spawner.spawn_station()
 
 	world.setup($UI/UpgradeUI)
+	
+	ObjectRegistry.register_distortion_parent($DistortMaskView/Viewport)
+	camera.setup_distortion_camera()
 
 
 func _on_Spawner_pirate_spawned(pirate: Node) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/World/Spawners/AsteroidSpawner.gd" type="Script" id=1]
 [ext_resource path="res://src/World/Spawners/StationSpawner.gd" type="Script" id=2]
@@ -10,16 +10,28 @@
 [ext_resource path="res://src/World/BackgroundStars.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/World/DockingPoint/Asteroid.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/UI/Minimap/MapDisplay.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/world/white.png" type="Texture" id=11]
 [ext_resource path="res://src/Ships/Player/PlayerCamera.gd" type="Script" id=12]
+[ext_resource path="res://src/VFX/Shaders/distorted_view.shader" type="Shader" id=13]
 [ext_resource path="res://src/World/World.gd" type="Script" id=14]
 [ext_resource path="res://src/World/Spawners/PirateSpawner.gd" type="Script" id=15]
 [ext_resource path="res://src/UI/Upgrades/UpgradeMenu.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/UI/UI.gd" type="Script" id=17]
 [ext_resource path="res://src/UI/QuitMenu.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/UI/ScreenFader.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/VFX/DistortMaskView.tscn" type="PackedScene" id=20]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("MapView/Viewport")
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("DistortMaskView/Viewport")
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 13 )
+shader_param/displacement_amount = 12.0
+shader_param/displacement_mask = SubResource( 2 )
 
 [node name="GameInitializer" type="Node"]
 script = ExtResource( 7 )
@@ -45,8 +57,9 @@ max_zoom = 6.0
 [node name="Tween" type="Tween" parent="World/Camera"]
 playback_process_mode = 0
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="World/Camera"]
-remote_path = NodePath("../../../MapViewport/Camera2D")
+[node name="RemoteMap" type="RemoteTransform2D" parent="World/Camera"]
+
+[node name="RemoteDistort" type="RemoteTransform2D" parent="World/Camera"]
 
 [node name="StationSpawner" type="Node2D" parent="World"]
 script = ExtResource( 2 )
@@ -66,11 +79,12 @@ spawn_radius = 300.0
 [node name="MapView" parent="." instance=ExtResource( 6 )]
 mouse_filter = 2
 
-[node name="BlackBackground" parent="MapView/Viewport/CanvasLayer" index="0"]
+[node name="DistortMaskView" parent="." instance=ExtResource( 20 )]
 mouse_filter = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
 pause_mode = 2
+layer = 2
 script = ExtResource( 17 )
 
 [node name="MapDisplay" parent="UI" instance=ExtResource( 10 )]
@@ -85,4 +99,20 @@ visible = false
 [node name="QuitMenu" parent="UI" instance=ExtResource( 18 )]
 visible = false
 
+[node name="PostProcessedLayer" type="CanvasLayer" parent="."]
+
+[node name="GameView" type="TextureRect" parent="PostProcessedLayer"]
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 1
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [editable path="MapView"]
+
+[editable path="DistortMaskView"]
