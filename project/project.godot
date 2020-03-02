@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Range",
+"class": "AnimatedBar",
+"language": "GDScript",
+"path": "res://src/Ships/Player/AnimatedBar.gd"
+}, {
 "base": "DockingPoint",
 "class": "Asteroid",
 "language": "GDScript",

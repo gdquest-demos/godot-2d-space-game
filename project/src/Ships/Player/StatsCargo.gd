@@ -29,3 +29,4 @@ func get_unload_rate() -> float:
 
 func set_cargo(value: float) -> void:
 	cargo = clamp(value, 0.0, get_max_cargo())
+	_update("cargo")

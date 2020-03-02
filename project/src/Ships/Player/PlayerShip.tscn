@@ -56,7 +56,7 @@ update_rotation = false
 [node name="BarRig" type="Node2D" parent="." index="7"]
 script = ExtResource( 13 )
 
-[node name="PlayerUI" parent="BarRig" index="0" instance=ExtResource( 12 )]
+[node name="PlayerShipUI" parent="BarRig" index="0" instance=ExtResource( 12 )]
 margin_top = 30.0
 margin_bottom = 42.0
 

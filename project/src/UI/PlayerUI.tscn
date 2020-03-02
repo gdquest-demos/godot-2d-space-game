@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[ext_resource path="res://src/Ships/Player/PlayerShipUI.gd" type="Script" id=1]
+[ext_resource path="res://src/Ships/Player/AnimatedBar.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.870588, 0.129412, 0.129412, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -12,7 +15,7 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.34902, 0.0588235, 0.0588235, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -24,7 +27,7 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.129412, 0.870588, 0.52549, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -36,7 +39,7 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.0588235, 0.34902, 0.192157, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -48,7 +51,7 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="PlayerUI" type="VBoxContainer"]
+[node name="PlayerShipUI" type="VBoxContainer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -57,29 +60,38 @@ margin_left = -25.0
 margin_top = -2.0
 margin_right = 25.0
 margin_bottom = 2.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Health" type="ProgressBar" parent="."]
+[node name="HealthBar" type="ProgressBar" parent="."]
 margin_right = 50.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 50, 10 )
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = SubResource( 4 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+step = 1.0
 percent_visible = false
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Cargo" type="ProgressBar" parent="."]
+[node name="Tween" type="Tween" parent="HealthBar"]
+
+[node name="CargoBar" type="ProgressBar" parent="."]
 margin_top = 14.0
 margin_right = 50.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 50, 10 )
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+step = 1.0
 percent_visible = false
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="CargoBar"]

@@ -43,3 +43,4 @@ func set_health(value: float) -> void:
 	health = clamp(value, 0.0, _max_health)
 	if is_equal_approx(health, 0.0):
 		emit_signal("health_depleted")
+	_update("health")
