@@ -4,11 +4,15 @@
 class_name StatsShip
 extends Stats
 
+signal health_depleted
+
 export var _max_health := 100.0
 export var _acceleration_max := 15.0
 export var _linear_speed_max := 350.0
 export var _angular_speed_max := 120.0
 export var _angular_acceleration_max := 45.0
+
+var health: float = _max_health setget set_health
 
 
 func _init() -> void:
@@ -33,3 +37,9 @@ func get_angular_speed_max() -> float:
 
 func get_angular_acceleration_max() -> float:
 	return get_stat("_angular_acceleration_max")
+
+
+func set_health(value: float) -> void:
+	health = clamp(value, 0.0, _max_health)
+	if is_equal_approx(health, 0.0):
+		emit_signal("health_depleted")

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/Ships/Player/StatsCargo.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+_max_cargo = 100.0
+_mining_rate = 10.0
+_unload_rate = 35.0

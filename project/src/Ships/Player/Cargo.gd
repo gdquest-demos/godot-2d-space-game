@@ -1,32 +1,28 @@
 # Worker node on the player ship that manages and maintains cargo and mining
 # from mineables.
+class_name Cargo
 extends Node
 
 enum States { IDLE, MINING, UNLOADING }
 
-export var max_cargo := 100.0
-export var mining_rate := 10.0
-export var unload_rate := 35.0
+export var stats: Resource = preload("res://src/Ships/Player/cargo_stats.tres")
 
 var state: int = States.IDLE
-var cargo := 0.0 setget set_cargo
 var is_mining := false
 var is_exporting := false
 var dockable_weakref: WeakRef
-var cargo_bar: ProgressBar
 
 
 func _ready() -> void:
 	Events.connect("docked", self, "_on_Player_docked")
 	Events.connect("undocked", self, "_on_Player_undocked")
 	yield(owner, "ready")
-	cargo_bar = owner.cargo_bar
 
 
 func _physics_process(delta: float) -> void:
 	match state:
 		States.MINING:
-			if cargo == max_cargo:
+			if stats.cargo == stats.get_max_cargo():
 				state = States.IDLE
 
 			var _asteroid: Asteroid = dockable_weakref.get_ref()
@@ -34,13 +30,15 @@ func _physics_process(delta: float) -> void:
 				state = States.IDLE
 				Events.emit_signal("force_undock")
 			else:
-				var mined: float = _asteroid.mine_amount(min(max_cargo, mining_rate * delta))
+				var mined: float = _asteroid.mine_amount(
+					min(stats.get_max_cargo(), stats.get_mining_rate() * delta)
+				)
 				if mined == 0:
 					state = States.IDLE
 				else:
-					self.cargo += mined
+					stats.cargo += mined
 		States.UNLOADING:
-			if cargo == 0:
+			if stats.cargo == 0:
 				state = States.IDLE
 
 			var _station: Station = dockable_weakref.get_ref()
@@ -48,8 +46,8 @@ func _physics_process(delta: float) -> void:
 				state = States.IDLE
 				Events.emit_signal("force_undock")
 			else:
-				var export_amount := min(unload_rate * delta, cargo)
-				set_cargo(max(0, cargo - export_amount))
+				var export_amount := min(stats.get_unload_rate() * delta, stats.cargo)
+				stats.cargo -= export_amount
 				_station.accumulated_iron += export_amount
 
 
@@ -63,9 +61,3 @@ func _on_Player_docked(dockable: Node) -> void:
 
 func _on_Player_undocked() -> void:
 	state = States.IDLE
-
-
-func set_cargo(value: float) -> void:
-	cargo = min(value, max_cargo)
-	var percentage := cargo / max_cargo
-	cargo_bar.value = percentage * cargo_bar.max_value

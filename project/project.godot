@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/World/DockingPoint/Asteroid.gd"
 }, {
+"base": "Node",
+"class": "Cargo",
+"language": "GDScript",
+"path": "res://src/Ships/Player/Cargo.gd"
+}, {
 "base": "Node2D",
 "class": "DockingPoint",
 "language": "GDScript",
@@ -180,6 +185,11 @@ _global_script_classes=[ {
 "path": "res://src/Utils/MathUtils.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "PlayerShip",
+"language": "GDScript",
+"path": "res://src/Ships/Player/PlayerShip.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://src/Ships/Guns/Projectiles/Projectile.gd"
@@ -205,12 +215,19 @@ _global_script_classes=[ {
 "path": "res://src/Ships/Stats.gd"
 }, {
 "base": "Stats",
+"class": "StatsCargo",
+"language": "GDScript",
+"path": "res://src/Ships/Player/StatsCargo.gd"
+}, {
+"base": "Stats",
 "class": "StatsShip",
 "language": "GDScript",
 "path": "res://src/Ships/Player/StatsShip.gd"
 } ]
 _global_script_class_icons={
+"AnimatedBar": "",
 "Asteroid": "",
+"Cargo": "",
 "DockingPoint": "",
 "GSAIAgentLocation": "",
 "GSAIArrive": "",
@@ -244,11 +261,13 @@ _global_script_class_icons={
 "Gun": "",
 "MapIcon": "",
 "MathUtils": "",
+"PlayerShip": "",
 "Projectile": "",
 "State": "",
 "StateMachine": "",
 "Station": "",
 "Stats": "",
+"StatsCargo": "",
 "StatsShip": ""
 }
 
