@@ -4,18 +4,19 @@
 class_name Projectile
 extends KinematicBody2D
 
-export var speed := 750.0
+export var speed := 1650.0
 export var damage := 10.0
+var fire_range := 1500.0
 
 var direction := Vector2.ZERO
 var shooter: Node
 
-onready var lifespan_timer := $Lifespan
+onready var visibility_notifier: VisibilityNotifier2D = $VisibilityNotifier2D
 
 
 func _ready() -> void:
 	direction = -GSAIUtils.angle_to_vector2(rotation)
-	lifespan_timer.connect("timeout", self, "_on_Lifespan_timeout")
+	visibility_notifier.connect("screen_exited", self, "queue_free")
 
 
 func _physics_process(delta: float) -> void:
@@ -23,7 +24,3 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		Events.emit_signal("damaged", collision.collider, damage, shooter)
 		queue_free()
-
-
-func _on_Lifespan_timeout() -> void:
-	queue_free()

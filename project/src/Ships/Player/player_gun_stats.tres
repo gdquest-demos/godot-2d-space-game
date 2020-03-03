@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource( 1 )
-_damage = 5.0
-_cooldown = 0.4
+_damage = 4.0
+_cooldown = 0.2
+_spread = 30.0

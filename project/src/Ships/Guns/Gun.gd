@@ -22,9 +22,11 @@ func fire(spawn_position: Vector2, spawn_orientation: float, projectile_mask: in
 	if not cooldown.is_stopped() or not Projectile:
 		return
 
+	var spread: float = stats.get_spread()
+
 	var projectile: Projectile = Projectile.instance()
 	projectile.global_position = spawn_position
-	projectile.rotation = spawn_orientation
+	projectile.rotation = spawn_orientation + deg2rad(rand_range(-spread / 2, spread / 2))
 	projectile.collision_mask = projectile_mask
 	projectile.shooter = owner
 	projectile.damage += stats.get_damage()
