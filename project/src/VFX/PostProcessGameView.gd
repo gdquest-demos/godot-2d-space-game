@@ -3,5 +3,4 @@ extends TextureRect
 
 
 func _ready() -> void:
-	if Engine.editor_hint:
-		visible = false
+	visible = not Engine.editor_hint
