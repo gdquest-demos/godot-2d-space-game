@@ -16,15 +16,15 @@ func _init() -> void:
 
 
 func get_max_cargo() -> float:
-	return get_stat("_max_cargo")
+	return get_stat("max_cargo")
 
 
 func get_mining_rate() -> float:
-	return get_stat("_mining_rate")
+	return get_stat("mining_rate")
 
 
 func get_unload_rate() -> float:
-	return get_stat("_unload_rate")
+	return get_stat("unload_rate")
 
 
 func set_cargo(value: float) -> void:

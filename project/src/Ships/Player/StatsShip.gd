@@ -20,23 +20,23 @@ func _init() -> void:
 
 
 func get_max_health() -> float:
-	return get_stat("_max_health")
+	return get_stat("max_health")
 
 
 func get_acceleration_max() -> float:
-	return get_stat("_acceleration_max")
+	return get_stat("acceleration_max")
 
 
 func get_linear_speed_max() -> float:
-	return get_stat("_linear_speed_max")
+	return get_stat("linear_speed_max")
 
 
 func get_angular_speed_max() -> float:
-	return get_stat("_angular_speed_max")
+	return get_stat("angular_speed_max")
 
 
 func get_angular_acceleration_max() -> float:
-	return get_stat("_angular_acceleration_max")
+	return get_stat("angular_acceleration_max")
 
 
 func set_health(value: float) -> void:

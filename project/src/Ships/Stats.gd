@@ -61,7 +61,7 @@ func reset() -> void:
 
 # Calculates the final value of a single stat, its based value with all modifiers applied.
 func _update(stat: String = "") -> void:
-	var value_start: float = self.get(stat)
+	var value_start: float = self.get(_stats_list[stat])
 	var value = value_start
 	for modifier in _modifiers[stat]:
 		value += modifier
@@ -76,7 +76,7 @@ func _update_all() -> void:
 
 
 # Returns a list of stat properties as strings.
-func _get_stats_list() -> PoolStringArray:
+func _get_stats_list() -> Dictionary:
 	var ignore := [
 		"resource_local_to_scene",
 		"resource_name",
@@ -86,11 +86,11 @@ func _get_stats_list() -> PoolStringArray:
 		"_modifiers",
 		"_cache"
 	]
-	var stats := PoolStringArray()
+	var stats := {}
 	for p in get_property_list():
 		if p.name[0].capitalize() == p.name[0]:
 			continue
 		if p.name in ignore:
 			continue
-		stats.append(p.name)
+		stats[p.name.lstrip("_")] = p.name
 	return stats
