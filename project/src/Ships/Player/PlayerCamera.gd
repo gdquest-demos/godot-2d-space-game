@@ -9,7 +9,8 @@ export var max_zoom := 5.0
 var _start_zoom := zoom
 var _start_position := Vector2.ZERO
 
-onready var remote_transform := $RemoteTransform2D
+onready var remote_map := $RemoteMap
+onready var remote_distort := $RemoteDistort
 onready var tween := $Tween
 
 
@@ -18,9 +19,15 @@ func _ready() -> void:
 
 
 func setup_camera_map(map: Viewport) -> void:
-	var camera_map = self.duplicate()
+	var camera_map := self.duplicate()
 	map.add_child(camera_map)
-	remote_transform.remote_path = camera_map.get_path()
+	remote_map.remote_path = camera_map.get_path()
+
+
+func setup_distortion_camera() -> void:
+	var distort_camera := self.duplicate()
+	ObjectRegistry.register_distortion_effect(distort_camera)
+	remote_distort.remote_path = distort_camera.get_path()
 
 
 func _toggle_map(show: bool, duration: float) -> void:

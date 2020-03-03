@@ -291,8 +291,8 @@ config/icon="res://assets/icon.png"
 
 [autoload]
 
-ObjectRegistry="*res://src/Autoload/ObjectRegistry.gd"
 Events="*res://src/Autoload/Events.gd"
+ObjectRegistry="*res://src/Autoload/ObjectRegistry.tscn"
 
 [debug]
 
