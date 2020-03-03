@@ -20,4 +20,4 @@ func die() -> void:
 	dying = true
 	timer.start(lifetime)
 	yield(timer, "timeout")
-	cache.recycle_emitter(self, template)
+	queue_free()

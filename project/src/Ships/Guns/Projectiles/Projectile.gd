@@ -26,7 +26,7 @@ func _ready() -> void:
 	sprite.material = sprite.material.duplicate()
 	player.play("Flicker")
 	
-	var emitter := EmitterCache.get_new_emitter(distortion_emitter)
+	var emitter := distortion_emitter.instance()
 	ObjectRegistry.register_distortion_effect(emitter)
 	remote_transform.remote_path = emitter.get_path()
 
