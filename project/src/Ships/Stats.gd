@@ -64,7 +64,7 @@ func _update(stat: String = "") -> void:
 	var value_start: float = self.get(stat)
 	var value = value_start
 	for modifier in _modifiers[stat]:
-		value += modifier.value
+		value += modifier
 	_cache[stat] = value
 	emit_signal("stat_changed", stat, value_start, value)
 
