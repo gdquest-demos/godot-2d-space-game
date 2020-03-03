@@ -15,10 +15,6 @@ export var _angular_acceleration_max := 45.0
 var health: float = _max_health setget set_health
 
 
-func _init() -> void:
-	_update_all()
-
-
 func get_max_health() -> float:
 	return get_stat("max_health")
 

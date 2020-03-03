@@ -14,6 +14,7 @@ var dockable_weakref: WeakRef
 
 
 func _ready() -> void:
+	stats.initialize()
 	Events.connect("docked", self, "_on_Player_docked")
 	Events.connect("undocked", self, "_on_Player_undocked")
 	yield(owner, "ready")

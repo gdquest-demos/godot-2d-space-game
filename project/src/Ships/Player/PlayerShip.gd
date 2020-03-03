@@ -25,6 +25,7 @@ onready var ui := $BarRig/PlayerShipUI
 
 
 func _ready() -> void:
+	stats.initialize()
 	Events.connect("damaged", self, "_on_damaged")
 	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
 	stats.connect("health_depleted", self, "die")

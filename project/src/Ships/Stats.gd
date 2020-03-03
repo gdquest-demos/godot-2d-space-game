@@ -1,5 +1,8 @@
 # Virtual base class for stats (health, speed...) that support upgrades.
 #
+# You must call `initialize()` to initialize the stats' values. This ensures that they are in sync
+# with the values modified in Godot's inspector.
+#
 # Each stat should be a floating point value, and we recommend to make them private properties, as
 # they should be read-only. To get a stat's calculated value, with modifiers, see `get_stat()`.
 class_name Stats
@@ -23,6 +26,10 @@ func _init() -> void:
 	for stat in _stats_list:
 		_modifiers[stat] = []
 		_cache[stat] = 0.0
+
+
+func initialize() -> void:
+	_update_all()
 
 
 # Get the final value of a stat, with all modifiers applied to it.

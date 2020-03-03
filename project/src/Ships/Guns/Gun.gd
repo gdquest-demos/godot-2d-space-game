@@ -11,6 +11,7 @@ onready var cooldown: Timer = $Cooldown
 
 
 func _ready() -> void:
+	stats.initialize()
 	cooldown.wait_time = stats.get_cooldown()
 
 
