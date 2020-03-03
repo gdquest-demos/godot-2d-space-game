@@ -293,6 +293,7 @@ config/icon="res://assets/icon.png"
 
 Events="*res://src/Autoload/Events.gd"
 ObjectRegistry="*res://src/Autoload/ObjectRegistry.tscn"
+EmitterCache="*res://src/Autoload/EmitterCache.gd"
 
 [debug]
 

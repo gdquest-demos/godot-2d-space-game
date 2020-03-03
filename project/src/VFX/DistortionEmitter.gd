@@ -1,8 +1,11 @@
+# One-shot particle emitter that recycles itself after use.
 extends Particles2D
-
 
 onready var timer := $Timer
 var dying := false
+var cache: Node
+var template: PackedScene
+
 
 func _ready() -> void:
 	emitting = true
@@ -17,4 +20,4 @@ func die() -> void:
 	dying = true
 	timer.start(lifetime)
 	yield(timer, "timeout")
-	queue_free()
+	cache.recycle_emitter(self, template)

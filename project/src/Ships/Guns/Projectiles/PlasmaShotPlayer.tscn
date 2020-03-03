@@ -6,9 +6,9 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/alpha_intensity_front = 0.5
-shader_param/tint_front = Color( 0.92549, 0.960784, 0.972549, 1 )
+shader_param/tint_front = Color( 0.92549, 0.956863, 0.972549, 1 )
 shader_param/alpha_intensity_back = 3.0
-shader_param/tint_back = Color( 0.054902, 0.384314, 0.94902, 1 )
+shader_param/tint_back = Color( 0.0392157, 0.72549, 0.964706, 1 )
 shader_param/blend_amount = 1.0
 shader_param/fade_amount = 1.0
 

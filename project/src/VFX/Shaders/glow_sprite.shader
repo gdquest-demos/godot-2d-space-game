@@ -1,5 +1,11 @@
 shader_type canvas_item;
 
+//Shader that draws a sprite that has a drawn-in glow effect on the original
+// instead of generating a new glow. This makes it relatively high performance.
+// The sprite is drawn twice, tinted seperately and blended together.
+// The alpha_intensity_ variables control the falloff of the existing alpha's
+// glow.
+
 uniform float alpha_intensity_front : hint_range(0.0, 3.0) = 1.0;
 uniform vec4 tint_front : hint_color = vec4(1.0,1.0,1.0,1.0);
 uniform float alpha_intensity_back : hint_range(0.0, 3.0) = 1.0;

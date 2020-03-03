@@ -10,7 +10,7 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=3]
 flag_disable_z = true
 direction = Vector3( 0, 1, 0 )
 spread = 25.0
@@ -28,8 +28,11 @@ lifetime = 0.75
 one_shot = true
 visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
 local_coords = false
-process_material = SubResource( 5 )
+process_material = SubResource( 3 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": "Emits a soft white circular particle that will be drawn onto a black and white viewport, which will be used as a mask to distort the game view."
+}
 
 [node name="Timer" type="Timer" parent="."]

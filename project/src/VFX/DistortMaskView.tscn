@@ -14,7 +14,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 stretch = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_editor_description_": "Black and white viewport that will be used to generate distortion masks for heattrails and shockwaves."
 }
 
 [node name="Viewport" type="Viewport" parent="."]
