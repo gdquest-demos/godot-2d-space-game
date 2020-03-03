@@ -26,8 +26,7 @@ onready var ui := $BarRig/PlayerShipUI
 
 func _ready() -> void:
 	Events.connect("damaged", self, "_on_damaged")
-	# TODO: restore upgrades
-	# Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
 	stats.connect("health_depleted", self, "die")
 	gun.projectile_mask = projectile_mask
 	ui.initialize(self, cargo)
@@ -66,26 +65,21 @@ func _on_damaged(target: Node, amount: int, _origin: Node) -> void:
 
 	stats.health -= amount
 
-# # TODO: Make components subscribe to stat changes and upgrade from there?
-# func _on_Upgrade_Choice_made(choice: int) -> void:
-# 	match choice:
-# 		Events.UpgradeChoices.HEALTH:
-# 			stats.add_modifier("max_health", 25.0)
-# 			_health = stats.get_max_health()
-# 			health_bar.max_value = stats.get_max_health()
-# 			health_bar.value = _health
-# 		Events.UpgradeChoices.SPEED:
-# 			stats.add_modifier("linear_speed_max", 125.0)
-# 			move_state.linear_speed_max = stats.get_linear_speed_max()
-# 			agent.linear_speed_max = stats.get_linear_speed_max()
-# 		# TODO: Move to the cargo
-# 		Events.UpgradeChoices.CARGO:
-# 			cargo.max_cargo += stats.max_cargo
-# 			cargo_bar.max_value += stats.max_cargo
-# 		Events.UpgradeChoices.MINING:
-# 			cargo.mining_rate += 10
-# 			cargo.unload_rate = max(cargo.unload_rate + 5, cargo.mining_rate)
-# 		# TODO: Move to the weapon
-# 		Events.UpgradeChoices.WEAPON:
-# 			gun.damage_bonus += 2
-# 			gun.cooldown.wait_time *= 0.9
+
+func _on_Upgrade_Choice_made(choice: int) -> void:
+	match choice:
+		Events.UpgradeChoices.HEALTH:
+			stats.add_modifier("max_health", 25.0)
+		Events.UpgradeChoices.SPEED:
+			stats.add_modifier("linear_speed_max", 125.0)
+		Events.UpgradeChoices.CARGO:
+			cargo.stats.add_modifier("max_cargo", 50.0)
+		Events.UpgradeChoices.MINING:
+			cargo.stats.add_modifier("mining_rate", 10.0)
+			cargo.stats.add_modifier("unload_rate", 5.0)
+		Events.UpgradeChoices.WEAPON:
+			gun.stats.add_modifier("damage", 3.0)
+			# That's a limitation of the stats system, modifiers only add or remove values, and they
+			# don't have limits
+			if gun.stats.get_stat("_cooldown") > 0.2:
+				gun.stats.add_modifier("cooldown", -0.05)
