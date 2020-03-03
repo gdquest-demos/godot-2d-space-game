@@ -1,5 +1,6 @@
 # A specialized steering agent that updates itself every frame so the user does
 # not have to using a RigidBody
+# category: Specialized agents
 extends GSAISpecializedAgent
 class_name GSAIRigidBody3DAgent
 
@@ -8,7 +9,6 @@ var body: RigidBody setget _set_body
 
 var _last_position: Vector3
 var _body_ref: WeakRef
-
 
 func _init(_body: RigidBody) -> void:
 	if not _body.is_inside_tree():
@@ -25,7 +25,7 @@ func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> voi
 	var _body: RigidBody = _body_ref.get_ref()
 	if not _body:
 		return
-
+		
 	_applied_steering = true
 	_body.apply_central_impulse(acceleration.linear)
 	_body.apply_torque_impulse(Vector3.UP * acceleration.angular)
@@ -48,7 +48,7 @@ func _on_SceneTree_frame() -> void:
 	var _body: RigidBody = _body_ref.get_ref()
 	if not _body:
 		return
-
+		
 	var current_position := _body.transform.origin
 	var current_orientation := _body.rotation.y
 

@@ -29,6 +29,7 @@ func setup(_upgrade_ui: Control) -> void:
 	Events.connect(
 		"upgrade_choice_made", pirate_spawner, "spawn_pirate_group", [world_radius, self]
 	)
+	pirate_spawner.spawn_pirate_group(0, world_radius, self)
 
 
 func remove_iron(amount: float, asteroid: Node2D) -> void:
