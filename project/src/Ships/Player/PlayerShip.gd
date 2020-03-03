@@ -52,7 +52,7 @@ func die() -> void:
 
 func register_on_map(map: Viewport) -> void:
 	var id: int = map.register_map_object($MapTransform, map_icon)
-	connect("died", map, "remove_map_object", [self, id])
+	connect("died", map, "remove_map_object", [id])
 
 
 func grab_camera(camera: Camera2D) -> void:
