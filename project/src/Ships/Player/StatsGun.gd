@@ -1,6 +1,4 @@
-# Represents a Ship's stats, like its hull's health, its speed, etc. The stats are calculated from
-# the base_* properties, with modifiers (upgrades) applied to them internally.
-# To access the final stats, use the `get_*` functions, or call `get_stat()`
+# Resource that defines the base stats for a gun.
 class_name StatsGun
 extends Stats
 
