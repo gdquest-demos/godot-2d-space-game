@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Ships/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Ships/Enemies/Pirate/PirateShip.gd" type="Script" id=2]
@@ -10,10 +10,11 @@
 [ext_resource path="res://src/Ships/Enemies/Pirate/States/Attack.gd" type="Script" id=8]
 [ext_resource path="res://src/Ships/Enemies/Pirate/States/Patrol.gd" type="Script" id=9]
 [ext_resource path="res://src/Ships/Enemies/Pirate/States/Spawn.gd" type="Script" id=10]
-[ext_resource path="res://src/Ships/Guns/Projectiles/PlasmaShot.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Ships/Enemies/Pirate/PlasmaShotEnemy.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Ships/Enemies/Pirate/pirate_gun_stats.tres" type="Resource" id=12]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 200.0
+radius = 302.669
 
 [node name="PirateShip" groups=[
 "Enemies",
@@ -37,6 +38,7 @@ shape = SubResource( 1 )
 
 [node name="Gun" parent="." index="3"]
 Projectile = ExtResource( 11 )
+stats = ExtResource( 12 )
 
 [node name="StateMachine" type="Node" parent="." index="5"]
 script = ExtResource( 6 )
