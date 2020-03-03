@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/World/Spawners/AsteroidSpawner.gd" type="Script" id=1]
 [ext_resource path="res://src/World/Spawners/StationSpawner.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://src/UI/QuitMenu.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/UI/ScreenFader.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/VFX/DistortMaskView.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/VFX/PostProcessGameView.gd" type="Script" id=21]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("MapView/Viewport")
@@ -108,14 +109,18 @@ visible = false
 [node name="PostProcessedLayer" type="CanvasLayer" parent="."]
 
 [node name="GameView" type="TextureRect" parent="PostProcessedLayer"]
+visible = false
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -1.80502
+margin_right = -1.80505
 mouse_filter = 2
 texture = ExtResource( 11 )
 expand = true
 stretch_mode = 1
 flip_v = true
+script = ExtResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
