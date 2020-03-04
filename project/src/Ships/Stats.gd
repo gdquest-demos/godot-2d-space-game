@@ -28,6 +28,8 @@ func _init() -> void:
 		_cache[stat] = 0.0
 
 
+# Call this function from your node's ready function, before accessing the stats. This ensures
+# they're all loaded.
 func initialize() -> void:
 	_update_all()
 
