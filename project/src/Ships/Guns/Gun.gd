@@ -9,7 +9,6 @@ export var stats: Resource = preload("res://src/Ships/Player/player_gun_stats.tr
 
 onready var cooldown: Timer = $Cooldown
 
-
 func _ready() -> void:
 	stats.initialize()
 	cooldown.wait_time = stats.get_cooldown()
@@ -27,12 +26,14 @@ func fire(spawn_position: Vector2, spawn_orientation: float, projectile_mask: in
 
 	var projectile: Projectile = Projectile.instance()
 	projectile.global_position = spawn_position
-	projectile.rotation = spawn_orientation + deg2rad(rand_range(-spread / 2, spread / 2))
+	projectile.rotation = spawn_orientation + deg2rad(random_spread(spread))
+	projectile.speed *= 1.0 + random_spread(0.4)
 	projectile.collision_mask = projectile_mask
 	projectile.shooter = owner
 	projectile.damage += stats.get_damage()
 
 	ObjectRegistry.register_projectile(projectile)
+	cooldown.wait_time = stats.get_cooldown() * (1.0 + random_spread(0.2))
 	cooldown.start()
 
 
@@ -40,3 +41,8 @@ func _on_Stats_stat_changed(stat_name: String, _old_value: float, new_value: flo
 	match stat_name:
 		"cooldown":
 			cooldown.wait_time = new_value
+
+
+static func random_spread(value: float) -> float:
+	var half_spread := value / 2.0
+	return rand_range(- half_spread, half_spread)
