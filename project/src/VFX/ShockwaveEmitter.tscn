@@ -19,7 +19,7 @@ flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 3.0
+scale = 10.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
