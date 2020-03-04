@@ -20,6 +20,8 @@ onready var timer := $MapTimer
 onready var cargo := $Cargo
 onready var move_state := $StateMachine/Move
 onready var gun := $Gun
+onready var move_trail := $MoveTrail
+export var shockwave: PackedScene 
 
 onready var ui := $BarRig/PlayerShipUI
 
