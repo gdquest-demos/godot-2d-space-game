@@ -9,17 +9,13 @@ signal died
 
 export (Resource) var map_icon = MapIcon.new()
 export var docking_distance := 200.0 setget _set_docking_distance
-export var docking_color_highlight := Color(0, 1, 0, 0.2)
 
 var angle_proportion := 1.0
 var is_player_inside := false
 var radius := 0.0
 var docking_point_edge := Vector2.ZERO
 
-onready var docking_color_normal := Color(
-	docking_color_highlight.r, docking_color_highlight.g, docking_color_highlight.b, 0
-)
-onready var current_color := docking_color_normal
+
 onready var docking_shape: CollisionShape2D = $DockingArea/CollisionShape2D
 onready var docking_area: Area2D = $DockingArea
 onready var collision_shape: CollisionShape2D = $KinematicBody2D/CollisionShape2D
@@ -28,6 +24,8 @@ onready var remote_rig: Node2D = $RemoteRig
 onready var remote_transform: RemoteTransform2D = $RemoteRig/RemoteTransform2D
 onready var ref_to := weakref(self)
 onready var tween := $Tween
+onready var dock_aura := $Sprite/ActiveAura
+onready var animator := $AnimationPlayer
 
 
 func _ready() -> void:
@@ -40,10 +38,6 @@ func _ready() -> void:
 
 	docking_area.connect("body_entered", self, "_on_DockingArea_body_entered")
 	docking_area.connect("body_exited", self, "_on_DockingArea_body_exited")
-
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, docking_distance, current_color)
 
 
 func set_docking_remote(node: Node2D, docker_distance: float) -> void:
@@ -68,21 +62,21 @@ func _set_docking_distance(value: float) -> void:
 		yield(self, "ready")
 
 	docking_shape.shape.radius = value
-	update()
 
 
 func _on_DockingArea_body_entered(body: Node) -> void:
 	is_player_inside = true
 	body.dockables.append(ref_to)
-	tween.interpolate_method(
-		self,
-		"_on_Tween_color_callback",
-		current_color,
-		docking_color_highlight,
-		0.5,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT
-	)
+	animator.stop(false)
+	tween.interpolate_property(
+		dock_aura,
+		"scale", 
+		Vector2(0.01, 0.01),
+		Vector2(2.15, 2.15),
+		1.0,
+		Tween.TRANS_ELASTIC,
+		Tween.EASE_OUT)
+	dock_aura.visible = true
 	tween.start()
 
 
@@ -91,18 +85,16 @@ func _on_DockingArea_body_exited(body: Node) -> void:
 	var index: int = body.dockables.find(ref_to)
 	if index > -1:
 		body.dockables.remove(index)
-	tween.interpolate_method(
-		self,
-		"_on_Tween_color_callback",
-		current_color,
-		docking_color_normal,
+	animator.play()
+	tween.interpolate_property(
+		dock_aura,
+		"scale", 
+		Vector2(2.15, 2.15),
+		Vector2(0.01, 0.01),
 		0.5,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT_IN
-	)
+		Tween.TRANS_BACK,
+		Tween.EASE_IN)
 	tween.start()
+	yield(tween, "tween_all_completed")
+	dock_aura.visible = false
 
-
-func _on_Tween_color_callback(current: Color) -> void:
-	current_color = current
-	update()

@@ -18,13 +18,13 @@ colors = PoolColorArray( 0, 0, 0, 1 )
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.248804, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.502392, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.746412, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
 emission_box_extents = Vector3( 640, 360, 1 )
 flag_disable_z = true
@@ -35,7 +35,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.5
 scale_random = 1.0
-scale_curve = SubResource( 5 )
+scale_curve = SubResource( 4 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -94,7 +94,7 @@ scroll_base_scale = Vector2( 0.5, 0.5 )
 position = Vector2( 640, 360 )
 amount = 16
 lifetime = 5.0
-process_material = SubResource( 3 )
+process_material = SubResource( 5 )
 texture = ExtResource( 10 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="Background/BackgroundStars"]
@@ -103,7 +103,7 @@ texture = ExtResource( 10 )
 position = Vector2( 640, 360 )
 amount = 16
 lifetime = 5.0
-process_material = SubResource( 3 )
+process_material = SubResource( 5 )
 texture = ExtResource( 10 )
 
 [node name="Context" type="Control" parent="."]

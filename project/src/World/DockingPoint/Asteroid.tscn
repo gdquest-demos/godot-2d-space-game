@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/World/DockingPoint/DockingPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/World/DockingPoint/Asteroid.gd" type="Script" id=2]
-[ext_resource path="res://src/World/DockingPoint/asteroid_map_icon.tres" type="Resource" id=3]
+[ext_resource path="res://assets/world/asteroid-round.svg" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 117.956
@@ -12,13 +12,23 @@ radius = 48.0012
 
 [node name="Asteroid" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-map_icon = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="1"]
-scale = Vector2( 0.58, 0.6 )
+position = Vector2( 0, 0 )
+scale = Vector2( 0.449401, 0.449401 )
+texture = ExtResource( 3 )
+
+[node name="ActiveAura" parent="Sprite" index="0"]
+visible = false
+position = Vector2( 1.37606, -1.8366 )
 
 [node name="CollisionShape2D" parent="DockingArea" index="0"]
+visible = true
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="KinematicBody2D" index="0"]
+visible = true
 shape = SubResource( 2 )
+
+[node name="AnimationPlayer" parent="." index="6"]
+autoplay = "spin"

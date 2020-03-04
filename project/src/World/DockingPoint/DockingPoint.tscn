@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/World/DockingPoint/DockingPoint.gd" type="Script" id=1]
-[ext_resource path="res://assets/world/topdown-portal-orange.svg" type="Texture" id=2]
+[ext_resource path="res://assets/world/dock-aura.svg" type="Texture" id=2]
 [ext_resource path="res://src/World/DockingPoint/asteroid_map_icon.tres" type="Resource" id=3]
-
-
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 200.0
@@ -12,23 +10,55 @@ radius = 200.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 81.3653
 
+[sub_resource type="Animation" id=3]
+resource_name = "spin"
+length = 8.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends AnimationPlayer
+
+
+func _ready() -> void:
+	playback_speed = rand_range(0.5, 2.0)
+"
+
 [node name="DockingPoint" type="Node2D" groups=[
 "MappableObjects",
 "WorldObjects",
 ]]
 script = ExtResource( 1 )
 map_icon = ExtResource( 3 )
-docking_color_highlight = Color( 0, 1, 0, 0.137255 )
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -3.18198, -4.24265 )
+scale = Vector2( 0.703517, 0.703517 )
+
+[node name="ActiveAura" type="Sprite" parent="Sprite"]
+position = Vector2( 4.52295, 6.03063 )
+scale = Vector2( 1e-05, 1e-05 )
+z_index = -1
 texture = ExtResource( 2 )
 
 [node name="DockingArea" type="Area2D" parent="."]
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DockingArea"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
@@ -36,6 +66,7 @@ collision_layer = 2
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+visible = false
 shape = SubResource( 2 )
 
 [node name="RemoteRig" type="Node2D" parent="."]
@@ -44,3 +75,7 @@ shape = SubResource( 2 )
 update_scale = false
 
 [node name="MapTransform" type="RemoteTransform2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/spin = SubResource( 3 )
+script = SubResource( 4 )
