@@ -2,22 +2,21 @@
 extends Particles2D
 
 onready var timer := $Timer
-var dying := false
-var cache: Node
-var template: PackedScene
+var is_dying := false
 
 
 func _ready() -> void:
+	one_shot = true
 	emitting = true
 
 
 func _process(_delta: float) -> void:
-	if not emitting and not dying:
+	if not emitting and not is_dying:
 		die()
 
 
 func die() -> void:
-	dying = true
+	is_dying = true
 	timer.start(lifetime)
 	yield(timer, "timeout")
 	queue_free()
