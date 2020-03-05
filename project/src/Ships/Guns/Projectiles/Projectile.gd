@@ -8,6 +8,7 @@ export var speed := 1650.0
 export var damage := 10.0
 export var distortion_emitter: PackedScene
 
+var is_active := true setget set_is_active
 var direction := Vector2.ZERO
 var shooter: Node
 
@@ -16,6 +17,7 @@ onready var sprite := $Sprite
 onready var player := $AnimationPlayer
 onready var remote_transform := $DistortionTransform
 onready var visibility_notifier: VisibilityNotifier2D = $VisibilityNotifier2D
+onready var collider: CollisionShape2D = $CollisionShape2D
 
 
 func _ready() -> void:
@@ -32,16 +34,23 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var collision := move_and_collide(direction * speed * delta)
-	if collision and not tween.is_active():
+	if collision:
 		Events.emit_signal("damaged", collision.collider, damage, shooter)
-		queue_free()
+		die()
 
 
 func die() -> void:
+	self.is_active = false
 	tween.interpolate_method(self, "_fade", 1, 0, 0.15, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tween.start()
 	yield(tween, "tween_all_completed")
 	queue_free()
+
+
+func set_is_active(value: bool) -> void:
+	is_active = value
+	collider.disabled = not is_active
+	set_physics_process(is_active)
 
 
 func _fade(value: float) -> void:
