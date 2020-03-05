@@ -16,6 +16,17 @@ As they accumulate iron, enemy pirates spawn around asteroid pockets. This force
 
 The player continues until they are overwhelmed by the mounting difficulty and growing opposition and sees how far they can go.
 
+## Contributing ##
+
+Contributors are welcome!
+
+If you encounter a bug, please [open an issue](https://github.com/GDQuest/godot-game-harvester/issues/new).
+
+If you want to contribute to the project, for instance by fixing a bug or adding a feature, check out our:
+
+1. [Contributor's guidelines](https://www.gdquest.com/docs/guidelines/contributing-to/gdquest-projects/).
+1. [GDScript style guide](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/)
+
 ## Development ##
 
 The game uses the [Godot Steering AI Framework](https://github.com/GDQuest/godot-steering-ai-framework) while still being a fun time waster.
