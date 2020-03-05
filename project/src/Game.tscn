@@ -50,6 +50,7 @@ refresh_threshold_range = 350.0
 ]]
 current = true
 zoom = Vector2( 1.2, 1.2 )
+process_mode = 0
 smoothing_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource( 12 )
