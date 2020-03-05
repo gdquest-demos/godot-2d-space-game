@@ -42,6 +42,7 @@ script = ExtResource( 5 )
 script = ExtResource( 7 )
 
 [node name="Gun" parent="." index="3"]
+position = Vector2( 0, -64.8107 )
 script = ExtResource( 9 )
 Projectile = ExtResource( 14 )
 
