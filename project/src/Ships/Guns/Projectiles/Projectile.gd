@@ -22,7 +22,7 @@ onready var collider: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
 	direction = -GSAIUtils.angle_to_vector2(rotation)
-	visibility_notifier.connect("screen_exited", self, "die")
+	visibility_notifier.connect("screen_exited", self, "queue_free")
 
 	sprite.material = sprite.material.duplicate()
 	player.play("Flicker")
@@ -30,6 +30,8 @@ func _ready() -> void:
 	var emitter := distortion_emitter.instance()
 	ObjectRegistry.register_distortion_effect(emitter)
 	remote_transform.remote_path = emitter.get_path()
+	
+	appear()
 
 
 func _physics_process(delta: float) -> void:
@@ -39,9 +41,16 @@ func _physics_process(delta: float) -> void:
 		die()
 
 
+func appear() -> void:
+	self.is_active = true
+	tween.interpolate_method(self, "_fade", 0.0, 1.0, 0.05, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.interpolate_property(self, "scale", scale / 5.0, scale, 0.05, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.start()
+	
+
 func die() -> void:
 	self.is_active = false
-	tween.interpolate_method(self, "_fade", 1, 0, 0.15, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.interpolate_method(self, "_fade", 1.0, 0.0, 0.15, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tween.start()
 	yield(tween, "tween_all_completed")
 	queue_free()
