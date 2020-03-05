@@ -1,5 +1,6 @@
 # Base script that represents the physics body of a pirate ship. Manages the 
 # pirate's squad, squad leader, and movement speeds of the ship.
+class_name PirateShip
 extends KinematicBody2D
 
 signal died

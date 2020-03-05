@@ -3,7 +3,7 @@
 # to the screen's orientation. The Face steering behavior will constantly
 # turn to face the mouse, or the direction the right analog stick of
 # a controller is pointing towards.
-extends State
+extends PlayerState
 
 export var speed_multiplier := 0.75
 
@@ -73,7 +73,7 @@ func get_direction() -> Vector2:
 
 
 func _update_mouse_target() -> void:
-	var mouse_position: Vector2 = owner.get_global_mouse_position()
+	var mouse_position: Vector2 = ship.get_global_mouse_position()
 	_target_location.position.x = mouse_position.x
 	_target_location.position.y = mouse_position.y
 

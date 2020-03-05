@@ -1,7 +1,7 @@
 # State for the pirates' finite state machine. Initializes and controls the way
 # the pirate ships will chase and maintain a certain distance from the player,
 # or when to break off pursuit and return to patrol, and when to fire the gun.
-extends State
+extends PirateState
 
 export var distance_from_player_min := 200.0
 export var firing_alignment_tolerance_percentage := 0.15
@@ -18,17 +18,17 @@ var target_separate: GSAIRadiusProximity
 
 func _ready() -> void:
 	yield(owner, "ready")
-	pursue = GSAIPursue.new(owner.agent, target)
-	var avoid := GSAIAvoidCollisions.new(owner.agent, owner.world_proximity)
-	var squad_avoid := GSAIAvoidCollisions.new(owner.agent, owner.squad_proximity)
-	face = GSAIFace.new(owner.agent, target)
+	pursue = GSAIPursue.new(ship.agent, target)
+	var avoid := GSAIAvoidCollisions.new(ship.agent, ship.world_proximity)
+	var squad_avoid := GSAIAvoidCollisions.new(ship.agent, ship.squad_proximity)
+	face = GSAIFace.new(ship.agent, target)
 
-	target_separate = GSAIRadiusProximity.new(owner.agent, [], distance_from_player_min)
+	target_separate = GSAIRadiusProximity.new(ship.agent, [], distance_from_player_min)
 
-	var separate := GSAISeparation.new(owner.agent, target_separate)
+	var separate := GSAISeparation.new(ship.agent, target_separate)
 	separate.decay_coefficient = 20000
 
-	blend = GSAIBlend.new(owner.agent)
+	blend = GSAIBlend.new(ship.agent)
 	blend.add(avoid, 2)
 	blend.add(squad_avoid, 1)
 	blend.add(pursue, 1)
@@ -43,33 +43,33 @@ func enter(msg := {}) -> void:
 	if not target_separate.agents.has(target):
 		target_separate.agents.append(target)
 
-	if owner.is_squad_leader:
-		starting_position = owner.global_position
+	if ship.is_squad_leader:
+		starting_position = ship.global_position
 	else:
 		Events.connect("call_off_pursuit", self, "_on_Leader_call_off_pursuit")
 
 
 func exit() -> void:
-	if not owner.is_squad_leader:
+	if not ship.is_squad_leader:
 		Events.disconnect("call_off_pursuit", self, "_on_Leader_call_off_pursuit")
 
 
 func physics_process(delta: float) -> void:
 	blend.calculate_steering(accel)
-	owner.agent._apply_steering(accel, delta)
-	var facing_direction := GSAIUtils.angle_to_vector2(owner.agent.orientation)
-	var to_player := GSAIUtils.to_vector2(owner.agent.position - target.position).normalized()
+	ship.agent._apply_steering(accel, delta)
+	var facing_direction := GSAIUtils.angle_to_vector2(ship.agent.orientation)
+	var to_player := GSAIUtils.to_vector2(ship.agent.position - target.position).normalized()
 	var player_dot_facing := facing_direction.dot(to_player)
 
 	if player_dot_facing > 1 - firing_alignment_tolerance_percentage:
-		owner.gun.fire(owner.gun.global_position, owner.agent.orientation, owner.projectile_mask)
-	if owner.is_squad_leader:
-		var distance_to := starting_position.distance_squared_to(owner.global_position)
+		ship.gun.fire(ship.gun.global_position, ship.agent.orientation, ship.projectile_mask)
+	if ship.is_squad_leader:
+		var distance_to := starting_position.distance_squared_to(ship.global_position)
 		if distance_to > pursuit_distance_max * pursuit_distance_max:
-			Events.emit_signal("call_off_pursuit", owner)
-			_state_machine.transition_to("Patrol", {patrol_point = owner.patrol_point})
+			Events.emit_signal("call_off_pursuit", ship)
+			_state_machine.transition_to("Patrol", {patrol_point = ship.patrol_point})
 
 
 func _on_Leader_call_off_pursuit(leader: Node) -> void:
-	if leader == owner.squad_leader:
-		_state_machine.transition_to("Patrol", {patrol_point = owner.patrol_point})
+	if leader == ship.squad_leader:
+		_state_machine.transition_to("Patrol", {patrol_point = ship.patrol_point})

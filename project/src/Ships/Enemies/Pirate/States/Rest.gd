@@ -1,7 +1,7 @@
 # A state for the pirates' finite state machine. The squad leader sets a timer
 # and emits a signal when it's time to go on patrol, and the squaddies follow
 # based on the signal.
-extends State
+extends PirateState
 
 var initialized := false
 
@@ -17,18 +17,18 @@ func _ready() -> void:
 
 
 func enter(_msg := {}) -> void:
-	if owner.is_squad_leader:
+	if ship.is_squad_leader:
 		if not _timer:
 			_timer = Timer.new()
 			add_child(_timer)
 		_timer.connect("timeout", self, "_on_Timer_timeout")
-		_timer.start(owner.rng.randf_range(REST_TIME_MIN, REST_TIME_MAX))
+		_timer.start(ship.rng.randf_range(REST_TIME_MIN, REST_TIME_MAX))
 	else:
 		Events.connect("begin_patrol", self, "_on_SquadLeader_begin_patrol")
 
 
 func exit() -> void:
-	if owner.is_squad_leader:
+	if ship.is_squad_leader:
 		if _timer:
 			_timer.disconnect("timeout", self, "_on_Timer_timeout")
 	else:
@@ -36,17 +36,17 @@ func exit() -> void:
 
 
 func physics_process(delta: float) -> void:
-	owner.agent._apply_steering(_accel, delta)
+	ship.agent._apply_steering(_accel, delta)
 
 
 func _on_Timer_timeout() -> void:
-	Events.emit_signal("begin_patrol", owner)
-	_state_machine.transition_to("Patrol", {patrol_point = owner.patrol_point})
+	Events.emit_signal("begin_patrol", ship)
+	_state_machine.transition_to("Patrol", {patrol_point = ship.patrol_point})
 
 
 func _on_SquadLeader_begin_patrol(leader: Node) -> void:
-	if owner.squad_leader == leader:
-		_state_machine.transition_to("Patrol", {patrol_point = owner.patrol_point})
+	if ship.squad_leader == leader:
+		_state_machine.transition_to("Patrol", {patrol_point = ship.patrol_point})
 
 
 func _on_Leader_changed(current_patrol_point: Vector2) -> void:

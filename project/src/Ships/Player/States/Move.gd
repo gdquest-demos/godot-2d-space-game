@@ -2,7 +2,7 @@
 # controlling the player using linear and angular velocities, and how to
 # transition through some of its child states, like docking or changing
 # movement style between Travel and Precision.
-extends State
+extends PlayerState
 
 export var drag_linear_coeff := 0.05
 export var reverse_multiplier := 0.25
@@ -25,16 +25,16 @@ onready var agent := GSAIKinematicBody2DAgent.new(owner)
 func _ready() -> void:
 	yield(owner, "ready")
 
-	acceleration_max = owner.stats.get_acceleration_max()
-	linear_speed_max = owner.stats.get_linear_speed_max()
-	angular_speed_max = owner.stats.get_angular_speed_max()
-	angular_acceleration_max = owner.stats.get_angular_acceleration_max()
+	acceleration_max = ship.stats.get_acceleration_max()
+	linear_speed_max = ship.stats.get_linear_speed_max()
+	angular_speed_max = ship.stats.get_angular_speed_max()
+	angular_acceleration_max = ship.stats.get_angular_acceleration_max()
 
 	agent.linear_acceleration_max = acceleration_max * reverse_multiplier
 	agent.linear_speed_max = linear_speed_max
 	agent.angular_acceleration_max = deg2rad(angular_acceleration_max)
 	agent.angular_speed_max = deg2rad(angular_speed_max)
-	agent.bounding_radius = (MathUtils.get_triangle_circumcircle_radius(owner.shape.polygon))
+	agent.bounding_radius = (MathUtils.get_triangle_circumcircle_radius(ship.shape.polygon))
 
 
 func physics_process(delta: float) -> void:
@@ -44,17 +44,17 @@ func physics_process(delta: float) -> void:
 	angular_velocity = clamp(angular_velocity, -agent.angular_speed_max, agent.angular_speed_max)
 	angular_velocity = lerp(angular_velocity, 0, drag_angular_coeff)
 
-	linear_velocity = owner.move_and_slide(linear_velocity)
-	owner.rotation += angular_velocity * delta
+	linear_velocity = ship.move_and_slide(linear_velocity)
+	ship.rotation += angular_velocity * delta
 
 
 func unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("toggle_dock") and owner.dockables.size() > 0:
+	if event.is_action_pressed("toggle_dock") and ship.dockables.size() > 0:
 		var dockable: Node2D
-		while not dockable and owner.dockables.size() > 0:
-			dockable = owner.dockables.back().get_ref()
+		while not dockable and ship.dockables.size() > 0:
+			dockable = ship.dockables.back().get_ref()
 			if not dockable:
-				owner.dockables.pop_back()
+				ship.dockables.pop_back()
 		if dockable:
 			_state_machine.transition_to(
 				"Move/Dock",

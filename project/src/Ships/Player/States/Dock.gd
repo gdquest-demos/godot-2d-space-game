@@ -1,7 +1,7 @@
 # State for the player's finite state machine. Controls approaching and
 # attaching to dockable objects, and using steering behaviors to orient away
 # from and back up to a dockable object an detecting when it touches it.
-extends State
+extends PlayerState
 
 enum DockingProcess { CLEARING, DOCKING, DOCKED }
 
@@ -68,7 +68,7 @@ func physics_process(delta: float) -> void:
 	var dock_position := _dock_position.position
 
 	var to_dock := GSAIUtils.to_vector2(current_position - dock_position).normalized()
-	var facing_direction := GSAIUtils.angle_to_vector2(owner.rotation).normalized()
+	var facing_direction := GSAIUtils.angle_to_vector2(ship.rotation).normalized()
 
 	var dot_face = to_dock.dot(facing_direction)
 
@@ -86,16 +86,16 @@ func physics_process(delta: float) -> void:
 	_parent.physics_process(delta)
 
 	if _docking_phase == DockingProcess.DOCKING:
-		var slide_count: int = owner.get_slide_count()
+		var slide_count: int = ship.get_slide_count()
 
 		for s in range(slide_count):
-			var collision: KinematicCollision2D = owner.get_slide_collision(s)
+			var collision: KinematicCollision2D = ship.get_slide_collision(s)
 
 			if collision.collider.collision_layer == 2:
 				_docking_phase = DockingProcess.DOCKED
 				_current_docking_point = collision.collider.owner
 				Events.emit_signal("docked", _current_docking_point)
-				_current_docking_point.set_docking_remote(owner, _agent.bounding_radius * 0.75)
+				_current_docking_point.set_docking_remote(ship, _agent.bounding_radius * 0.75)
 				Events.connect("force_undock", self, "_on_Ship_force_undock")
 				return
 
@@ -106,7 +106,7 @@ func unhandled_input(event: InputEvent) -> void:
 			Events.emit_signal("undocked")
 			Events.disconnect("force_undock", self, "_on_Ship_force_undock")
 
-			var direction: Vector2 = (owner.global_position - Vector2(_dock_position.position.x, _dock_position.position.y)).normalized()
+			var direction: Vector2 = (ship.global_position - Vector2(_dock_position.position.x, _dock_position.position.y)).normalized()
 
 			_current_docking_point.undock()
 			_parent.linear_velocity += direction * docking_release_speed

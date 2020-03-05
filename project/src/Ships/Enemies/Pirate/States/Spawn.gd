@@ -2,7 +2,7 @@
 # arrive steering behavior to go from the spawning point to the point in space
 # that the squad will patrol. The squaddies, meanwhile, follow the leader using
 # cohesion and separation.
-extends State
+extends PirateState
 
 const ARRIVAL_TOLERANCE := 350 * 350
 
@@ -15,10 +15,10 @@ onready var acceleration := GSAITargetAcceleration.new()
 
 func _ready() -> void:
 	yield(owner, "ready")
-	owner.connect("squad_leader_changed", self, "_on_Leader_changed")
+	ship.connect("squad_leader_changed", self, "_on_Leader_changed")
 	set_behaviors()
 
-	if not owner.is_squad_leader:
+	if not ship.is_squad_leader:
 		Events.connect("reached_cluster", self, "_on_Leader_reached_cluster")
 	else:
 		var timer := Timer.new()
@@ -32,50 +32,50 @@ func exit() -> void:
 
 
 func physics_process(delta: float) -> void:
-	if owner.is_squad_leader:
+	if ship.is_squad_leader:
 		var distance_to := patrol_target.position.distance_squared_to(
-			GSAIUtils.to_vector3(owner.global_position)
+			GSAIUtils.to_vector3(ship.global_position)
 		)
 		if distance_to <= ARRIVAL_TOLERANCE:
-			Events.emit_signal("reached_cluster", owner)
+			Events.emit_signal("reached_cluster", ship)
 			_state_machine.transition_to("Rest")
 
 	priority.calculate_steering(acceleration)
-	owner.agent._apply_steering(acceleration, delta)
+	ship.agent._apply_steering(acceleration, delta)
 
 
 func set_behaviors() -> void:
-	var avoid_collisions := GSAIAvoidCollisions.new(owner.agent, owner.world_proximity)
+	var avoid_collisions := GSAIAvoidCollisions.new(ship.agent, ship.world_proximity)
 	priority.add(avoid_collisions)
 
-	var faction_avoid := GSAIAvoidCollisions.new(owner.agent, owner.faction_proximity)
+	var faction_avoid := GSAIAvoidCollisions.new(ship.agent, ship.faction_proximity)
 	priority.add(faction_avoid)
 
-	var look := GSAILookWhereYouGo.new(owner.agent)
-	look.alignment_tolerance = owner.ALIGNMENT_TOLERANCE
-	look.deceleration_radius = owner.DECELERATION_RADIUS
+	var look := GSAILookWhereYouGo.new(ship.agent)
+	look.alignment_tolerance = ship.ALIGNMENT_TOLERANCE
+	look.deceleration_radius = ship.DECELERATION_RADIUS
 
-	if owner.is_squad_leader:
-		var arrive := GSAIArrive.new(owner.agent, patrol_target)
+	if ship.is_squad_leader:
+		var arrive := GSAIArrive.new(ship.agent, patrol_target)
 		arrive.deceleration_radius = 200
 		arrive.arrival_tolerance = 50
-		patrol_target.position = GSAIUtils.to_vector3(owner.patrol_point)
+		patrol_target.position = GSAIUtils.to_vector3(ship.patrol_point)
 
-		var arrive_blend := GSAIBlend.new(owner.agent)
+		var arrive_blend := GSAIBlend.new(ship.agent)
 
 		arrive_blend.add(arrive, 1)
 		arrive_blend.add(look, 1)
 
 		priority.add(arrive_blend)
 	else:
-		var separation = GSAISeparation.new(owner.agent, owner.squad_proximity)
+		var separation = GSAISeparation.new(ship.agent, ship.squad_proximity)
 		separation.decay_coefficient = 2000
 
-		var cohesion = GSAICohesion.new(owner.agent, owner.squad_proximity)
+		var cohesion = GSAICohesion.new(ship.agent, ship.squad_proximity)
 
-		var pursue = GSAIPursue.new(owner.agent, owner.squad_leader.agent)
+		var pursue = GSAIPursue.new(ship.agent, ship.squad_leader.agent)
 
-		var group_blend = GSAIBlend.new(owner.agent)
+		var group_blend = GSAIBlend.new(ship.agent)
 		group_blend.add(pursue, 0.65)
 		group_blend.add(separation, 4.5)
 		group_blend.add(cohesion, 0.3)
@@ -85,14 +85,14 @@ func set_behaviors() -> void:
 
 
 func _on_Leader_reached_cluster(leader: Node) -> void:
-	if not leader == owner.squad_leader:
+	if not leader == ship.squad_leader:
 		return
 
 	_state_machine.transition_to("Rest")
 
 
 func _on_Timer_timeout() -> void:
-	Events.emit_signal("reached_cluster", owner)
+	Events.emit_signal("reached_cluster", ship)
 	_state_machine.transition_to("Rest")
 
 
