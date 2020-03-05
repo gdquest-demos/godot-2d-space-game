@@ -120,6 +120,10 @@ func _die() -> void:
 	emit_signal("died")
 	var new_leader: KinematicBody2D
 	for squaddie in squaddies:
+		# FIXME: I had an error because a Projectile was in the squaddies array
+		# We should ensure this cannot happen, and squaddies are all from the faction
+		if not squaddie.is_in_group("Enemies"):
+			continue
 		if squaddie._health > 0:
 			new_leader = squaddie
 			break
