@@ -32,6 +32,12 @@ func _ready() -> void:
 	camera.setup_distortion_camera()
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_fullscreen"):
+		OS.window_fullscreen = not OS.window_fullscreen
+		get_tree().set_input_as_handled()
+
+
 func _on_Spawner_pirate_spawned(pirate: Node) -> void:
 	pirate.register_on_map(map)
 	pirate.setup_world_objects(_world_objects)
