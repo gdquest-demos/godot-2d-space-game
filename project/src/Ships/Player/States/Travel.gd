@@ -35,7 +35,4 @@ func unhandled_input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
 	if event.is_action("thrust_forwards") and event.is_pressed():
-		var shockwave = owner.shockwave.instance()
-		shockwave.global_position = owner.global_position
-		ObjectRegistry.register_distortion_effect(shockwave)
-		shockwave.emitting = true
+		owner.vfx.create_shockwave()

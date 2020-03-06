@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://assets/world/topdown-player.svg" type="Texture" id=1]
 [ext_resource path="res://src/Ships/Guns/Gun.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/VFX/MoveTrail.tscn" type="PackedScene" id=3]
 
 [node name="Ship" type="KinematicBody2D" groups=[
 "MappableObjects",
@@ -19,7 +18,3 @@ polygon = PoolVector2Array( 0, -20, -20, 15, 20, 15 )
 position = Vector2( 0, -20 )
 
 [node name="MapTransform" type="RemoteTransform2D" parent="."]
-
-[node name="MoveTrail" parent="." instance=ExtResource( 3 )]
-lifetime = 0.3
-initial_velocity = 200.0

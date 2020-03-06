@@ -4,7 +4,6 @@
 # movement style between Travel and Precision.
 extends PlayerState
 
-const TRAIL_VELOCITY_THRESHOLD := 200
 
 export var drag_linear_coeff := 0.05
 export var reverse_multiplier := 0.25

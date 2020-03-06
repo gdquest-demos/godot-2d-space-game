@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/Ships/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Libraries/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://src/Ships/Player/UIBarRig.gd" type="Script" id=13]
 [ext_resource path="res://src/Ships/Guns/Projectiles/PlasmaShotPlayer.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/VFX/ShockwaveEmitter.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/VFX/RippleEmitter.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/VFX/MoveTrail.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/Ships/Player/VFX.gd" type="Script" id=18]
 
 [node name="PlayerShip" groups=[
 "Player",
@@ -24,7 +27,6 @@ script = ExtResource( 6 )
 projectile_mask = 6
 PopEffect = ExtResource( 11 )
 map_icon = ExtResource( 8 )
-shockwave = ExtResource( 15 )
 
 [node name="StateMachine" type="Node" parent="." index="2"]
 script = ExtResource( 2 )
@@ -65,3 +67,16 @@ margin_bottom = 42.0
 
 [node name="Cargo" type="Node" parent="." index="8"]
 script = ExtResource( 10 )
+
+[node name="VFX" type="Node2D" parent="." index="10"]
+script = ExtResource( 18 )
+
+[node name="MoveTrail" parent="VFX" index="0" instance=ExtResource( 17 )]
+z_index = -1
+lifetime = 0.3
+initial_velocity = 200.0
+
+[node name="Shockwave" parent="VFX" index="1" instance=ExtResource( 15 )]
+
+[node name="Ripple" parent="VFX" index="2" instance=ExtResource( 16 )]
+position = Vector2( 0, 20 )
