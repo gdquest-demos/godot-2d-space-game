@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/World/DockingPoint/DockingPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/World/DockingPoint/Asteroid.gd" type="Script" id=2]
@@ -9,6 +9,32 @@ radius = 117.956
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 48.0012
+
+[sub_resource type="Animation" id=3]
+resource_name = "spin"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends AnimationPlayer
+
+
+func _ready() -> void:
+	playback_speed = rand_range(0.5, 2.0)
+
+"
 
 [node name="Asteroid" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -30,5 +56,7 @@ shape = SubResource( 1 )
 visible = true
 shape = SubResource( 2 )
 
-[node name="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 autoplay = "spin"
+anims/spin = SubResource( 3 )
+script = SubResource( 4 )

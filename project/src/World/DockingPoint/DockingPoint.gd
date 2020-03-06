@@ -25,7 +25,6 @@ onready var remote_transform: RemoteTransform2D = $RemoteRig/RemoteTransform2D
 onready var ref_to := weakref(self)
 onready var tween := $AuraTween
 onready var dock_aura := $Sprite/ActiveAura
-onready var animator := $AnimationPlayer
 
 
 func _ready() -> void:
@@ -67,7 +66,6 @@ func _set_docking_distance(value: float) -> void:
 func _on_DockingArea_body_entered(body: Node) -> void:
 	is_player_inside = true
 	body.dockables.append(ref_to)
-	animator.stop(false)
 	tween.tween_aura_out(dock_aura)
 
 
@@ -76,6 +74,4 @@ func _on_DockingArea_body_exited(body: Node) -> void:
 	var index: int = body.dockables.find(ref_to)
 	if index > -1:
 		body.dockables.remove(index)
-	if animator.current_animation:
-		animator.play()
 	tween.tween_aura_in(dock_aura)
