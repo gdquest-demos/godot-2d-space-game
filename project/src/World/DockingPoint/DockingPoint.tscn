@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/World/DockingPoint/DockingPoint.gd" type="Script" id=1]
 [ext_resource path="res://assets/world/dock-aura.svg" type="Texture" id=2]
 [ext_resource path="res://src/World/DockingPoint/asteroid_map_icon.tres" type="Resource" id=3]
+[ext_resource path="res://src/World/DockingPoint/AuraTween.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 200.0
@@ -42,7 +43,8 @@ func _ready() -> void:
 script = ExtResource( 1 )
 map_icon = ExtResource( 3 )
 
-[node name="Tween" type="Tween" parent="."]
+[node name="AuraTween" type="Tween" parent="."]
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -3.18198, -4.24265 )
@@ -51,7 +53,8 @@ scale = Vector2( 0.703517, 0.703517 )
 [node name="ActiveAura" type="Sprite" parent="Sprite"]
 position = Vector2( 4.52295, 6.03063 )
 scale = Vector2( 1e-05, 1e-05 )
-z_index = -1
+z_index = -5
+z_as_relative = false
 texture = ExtResource( 2 )
 
 [node name="DockingArea" type="Area2D" parent="."]

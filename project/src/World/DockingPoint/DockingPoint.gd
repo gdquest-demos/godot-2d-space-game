@@ -23,7 +23,7 @@ onready var agent_location := GSAISteeringAgent.new()
 onready var remote_rig: Node2D = $RemoteRig
 onready var remote_transform: RemoteTransform2D = $RemoteRig/RemoteTransform2D
 onready var ref_to := weakref(self)
-onready var tween := $Tween
+onready var tween := $AuraTween
 onready var dock_aura := $Sprite/ActiveAura
 onready var animator := $AnimationPlayer
 
@@ -68,16 +68,7 @@ func _on_DockingArea_body_entered(body: Node) -> void:
 	is_player_inside = true
 	body.dockables.append(ref_to)
 	animator.stop(false)
-	tween.interpolate_property(
-		dock_aura,
-		"scale", 
-		Vector2(0.01, 0.01),
-		Vector2(2.15, 2.15),
-		1.0,
-		Tween.TRANS_ELASTIC,
-		Tween.EASE_OUT)
-	dock_aura.visible = true
-	tween.start()
+	tween.tween_aura_out(dock_aura)
 
 
 func _on_DockingArea_body_exited(body: Node) -> void:
@@ -85,16 +76,6 @@ func _on_DockingArea_body_exited(body: Node) -> void:
 	var index: int = body.dockables.find(ref_to)
 	if index > -1:
 		body.dockables.remove(index)
-	animator.play()
-	tween.interpolate_property(
-		dock_aura,
-		"scale", 
-		Vector2(2.15, 2.15),
-		Vector2(0.01, 0.01),
-		0.5,
-		Tween.TRANS_BACK,
-		Tween.EASE_IN)
-	tween.start()
-	yield(tween, "tween_all_completed")
-	dock_aura.visible = false
-
+	if animator.current_animation:
+		animator.play()
+	tween.tween_aura_in(dock_aura)
