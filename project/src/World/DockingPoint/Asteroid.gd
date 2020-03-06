@@ -6,7 +6,7 @@ extends DockingPoint
 export var min_iron_amount := 5.0
 export var max_iron_amount := 100.0
 
-onready var animator = $AnimationPlayer
+onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 var iron_amount: float
 var world: Node2D
@@ -32,9 +32,9 @@ func mine_amount(value: float) -> float:
 
 func _on_DockingArea_body_entered(body: Node) -> void:
 	._on_DockingArea_body_entered(body)
-	animator.stop(false)
+	anim_player.stop(false)
 
 
 func _on_DockingArea_body_exited(body: Node) -> void:
 	._on_DockingArea_body_exited(body)
-	animator.play()
+	anim_player.play()

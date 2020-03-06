@@ -248,6 +248,11 @@ _global_script_classes=[ {
 "class": "StatsShip",
 "language": "GDScript",
 "path": "res://src/Ships/Player/StatsShip.gd"
+}, {
+"base": "Reference",
+"class": "TweenAura",
+"language": "GDScript",
+"path": "res://src/World/DockingPoint/TweenAura.gd"
 } ]
 _global_script_class_icons={
 "AnimatedBar": "",
@@ -297,7 +302,8 @@ _global_script_class_icons={
 "Stats": "",
 "StatsCargo": "",
 "StatsGun": "",
-"StatsShip": ""
+"StatsShip": "",
+"TweenAura": ""
 }
 
 [application]

@@ -35,4 +35,4 @@ func unhandled_input(event: InputEvent) -> void:
 	if event.is_echo():
 		return
 	if event.is_action("thrust_forwards") and event.is_pressed():
-		owner.vfx.create_shockwave()
+		ship.vfx.create_shockwave()

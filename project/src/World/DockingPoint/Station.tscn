@@ -5,14 +5,10 @@
 [ext_resource path="res://src/World/DockingPoint/DockingPoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/World/DockingPoint/Station.gd" type="Script" id=4]
 
-
-
 [node name="Station" instance=ExtResource( 3 )]
 script = ExtResource( 4 )
 map_icon = ExtResource( 1 )
-docking_distance = 200.0
-docking_color_highlight = Color( 0, 1, 0, 0.2 )
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="2"]
 scale = Vector2( 0.977, 1 )
 texture = ExtResource( 2 )

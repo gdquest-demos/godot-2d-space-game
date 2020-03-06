@@ -3,7 +3,7 @@
 [ext_resource path="res://src/World/DockingPoint/DockingPoint.gd" type="Script" id=1]
 [ext_resource path="res://assets/world/dock-aura.svg" type="Texture" id=2]
 [ext_resource path="res://src/World/DockingPoint/asteroid_map_icon.tres" type="Resource" id=3]
-[ext_resource path="res://src/World/DockingPoint/AuraTween.gd" type="Script" id=4]
+[ext_resource path="res://src/World/DockingPoint/TweenAura.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 200.0
@@ -18,7 +18,7 @@ radius = 81.3653
 script = ExtResource( 1 )
 map_icon = ExtResource( 3 )
 
-[node name="AuraTween" type="Tween" parent="."]
+[node name="TweenAura" type="Tween" parent="."]
 script = ExtResource( 4 )
 
 [node name="DockingAura" type="Sprite" parent="."]

@@ -47,7 +47,7 @@ func physics_process(delta: float) -> void:
 
 	linear_velocity = ship.move_and_slide(linear_velocity)
 	ship.rotation += angular_velocity * delta
-	owner.vfx.make_trail(linear_velocity.length())
+	ship.vfx.make_trail(linear_velocity.length())
 
 
 func unhandled_input(event: InputEvent) -> void:
