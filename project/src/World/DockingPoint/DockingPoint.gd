@@ -23,7 +23,7 @@ onready var agent_location := GSAISteeringAgent.new()
 onready var remote_rig: Node2D = $RemoteRig
 onready var remote_transform: RemoteTransform2D = $RemoteRig/RemoteTransform2D
 onready var ref_to := weakref(self)
-onready var tween := $AuraTween
+onready var tween := $TweenAura
 onready var dock_aura := $DockingAura
 
 
