@@ -15,7 +15,6 @@ var is_player_inside := false
 var radius := 0.0
 var docking_point_edge := Vector2.ZERO
 
-
 onready var docking_shape: CollisionShape2D = $DockingArea/CollisionShape2D
 onready var docking_area: Area2D = $DockingArea
 onready var collision_shape: CollisionShape2D = $KinematicBody2D/CollisionShape2D
@@ -37,9 +36,10 @@ func _ready() -> void:
 
 	docking_area.connect("body_entered", self, "_on_DockingArea_body_entered")
 	docking_area.connect("body_exited", self, "_on_DockingArea_body_exited")
-	
-	var docking_diameter := docking_distance*2
-	tween.scale_final = Vector2.ONE * (docking_diameter/dock_aura.texture.get_width())
+
+	var docking_diameter := docking_distance * 2
+	tween.scale_final = Vector2.ONE * (docking_diameter / dock_aura.texture.get_width())
+
 
 func set_docking_remote(node: Node2D, docker_distance: float) -> void:
 	remote_rig.global_rotation = GSAIUtils.vector2_to_angle(node.global_position - global_position)

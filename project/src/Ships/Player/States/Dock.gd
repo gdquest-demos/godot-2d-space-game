@@ -81,7 +81,9 @@ func physics_process(delta: float) -> void:
 	_reverse_face_position.position = (current_position + GSAIUtils.to_vector3(to_dock))
 
 	_priority.calculate_steering(_acceleration)
-	_parent.linear_velocity += GSAIUtils.to_vector2(_acceleration.linear * docking_speed_multiplier * delta)
+	_parent.linear_velocity += GSAIUtils.to_vector2(
+		_acceleration.linear * docking_speed_multiplier * delta
+	)
 	_parent.angular_velocity += _acceleration.angular * delta
 	_parent.physics_process(delta)
 

@@ -30,7 +30,7 @@ func _ready() -> void:
 	var emitter := distortion_emitter.instance()
 	ObjectRegistry.register_distortion_effect(emitter)
 	remote_transform.remote_path = emitter.get_path()
-	
+
 	appear()
 
 
@@ -44,9 +44,11 @@ func _physics_process(delta: float) -> void:
 func appear() -> void:
 	self.is_active = true
 	tween.interpolate_method(self, "_fade", 0.0, 1.0, 0.05, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	tween.interpolate_property(self, "scale", scale / 5.0, scale, 0.05, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.interpolate_property(
+		self, "scale", scale / 5.0, scale, 0.05, Tween.TRANS_LINEAR, Tween.EASE_OUT
+	)
 	tween.start()
-	
+
 
 func die() -> void:
 	self.is_active = false

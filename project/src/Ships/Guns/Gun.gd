@@ -9,6 +9,7 @@ export var stats: Resource = preload("res://src/Ships/Player/player_gun_stats.tr
 
 onready var cooldown: Timer = $Cooldown
 
+
 func _ready() -> void:
 	stats.initialize()
 	cooldown.wait_time = stats.get_cooldown()
@@ -45,4 +46,4 @@ func _on_Stats_stat_changed(stat_name: String, _old_value: float, new_value: flo
 
 static func random_spread(value: float) -> float:
 	var half_spread := value / 2.0
-	return rand_range(- half_spread, half_spread)
+	return rand_range(-half_spread, half_spread)

@@ -1,7 +1,6 @@
 extends Node2D
 # Visual Effects container. Provides a high level interface to create Ships visual effects
 
-
 const TRAIL_VELOCITY_THRESHOLD := 200
 
 onready var _ship_trail := $MoveTrail

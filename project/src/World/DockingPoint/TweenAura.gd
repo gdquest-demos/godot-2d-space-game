@@ -15,13 +15,7 @@ func make_appear(aura: Sprite) -> void:
 	if aura.visible:
 		return
 	interpolate_property(
-		aura,
-		"scale",
-		aura.scale,
-		scale_final,
-		duration_appear,
-		Tween.TRANS_ELASTIC,
-		Tween.EASE_OUT
+		aura, "scale", aura.scale, scale_final, duration_appear, Tween.TRANS_ELASTIC, Tween.EASE_OUT
 	)
 	aura.visible = true
 	start()
