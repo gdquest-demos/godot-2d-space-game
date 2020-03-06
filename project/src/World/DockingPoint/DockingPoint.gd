@@ -24,7 +24,7 @@ onready var remote_rig: Node2D = $RemoteRig
 onready var remote_transform: RemoteTransform2D = $RemoteRig/RemoteTransform2D
 onready var ref_to := weakref(self)
 onready var tween := $AuraTween
-onready var dock_aura := $Sprite/ActiveAura
+onready var dock_aura := $DockingAura
 
 
 func _ready() -> void:
@@ -37,7 +37,9 @@ func _ready() -> void:
 
 	docking_area.connect("body_entered", self, "_on_DockingArea_body_entered")
 	docking_area.connect("body_exited", self, "_on_DockingArea_body_exited")
-
+	
+	var docking_diameter := docking_distance*2
+	tween.final_scale = Vector2.ONE * (docking_diameter/dock_aura.texture.get_width())
 
 func set_docking_remote(node: Node2D, docker_distance: float) -> void:
 	remote_rig.global_rotation = GSAIUtils.vector2_to_angle(node.global_position - global_position)

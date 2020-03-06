@@ -1,7 +1,7 @@
 extends Tween
 
 export var hidden_scale := Vector2.ZERO
-export var final_scale := Vector2(2, 2)
+export var final_scale := Vector2(1, 1)
 export var tween_out_duration := 1.0
 export var tween_in_duration := 0.5
 

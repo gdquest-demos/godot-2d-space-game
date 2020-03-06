@@ -39,14 +39,10 @@ func _ready() -> void:
 [node name="Asteroid" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="2"]
 position = Vector2( 0, 0 )
 scale = Vector2( 0.449401, 0.449401 )
 texture = ExtResource( 3 )
-
-[node name="ActiveAura" parent="Sprite" index="0"]
-visible = false
-position = Vector2( 1.37606, -1.8366 )
 
 [node name="CollisionShape2D" parent="DockingArea" index="0"]
 visible = true
