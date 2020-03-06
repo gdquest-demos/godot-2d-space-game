@@ -82,5 +82,5 @@ func _on_Upgrade_Choice_made(choice: int) -> void:
 			gun.stats.add_modifier("damage", 3.0)
 			# That's a limitation of the stats system, modifiers only add or remove values, and they
 			# don't have limits
-			if gun.stats.get_stat("_cooldown") > 0.2:
+			if gun.stats.get_stat("cooldown") > 0.2:
 				gun.stats.add_modifier("cooldown", -0.05)
