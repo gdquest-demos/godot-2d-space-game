@@ -3,10 +3,10 @@
 class_name TweenAura
 extends Tween
 
-export var hidden_scale := Vector2.ZERO
-export var final_scale := Vector2(1, 1)
-export var tween_out_duration := 1.0
-export var tween_in_duration := 0.5
+export var scale_hidden := Vector2.ZERO
+export var scale_final := Vector2(1, 1)
+export var duration_appear := 1.0
+export var duration_disappear := 0.5
 
 
 func make_appear(aura: Sprite) -> void:
@@ -18,8 +18,8 @@ func make_appear(aura: Sprite) -> void:
 		aura,
 		"scale",
 		aura.scale,
-		final_scale,
-		tween_out_duration,
+		scale_final,
+		duration_appear,
 		Tween.TRANS_ELASTIC,
 		Tween.EASE_OUT
 	)
@@ -33,7 +33,7 @@ func make_disappear(aura: Sprite) -> void:
 	if not aura.visible:
 		return
 	interpolate_property(
-		aura, "scale", aura.scale, hidden_scale, tween_in_duration, Tween.TRANS_BACK, Tween.EASE_IN
+		aura, "scale", aura.scale, scale_hidden, duration_disappear, Tween.TRANS_BACK, Tween.EASE_IN
 	)
 	start()
 	yield(self, "tween_completed")
