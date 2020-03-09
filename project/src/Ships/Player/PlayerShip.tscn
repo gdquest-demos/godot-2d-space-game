@@ -10,7 +10,7 @@
 [ext_resource path="res://src/Ships/Player/player_map_icon.tres" type="Resource" id=8]
 [ext_resource path="res://src/Ships/Player/PlayerGun.gd" type="Script" id=9]
 [ext_resource path="res://src/Ships/Player/Cargo.gd" type="Script" id=10]
-[ext_resource path="res://src/VFX/PopEffect.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/VFX/Explosion.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/UI/PlayerUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Ships/Player/UIBarRig.gd" type="Script" id=13]
 [ext_resource path="res://src/Ships/Guns/Projectiles/PlasmaShotPlayer.tscn" type="PackedScene" id=14]
@@ -70,7 +70,7 @@ color_ramp = SubResource( 4 )
 collision_mask = 14
 script = ExtResource( 6 )
 projectile_mask = 6
-PopEffect = ExtResource( 11 )
+ExplosionEffect = ExtResource( 11 )
 map_icon = ExtResource( 8 )
 
 [node name="StateMachine" type="Node" parent="." index="2"]

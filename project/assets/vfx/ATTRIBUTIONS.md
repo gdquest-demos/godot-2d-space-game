@@ -1,0 +1,1 @@
+- `explosion_01_strip13` by "Bleed - http://remusprites.carbonmade.com/"

@@ -7,7 +7,7 @@ signal died
 
 export var stats: Resource = preload("res://src/Ships/Player/player_stats.tres")
 export (int, LAYERS_2D_PHYSICS) var projectile_mask := 0
-export var PopEffect: PackedScene
+export var ExplosionEffect: PackedScene
 # Represents the ship on the minimap. Use a MapIcon resource.
 export var map_icon: Resource
 
@@ -42,7 +42,7 @@ func _toggle_map(map_up: bool, tween_time: float) -> void:
 
 
 func die() -> void:
-	var effect := PopEffect.instance()
+	var effect := ExplosionEffect.instance()
 	effect.global_position = global_position
 	ObjectRegistry.register_effect(effect)
 

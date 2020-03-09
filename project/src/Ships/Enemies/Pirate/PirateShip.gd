@@ -23,7 +23,7 @@ export var angular_drag_factor := 0.1
 export var distance_from_target_min := 200.0
 export var distance_from_obstacles_min := 200.0
 export (int, LAYERS_2D_PHYSICS) var projectile_mask := 0
-export var PopEffect: PackedScene
+export var ExplosionEffect: PackedScene
 
 var current_target: Node
 var target_agent: GSAISteeringAgent
@@ -95,9 +95,11 @@ func setup_squad(
 	is_squad_leader = _is_squad_leader
 	squad_leader = _squad_leader
 	patrol_point = _patrol_point
+	var squaddies_ref := []
 	for s in _squaddies:
 		squad_proximity.agents.append(s.agent)
-	squaddies = _squaddies
+		squaddies_ref.append(weakref(s))
+	squaddies = squaddies_ref
 	if not is_squad_leader:
 		Events.connect("squad_leader_changed", self, "_on_Leader_changed")
 
@@ -114,12 +116,15 @@ func register_on_map(map: Viewport) -> void:
 
 
 func _die() -> void:
-	var effect: Node2D = PopEffect.instance()
+	var effect: Node2D = ExplosionEffect.instance()
 	effect.global_position = global_position
 	ObjectRegistry.register_effect(effect)
 	emit_signal("died")
 	var new_leader: KinematicBody2D
-	for squaddie in squaddies:
+	for squaddie_ref in squaddies:
+		var squaddie: KinematicBody2D = squaddie_ref.get_ref()
+		if not squaddie:
+			continue
 		# FIXME: I had an error because a Projectile was in the squaddies array
 		# We should ensure this cannot happen, and squaddies are all from the faction
 		if not squaddie.is_in_group("Enemies"):

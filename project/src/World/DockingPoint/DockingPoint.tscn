@@ -29,7 +29,6 @@ z_as_relative = false
 texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -3.18198, -4.24265 )
 scale = Vector2( 0.703517, 0.703517 )
 
 [node name="DockingArea" type="Area2D" parent="."]

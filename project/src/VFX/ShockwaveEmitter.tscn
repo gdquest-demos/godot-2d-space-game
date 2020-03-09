@@ -31,6 +31,6 @@ local_coords = false
 process_material = SubResource( 5 )
 texture = ExtResource( 1 )
 
-[node name="LifeSpam" type="Timer" parent="."]
+[node name="LifeSpan" type="Timer" parent="."]
 one_shot = true
-[connection signal="timeout" from="LifeSpam" to="." method="queue_free"]
+[connection signal="timeout" from="LifeSpan" to="." method="queue_free"]

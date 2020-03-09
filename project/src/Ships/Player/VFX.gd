@@ -19,7 +19,7 @@ func create_shockwave() -> void:
 	ObjectRegistry.register_distortion_effect(shockwave)
 	shockwave.global_position = _shockwave.global_position
 	shockwave.emitting = true
-	shockwave.get_node("LifeSpam").start()
+	shockwave.get_node("LifeSpan").start()
 
 
 func create_ripple() -> void:
@@ -27,7 +27,7 @@ func create_ripple() -> void:
 	ObjectRegistry.register_distortion_effect(ripple)
 	ripple.global_position = _ripple.global_position
 	ripple.emitting = true
-	ripple.get_node("LifeSpam").start()
+	ripple.get_node("LifeSpan").start()
 
 
 func create_dust() -> void:
