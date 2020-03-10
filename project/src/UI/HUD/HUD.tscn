@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/HUD/ShieldBar.tscn" type="PackedScene" id=1]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShieldBar" parent="." instance=ExtResource( 1 )]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 509.0
+margin_bottom = 99.0
+stretch_margin_left = 40
+stretch_margin_right = 56

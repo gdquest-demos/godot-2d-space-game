@@ -8,7 +8,7 @@
 class_name Stats
 extends Resource
 
-signal stat_changed(old_value, new_value)
+signal stat_changed(stat, old_value, new_value)
 
 # Stores a cached array of property names that are stats as strings, that we use to find and
 # calculate the stats with upgrades from the base stats.
