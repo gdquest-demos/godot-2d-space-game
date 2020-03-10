@@ -36,11 +36,12 @@ func _on_Stats_stat_changed(stat: String, value_start: float, current_value: flo
 
 func _on_Tween_tween_step(object: Object, key: NodePath, elapsed: float, tween_value: Object) -> void:
 	var shield_ratio := value / max_value
-	tint_progress = gradient.interpolate(shield_ratio)
+	var gradient_color := gradient.interpolate(shield_ratio)
+	tint_progress = gradient_color
 	
 	if shield_ratio <= danger_threshold:
 		var anim: Animation = anim_player.get_animation("danger")
-		var final_tint := tint_progress + Color(0, 0, 0, 0.4)
-		anim.track_set_key_value(0, 0, tint_progress)
+		var final_tint := gradient_color + Color(0, 0, 0, 0.4)
+		anim.track_set_key_value(0, 0, gradient_color)
 		anim.track_set_key_value(0, 1, final_tint)
 		anim_player.play("danger")
