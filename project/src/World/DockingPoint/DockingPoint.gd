@@ -68,6 +68,8 @@ func _set_docking_distance(value: float) -> void:
 func _on_DockingArea_body_entered(body: Node) -> void:
 	is_player_inside = true
 	body.dockables.append(ref_to)
+	if tween.is_active():
+		tween.stop_all()
 	tween.make_appear(dock_aura)
 
 
@@ -76,4 +78,6 @@ func _on_DockingArea_body_exited(body: Node) -> void:
 	var index: int = body.dockables.find(ref_to)
 	if index > -1:
 		body.dockables.remove(index)
+	if tween.is_active():
+		tween.stop_all()
 	tween.make_disappear(dock_aura)
