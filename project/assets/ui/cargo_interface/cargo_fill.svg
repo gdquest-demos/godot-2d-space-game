@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="173.23725"
-     inkscape:cy="-32.510801"
+     inkscape:zoom="2.8"
+     inkscape:cx="-2.2105593"
+     inkscape:cy="97.669596"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -57,16 +57,22 @@
      id="layer1"
      transform="translate(0,-263.13331)">
     <g
-       transform="matrix(0.91625618,0,0,0.91625618,1.4180628,23.453844)"
-       id="layer1-3"
+       id="layer1-35"
        inkscape:label="Layer 1"
-       style="stroke-width:1.09139788">
-      <circle
-         r="13.563929"
-         cy="280.06665"
-         cx="16.933332"
-         id="path1544-5"
-         style="opacity:1;fill:#4b5bab;fill-opacity:1;stroke:none;stroke-width:1.15506268;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       transform="matrix(1.2585121,0,0,1.2585121,-4.3774724,-72.400629)"
+       style="stroke-width:0.7945891">
+      <g
+         style="stroke-width:0.86721283"
+         inkscape:label="Layer 1"
+         id="layer1-3"
+         transform="matrix(0.91625618,0,0,0.91625618,1.4180628,23.453844)">
+        <circle
+           style="opacity:1;fill:#4b5bab;fill-opacity:1;stroke:none;stroke-width:0.91780019;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="path1544-5"
+           cx="16.933332"
+           cy="280.06665"
+           r="13.563929" />
+      </g>
     </g>
   </g>
 </svg>
