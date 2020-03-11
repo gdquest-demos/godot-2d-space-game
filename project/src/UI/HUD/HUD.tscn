@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/HUD/ShieldBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/CargoProgress.tscn" type="PackedScene" id=2]
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
@@ -16,3 +17,9 @@ margin_right = 509.0
 margin_bottom = 99.0
 stretch_margin_left = 40
 stretch_margin_right = 56
+
+[node name="CargoGauge" parent="." instance=ExtResource( 2 )]
+margin_left = 1112.0
+margin_top = 24.0
+margin_right = -40.0
+margin_bottom = -568.0
