@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/Ships/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Libraries/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -11,8 +11,6 @@
 [ext_resource path="res://src/Ships/Player/PlayerGun.gd" type="Script" id=9]
 [ext_resource path="res://src/Ships/Player/Cargo.gd" type="Script" id=10]
 [ext_resource path="res://src/VFX/Explosion.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/UI/PlayerUI.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/Ships/Player/UIBarRig.gd" type="Script" id=13]
 [ext_resource path="res://src/Ships/Guns/Projectiles/PlasmaShotPlayer.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/VFX/ShockwaveEmitter.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/VFX/RippleEmitter.tscn" type="PackedScene" id=16]
@@ -103,17 +101,10 @@ update_rotation = false
 
 [node name="MapTimer" type="Timer" parent="." index="6"]
 
-[node name="BarRig" type="Node2D" parent="." index="7"]
-script = ExtResource( 13 )
-
-[node name="PlayerShipUI" parent="BarRig" index="0" instance=ExtResource( 12 )]
-margin_top = 30.0
-margin_bottom = 42.0
-
-[node name="Cargo" type="Node" parent="." index="8"]
+[node name="Cargo" type="Node" parent="." index="7"]
 script = ExtResource( 10 )
 
-[node name="VFX" type="Node2D" parent="." index="10"]
+[node name="VFX" type="Node2D" parent="." index="9"]
 script = ExtResource( 18 )
 
 [node name="MoveTrail" parent="VFX" index="0" instance=ExtResource( 17 )]

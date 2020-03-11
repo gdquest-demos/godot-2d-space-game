@@ -22,8 +22,6 @@ onready var move_state := $StateMachine/Move
 onready var gun := $Gun
 onready var vfx := $VFX
 
-onready var ui := $BarRig/PlayerShipUI
-
 
 func _ready() -> void:
 	stats.initialize()
@@ -31,7 +29,6 @@ func _ready() -> void:
 	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
 	stats.connect("health_depleted", self, "die")
 	gun.projectile_mask = projectile_mask
-	ui.initialize(self, cargo)
 
 
 func _toggle_map(map_up: bool, tween_time: float) -> void:

@@ -6,10 +6,10 @@
 [ext_resource path="res://src/UI/HUD/ShieldBar.gd" type="Script" id=4]
 [ext_resource path="res://src/Ships/Player/player_stats.tres" type="Resource" id=5]
 
-[sub_resource type="Gradient" id=2]
-colors = PoolColorArray( 1, 0.133333, 0.133333, 0.54902, 0.301961, 0.65098, 1, 0.54902 )
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 0.269531, 0.269531, 1, 0.294118, 0.356863, 0.670588, 1 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "damage"
 length = 0.2
 step = 0.01
@@ -26,7 +26,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 4, 4, 4, 1 ), Color( 1, 1, 1, 1 ), Color( 4, 4, 4, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "danger"
 length = 0.5
 loop = true
@@ -61,12 +61,12 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-gradient = SubResource( 2 )
+gradient = SubResource( 1 )
 stats = ExtResource( 5 )
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/damage = SubResource( 3 )
-anims/danger = SubResource( 4 )
+anims/damage = SubResource( 2 )
+anims/danger = SubResource( 3 )
 [connection signal="tween_step" from="Tween" to="." method="_on_Tween_tween_step"]

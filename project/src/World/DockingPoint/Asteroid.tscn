@@ -40,7 +40,6 @@ func _ready() -> void:
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="2"]
-position = Vector2( 0, 0 )
 scale = Vector2( 0.449401, 0.449401 )
 texture = ExtResource( 3 )
 

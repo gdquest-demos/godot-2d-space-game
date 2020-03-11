@@ -41,7 +41,7 @@ func _on_Tween_tween_step(object: Object, key: NodePath, elapsed: float, tween_v
 	
 	if shield_ratio <= danger_threshold:
 		var anim: Animation = anim_player.get_animation("danger")
-		var final_tint := gradient_color + Color(0, 0, 0, 0.4)
+		var final_tint := gradient_color + Color(1.0, 1.0, 1.0, 0.0)
 		anim.track_set_key_value(0, 0, gradient_color)
 		anim.track_set_key_value(0, 1, final_tint)
 		anim_player.play("danger")
