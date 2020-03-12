@@ -35,6 +35,7 @@ func _physics_process(delta: float) -> void:
 					min(stats.get_max_cargo(), stats.get_mining_rate() * delta)
 				)
 				if mined == 0:
+					Events.emit_signal("force_undock")
 					state = States.IDLE
 				else:
 					stats.cargo += mined
