@@ -30,6 +30,8 @@ signal call_off_pursuit(squad_leader)
 signal force_undock
 signal docked
 signal undocked
+signal mine_started(mine_position)
+signal mine_finished
 
 enum UpgradeChoices { HEALTH, SPEED, CARGO, MINING, WEAPON }
 

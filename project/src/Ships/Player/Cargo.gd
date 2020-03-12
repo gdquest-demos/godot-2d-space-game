@@ -50,6 +50,8 @@ func _physics_process(delta: float) -> void:
 				var export_amount := min(stats.get_unload_rate() * delta, stats.cargo)
 				stats.cargo -= export_amount
 				_station.accumulated_iron += export_amount
+		States.IDLE:
+			Events.emit_signal("mine_finished")
 
 
 func _on_Player_docked(dockable: Node) -> void:
@@ -58,6 +60,8 @@ func _on_Player_docked(dockable: Node) -> void:
 		state = States.UNLOADING
 	elif dockable is Asteroid:
 		state = States.MINING
+		var asteroid_position: Vector2 = dockable.get_global_transform_with_canvas().origin
+		Events.emit_signal("mine_started", asteroid_position)
 
 
 func _on_Player_undocked() -> void:

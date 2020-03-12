@@ -41,6 +41,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1152.0
 margin_bottom = -592.0
+rect_pivot_offset = Vector2( 64, 64 )
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 percent_visible = false

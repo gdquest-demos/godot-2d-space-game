@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/World/DockingPoint/DockingPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/World/DockingPoint/Asteroid.gd" type="Script" id=2]
@@ -33,8 +33,41 @@ script/source = "extends AnimationPlayer
 
 func _ready() -> void:
 	playback_speed = rand_range(0.5, 2.0)
-
 "
+
+[sub_resource type="Animation" id=5]
+resource_name = "disappear"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.449401, 0.449401 ), Vector2( 0.519565, 0.519565 ), Vector2( 1e-05, 1e-05 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "pulse"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 2, 0.5, 2 ),
+"update": 0,
+"values": [ Vector2( 0.449401, 0.449401 ), Vector2( 0.505533, 0.505533 ), Vector2( 0.449401, 0.449401 ) ]
+}
 
 [node name="Asteroid" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -55,3 +88,8 @@ shape = SubResource( 2 )
 autoplay = "spin"
 anims/spin = SubResource( 3 )
 script = SubResource( 4 )
+
+[node name="FXAnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+anims/disappear = SubResource( 5 )
+anims/pulse = SubResource( 6 )
+[connection signal="animation_finished" from="FXAnimationPlayer" to="." method="_on_FXAnimationPlayer_animation_finished"]
