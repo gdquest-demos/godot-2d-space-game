@@ -15,6 +15,7 @@ onready var asteroid_spawner := $World/AsteroidSpawner
 onready var map := $MapView/Viewport
 onready var camera := $World/Camera
 onready var world := $World
+onready var hud := $UI/HUD
 
 
 func _ready() -> void:
@@ -43,12 +44,13 @@ func _on_Spawner_pirate_spawned(pirate: Node) -> void:
 	pirate.setup_world_objects(_world_objects)
 
 
-func _on_Spawner_station_spawned(station: Node, _player: KinematicBody2D) -> void:
+func _on_Spawner_station_spawned(station: Node, player: KinematicBody2D) -> void:
 	_world_objects.append(weakref(station))
 	station.register_on_map(map)
 
-	_player.register_on_map(map)
-	_player.grab_camera(camera)
+	player.register_on_map(map)
+	hud.initialize(player)
+	player.grab_camera(camera)
 
 
 func _on_Spawner_asteroid_spawned(asteroid: Node) -> void:

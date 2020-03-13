@@ -69,4 +69,3 @@ stats = ExtResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/damage = SubResource( 2 )
 anims/danger = SubResource( 3 )
-[connection signal="tween_step" from="Tween" to="." method="_on_Tween_tween_step"]

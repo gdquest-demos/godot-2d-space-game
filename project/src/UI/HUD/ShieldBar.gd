@@ -1,11 +1,8 @@
-# TextureProgress that tints its Progress Texture based on its 
-# value / max_value ratio, tweening its value based on a Stats'
-# `_max_health` and `health` properties.
-
+# Animated shield bar for the Player's ship.
 extends TextureProgress
 
 export var gradient: Gradient
-export var stats: Resource = preload("res://src/Ships/Player/player_stats.tres") as Stats
+export var stats: Resource = preload("res://src/Ships/Player/player_stats.tres") as StatsShip
 export var danger_threshold := 0.3
 
 onready var tween := $Tween
@@ -13,14 +10,14 @@ onready var anim_player := $AnimationPlayer
 
 
 func _ready() -> void:
-	initialize()
+	tween.connect("tween_step", self, "_on_Tween_tween_step")
 
 
-func initialize() -> void:
-	stats.connect("stat_changed", self, "_on_Stats_stat_changed")
+func initialize(player: PlayerShip) -> void:
+	player.stats.connect("stat_changed", self, "_on_Stats_stat_changed")
+	max_value = player.stats.get_max_health()
+	value = player.stats.get("health")
 	tint_progress = gradient.interpolate(value / max_value)
-	max_value = stats.get("_max_health")
-	value = stats.get("health")
 
 
 func _on_Stats_stat_changed(stat: String, value_start: float, current_value: float) -> void:

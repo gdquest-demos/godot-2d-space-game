@@ -23,3 +23,7 @@ func spawn_station() -> void:
 		+ (Vector2.UP.rotated(rng.randf_range(0, PI * 2)) * radius_player_near_station)
 	)
 	Events.emit_signal("station_spawned", station, player)
+
+
+func get_player() -> PlayerShip:
+	return get_node("PlayerShip") as PlayerShip

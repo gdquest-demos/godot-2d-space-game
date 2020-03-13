@@ -5,7 +5,7 @@ extends Node
 
 enum States { IDLE, MINING, UNLOADING }
 
-export var stats: Resource = preload("res://src/Ships/Player/cargo_stats.tres")
+export var stats: Resource = preload("res://src/Ships/Player/cargo_stats.tres") as StatsCargo
 
 var state: int = States.IDLE
 var is_mining := false
