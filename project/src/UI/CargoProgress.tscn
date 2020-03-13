@@ -11,7 +11,7 @@
 [sub_resource type="Animation" id=3]
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("ArcBot:rect_rotation")
+tracks/0/path = NodePath("ArcBottom:rect_rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -61,7 +61,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ArcBot" type="TextureProgress" parent="."]
+[node name="ArcBottom" type="TextureProgress" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 64, 64 )
@@ -97,4 +97,3 @@ stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="value_changed" from="." to="." method="_on_value_changed"]

@@ -2,7 +2,7 @@ extends ProgressBar
 
 export var Ore: PackedScene = preload("res://src/World/Ores/IronOre.tscn")
 
-onready var arc_bot := $ArcBot
+onready var arc_bottom := $ArcBottom
 onready var arc_top := $ArcTop
 onready var fill := $Fill
 onready var tween := $Tween
@@ -15,7 +15,8 @@ var _is_mining: = false
 func _ready() -> void:
 	Events.connect("mine_started", self, "_on_Events_mine_started")
 	Events.connect("mine_finished", self, "_on_Events_mine_finished")
-	share(arc_bot)
+	self.connect("value_changed", self, "_on_value_changed")
+	share(arc_bottom)
 	share(arc_top)
 
 
