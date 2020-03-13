@@ -1,7 +1,7 @@
 extends Particles2D
 
-
 var timing_out := false
+
 
 func _process(delta: float) -> void:
 	if not timing_out and not emitting:

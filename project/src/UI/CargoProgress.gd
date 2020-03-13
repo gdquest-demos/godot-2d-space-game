@@ -10,7 +10,8 @@ onready var anim_player := $AnimationPlayer
 
 var asteroid_position := Vector2.ZERO
 
-var _is_mining: = false
+var _is_mining := false
+
 
 func _ready() -> void:
 	Events.connect("mine_started", self, "_on_Events_mine_started")
@@ -54,7 +55,14 @@ func _on_Stats_stat_changed(stat: String, value_start: float, current_value: flo
 func _on_value_changed(value: float) -> void:
 	if tween.is_active():
 		return
-	tween.interpolate_property(fill, "rect_scale", fill.rect_scale,
-			Vector2(ratio, ratio), 0.25, Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+	tween.interpolate_property(
+		fill,
+		"rect_scale",
+		fill.rect_scale,
+		Vector2(ratio, ratio),
+		0.25,
+		Tween.TRANS_ELASTIC,
+		Tween.EASE_OUT
+	)
 	tween.start()
 	spawn_ore()

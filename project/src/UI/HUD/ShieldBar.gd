@@ -25,8 +25,9 @@ func _on_Stats_stat_changed(stat: String, value_start: float, current_value: flo
 		return
 	if tween.is_active():
 		tween.stop_all()
-	tween.interpolate_property(self, "value", value_start, current_value, 
-			0.25, Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+	tween.interpolate_property(
+		self, "value", value_start, current_value, 0.25, Tween.TRANS_ELASTIC, Tween.EASE_OUT
+	)
 	tween.start()
 	anim_player.play("damage")
 
@@ -35,7 +36,7 @@ func _on_Tween_tween_step(object: Object, key: NodePath, elapsed: float, tween_v
 	var shield_ratio := value / max_value
 	var gradient_color := gradient.interpolate(shield_ratio)
 	tint_progress = gradient_color
-	
+
 	if shield_ratio <= danger_threshold:
 		var anim: Animation = anim_player.get_animation("danger")
 		var final_tint := gradient_color + Color(1.0, 1.0, 1.0, 0.0)
