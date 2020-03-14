@@ -6,7 +6,8 @@ Harvester is a top-down space mining game. Control your spaceship in forays into
 
 But beware, as you are not alone out here. Pirate miners are out there and want to monopolize the business.
 
-![Screenshot of the game's prototype](./img/harvester-prototype-screenshot-1.png)
+![The player's ship, docked on an asteroid, mining](./img/harvester-v1.0-mining.png)
+
 
 ## Summary ##
 
@@ -15,6 +16,7 @@ The player begins with a ship at their space station in a relatively large, proc
 As they accumulate iron, enemy pirates spawn around asteroid pockets. This forces the player to take different paths until they can destroy the interlopers.
 
 The player continues until they are overwhelmed by the mounting difficulty and growing opposition and sees how far they can go.
+
 
 ## Contributing ##
 
@@ -26,6 +28,8 @@ If you want to contribute to the project, for instance by fixing a bug or adding
 
 1. [Contributor's guidelines](https://www.gdquest.com/docs/guidelines/contributing-to/gdquest-projects/).
 1. [GDScript style guide](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/)
+
+![A ship is exploding after an encounter with pirates](./img/harvester-v1.0-explosion.png)
 
 ## Development ##
 
