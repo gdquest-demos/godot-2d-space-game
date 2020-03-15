@@ -30,11 +30,10 @@ func initialize(player: PlayerShip) -> void:
 func spawn_ore() -> void:
 	if not _is_mining:
 		return
-	var instance := Ore.instance()
-	add_child(instance)
-	instance.global_position = asteroid_position
-	instance.target_position = rect_global_position + rect_pivot_offset
-	instance.animate()
+	var ore := Ore.instance()
+	add_child(ore)
+	ore.global_position = asteroid_position
+	ore.animate_to(rect_global_position + rect_pivot_offset)
 
 
 func _on_Events_mine_started(mining_position: Vector2) -> void:
