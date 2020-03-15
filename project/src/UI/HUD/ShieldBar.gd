@@ -32,7 +32,7 @@ func _on_Stats_stat_changed(stat: String, value_start: float, current_value: flo
 	anim_player.play("damage")
 
 
-func _on_Tween_tween_step(object: Object, key: NodePath, elapsed: float, tween_value: Object) -> void:
+func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _tween_value: Object) -> void:
 	var shield_ratio := value / max_value
 	var gradient_color := gradient.interpolate(shield_ratio)
 	tint_progress = gradient_color

@@ -4,7 +4,7 @@ onready var tween := $Tween
 var target_position := Vector2.ZERO
 
 
-func tween() -> void:
+func animate() -> void:
 	tween.interpolate_property(
 		self,
 		"global_position",

@@ -34,7 +34,7 @@ func spawn_ore() -> void:
 	add_child(instance)
 	instance.global_position = asteroid_position
 	instance.target_position = rect_global_position + rect_pivot_offset
-	instance.tween()
+	instance.animate()
 
 
 func _on_Events_mine_started(mining_position: Vector2) -> void:
@@ -46,13 +46,13 @@ func _on_Events_mine_finished() -> void:
 	_is_mining = false
 
 
-func _on_Stats_stat_changed(stat: String, value_start: float, current_value: float) -> void:
+func _on_Stats_stat_changed(stat: String, _value_start: float, current_value: float) -> void:
 	if not stat == "cargo":
 		return
 	value = current_value
 
 
-func _on_value_changed(value: float) -> void:
+func _on_value_changed(_value: float) -> void:
 	if tween.is_active():
 		return
 	tween.interpolate_property(
