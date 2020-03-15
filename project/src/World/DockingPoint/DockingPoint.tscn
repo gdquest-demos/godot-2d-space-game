@@ -12,8 +12,8 @@ radius = 200.0
 radius = 81.3653
 
 [node name="DockingPoint" type="Node2D" groups=[
-"MappableObjects",
-"WorldObjects",
+"mini-map",
+"world_objects",
 ]]
 script = ExtResource( 1 )
 map_icon = ExtResource( 3 )

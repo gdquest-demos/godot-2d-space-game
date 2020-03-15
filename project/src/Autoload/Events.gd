@@ -8,6 +8,7 @@ extends Node
 signal player_died
 signal quit_requested
 
+signal node_spawned(node)
 signal station_spawned(station, player)
 signal pirate_spawned(pirate)
 signal asteroid_spawned(object)

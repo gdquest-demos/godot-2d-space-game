@@ -12,7 +12,7 @@ var _world_objects := []
 onready var pirate_spawner := $World/PirateSpawner
 onready var station_spawner := $World/StationSpawner
 onready var asteroid_spawner := $World/AsteroidSpawner
-onready var map := $MapView
+onready var map: MapView = $MapView
 onready var camera := $World/Camera
 onready var world := $World
 onready var hud := $UI/HUD
@@ -39,20 +39,20 @@ func _input(event: InputEvent) -> void:
 		get_tree().set_input_as_handled()
 
 
-func _on_Spawner_pirate_spawned(pirate: Node) -> void:
-	pirate.register_on_map(map)
+func _on_Spawner_pirate_spawned(pirate: PirateShip) -> void:
 	pirate.setup_world_objects(_world_objects)
+	Events.emit_signal("node_spawned", pirate)
 
 
-func _on_Spawner_station_spawned(station: Node, player: KinematicBody2D) -> void:
+func _on_Spawner_station_spawned(station: DockingPoint, player: PlayerShip) -> void:
 	_world_objects.append(weakref(station))
-	station.register_on_map(map)
 
-	player.register_on_map(map)
 	hud.initialize(player)
 	player.grab_camera(camera)
+	Events.emit_signal("node_spawned", station)
+	Events.emit_signal("node_spawned", player)
 
 
-func _on_Spawner_asteroid_spawned(asteroid: Node) -> void:
-	asteroid.register_on_map(map)
+func _on_Spawner_asteroid_spawned(asteroid: DockingPoint) -> void:
 	_world_objects.append(weakref(asteroid))
+	Events.emit_signal("node_spawned", asteroid)

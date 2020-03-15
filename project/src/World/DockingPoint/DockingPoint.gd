@@ -51,12 +51,6 @@ func undock() -> void:
 	remote_transform.remote_path = ""
 
 
-func register_on_map(map: MapView) -> void:
-	var id: int = map.register_map_object($MapTransform, map_icon)
-	# warning-ignore:return_value_discarded
-	connect("died", map, "remove_map_object", [id])
-
-
 func _set_docking_distance(value: float) -> void:
 	docking_distance = value
 	if not is_inside_tree():

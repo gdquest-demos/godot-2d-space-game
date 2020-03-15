@@ -49,11 +49,6 @@ func die() -> void:
 	queue_free()
 
 
-func register_on_map(map: MapView) -> void:
-	var id: int = map.register_map_object($MapTransform, map_icon)
-	connect("died", map, "remove_map_object", [id])
-
-
 func grab_camera(camera: Camera2D) -> void:
 	camera_transform.remote_path = camera.get_path()
 

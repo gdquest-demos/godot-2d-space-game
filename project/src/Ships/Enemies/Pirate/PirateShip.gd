@@ -105,12 +105,6 @@ func setup_faction(pirates: Array) -> void:
 		faction_proximity.agents.append(p.agent)
 
 
-func register_on_map(map: MapView) -> void:
-	var id: int = map.register_map_object($MapTransform, map_icon)
-	# warning-ignore:return_value_discarded
-	connect("died", map, "remove_map_object", [id])
-
-
 func _die() -> void:
 	var effect: Node2D = ExplosionEffect.instance()
 	effect.global_position = global_position
