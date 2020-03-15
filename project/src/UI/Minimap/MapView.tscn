@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/Minimap/MapView.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/Minimap/MapSprite.tscn" type="PackedScene" id=2]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0 )
@@ -38,3 +39,7 @@ expand = true
 stretch_mode = 1
 
 [node name="Sprites" type="Node2D" parent="Viewport"]
+
+[node name="MapSprite" parent="Viewport/Sprites" instance=ExtResource( 2 )]
+
+[node name="MapSprite2" parent="Viewport/Sprites" instance=ExtResource( 2 )]

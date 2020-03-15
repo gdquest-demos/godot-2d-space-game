@@ -13,15 +13,15 @@ func register_camera(camera: Camera2D) -> void:
 
 
 func register_map_object(remote_transform: RemoteTransform2D, icon: MapIcon) -> int:
-	var map_object := MapSprite.instance()
-	map_object.global_position = remote_transform.global_position
+	var map_sprite := MapSprite.instance()
+	map_sprite.global_position = remote_transform.global_position
 
-	sprites.add_child(map_object)
-	map_object.setup(remote_transform, icon)
+	sprites.add_child(map_sprite)
+	map_sprite.setup(remote_transform, icon)
 
-	return sprites.get_child_count()
+	return sprites.get_child_count() - 1
 
 
 func remove_map_object(id: int) -> void:
-	if sprites.get_child_count() >= id:
+	if sprites.get_child_count() > id:
 		sprites.get_child(id).queue_free()
