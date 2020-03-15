@@ -88,9 +88,6 @@ spawn_radius = 300.0
 [node name="MapView" parent="." instance=ExtResource( 6 )]
 mouse_filter = 2
 
-[node name="BlackBackground" parent="MapView/Viewport/CanvasLayer" index="0"]
-mouse_filter = 2
-
 [node name="DistortMaskView" parent="." instance=ExtResource( 20 )]
 mouse_filter = 2
 

@@ -18,9 +18,9 @@ func _ready() -> void:
 	Events.connect("map_toggled", self, "_toggle_map")
 
 
-func setup_camera_map(map: Viewport) -> void:
+func setup_camera_map(map: MapView) -> void:
 	var camera_map := self.duplicate()
-	map.add_child(camera_map)
+	map.register_camera(camera_map)
 	remote_map.remote_path = camera_map.get_path()
 
 

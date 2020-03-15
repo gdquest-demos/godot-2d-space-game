@@ -51,7 +51,7 @@ func undock() -> void:
 	remote_transform.remote_path = ""
 
 
-func register_on_map(map: Viewport) -> void:
+func register_on_map(map: MapView) -> void:
 	var id: int = map.register_map_object($MapTransform, map_icon)
 	# warning-ignore:return_value_discarded
 	connect("died", map, "remove_map_object", [id])

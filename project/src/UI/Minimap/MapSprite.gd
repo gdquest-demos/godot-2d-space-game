@@ -1,4 +1,4 @@
-# A proxy object that holds a sprite representation of itself and moves in the 
+# Holds a sprite representation of itself and moves in the 
 # minimap world using a remote transform that ties it to the original.
 extends Node2D
 
