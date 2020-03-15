@@ -8,12 +8,13 @@ onready var fill := $Fill
 onready var tween := $Tween
 onready var anim_player := $AnimationPlayer
 
-var asteroid_position := Vector2.ZERO
+var docked_position := Vector2.ZERO
 
-var _is_mining := false
+var _player_is_mining := false
 
 
 func _ready() -> void:
+	Events.connect("docked", self, "_on_Events_docked")
 	Events.connect("mine_started", self, "_on_Events_mine_started")
 	Events.connect("mine_finished", self, "_on_Events_mine_finished")
 	self.connect("value_changed", self, "_on_value_changed")
@@ -28,21 +29,26 @@ func initialize(player: PlayerShip) -> void:
 
 
 func spawn_ore() -> void:
-	if not _is_mining:
-		return
 	var ore := Ore.instance()
 	add_child(ore)
-	ore.global_position = asteroid_position
-	ore.animate_to(rect_global_position + rect_pivot_offset)
+	if _player_is_mining:
+		ore.global_position = docked_position
+		ore.animate_to(rect_global_position + rect_pivot_offset)
+	else:
+		ore.global_position = rect_global_position + rect_pivot_offset
+		ore.animate_to(docked_position)
 
 
-func _on_Events_mine_started(mining_position: Vector2) -> void:
-	asteroid_position = mining_position
-	_is_mining = true
+func _on_Events_docked(docking_point: DockingPoint) -> void:
+	docked_position = docking_point.get_global_transform_with_canvas().origin
+
+
+func _on_Events_mine_started(_mining_position: Vector2) -> void:
+	_player_is_mining = true
 
 
 func _on_Events_mine_finished() -> void:
-	_is_mining = false
+	_player_is_mining = false
 
 
 func _on_Stats_stat_changed(stat: String, _value_start: float, current_value: float) -> void:
