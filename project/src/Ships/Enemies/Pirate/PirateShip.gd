@@ -73,17 +73,13 @@ func _ready() -> void:
 
 
 func setup_world_objects(world_objects: Array) -> void:
-	var removals := []
+	world_proximity.agents.clear()
 	for wo_ref in world_objects:
 		var wo: Node2D = wo_ref.get_ref()
 		if not wo:
-			removals.append(wo_ref)
 			continue
 		var object_agent: GSAIAgentLocation = wo.agent_location
-		if object_agent and not world_proximity.agents.has(object_agent):
-			world_proximity.agents.append(object_agent)
-	for wo in removals:
-		world_objects.remove(world_objects.find(wo))
+		world_proximity.agents.append(object_agent)
 
 
 func setup_squad(
