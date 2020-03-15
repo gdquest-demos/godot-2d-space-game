@@ -88,6 +88,9 @@ spawn_radius = 300.0
 [node name="MapView" parent="." instance=ExtResource( 6 )]
 mouse_filter = 2
 
+[node name="BlackBackground" parent="MapView/Viewport/CanvasLayer" index="0"]
+mouse_filter = 2
+
 [node name="DistortMaskView" parent="." instance=ExtResource( 20 )]
 mouse_filter = 2
 
@@ -100,6 +103,7 @@ layer = 2
 script = ExtResource( 17 )
 
 [node name="HUD" parent="UI" instance=ExtResource( 22 )]
+mouse_filter = 2
 
 [node name="MapDisplay" parent="UI" instance=ExtResource( 10 )]
 pause_mode = 1
@@ -108,11 +112,13 @@ flip_v = true
 
 [node name="UpgradeUI" parent="UI" instance=ExtResource( 16 )]
 visible = false
+mouse_filter = 2
 
 [node name="ScreenFader" parent="UI" instance=ExtResource( 19 )]
 
 [node name="QuitMenu" parent="UI" instance=ExtResource( 18 )]
 visible = false
+mouse_filter = 2
 
 [node name="PostProcessedLayer" type="CanvasLayer" parent="."]
 
@@ -121,8 +127,6 @@ visible = false
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1.80502
-margin_right = -1.80505
 mouse_filter = 2
 texture = ExtResource( 11 )
 expand = true
