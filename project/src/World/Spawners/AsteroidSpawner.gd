@@ -66,7 +66,7 @@ func _spawn_asteroid_cluster(spawn_position: Vector2, existing_clusters: Array, 
 				spawned.append(asteroid)
 				objects.append(asteroid_pos)
 				break
-	Events.emit_signal("cluster_spawned", spawned)
+	Events.emit_signal("asteroid_cluster_spawned", spawned)
 
 
 func _spawn_asteroid(position: Vector2, world: Node2D) -> Node2D:

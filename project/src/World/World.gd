@@ -60,7 +60,7 @@ func find_freshest_iron_cluster() -> Vector2:
 
 
 func _refresh_iron() -> void:
-	Events.connect("cluster_spawned", self, "_on_Spawner_spawned_asteroid")
+	Events.connect("asteroid_cluster_spawned", self, "_on_Spawner_spawned_asteroid_cluster")
 	while iron_amount < iron_amount_balance_level:
 		asteroid_spawner.spawn_random_cluster(
 			world_radius,
@@ -82,7 +82,7 @@ func _remove_cluster_iron(amount: float, asteroid: Node2D) -> void:
 					return
 
 
-func _on_Spawner_spawned_asteroid(asteroids: Array) -> void:
+func _on_Spawner_spawned_asteroid_cluster(asteroids: Array) -> void:
 	var cluster_position := Vector2.ZERO
 	var iron_amount_local := 0
 
