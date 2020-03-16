@@ -2,19 +2,27 @@
 
 This document lists the new features, improvements, changes, and bug fixes in each new release of the Godot 2D Space game Harvester.
 
-## Harvester: 2D Space Game 0.2.0
+## Harvester: 2D Space Game 1.0.0
 
 ## New Features
 
-- Visual redesign: new asteroids, animated star field in the background, and more
+- Visual redesign: new asteroids, animated star field in the background, and more.
 - New visual effects:
-    - Shockwave when accelerating and docking (deformation shader)
-    - Animated docking area to indicate when you can safely dock onto an asteroid or the station
-    - Ship movement trail
+    - Shockwave when accelerating and docking (deformation shader).
+    - Animated docking area to indicate when you can safely dock onto an asteroid or the station.
+    - Ship movement trail.
+- Redesigned Heads-Up Display.
+    - Animated shield bar.
+    = Animated mining, with ore that goes from asteroids to the UI, and vice-versa when unloading in the station.
+
+## Changes
+
+- Refactored the mini-map's code to remove coupling.
+- Simplified some code, renamed variables for clarity.
 
 ## Bug fixes
 
-- Fixed an error with a nonexistent stat when getting a weapon upgrade
+- Fixed an error with a nonexistent stat when getting a weapon upgrade.
 
 ## Harvester: 2D Space Game 0.1.0
 
