@@ -81,7 +81,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "idle"
 length = 7.0
 loop = true
@@ -134,7 +134,7 @@ tracks/3/keys = {
 "values": [ Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 932, 812 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 length = 4.0
 loop = true
 step = 0.05
@@ -145,10 +145,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2, 3 ),
-"transitions": PoolRealArray( 0.5, 2, 0.5, 2 ),
+"times": PoolRealArray( 0.25, 1, 2.2, 3 ),
+"transitions": PoolRealArray( 0.517633, 1.93187, 0.517633, 1.93187 ),
 "update": 0,
-"values": [ 0.0, 5.0, 0.0, -5.0 ]
+"values": [ 0.0, 3.0, 0.0, -3.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Foreground/GDQuestLogo:rect_scale")
@@ -157,13 +157,13 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 2, 3 ),
-"transitions": PoolRealArray( 0.5, 1, 0.5, 1 ),
+"times": PoolRealArray( 0.95, 1.95, 2.95, 3.85 ),
+"transitions": PoolRealArray( 1.46409, 0.707107, 1.46409, 0.707107 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
+"values": [ Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 length = 0.9
 step = 0.05
 tracks/0/type = "value"
@@ -173,10 +173,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.4, 0.75, 0.85 ),
-"transitions": PoolRealArray( 0.5, 0.5, 1 ),
+"times": PoolRealArray( 0.05, 0.35, 0.65, 0.85, 0.9 ),
+"transitions": PoolRealArray( 0.287175, 0.287175, 3.73213, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 526, 728 ), Vector2( 526, 512 ), Vector2( 526, 545 ) ]
+"values": [ Vector2( 526, 728 ), Vector2( 526, 728 ), Vector2( 526, 512 ), Vector2( 526, 545 ), Vector2( 526, 545 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Foreground/HarvesterLogo:rect_scale")
@@ -185,10 +185,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2, 0.5, 0.65 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.05, 0.2, 0.5, 0.75 ),
+"transitions": PoolRealArray( 0.34151, 0.34151, 2.92817, 0.353553 ),
 "update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 1.16, 1.16 ), Vector2( 1, 1 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("AnimationPlayer")
@@ -204,8 +204,32 @@ tracks/2/keys = {
 "method": "play"
 } ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Foreground/HarvesterLogo:rect_rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.05, 0.2, 0.4, 0.65, 0.8 ),
+"transitions": PoolRealArray( 0.329877, 0.329877, 0.554785, 1.31951, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 2.15657, -2.05776, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Foreground/GDQuestLogo:rect_rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.05, 0.3, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 9.62309, 9.62309, -1.05059 ]
+}
 
-[sub_resource type="GDScript" id=11]
+[sub_resource type="GDScript" id=10]
 script/source = "extends TextureButton
 
 func _pressed() -> void:
@@ -284,7 +308,6 @@ texture = ExtResource( 5 )
 
 [node name="Asteroid" type="Sprite" parent="MarginContainer/MarginContainer/Asteroids"]
 position = Vector2( 164, 292 )
-rotation = 1.25664
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 
@@ -327,37 +350,41 @@ range_z_min = 1
 range_z_max = 2
 
 [node name="Player" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
-position = Vector2( 1036, 820 )
+position = Vector2( 729.7, 577.6 )
 rotation = 2.35619
+scale = Vector2( 0.7, 0.8 )
 z_index = 1
 texture = ExtResource( 9 )
 
 [node name="Enemy" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
-position = Vector2( 728.641, 634.588 )
+position = Vector2( 15, 12 )
 rotation = 2.35619
+scale = Vector2( 0.7, 0.8 )
 z_index = 1
 texture = ExtResource( 11 )
 
 [node name="Enemy2" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
-position = Vector2( 932, 812 )
+position = Vector2( 198.4, 172 )
 rotation = 2.35619
+scale = Vector2( 0.7, 0.8 )
 z_index = 1
 texture = ExtResource( 11 )
 
 [node name="Enemy3" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
-position = Vector2( 545.242, 474.588 )
+position = Vector2( 15, 12 )
 rotation = 2.35619
+scale = Vector2( 0.7, 0.8 )
 z_index = 1
 texture = ExtResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/Ships"]
 autoplay = "idle"
-anims/idle = SubResource( 8 )
+anims/idle = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "intro"
-anims/idle = SubResource( 9 )
-anims/intro = SubResource( 10 )
+anims/idle = SubResource( 8 )
+anims/intro = SubResource( 9 )
 
 [node name="Foreground" type="CanvasLayer" parent="."]
 layer = 2
@@ -371,7 +398,6 @@ margin_left = -261.0
 margin_top = -103.0
 margin_right = 261.0
 margin_bottom = 104.0
-rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 261, 103 )
 texture = ExtResource( 7 )
 expand = true
@@ -415,17 +441,20 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -114.0
-margin_top = 8.0
+margin_top = -175.0
 margin_right = 114.0
-margin_bottom = 79.0
+margin_bottom = -104.0
+rect_rotation = -1.05059
+rect_scale = Vector2( 1.01872, 1.01872 )
 rect_pivot_offset = Vector2( 114, 35 )
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 4 )
 expand = true
 stretch_mode = 5
-script = SubResource( 11 )
+script = SubResource( 10 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_editor_description_": ""
 }
 
 [node name="Mask2D" type="Light2D" parent="Foreground"]
