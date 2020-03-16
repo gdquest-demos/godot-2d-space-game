@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/world/starfield.png" type="Texture" id=1]
-[ext_resource path="res://assets/ui/title_screen_illustration.svg" type="Texture" id=2]
+[ext_resource path="res://src/UI/MainScreen/MainScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/theme_main_menu.tres" type="Theme" id=3]
 [ext_resource path="res://assets/ui/icons/gamepads/xbox_a_button.svg" type="Texture" id=4]
 [ext_resource path="res://assets/ui/icons/gamepads/playstation_cross_buttton.svg" type="Texture" id=5]
@@ -9,33 +8,6 @@
 [ext_resource path="res://src/UI/MainMenuTexts.gd" type="Script" id=7]
 [ext_resource path="res://src/UI/MainMenu.gd" type="Script" id=8]
 [ext_resource path="res://src/UI/ScreenFader.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/world/star.png" type="Texture" id=10]
-
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 0, 0, 0, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.248804, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.502392, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.746412, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=5]
-emission_shape = 2
-emission_box_extents = Vector3( 640, 360, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-angular_velocity = 50.0
-angular_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 0.5
-scale_random = 1.0
-scale_curve = SubResource( 4 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -53,58 +25,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="TextureRect" parent="Background"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = SubResource( 2 )
-expand = true
-stretch_mode = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Stars" type="TextureRect" parent="Background"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 1 )
-expand = true
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Splash" type="TextureRect" parent="Background"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 2 )
-expand = true
-stretch_mode = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundStars" type="ParallaxBackground" parent="Background"]
-scroll_base_scale = Vector2( 0.5, 0.5 )
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="Background/BackgroundStars"]
-
-[node name="Stars" type="Particles2D" parent="Background/BackgroundStars/ParallaxLayer"]
-position = Vector2( 640, 360 )
-amount = 16
-lifetime = 5.0
-process_material = SubResource( 5 )
-texture = ExtResource( 10 )
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="Background/BackgroundStars"]
-
-[node name="Stars" type="Particles2D" parent="Background/BackgroundStars/ParallaxLayer2"]
-position = Vector2( 640, 360 )
-amount = 16
-lifetime = 5.0
-process_material = SubResource( 5 )
-texture = ExtResource( 10 )
+[node name="MainScreen" parent="Background" instance=ExtResource( 1 )]
 
 [node name="Context" type="Control" parent="."]
 anchor_left = 0.6
@@ -129,6 +50,8 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="Context/Texts"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 28.0
+margin_bottom = 28.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
