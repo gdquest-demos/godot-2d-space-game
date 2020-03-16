@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/ui/banner/envelope-foreground.png" type="Texture" id=1]
 [ext_resource path="res://assets/ui/banner/envelope-background.png" type="Texture" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://assets/world/topdown-player.svg" type="Texture" id=9]
 [ext_resource path="res://assets/ui/banner/mask.png" type="Texture" id=10]
 [ext_resource path="res://assets/world/topdown-enemy.svg" type="Texture" id=11]
-[ext_resource path="res://src/VFX/MoveTrail.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.248804, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.502392, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.746412, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -82,12 +81,9 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Gradient" id=7]
-colors = PoolColorArray( 1, 1, 1, 0.407843, 1, 1, 1, 0 )
-
 [sub_resource type="Animation" id=8]
 resource_name = "idle"
-length = 6.2
+length = 7.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Player:position")
@@ -96,10 +92,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 4.1, 4.5 ),
-"transitions": PoolRealArray( 1, 0 ),
+"times": PoolRealArray( 0, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 0 ),
 "update": 0,
-"values": [ Vector2( 15, 12 ), Vector2( 1036, 820 ) ]
+"values": [ Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 1036, 820 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Enemy3:position")
@@ -108,10 +104,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 4.5, 4.7, 5.1 ),
-"transitions": PoolRealArray( 1, 1, 0 ),
+"times": PoolRealArray( 0, 4.5, 5.2, 6.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 0 ),
 "update": 0,
-"values": [ Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 932, 812 ) ]
+"values": [ Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 932, 812 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Enemy2:position")
@@ -120,10 +116,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 4.5, 4.9 ),
-"transitions": PoolRealArray( 1, 0 ),
+"times": PoolRealArray( 0, 4.5, 5.5 ),
+"transitions": PoolRealArray( 1, 1, 0 ),
 "update": 0,
-"values": [ Vector2( 15, 12 ), Vector2( 932, 812 ) ]
+"values": [ Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 932, 812 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Enemy:position")
@@ -132,10 +128,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 4.5, 4.8, 5.2 ),
-"transitions": PoolRealArray( 1, 1, 0 ),
+"times": PoolRealArray( 0, 4.5, 5, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 0 ),
 "update": 0,
-"values": [ Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 932, 812 ) ]
+"values": [ Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 932, 812 ) ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -150,7 +146,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 2, 3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"transitions": PoolRealArray( 0.5, 2, 0.5, 2 ),
 "update": 0,
 "values": [ 0.0, 5.0, 0.0, -5.0 ]
 }
@@ -162,13 +158,13 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 1, 2, 3 ),
-"transitions": PoolRealArray( 0.5, 0.5, 0.5, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1, 0.5, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
 }
 
 [sub_resource type="Animation" id=10]
-length = 0.7
+length = 0.9
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Foreground/GDQuestLogo:rect_position")
@@ -177,10 +173,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.2, 0.35, 0.5 ),
+"times": PoolRealArray( 0.4, 0.75, 0.85 ),
 "transitions": PoolRealArray( 0.5, 0.5, 1 ),
 "update": 0,
-"values": [ Vector2( 526, 728 ), Vector2( 526, 528 ), Vector2( 526, 560 ) ]
+"values": [ Vector2( 526, 728 ), Vector2( 526, 512 ), Vector2( 526, 545 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Foreground/HarvesterLogo:rect_scale")
@@ -189,10 +185,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2, 0.35, 0.5, 0.65 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.2, 0.5, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("AnimationPlayer")
@@ -201,7 +197,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.7 ),
+"times": PoolRealArray( 0.85 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "idle", -1, 1.0, false ],
@@ -224,9 +220,13 @@ __meta__ = {
 }
 
 [node name="EnvelopeBackground" type="TextureRect" parent="."]
-margin_right = 1280.0
-margin_bottom = 720.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -275,6 +275,7 @@ __meta__ = {
 position = Vector2( 588, 316 )
 amount = 24
 lifetime = 5.0
+preprocess = 5.0
 randomness = 1.0
 process_material = SubResource( 3 )
 texture = ExtResource( 5 )
@@ -283,22 +284,24 @@ texture = ExtResource( 5 )
 
 [node name="Asteroid" type="Sprite" parent="MarginContainer/MarginContainer/Asteroids"]
 position = Vector2( 164, 292 )
-rotation = 1.46607
+rotation = 1.25664
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/Asteroids/Asteroid"]
 autoplay = "idle"
+playback_speed = 1.5
 anims/idle = SubResource( 4 )
 
 [node name="Asteroid2" type="Sprite" parent="MarginContainer/MarginContainer/Asteroids"]
 position = Vector2( 908, 524 )
+rotation = 1.25664
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/Asteroids/Asteroid2"]
 autoplay = "idle"
-playback_speed = 0.9
+playback_speed = 1.7
 anims/idle = SubResource( 5 )
 
 [node name="Asteroid3" type="Sprite" parent="MarginContainer/MarginContainer/Asteroids"]
@@ -315,8 +318,8 @@ anims/idle = SubResource( 6 )
 position = Vector2( 132, -52 )
 
 [node name="Mask2D" type="Light2D" parent="MarginContainer/MarginContainer/Ships"]
-position = Vector2( 448, 690.5 )
-scale = Vector2( 20, 1.67187 )
+position = Vector2( 448, 1274.5 )
+scale = Vector2( 20, 20 )
 texture = ExtResource( 10 )
 energy = 0.0
 mode = 3
@@ -324,37 +327,31 @@ range_z_min = 1
 range_z_max = 2
 
 [node name="Player" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
-position = Vector2( 912.776, 722.483 )
+position = Vector2( 1036, 820 )
 rotation = 2.35619
 z_index = 1
 texture = ExtResource( 9 )
 
-[node name="MoveTrail" parent="MarginContainer/MarginContainer/Ships/Player" instance=ExtResource( 12 )]
-z_index = -1
-initial_velocity = 200.0
-color_ramp = SubResource( 7 )
-
 [node name="Enemy" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
-position = Vector2( 932, 812 )
+position = Vector2( 728.641, 634.588 )
 rotation = 2.35619
 z_index = 1
 texture = ExtResource( 11 )
 
 [node name="Enemy2" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
-position = Vector2( 884.569, 770.621 )
+position = Vector2( 932, 812 )
 rotation = 2.35619
 z_index = 1
 texture = ExtResource( 11 )
 
 [node name="Enemy3" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
-position = Vector2( 915.625, 797.714 )
+position = Vector2( 545.242, 474.588 )
 rotation = 2.35619
 z_index = 1
 texture = ExtResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/Ships"]
 autoplay = "idle"
-playback_speed = 0.7
 anims/idle = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -374,6 +371,7 @@ margin_left = -261.0
 margin_top = -103.0
 margin_right = 261.0
 margin_bottom = 104.0
+rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 261, 103 )
 texture = ExtResource( 7 )
 expand = true
@@ -395,32 +393,48 @@ rect_scale = Vector2( 0.956783, 0.956783 )
 rect_pivot_offset = Vector2( 204, 42 )
 texture = ExtResource( 6 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="GDQuestLogo" type="TextureButton" parent="Foreground"]
-light_mask = 4
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -114.0
-margin_top = -160.0
-margin_right = 114.0
-margin_bottom = -89.0
-rect_pivot_offset = Vector2( 114, 35 )
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 4 )
-script = SubResource( 11 )
+stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="EnvelopeForeground" type="TextureRect" parent="Foreground"]
-margin_right = 1280.0
-margin_bottom = 172.0
+anchor_right = 1.0
+margin_bottom = 176.0
 texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GDQuestLogo" type="TextureButton" parent="Foreground"]
+light_mask = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -114.0
+margin_top = 8.0
+margin_right = 114.0
+margin_bottom = 79.0
+rect_pivot_offset = Vector2( 114, 35 )
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+script = SubResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mask2D" type="Light2D" parent="Foreground"]
+position = Vector2( 640.003, 1288 )
+scale = Vector2( 20, 20 )
+texture = ExtResource( 10 )
+energy = 0.0
+mode = 3
+range_z_min = 0
+range_layer_min = 2
+range_layer_max = 4
+range_item_cull_mask = 2
