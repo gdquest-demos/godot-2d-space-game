@@ -314,7 +314,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Open 2D Space Game"
+config/name="Harvester"
 config/description="Harvester is a top down space mining game meant to showcase the Godot Steering AI Framework for AI agents."
 run/main_scene="res://src/UI/MainMenu.tscn"
 config/icon="res://assets/icon.png"
@@ -333,6 +333,7 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1280
 window/size/height=720
+window/size/always_on_top=true
 
 [input]
 
@@ -478,5 +479,4 @@ toggle_fullscreen={
 [rendering]
 
 environment/default_clear_color=Color( 0.196078, 0.160784, 0.278431, 1 )
-quality/filters/msaa=2
 environment/default_environment="res://default_env.tres"

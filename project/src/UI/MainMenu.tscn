@@ -133,6 +133,10 @@ __meta__ = {
 repeat = true
 playback/repeat = true
 
-[node name="ScreenFader" parent="." instance=ExtResource( 9 )]
-
 [node name="Tween" type="Tween" parent="."]
+
+[node name="FadeLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="ScreenFader" parent="FadeLayer" instance=ExtResource( 9 )]
+duration_fade_out = 1.0

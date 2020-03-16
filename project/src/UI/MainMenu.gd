@@ -5,7 +5,7 @@ extends Control
 const FADE_IN_TIME := 0.5
 const FADE_OUT_TIME := 2.5
 
-onready var screen_fader: TextureRect = $ScreenFader
+onready var screen_fader: TextureRect = $FadeLayer/ScreenFader
 
 
 func _ready() -> void:
