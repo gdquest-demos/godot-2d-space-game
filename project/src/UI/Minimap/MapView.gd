@@ -15,19 +15,12 @@ func register_camera(camera: Camera2D) -> void:
 	viewport.add_child(camera)
 
 
-func register_map_object(remote_transform: RemoteTransform2D, icon: MapIcon) -> int:
-	var map_sprite := MapSprite.instance()
+func register_map_object(remote_transform: RemoteTransform2D, icon: MapIcon) -> MapSprite:
+	var map_sprite: MapSprite = MapSprite.instance()
 	map_sprite.global_position = remote_transform.global_position
-
 	sprites.add_child(map_sprite)
 	map_sprite.setup(remote_transform, icon)
-
-	return sprites.get_child_count() - 1
-
-
-func remove_map_object(id: int) -> void:
-	if sprites.get_child_count() > id:
-		sprites.get_child(id).queue_free()
+	return map_sprite
 
 
 func _on_Spawner_node_spawned(node: Node) -> void:
@@ -35,5 +28,5 @@ func _on_Spawner_node_spawned(node: Node) -> void:
 		return
 	assert(node.has_node("MapTransform"))
 	assert(node.get("map_icon") != null)
-	var id := register_map_object(node.get_node("MapTransform"), node.map_icon)
-	node.connect("tree_exiting", self, "remove_map_object", [id])
+	var map_sprite := register_map_object(node.get_node("MapTransform"), node.map_icon)
+	node.connect("tree_exiting", map_sprite, "queue_free")
