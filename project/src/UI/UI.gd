@@ -8,8 +8,8 @@ onready var quit_menu := $QuitMenu
 
 
 func _ready() -> void:
-	Events.connect("player_died", self, "quit", [true])
-	Events.connect("quit_requested", self, "quit", [false])
+	Events.connect("player_died", self, "reset", [true])
+	Events.connect("quit_requested", self, "quit")
 	Events.connect("upgrade_unlocked", upgrade_menu, "open")
 	screen_fader.fade_in()
 
@@ -24,7 +24,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		map.toggle()
 
 
-func quit(with_delay: bool) -> void:
+func quit() -> void:
+	get_tree().quit()
+
+
+func reset(with_delay: bool) -> void:
 	screen_fader.fade_out(with_delay)
 	yield(screen_fader, "animation_finished")
 	get_tree().change_scene("res://src/UI/MainMenu.tscn")
