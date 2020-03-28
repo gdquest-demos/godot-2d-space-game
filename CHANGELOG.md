@@ -17,6 +17,7 @@ This document lists the new features, improvements, changes, and bug fixes in ea
 
 ## Changes
 
+- Updated QuitMenu to quit the game instead of reseting to the main menu.
 - Refactored the mini-map's code to remove coupling.
 - Simplified some code, renamed variables for clarity.
 
