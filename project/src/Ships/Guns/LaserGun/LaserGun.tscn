@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/VFX/LaserBeam/LaserBeam.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Ships/Guns/LaserGun/LaserGun.gd" type="Script" id=2]
+
+[node name="LaserGun" type="Node2D"]
+script = ExtResource( 2 )
+damage_per_second = 300.0
+
+[node name="LaserBeam2D" parent="." instance=ExtResource( 1 )]

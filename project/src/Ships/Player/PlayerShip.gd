@@ -20,6 +20,7 @@ onready var timer := $MapTimer
 onready var cargo := $Cargo
 onready var move_state := $StateMachine/Move
 onready var gun := $Gun
+onready var laser_gun := $LaserGun
 onready var vfx := $VFX
 
 
@@ -28,7 +29,8 @@ func _ready() -> void:
 	Events.connect("damaged", self, "_on_damaged")
 	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
 	stats.connect("health_depleted", self, "die")
-	gun.projectile_mask = projectile_mask
+	gun.collision_mask = projectile_mask
+	laser_gun.collision_mask = projectile_mask
 
 
 func _toggle_map(map_up: bool, tween_time: float) -> void:
