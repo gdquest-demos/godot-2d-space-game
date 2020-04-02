@@ -8,6 +8,8 @@ export var max_iron_amount := 100.0
 
 onready var anim_player := $AnimationPlayer
 onready var fx_anim_player := $FXAnimationPlayer
+onready var fx_tween := $FXTween
+onready var sprite := $Sprite
 
 var iron_amount: float
 var world: Node2D
@@ -29,8 +31,20 @@ func mine_amount(value: float) -> float:
 		fx_anim_player.play("pulse")
 	if iron_amount == 0:
 		emit_signal("died")
-		fx_anim_player.play("disappear")
+		shrink()
 	return mined
+
+
+func shrink() -> void:
+	if fx_anim_player.is_playing():
+		fx_anim_player.stop(false)
+	fx_tween.interpolate_property(sprite, "scale", sprite.scale, 
+				Vector2.ZERO, 0.25, Tween.TRANS_BACK, Tween.EASE_IN)
+	fx_tween.interpolate_property(dock_aura, "scale", dock_aura.scale,
+			Vector2.ZERO, 0.5, Tween.TRANS_BACK, Tween.EASE_IN)
+	fx_tween.start()
+	yield(fx_tween, "tween_all_completed")
+	queue_free()
 
 
 func _on_DockingArea_body_entered(body: Node) -> void:
@@ -41,9 +55,3 @@ func _on_DockingArea_body_entered(body: Node) -> void:
 func _on_DockingArea_body_exited(body: Node) -> void:
 	._on_DockingArea_body_exited(body)
 	anim_player.play()
-
-
-func _on_FXAnimationPlayer_animation_finished(anim_name: String) -> void:
-	if anim_name != "disappear":
-		return
-	queue_free()

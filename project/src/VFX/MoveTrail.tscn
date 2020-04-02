@@ -17,6 +17,6 @@ flag_align_y = true
 direction = Vector2( 0, 1 )
 spread = 0.0
 gravity = Vector2( 0, 0 )
-initial_velocity = 20.0
+initial_velocity = 1.0
 scale_amount = 0.5
 color_ramp = SubResource( 1 )

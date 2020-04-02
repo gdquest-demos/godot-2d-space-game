@@ -350,30 +350,30 @@ range_z_min = 1
 range_z_max = 2
 
 [node name="Player" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
-position = Vector2( 729.7, 577.6 )
+position = Vector2( 15, 12 )
 rotation = 2.35619
-scale = Vector2( 0.7, 0.8 )
+scale = Vector2( 0.7, 0.7 )
 z_index = 1
 texture = ExtResource( 9 )
 
 [node name="Enemy" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
 position = Vector2( 15, 12 )
 rotation = 2.35619
-scale = Vector2( 0.7, 0.8 )
+scale = Vector2( 0.7, 0.7 )
 z_index = 1
 texture = ExtResource( 11 )
 
 [node name="Enemy2" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
-position = Vector2( 198.4, 172 )
+position = Vector2( 15, 12 )
 rotation = 2.35619
-scale = Vector2( 0.7, 0.8 )
+scale = Vector2( 0.7, 0.7 )
 z_index = 1
 texture = ExtResource( 11 )
 
 [node name="Enemy3" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
 position = Vector2( 15, 12 )
 rotation = 2.35619
-scale = Vector2( 0.7, 0.8 )
+scale = Vector2( 0.7, 0.7 )
 z_index = 1
 texture = ExtResource( 11 )
 
