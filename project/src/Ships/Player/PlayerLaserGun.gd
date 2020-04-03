@@ -4,6 +4,7 @@ extends LaserGun
 
 export var fire_action := "fire2"
 
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_echo():
 		return

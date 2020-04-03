@@ -63,7 +63,7 @@ func cast_beam() -> void:
 func appear() -> void:
 	if tween.is_active():
 		tween.stop_all()
-	tween.interpolate_property(fill, "width", 0, line_width, growth_time*2)
+	tween.interpolate_property(fill, "width", 0, line_width, growth_time * 2)
 	tween.start()
 
 

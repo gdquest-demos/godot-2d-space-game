@@ -7,6 +7,7 @@ export var MapSprite: PackedScene = preload("res://src/UI/Minimap/MapSprite.tscn
 onready var sprites: Node2D = $Viewport/Sprites
 onready var viewport: Viewport = $Viewport
 
+
 func _ready() -> void:
 	Events.connect("node_spawned", self, "_on_Spawner_node_spawned")
 

@@ -38,10 +38,12 @@ func mine_amount(value: float) -> float:
 func shrink() -> void:
 	if fx_anim_player.is_playing():
 		fx_anim_player.stop(false)
-	fx_tween.interpolate_property(sprite, "scale", sprite.scale, 
-				Vector2.ZERO, 0.25, Tween.TRANS_BACK, Tween.EASE_IN)
-	fx_tween.interpolate_property(dock_aura, "scale", dock_aura.scale,
-			Vector2.ZERO, 0.5, Tween.TRANS_BACK, Tween.EASE_IN)
+	fx_tween.interpolate_property(
+		sprite, "scale", sprite.scale, Vector2.ZERO, 0.25, Tween.TRANS_BACK, Tween.EASE_IN
+	)
+	fx_tween.interpolate_property(
+		dock_aura, "scale", dock_aura.scale, Vector2.ZERO, 0.5, Tween.TRANS_BACK, Tween.EASE_IN
+	)
 	fx_tween.start()
 	yield(fx_tween, "tween_all_completed")
 	queue_free()
