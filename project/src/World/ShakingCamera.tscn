@@ -12,7 +12,6 @@ smoothing_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource( 1 )
 max_zoom = 6.0
-shake_strength = 10
 
 [node name="Tween" type="Tween" parent="."]
 playback_process_mode = 0
