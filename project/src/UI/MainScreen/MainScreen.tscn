@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/ui/banner/envelope-foreground.png" type="Texture" id=1]
 [ext_resource path="res://assets/ui/banner/envelope-background.png" type="Texture" id=2]
+[ext_resource path="res://src/UI/MainScreen/MainScreen.gd" type="Script" id=3]
 [ext_resource path="res://assets/ui/banner/gdquest-logo.png" type="Texture" id=4]
 [ext_resource path="res://assets/world/star.png" type="Texture" id=5]
 [ext_resource path="res://assets/ui/banner/title.png" type="Texture" id=6]
@@ -190,39 +191,25 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 1.16, 1.16 ), Vector2( 1, 1 ) ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/type = "value"
+tracks/2/path = NodePath("Foreground/HarvesterLogo:rect_rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.85 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "idle", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Foreground/HarvesterLogo:rect_rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0.05, 0.2, 0.4, 0.65, 0.8 ),
 "transitions": PoolRealArray( 0.329877, 0.329877, 0.554785, 1.31951, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 2.15657, -2.05776, 0.0 ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Foreground/GDQuestLogo:rect_rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/path = NodePath("Foreground/GDQuestLogo:rect_rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0.05, 0.3, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
@@ -239,6 +226,7 @@ func _pressed() -> void:
 [node name="MainScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -467,3 +455,4 @@ range_z_min = 0
 range_layer_min = 2
 range_layer_max = 4
 range_item_cull_mask = 2
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
