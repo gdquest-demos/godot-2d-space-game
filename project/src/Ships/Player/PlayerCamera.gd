@@ -29,7 +29,7 @@ func _ready() -> void:
 	set_physics_process(false)
 
 	Events.connect("map_toggled", self, "_toggle_map")
-	Events.connect("shake", self, "shake")
+	Events.connect("explosion_occurred", self, "_on_Events_explosion_occurred")
 
 	randomize()
 	noise.seed = randi()

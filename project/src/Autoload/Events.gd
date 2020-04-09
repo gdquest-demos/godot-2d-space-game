@@ -34,7 +34,7 @@ signal undocked
 signal mine_started(mine_position)
 signal mine_finished
 
-signal shake
+signal explosion_occurred
 
 enum UpgradeChoices { HEALTH, SPEED, CARGO, MINING, WEAPON }
 
