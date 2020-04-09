@@ -11,7 +11,7 @@
 [ext_resource path="res://src/World/DockingPoint/Asteroid.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/UI/Minimap/MapDisplay.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/world/white.png" type="Texture" id=11]
-[ext_resource path="res://src/Ships/Player/PlayerCamera.gd" type="Script" id=12]
+[ext_resource path="res://src/World/ShakingCamera.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/VFX/Shaders/distorted_view.shader" type="Shader" id=13]
 [ext_resource path="res://src/World/World.gd" type="Script" id=14]
 [ext_resource path="res://src/World/Spawners/PirateSpawner.gd" type="Script" id=15]
@@ -52,23 +52,7 @@ refresh_threshold_range = 350.0
 
 [node name="BackgroundStars" parent="World" instance=ExtResource( 8 )]
 
-[node name="Camera" type="Camera2D" parent="World" groups=[
-"Camera",
-]]
-current = true
-zoom = Vector2( 1.2, 1.2 )
-process_mode = 0
-smoothing_enabled = true
-editor_draw_drag_margin = true
-script = ExtResource( 12 )
-max_zoom = 6.0
-
-[node name="Tween" type="Tween" parent="World/Camera"]
-playback_process_mode = 0
-
-[node name="RemoteMap" type="RemoteTransform2D" parent="World/Camera"]
-
-[node name="RemoteDistort" type="RemoteTransform2D" parent="World/Camera"]
+[node name="Camera" parent="World" instance=ExtResource( 12 )]
 
 [node name="StationSpawner" type="Node2D" parent="World"]
 script = ExtResource( 2 )

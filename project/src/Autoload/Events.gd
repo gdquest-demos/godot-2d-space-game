@@ -34,6 +34,8 @@ signal undocked
 signal mine_started(mine_position)
 signal mine_finished
 
+signal shake
+
 enum UpgradeChoices { HEALTH, SPEED, CARGO, MINING, WEAPON }
 
 enum UITypes { UPGRADE, QUIT }
