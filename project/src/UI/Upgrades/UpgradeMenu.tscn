@@ -8,13 +8,6 @@
 [ext_resource path="res://src/UI/Upgrades/UpgradeButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/ui/icons/upgrades/mining_upgrade.svg" type="Texture" id=7]
 
-
-
-
-
-
-
-
 [node name="UpgradeMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
