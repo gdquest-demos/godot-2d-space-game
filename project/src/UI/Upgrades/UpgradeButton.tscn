@@ -6,16 +6,9 @@
 [ext_resource path="res://assets/ui/fonts/default_font_bold.tres" type="DynamicFont" id=5]
 [ext_resource path="res://src/UI/Upgrades/UpgradeButton.gd" type="Script" id=6]
 
-
-
-
-
-
 [node name="UpgradeButton" type="TextureButton"]
 margin_right = 128.0
 margin_bottom = 128.0
-focus_neighbour_left = NodePath("../WeaponUpgrade")
-focus_neighbour_right = NodePath("../SpeedUpgrade")
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 3 )
 texture_hover = ExtResource( 4 )
