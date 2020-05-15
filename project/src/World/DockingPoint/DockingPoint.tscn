@@ -31,6 +31,11 @@ texture = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.703517, 0.703517 )
 
+[node name="PlayerRotationRig" type="Node2D" parent="Sprite"]
+
+[node name="PlayerRotationRemoteTransform" type="RemoteTransform2D" parent="Sprite/PlayerRotationRig"]
+update_scale = false
+
 [node name="DockingArea" type="Area2D" parent="."]
 collision_layer = 8
 
