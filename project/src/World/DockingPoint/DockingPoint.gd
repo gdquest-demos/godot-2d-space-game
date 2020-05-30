@@ -29,6 +29,7 @@ onready var player_rotation_transform_rig = $Sprite/PlayerRotationRig
 
 
 func _ready() -> void:
+	player_rotation_transform_rig.scale = Vector2.ONE / $Sprite.scale
 	radius = collision_shape.shape.radius
 	agent_location.position.x = global_position.x
 	agent_location.position.y = global_position.y
@@ -44,15 +45,11 @@ func _ready() -> void:
 
 
 func set_docking_remote(node: Node2D, docker_distance: float) -> void:
-	remote_rig.global_rotation = GSAIUtils.vector2_to_angle(node.global_position - global_position)
-	remote_transform.position = docking_point_edge + Vector2.UP * (docker_distance / scale.x)
-
+	player_rotation_transform_rig.global_rotation = GSAIUtils.vector2_to_angle(node.global_position - global_position)
 	player_rotation_transform.position = docking_point_edge + Vector2.UP * (docker_distance / scale.x)
-	player_rotation_transform_rig.global_rotation = remote_rig.global_rotation
 	player_rotation_transform.remote_path = node.get_path()
 
 func undock() -> void:
-	remote_transform.remote_path = ""
 	player_rotation_transform.remote_path = ""
 
 

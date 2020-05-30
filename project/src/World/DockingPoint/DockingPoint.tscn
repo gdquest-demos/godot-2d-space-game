@@ -51,9 +51,4 @@ collision_mask = 7
 visible = false
 shape = SubResource( 2 )
 
-[node name="RemoteRig" type="Node2D" parent="."]
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="RemoteRig"]
-update_scale = false
-
 [node name="MapTransform" type="RemoteTransform2D" parent="."]
