@@ -31,6 +31,7 @@ func mine_amount(value: float) -> float:
 		fx_anim_player.play("pulse")
 	if iron_amount == 0:
 		emit_signal("died")
+		undock()
 		shrink()
 	return mined
 
