@@ -20,7 +20,6 @@
 [ext_resource path="res://src/Ships/Player/VFX.gd" type="Script" id=18]
 [ext_resource path="res://src/VFX/DustEmitter.tscn" type="PackedScene" id=19]
 
-
 [node name="PlayerShip" instance=ExtResource( 1 )]
 collision_mask = 14
 script = ExtResource( 6 )

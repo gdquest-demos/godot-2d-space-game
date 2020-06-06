@@ -31,6 +31,11 @@ texture = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.703517, 0.703517 )
 
+[node name="PlayerRotationRig" type="Node2D" parent="Sprite"]
+
+[node name="PlayerRotationRemoteTransform" type="RemoteTransform2D" parent="Sprite/PlayerRotationRig"]
+update_scale = false
+
 [node name="DockingArea" type="Area2D" parent="."]
 collision_layer = 8
 
@@ -45,10 +50,5 @@ collision_mask = 7
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 visible = false
 shape = SubResource( 2 )
-
-[node name="RemoteRig" type="Node2D" parent="."]
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="RemoteRig"]
-update_scale = false
 
 [node name="MapTransform" type="RemoteTransform2D" parent="."]
