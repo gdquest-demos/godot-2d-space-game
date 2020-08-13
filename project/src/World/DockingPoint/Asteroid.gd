@@ -20,7 +20,7 @@ var iron_amount: float
 
 func setup(rng: RandomNumberGenerator) -> void:
 	iron_amount = rng.randf_range(min_iron_amount, max_iron_amount)
-	scale *= min(iron_amount / max_iron_amount, min_scale)
+	scale *= max(iron_amount / max_iron_amount, min_scale)
 
 
 func mine_amount(value: float) -> float:
