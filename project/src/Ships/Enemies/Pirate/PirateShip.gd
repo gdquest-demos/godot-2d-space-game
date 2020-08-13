@@ -133,6 +133,9 @@ func _on_self_damaged(target: Node, amount: int, _origin: Node) -> void:
 
 	_health -= amount
 
+	if _origin:
+		Events.emit_signal("target_aggroed", squad_leader, _origin)
+
 	if _health <= 0:
 		_die()
 
