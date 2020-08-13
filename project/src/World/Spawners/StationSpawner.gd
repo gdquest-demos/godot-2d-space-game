@@ -7,14 +7,8 @@ export var Station: PackedScene
 export var Player: PackedScene
 export var radius_player_near_station := 300.0
 
-onready var rng := RandomNumberGenerator.new()
 
-
-func _ready() -> void:
-	rng.randomize()
-
-
-func spawn_station() -> void:
+func spawn_station(rng: RandomNumberGenerator) -> void:
 	var station := Station.instance()
 	var player := Player.instance()
 	add_child(player)
