@@ -8,7 +8,11 @@ signal cluster_depleted
 const AsteroidScene := preload("res://src/World/DockingPoint/Asteroid.tscn")
 
 # Ore left in the cluster.
-var iron_ore := 0.0 setget set_iron_ore
+var iron_amount := 0.0 setget set_iron_amount
+
+
+func _init() -> void:
+	set_as_toplevel(true)
 
 
 # Spawns a new random count of asteroids and adds them as children.
@@ -34,13 +38,14 @@ func spawn_asteroids(
 		asteroid.connect("mined", self, "_on_Asteroid_mined")
 		asteroid.connect("depleted", self, "_on_Asteroid_depleted")
 		add_child(asteroid)
+		iron_amount += asteroid.iron_amount
 
 	Events.emit_signal("asteroid_cluster_spawned", get_children())
 
 
-func set_iron_ore(value: float) -> void:
-	iron_ore = min(value, 0.0)
-	if is_equal_approx(iron_ore, 0.0):
+func set_iron_amount(value: float) -> void:
+	iron_amount = min(value, 0.0)
+	if is_equal_approx(iron_amount, 0.0):
 		emit_signal("cluster_depleted")
 		queue_free()
 
@@ -55,7 +60,7 @@ func _create_asteroid(rng: RandomNumberGenerator, location: Vector2) -> Asteroid
 
 
 func _on_Asteroid_mined(amount: float) -> void:
-	self.iron_ore -= amount
+	self.iron_amount -= amount
 
 
 func _on_Asteroid_depleted() -> void:
