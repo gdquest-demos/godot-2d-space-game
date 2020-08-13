@@ -13,28 +13,28 @@ var iron_ore := 0.0 setget set_iron_ore
 
 # Spawns a new random count of asteroids and adds them as children.
 func spawn_asteroids(
-		rng: RandomNumberGenerator,
-		count_min := 1,
-		count_max := 5,
-		spawn_radius := 150.0,
-		asteroid_radius := 75.0
-	) -> void:
+	rng: RandomNumberGenerator,
+	count_min := 1,
+	count_max := 5,
+	spawn_radius := 150.0,
+	asteroid_radius := 75.0
+) -> void:
 	var count = rng.randi_range(count_min, count_max)
 	var immunity_radius := pow(asteroid_radius, 2)
 
 	for _i in range(count):
 		var angle := rng.randf() * 2 * PI
 		var radius := spawn_radius * sqrt(rng.randf())
-		var spawn_position := Vector2(
-			radius * cos(angle), radius * sin(angle)
-		)
+		var spawn_position := Vector2(radius * cos(angle), radius * sin(angle))
 		for asteroid in get_children():
 			if spawn_position.distance_squared_to(asteroid.position) < immunity_radius:
 				continue
 
 		var asteroid = _create_asteroid(rng, spawn_position)
+		asteroid.connect("mined", self, "_on_Asteroid_mined")
+		asteroid.connect("depleted", self, "_on_Asteroid_depleted")
 		add_child(asteroid)
-	
+
 	Events.emit_signal("asteroid_cluster_spawned", get_children())
 
 
@@ -52,3 +52,12 @@ func _create_asteroid(rng: RandomNumberGenerator, location: Vector2) -> Asteroid
 	asteroid.rotation = rng.randf_range(0, PI * 2)
 	Events.emit_signal("asteroid_spawned", asteroid)
 	return asteroid
+
+
+func _on_Asteroid_mined(amount: float) -> void:
+	self.iron_ore -= amount
+
+
+func _on_Asteroid_depleted() -> void:
+	if get_child_count() == 1:
+		emit_signal("cluster_depleted")

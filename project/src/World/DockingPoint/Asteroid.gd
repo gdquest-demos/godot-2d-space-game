@@ -3,8 +3,12 @@
 class_name Asteroid
 extends DockingPoint
 
+signal mined(amount)
+signal depleted
+
 export var min_iron_amount := 5.0
 export var max_iron_amount := 100.0
+export var min_scale := 0.2
 
 onready var anim_player := $AnimationPlayer
 onready var fx_anim_player := $FXAnimationPlayer
@@ -12,30 +16,28 @@ onready var fx_tween := $FXTween
 onready var sprite := $Sprite
 
 var iron_amount: float
-var world: Node2D
 
 
-func setup(rng: RandomNumberGenerator, _world: Node2D) -> void:
-	world = _world
+func setup(rng: RandomNumberGenerator) -> void:
 	iron_amount = rng.randf_range(min_iron_amount, max_iron_amount)
-	scale *= iron_amount / max_iron_amount
+	scale *= min(iron_amount / max_iron_amount, min_scale)
 
 
 func mine_amount(value: float) -> float:
-	var mined := value
-	if iron_amount - mined < 0:
-		mined = iron_amount
-	world.remove_iron(mined, self)
-	iron_amount = iron_amount - mined
-	if not anim_player.is_playing():
-		fx_anim_player.play("pulse")
-	if iron_amount == 0:
-		emit_signal("died")
+	var mined := min(iron_amount, value)
+	iron_amount -= mined
+	emit_signal("mined", mined)
+
+	if is_equal_approx(iron_amount, 0.0):
 		undock()
 		shrink()
+	elif not anim_player.is_playing():
+		fx_anim_player.play("pulse")
+
 	return mined
 
 
+# Animates the asteroid shrinking down and frees it.
 func shrink() -> void:
 	if fx_anim_player.is_playing():
 		fx_anim_player.stop(false)
