@@ -115,5 +115,5 @@ func _on_Spawner_spawned_asteroid_cluster(asteroids: Array) -> void:
 
 
 # Spawn a new group of pirates upon getting an upgrade
-func _on_Events_upgrade_chosen(choice) -> void:
+func _on_Events_upgrade_chosen(_choice) -> void:
 	pirate_spawner.spawn_pirate_group(rng, 0, radius, find_freshest_iron_cluster())
