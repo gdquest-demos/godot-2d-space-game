@@ -11,8 +11,7 @@ export var count_max := 5
 export var spawn_radius := 150.0
 
 
-func spawn_pirate_group(rng: RandomNumberGenerator, _choice: int, world_radius: float, world: Node2D) -> void:
-	var cluster_position: Vector2 = world.find_freshest_iron_cluster()
+func spawn_pirate_group(rng: RandomNumberGenerator, _choice: int, world_radius: float, cluster_position: Vector2) -> void:
 	var spawn_position := cluster_position.normalized() * world_radius * 1.25
 
 	var pirates_in_cluster := []
