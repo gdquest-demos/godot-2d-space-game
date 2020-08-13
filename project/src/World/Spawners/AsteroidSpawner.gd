@@ -35,5 +35,5 @@ func spawn_random_cluster(
 func _spawn_asteroid_cluster(rng: RandomNumberGenerator, spawn_position: Vector2) -> void:
 	var cluster := AsteroidCluster.new()
 	cluster.global_position = spawn_position
-	cluster.spawn_asteroids(rng, count_min, count_max, spawn_radius, asteroid_radius)
 	add_child(cluster)
+	cluster.spawn_asteroids(rng, count_min, count_max, spawn_radius, asteroid_radius)

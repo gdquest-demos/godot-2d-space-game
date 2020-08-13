@@ -35,10 +35,11 @@ func spawn_asteroids(
 				continue
 
 		var asteroid = _create_asteroid(rng, spawn_position)
+		add_child(asteroid)
 		asteroid.connect("mined", self, "_on_Asteroid_mined")
 		asteroid.connect("depleted", self, "_on_Asteroid_depleted")
-		add_child(asteroid)
 		iron_amount += asteroid.iron_amount
+		Events.emit_signal("asteroid_spawned", asteroid)
 
 	Events.emit_signal("asteroid_cluster_spawned", get_children())
 
@@ -55,7 +56,6 @@ func _create_asteroid(rng: RandomNumberGenerator, location: Vector2) -> Asteroid
 	asteroid.setup(rng)
 	asteroid.global_position = location
 	asteroid.rotation = rng.randf_range(0, PI * 2)
-	Events.emit_signal("asteroid_spawned", asteroid)
 	return asteroid
 
 
