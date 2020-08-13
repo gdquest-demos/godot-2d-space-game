@@ -4,17 +4,11 @@
 # giving the player access to the game camera.
 extends Node
 
-export var map_transition_time := 0.35
-
 var _spawned_positions := []
 var _world_objects := []
 
-onready var pirate_spawner := $World/PirateSpawner
-onready var station_spawner := $World/StationSpawner
-onready var asteroid_spawner := $World/AsteroidSpawner
 onready var map: MapView = $MapView
-onready var camera := $World/Camera
-onready var world := $World
+onready var camera := $GameWorld/Camera
 onready var hud := $UI/HUD
 
 
@@ -24,10 +18,6 @@ func _ready() -> void:
 	Events.connect("pirate_spawned", self, "_on_Spawner_pirate_spawned")
 
 	camera.setup_camera_map(map)
-
-	station_spawner.spawn_station()
-
-	world.setup($UI/UpgradeUI)
 
 	ObjectRegistry.register_distortion_parent($DistortMaskView/Viewport)
 	camera.setup_distortion_camera()

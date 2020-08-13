@@ -1,5 +1,6 @@
 # Spawns the player and the resource offloading station at the center of the
 # world.
+class_name StationSpawner
 extends Node2D
 
 export var Station: PackedScene

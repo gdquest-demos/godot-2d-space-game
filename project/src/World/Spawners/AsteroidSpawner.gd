@@ -3,6 +3,7 @@
 # point inside of an asteroid belt that lies a minimum distance from the player
 # station's spawn point. Most of the logic is just making sure that a cluster
 # doesn't appear too close to another.
+class_name AsteroidSpawner
 extends Node2D
 
 export var AsteroidScene: PackedScene

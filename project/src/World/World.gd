@@ -1,35 +1,46 @@
 # Class that represents the game world. It keeps track of iron in the world
 # and which asteroid clusters holds it, and spawns more when running low. It
 # also signals the pirate spawner when an upgrade has been made.
+class_name GameWorld
 extends Node2D
 
-export var world_radius := 8000.0
-export var asteroid_radius_from_spawn := 2000
+# Radius of the world in pixels.
+export var radius := 8000.0
+# Minimum distance to place asteroids from the station.
+export var asteroid_min_spawn_distance := 2000
+# Minimum distance between asteroid clusters.
 export var radius_around_clusters := 600.0
 
+# Minimum amount of iron that must be added when the world spawns new asteroids.
+# Used in `_refresh_iron`.
 export var iron_amount_balance_level := 100.0
+# If the amouns of iron in the world goes below this threshold, spawns new asteroids.
 export var refresh_threshold_range := 25.0
 
 var iron_amount := 0.0
-var upgrade_ui: Control
 var _spawned_positions := []
 var _world_objects := []
 var _iron_clusters := {}
 
 onready var rng := RandomNumberGenerator.new()
 
-onready var asteroid_spawner := $AsteroidSpawner
-onready var pirate_spawner := $PirateSpawner
+onready var station_spawner: StationSpawner = $StationSpawner
+onready var asteroid_spawner: AsteroidSpawner = $AsteroidSpawner
+onready var pirate_spawner: PirateSpawner = $PirateSpawner
 
 
-func setup(_upgrade_ui: Control) -> void:
+func _ready() -> void:
+	yield(owner, "ready")
+	setup()
+
+func setup() -> void:
+	station_spawner.spawn_station()
 	rng.randomize()
 	_refresh_iron()
-	upgrade_ui = _upgrade_ui
 	Events.connect(
-		"upgrade_choice_made", pirate_spawner, "spawn_pirate_group", [world_radius, self]
+		"upgrade_choice_made", pirate_spawner, "spawn_pirate_group", [radius, self]
 	)
-	pirate_spawner.spawn_pirate_group(0, world_radius, self)
+	pirate_spawner.spawn_pirate_group(0, radius, self)
 
 
 func remove_iron(amount: float, asteroid: Node2D) -> void:
@@ -40,6 +51,7 @@ func remove_iron(amount: float, asteroid: Node2D) -> void:
 		_refresh_iron()
 
 
+# Returns the position of the cluster of asteroids with the most iron that isn't occupied.
 func find_freshest_iron_cluster() -> Vector2:
 	var largest_cluster: float = -INF
 	var largest_position := Vector2.ZERO
@@ -53,7 +65,7 @@ func find_freshest_iron_cluster() -> Vector2:
 	if largest_cluster == -INF:
 		largest_position = (
 			Vector2.UP.rotated(rng.randf_range(-PI, PI))
-			* world_radius
+			* radius
 			* rng.randf_range(0.5, 1)
 		)
 	return largest_position
@@ -63,9 +75,9 @@ func _refresh_iron() -> void:
 	Events.connect("asteroid_cluster_spawned", self, "_on_Spawner_spawned_asteroid_cluster")
 	while iron_amount < iron_amount_balance_level:
 		asteroid_spawner.spawn_random_cluster(
-			world_radius,
+			radius,
 			_spawned_positions,
-			asteroid_radius_from_spawn,
+			asteroid_min_spawn_distance,
 			radius_around_clusters,
 			self
 		)

@@ -44,27 +44,28 @@ glow_bicubic_upscale = true
 [node name="GameInitializer" type="Node"]
 script = ExtResource( 7 )
 
-[node name="World" type="Node2D" parent="."]
+[node name="GameWorld" type="Node2D" parent="."]
 script = ExtResource( 14 )
-world_radius = 4000.0
+asteroid_min_spawn_distance = 300
+radius_around_clusters = 400.0
 iron_amount_balance_level = 750.0
 refresh_threshold_range = 350.0
 
-[node name="BackgroundStars" parent="World" instance=ExtResource( 8 )]
+[node name="BackgroundStars" parent="GameWorld" instance=ExtResource( 8 )]
 
-[node name="Camera" parent="World" instance=ExtResource( 12 )]
+[node name="Camera" parent="GameWorld" instance=ExtResource( 12 )]
 
-[node name="StationSpawner" type="Node2D" parent="World"]
+[node name="StationSpawner" type="Node2D" parent="GameWorld"]
 script = ExtResource( 2 )
 Station = ExtResource( 4 )
 Player = ExtResource( 5 )
 
-[node name="PirateSpawner" type="Node2D" parent="World"]
+[node name="PirateSpawner" type="Node2D" parent="GameWorld"]
 script = ExtResource( 15 )
 PirateScene = ExtResource( 3 )
 spawn_radius = 350.0
 
-[node name="AsteroidSpawner" type="Node2D" parent="World"]
+[node name="AsteroidSpawner" type="Node2D" parent="GameWorld"]
 script = ExtResource( 1 )
 AsteroidScene = ExtResource( 9 )
 spawn_radius = 300.0
