@@ -29,4 +29,4 @@ func open() -> void:
 func select_upgrade(type: int) -> void:
 	get_tree().paused = false
 	hide()
-	Events.emit_signal("upgrade_choice_made", type)
+	Events.emit_signal("upgrade_chosen", type)

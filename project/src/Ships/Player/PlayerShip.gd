@@ -27,7 +27,7 @@ onready var vfx := $VFX
 func _ready() -> void:
 	stats.initialize()
 	Events.connect("damaged", self, "_on_damaged")
-	Events.connect("upgrade_choice_made", self, "_on_Upgrade_Choice_made")
+	Events.connect("upgrade_chosen", self, "_on_upgrade_chosen")
 	stats.connect("health_depleted", self, "die")
 	gun.collision_mask = projectile_mask
 	laser_gun.collision_mask = projectile_mask
@@ -62,7 +62,7 @@ func _on_damaged(target: Node, amount: int, _origin: Node) -> void:
 	stats.health -= amount
 
 
-func _on_Upgrade_Choice_made(choice: int) -> void:
+func _on_upgrade_chosen(choice: int) -> void:
 	match choice:
 		Events.UpgradeChoices.HEALTH:
 			stats.add_modifier("max_health", 25.0)
