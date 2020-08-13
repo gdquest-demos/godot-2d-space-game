@@ -68,7 +68,11 @@ spawn_radius = 350.0
 [node name="AsteroidSpawner" type="Node2D" parent="GameWorld"]
 script = ExtResource( 1 )
 AsteroidScene = ExtResource( 9 )
+count_min = null
+count_max = null
 spawn_radius = 300.0
+asteroid_radius = null
+randomize_rotation = null
 
 [node name="MapView" parent="." instance=ExtResource( 6 )]
 mouse_filter = 2
