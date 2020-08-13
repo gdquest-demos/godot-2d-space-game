@@ -45,7 +45,8 @@ script = ExtResource( 7 )
 
 [node name="GameWorld" type="Node2D" parent="."]
 script = ExtResource( 14 )
-asteroid_min_spawn_distance = 300
+radius = 3000.0
+asteroid_min_spawn_distance = 700
 radius_around_clusters = 400.0
 iron_amount_balance_level = 750.0
 refresh_threshold_range = 350.0
