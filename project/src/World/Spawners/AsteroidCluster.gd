@@ -44,7 +44,7 @@ func spawn_asteroids(
 
 
 func set_iron_amount(value: float) -> void:
-	iron_amount = min(value, 0.0)
+	iron_amount = max(value, 0.0)
 	if is_equal_approx(iron_amount, 0.0):
 		emit_signal("cluster_depleted")
 		queue_free()
