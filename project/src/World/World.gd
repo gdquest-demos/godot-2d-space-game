@@ -40,10 +40,8 @@ func setup() -> void:
 	rng.randomize()
 	station_spawner.spawn_station(rng)
 	_spawn_asteroids()
-#	Events.connect(
-#		"upgrade_choice_made", pirate_spawner, "spawn_pirate_group", [rng, radius, self]
-#	)
-#	pirate_spawner.spawn_pirate_group(rng, 0, radius, self)
+	Events.connect("upgrade_chosen", self, "_on_Events_upgrade_chosen")
+	pirate_spawner.spawn_pirate_group(rng, 0, radius, find_freshest_iron_cluster())
 
 
 func remove_iron(amount: float, asteroid: Node2D) -> void:
@@ -114,3 +112,8 @@ func _on_Spawner_spawned_asteroid_cluster(asteroids: Array) -> void:
 	_iron_clusters[cluster_position] = {
 		iron_amount = iron_amount_local, asteroids = asteroids, occupied = false
 	}
+
+
+# Spawn a new group of pirates upon getting an upgrade
+func _on_Events_upgrade_chosen(choice) -> void:
+	pirate_spawner.spawn_pirate_group(rng, 0, radius, find_freshest_iron_cluster())
