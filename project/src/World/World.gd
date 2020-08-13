@@ -40,10 +40,10 @@ func setup() -> void:
 	rng.randomize()
 	station_spawner.spawn_station()
 	_spawn_asteroids()
-	Events.connect(
-		"upgrade_choice_made", pirate_spawner, "spawn_pirate_group", [radius, self]
-	)
-	pirate_spawner.spawn_pirate_group(0, radius, self)
+#	Events.connect(
+#		"upgrade_choice_made", pirate_spawner, "spawn_pirate_group", [radius, self]
+#	)
+#	pirate_spawner.spawn_pirate_group(0, radius, self)
 
 
 func remove_iron(amount: float, asteroid: Node2D) -> void:
@@ -78,14 +78,14 @@ func find_freshest_iron_cluster() -> Vector2:
 # Spawns new asteroids until there's enough resources to mine in the world.
 # The target amount of resources is `iron_amount_balance_level`.
 func _spawn_asteroids() -> void:
+	# TODO: remove the wiring through events, we can connect to the new cluster
 	Events.connect("asteroid_cluster_spawned", self, "_on_Spawner_spawned_asteroid_cluster")
 	while iron_amount < iron_amount_balance_level:
 		asteroid_spawner.spawn_random_cluster(
+			rng,
 			radius,
-			_spawned_positions,
 			asteroid_min_spawn_distance,
-			radius_around_clusters,
-			self
+			radius_around_clusters
 		)
 
 
