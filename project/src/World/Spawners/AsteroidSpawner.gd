@@ -19,14 +19,17 @@ func spawn_random_cluster(
 	radius_from_spawn: float,
 	radius_from_clusters: float
 ) -> void:
-	var spawn_position := (
-		Vector2.UP.rotated(rng.randf_range(0, PI * 2))
-		* rng.randf_range(radius_from_spawn, world_radius)
-	)
-	for cluster in get_children():
-		if spawn_position.distance_squared_to(cluster.position) < pow(radius_from_clusters, 2):
-			return
-	_spawn_asteroid_cluster(rng, spawn_position)
+	var max_attempts := 3
+	for i in max_attempts:
+		var spawn_position := (
+			Vector2.UP.rotated(rng.randf_range(0, PI * 2))
+			* rng.randf_range(radius_from_spawn, world_radius)
+		)
+		for cluster in get_children():
+			if spawn_position.distance_squared_to(cluster.position) < pow(radius_from_clusters, 2):
+				continue
+		_spawn_asteroid_cluster(rng, spawn_position)
+		break
 
 
 func _spawn_asteroid_cluster(rng: RandomNumberGenerator, spawn_position: Vector2) -> void:
