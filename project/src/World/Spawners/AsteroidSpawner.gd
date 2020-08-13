@@ -45,37 +45,5 @@ func spawn_random_cluster(
 
 
 func _spawn_asteroid_cluster(spawn_position: Vector2, existing_clusters: Array, world: Node2D) -> void:
-	var count = rng.randi_range(count_min, count_max)
-	existing_clusters.append(spawn_position)
-	var objects := []
-	var spawned := []
-	var immunity_radius := pow(asteroid_radius, 2)
-	for _i in range(count):
-		while true:
-			var angle := rng.randf() * 2 * PI
-			var radius := spawn_radius * sqrt(rng.randf())
-			var asteroid_pos := Vector2(
-				spawn_position.x + (radius * cos(angle)), spawn_position.y + (radius * sin(angle))
-			)
-			var valid := true
-			for o in objects:
-				if asteroid_pos.distance_squared_to(o) < immunity_radius:
-					valid = false
-					break
-			if valid:
-				var asteroid = _spawn_asteroid(asteroid_pos, world)
-				spawned.append(asteroid)
-				objects.append(asteroid_pos)
-				break
-	Events.emit_signal("asteroid_cluster_spawned", spawned)
-
-
-func _spawn_asteroid(position: Vector2, world: Node2D) -> Node2D:
-	var asteroid = AsteroidScene.instance()
-	asteroid.setup(rng, world)
-	asteroid.global_position = position
-	if randomize_rotation:
-		asteroid.rotation = rng.randf_range(0, PI * 2)
-	add_child(asteroid)
-	Events.emit_signal("asteroid_spawned", asteroid)
-	return asteroid
+	var cluster := AsteroidCluster.new()
+	cluster.spawn_asteroids(rng, count_min, count_max, spawn_radius, asteroid_radius)
