@@ -38,12 +38,12 @@ func _ready() -> void:
 
 func setup() -> void:
 	rng.randomize()
-	station_spawner.spawn_station()
+	station_spawner.spawn_station(rng)
 	_spawn_asteroids()
 #	Events.connect(
-#		"upgrade_choice_made", pirate_spawner, "spawn_pirate_group", [radius, self]
+#		"upgrade_choice_made", pirate_spawner, "spawn_pirate_group", [rng, radius, self]
 #	)
-#	pirate_spawner.spawn_pirate_group(0, radius, self)
+#	pirate_spawner.spawn_pirate_group(rng, 0, radius, self)
 
 
 func remove_iron(amount: float, asteroid: Node2D) -> void:
