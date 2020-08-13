@@ -14,7 +14,7 @@ export var max_offset := Vector2(100.0, 100.0)
 export var max_rotation := 0.1
 
 var shake_amount := 0.0 setget set_shake_amount
-var noise_y := 0
+var noise_y := 0.0
 
 var _start_zoom := zoom
 var _start_position := Vector2.ZERO
