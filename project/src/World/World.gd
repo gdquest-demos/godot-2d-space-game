@@ -7,10 +7,6 @@ extends Node2D
 
 # Radius of the world in pixels.
 export var radius := 8000.0
-# Minimum distance to place asteroids from the station.
-export var asteroid_min_spawn_distance := 2000
-# Minimum distance between asteroid clusters.
-export var radius_around_clusters := 600.0
 
 # Minimum amount of iron that must be added when the world spawns new asteroids.
 # Used in `_spawn_asteroids`.
@@ -18,8 +14,6 @@ export var iron_amount_balance_level := 100.0
 # If the amouns of iron in the world goes below this threshold, spawns new asteroids.
 export var refresh_threshold_range := 25.0
 
-# Total amount of iron currently available to mine in the world.
-var iron_amount := 0.0
 var _spawned_positions := []
 var _world_objects := []
 var _iron_clusters := {}
@@ -40,28 +34,13 @@ func setup() -> void:
 	rng.randomize()
 
 	Events.connect("upgrade_chosen", self, "_on_Events_upgrade_chosen")
+	asteroid_spawner.connect("cluster_depleted", self, "_on_AsteroidSpawner_cluster_depleted")
 
 	station_spawner.spawn_station(rng)
-	iron_amount += asteroid_spawner.spawn_asteroid_clusters(
-		rng, iron_amount_balance_level, radius, asteroid_min_spawn_distance, radius_around_clusters
-	)
+	asteroid_spawner.spawn_asteroid_clusters(rng, iron_amount_balance_level, radius)
 	pirate_spawner.spawn_pirate_group(
 		rng, 0, radius, _find_largest_inoccupied_asteroid_cluster().global_position
 	)
-
-
-func remove_iron(amount: float, asteroid: Asteroid) -> void:
-	iron_amount = max(iron_amount - amount, 0)
-	asteroid.iron_amount -= amount
-
-	if iron_amount < refresh_threshold_range:
-		iron_amount += asteroid_spawner.spawn_asteroid_clusters(
-			rng,
-			iron_amount_balance_level,
-			radius,
-			asteroid_min_spawn_distance,
-			radius_around_clusters
-		)
 
 
 # Returns the AsteroidCluster with the most iron that isn't occupied.
@@ -86,3 +65,8 @@ func _on_Events_upgrade_chosen(_choice) -> void:
 	var target_cluster := _find_largest_inoccupied_asteroid_cluster()
 	if target_cluster:
 		pirate_spawner.spawn_pirate_group(rng, 0, radius, target_cluster.global_position)
+
+
+func _on_AsteroidSpawner_cluster_depleted(iron_left: float) -> void:
+	if iron_left < refresh_threshold_range:
+		asteroid_spawner.spawn_asteroid_clusters(rng, iron_amount_balance_level, radius)

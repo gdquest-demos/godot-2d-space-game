@@ -26,14 +26,14 @@ func spawn_asteroids(
 	asteroid_radius := 75.0
 ) -> void:
 	var count = rng.randi_range(count_min, count_max)
-	var immunity_radius := pow(asteroid_radius, 2)
+	var min_distance_squared := pow(asteroid_radius, 2)
 
 	for _i in range(count):
 		var angle := rng.randf() * 2 * PI
 		var radius := spawn_radius * sqrt(rng.randf())
 		var spawn_position := Vector2(radius * cos(angle), radius * sin(angle))
 		for asteroid in get_children():
-			if spawn_position.distance_squared_to(asteroid.position) < immunity_radius:
+			if spawn_position.distance_squared_to(asteroid.position) < min_distance_squared:
 				continue
 
 		var asteroid = _create_asteroid(rng, spawn_position)
@@ -51,6 +51,7 @@ func set_iron_amount(value: float) -> void:
 		queue_free()
 
 
+# Creates, initializes, and returns a new Asteroid.
 func _create_asteroid(rng: RandomNumberGenerator, location: Vector2) -> Asteroid:
 	var asteroid: Asteroid = AsteroidScene.instance()
 	asteroid.setup(rng)
