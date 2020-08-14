@@ -13,8 +13,26 @@ export var asteroid_radius := 75.0
 export var randomize_rotation := true
 
 
+# Spawns new asteroids until there's enough resources to mine in the world.
+# The target amount of resources is `iron_amount_balance_level`.
+func spawn_asteroid_clusters(
+	rng: RandomNumberGenerator,
+	target_iron_amount: float,
+	world_radius: float,
+	radius_from_spawn: float,
+	radius_from_clusters: float
+) -> float:
+	var spawned_iron := 0.0
+	while spawned_iron < target_iron_amount:
+		var cluster := _spawn_asteroid_cluster(
+			rng, world_radius, radius_from_spawn, radius_from_clusters
+		)
+		spawned_iron += cluster.iron_amount
+	return spawned_iron
+
+
 # Generates and randomly places a new asteroid cluster, then returns the newly created instance.
-func spawn_asteroid_cluster(
+func _spawn_asteroid_cluster(
 	rng: RandomNumberGenerator,
 	world_radius: float,
 	radius_from_spawn: float,

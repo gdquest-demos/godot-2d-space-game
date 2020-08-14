@@ -38,12 +38,16 @@ func _ready() -> void:
 
 func setup() -> void:
 	rng.randomize()
-	
+
 	Events.connect("upgrade_chosen", self, "_on_Events_upgrade_chosen")
-	
+
 	station_spawner.spawn_station(rng)
-	_spawn_asteroids()
-	pirate_spawner.spawn_pirate_group(rng, 0, radius, _find_largest_inoccupied_asteroid_cluster().global_position)
+	iron_amount += asteroid_spawner.spawn_asteroid_clusters(
+		rng, iron_amount_balance_level, radius, asteroid_min_spawn_distance, radius_around_clusters
+	)
+	pirate_spawner.spawn_pirate_group(
+		rng, 0, radius, _find_largest_inoccupied_asteroid_cluster().global_position
+	)
 
 
 func remove_iron(amount: float, asteroid: Asteroid) -> void:
@@ -51,14 +55,20 @@ func remove_iron(amount: float, asteroid: Asteroid) -> void:
 	asteroid.iron_amount -= amount
 
 	if iron_amount < refresh_threshold_range:
-		_spawn_asteroids()
+		iron_amount += asteroid_spawner.spawn_asteroid_clusters(
+			rng,
+			iron_amount_balance_level,
+			radius,
+			asteroid_min_spawn_distance,
+			radius_around_clusters
+		)
 
 
 # Returns the AsteroidCluster with the most iron that isn't occupied.
 # If all clusters are occupied, returns `null`.
 func _find_largest_inoccupied_asteroid_cluster() -> AsteroidCluster:
 	var target_cluster: AsteroidCluster
-	
+
 	var target_cluster_iron_amount := -INF
 	for cluster in asteroid_spawner.get_children():
 		assert(cluster is AsteroidCluster)
@@ -69,19 +79,6 @@ func _find_largest_inoccupied_asteroid_cluster() -> AsteroidCluster:
 			target_cluster_iron_amount = cluster.iron_amount
 	target_cluster.is_occupied = true
 	return target_cluster
-
-
-# Spawns new asteroids until there's enough resources to mine in the world.
-# The target amount of resources is `iron_amount_balance_level`.
-func _spawn_asteroids() -> void:
-	while iron_amount < iron_amount_balance_level:
-		var cluster := asteroid_spawner.spawn_asteroid_cluster(
-			rng,
-			radius,
-			asteroid_min_spawn_distance,
-			radius_around_clusters
-		)
-		iron_amount += cluster.iron_amount
 
 
 # Spawn a new group of pirates upon getting an upgrade
