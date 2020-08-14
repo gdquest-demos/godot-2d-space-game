@@ -9,6 +9,8 @@ const AsteroidScene := preload("res://src/World/DockingPoint/Asteroid.tscn")
 
 # Ore left in the cluster.
 var iron_amount := 0.0 setget set_iron_amount
+# If `true`, the cluster is occupied, e.g. by a pirate squad.
+var is_occupied := false
 
 
 func _init() -> void:
@@ -40,8 +42,6 @@ func spawn_asteroids(
 		asteroid.connect("depleted", self, "_on_Asteroid_depleted")
 		iron_amount += asteroid.iron_amount
 		Events.emit_signal("asteroid_spawned", asteroid)
-
-	Events.emit_signal("asteroid_cluster_spawned", get_children())
 
 
 func set_iron_amount(value: float) -> void:

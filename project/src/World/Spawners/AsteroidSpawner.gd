@@ -13,14 +13,15 @@ export var asteroid_radius := 75.0
 export var randomize_rotation := true
 
 
-func spawn_random_cluster(
+# Generates and randomly places a new asteroid cluster, then returns the newly created instance.
+func spawn_asteroid_cluster(
 	rng: RandomNumberGenerator,
 	world_radius: float,
 	radius_from_spawn: float,
 	radius_from_clusters: float
-) -> void:
-	var max_attempts := 3
-	for i in max_attempts:
+) -> AsteroidCluster:
+	var new_cluster: AsteroidCluster
+	while not new_cluster:
 		var spawn_position := (
 			Vector2.UP.rotated(rng.randf_range(0, PI * 2))
 			* rng.randf_range(radius_from_spawn, world_radius)
@@ -28,12 +29,15 @@ func spawn_random_cluster(
 		for cluster in get_children():
 			if spawn_position.distance_squared_to(cluster.position) < pow(radius_from_clusters, 2):
 				continue
-		_spawn_asteroid_cluster(rng, spawn_position)
+		new_cluster = _create_cluster(rng, spawn_position)
 		break
+	return new_cluster
 
 
-func _spawn_asteroid_cluster(rng: RandomNumberGenerator, spawn_position: Vector2) -> void:
+# Creates, initializes, and returns a new cluster with its asteroids pre-generated
+func _create_cluster(rng: RandomNumberGenerator, spawn_position: Vector2) -> AsteroidCluster:
 	var cluster := AsteroidCluster.new()
-	cluster.global_position = spawn_position
 	add_child(cluster)
+	cluster.global_position = spawn_position
 	cluster.spawn_asteroids(rng, count_min, count_max, spawn_radius, asteroid_radius)
+	return cluster
