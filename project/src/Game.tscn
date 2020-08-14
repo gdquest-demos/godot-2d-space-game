@@ -56,7 +56,8 @@ refresh_threshold_range = 350.0
 [node name="StationSpawner" type="Node2D" parent="GameWorld"]
 script = ExtResource( 2 )
 Station = ExtResource( 4 )
-Player = ExtResource( 5 )
+
+[node name="PlayerShip" parent="GameWorld/StationSpawner" instance=ExtResource( 5 )]
 
 [node name="AsteroidSpawner" type="Node2D" parent="GameWorld"]
 script = ExtResource( 1 )
