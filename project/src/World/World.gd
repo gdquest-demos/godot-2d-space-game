@@ -32,6 +32,7 @@ onready var pirate_spawner: PirateSpawner = $PirateSpawner
 
 
 func _ready() -> void:
+	yield(owner, "ready")
 	setup()
 
 
