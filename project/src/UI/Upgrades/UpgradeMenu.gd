@@ -9,6 +9,8 @@ onready var speed_button := $HBoxContainer/SpeedUpgrade
 onready var cargo_button := $HBoxContainer/CargoUpgrade
 onready var mine_button := $HBoxContainer/MiningUpgrade
 onready var weapon_button := $HBoxContainer/WeaponUpgrade
+onready var hbox_container := $HBoxContainer
+onready var button_count := $HBoxContainer.get_child_count();
 
 
 func _ready() -> void:
@@ -21,12 +23,18 @@ func _ready() -> void:
 
 func open() -> void:
 	get_tree().paused = true
-	show()
 	health_button.grab_focus()
-
+	for i in range(button_count):
+		var button = hbox_container.get_child(i)
+		button.show_delayed(i * 0.1)
+	show()
 
 # Emit a signal through the Events signal bus to transfer the upgrade selected by the player.
 func select_upgrade(type: int) -> void:
 	get_tree().paused = false
-	hide()
 	Events.emit_signal("upgrade_chosen", type)
+	for i in range(button_count):
+		var button = hbox_container.get_child(i)
+		button.hide_delayed(i * 0.1)
+	yield(hbox_container.get_child(button_count - 1), "on_hide_complete")
+	hide()
