@@ -8,6 +8,8 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "hide"
+length = 0.266667
+step = 0.0333333
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -15,7 +17,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0.0666667, 0.266667 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -25,9 +27,9 @@ tracks/1/path = NodePath(".:margin_top")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.7 ),
+"times": PoolRealArray( 0, 0.266667 ),
 "transitions": PoolRealArray( 2.46229, 1 ),
 "update": 0,
 "values": [ 0.0, 46.0 ]
@@ -39,7 +41,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.7 ),
+"times": PoolRealArray( 0, 0.266667 ),
 "transitions": PoolRealArray( 2.14355, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 0.2, 0.2 ) ]
@@ -47,6 +49,8 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "show"
+length = 0.366667
+step = 0.0333333
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -54,7 +58,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
@@ -66,8 +70,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 0.217638, 0.329877 ),
+"times": PoolRealArray( 0, 0.366667 ),
+"transitions": PoolRealArray( 0.170755, 0.329877 ),
 "update": 0,
 "values": [ 108.0, 0.0 ]
 }
@@ -78,13 +82,14 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.7 ),
-"transitions": PoolRealArray( 0.435275, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.266667 ),
+"transitions": PoolRealArray( 0.435275, 1 ),
 "update": 0,
-"values": [ Vector2( 0.2, 0.2 ), Vector2( 0.3, 0.7 ), Vector2( 1.1, 1.05 ), Vector2( 0.95, 0.93 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 1, 1 ) ]
 }
 
 [node name="UpgradeButton" type="TextureButton"]
+modulate = Color( 1, 1, 1, 0 )
 margin_right = 128.0
 margin_bottom = 128.0
 rect_pivot_offset = Vector2( 64, 64 )
@@ -130,3 +135,4 @@ align = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hide = SubResource( 1 )
 anims/show = SubResource( 2 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
