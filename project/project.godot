@@ -184,7 +184,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Libraries/godot-steering-ai-framework/GSAIUtils.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "GameWorld",
 "language": "GDScript",
 "path": "res://src/World/GameWorld.gd"

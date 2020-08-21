@@ -56,7 +56,8 @@ func _find_largest_inoccupied_asteroid_cluster() -> AsteroidCluster:
 		if cluster.iron_amount > target_cluster_iron_amount:
 			target_cluster = cluster
 			target_cluster_iron_amount = cluster.iron_amount
-	target_cluster.is_occupied = true
+	if target_cluster:
+		target_cluster.is_occupied = true
 	return target_cluster
 
 
