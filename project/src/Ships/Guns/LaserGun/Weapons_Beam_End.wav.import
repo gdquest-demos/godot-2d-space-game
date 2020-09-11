@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Weapons_Beam_End.wav-32e717e3f50fe31462ca7fec1898ac4c.sample"
+
+[deps]
+
+source_file="res://src/Ships/Guns/LaserGun/Weapons_Beam_End.wav"
+dest_files=[ "res://.import/Weapons_Beam_End.wav-32e717e3f50fe31462ca7fec1898ac4c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0

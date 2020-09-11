@@ -7,6 +7,7 @@ onready var arc_top := $ArcTop
 onready var fill := $Fill
 onready var tween := $Tween
 onready var anim_player := $AnimationPlayer
+onready var audio_unload: AudioStreamPlayer = $AudioUnload
 
 var docked_position := Vector2.ZERO
 
@@ -37,6 +38,7 @@ func spawn_ore() -> void:
 	else:
 		ore.global_position = rect_global_position + rect_pivot_offset
 		ore.animate_to(docked_position)
+		audio_unload.play()
 
 
 func _on_Events_docked(docking_point: DockingPoint) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/Ships/Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Libraries/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -19,6 +19,11 @@
 [ext_resource path="res://src/VFX/MoveTrail.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/Ships/Player/VFX.gd" type="Script" id=18]
 [ext_resource path="res://src/VFX/DustEmitter.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/Common/LoopingAudioStreamPlayer2D.gd" type="Script" id=20]
+[ext_resource path="res://src/Ships/Player/Thrust_End.wav" type="AudioStream" id=21]
+[ext_resource path="res://src/Ships/Player/Thrust_Loop.wav" type="AudioStream" id=22]
+[ext_resource path="res://src/Ships/Player/Thrust_Start.wav" type="AudioStream" id=23]
+[ext_resource path="res://src/Ships/Player/Player_Landing.wav" type="AudioStream" id=24]
 
 [node name="PlayerShip" instance=ExtResource( 1 )]
 collision_mask = 14
@@ -38,8 +43,17 @@ drag_linear_coeff = 0.04
 [node name="Travel" type="Node" parent="StateMachine/Move" index="0"]
 script = ExtResource( 4 )
 
+[node name="ThrustersAudioPlayer" type="AudioStreamPlayer2D" parent="StateMachine/Move/Travel" index="0"]
+script = ExtResource( 20 )
+start = ExtResource( 23 )
+loop = ExtResource( 22 )
+tail = ExtResource( 21 )
+
 [node name="Dock" type="Node" parent="StateMachine/Move" index="1"]
 script = ExtResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StateMachine/Move/Dock" index="0"]
+stream = ExtResource( 24 )
 
 [node name="Precision" type="Node" parent="StateMachine/Move" index="2"]
 script = ExtResource( 7 )

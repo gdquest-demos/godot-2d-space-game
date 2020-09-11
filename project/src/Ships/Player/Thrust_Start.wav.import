@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Thrust_Start.wav-645aa5b52079f2b2373b3fa8a8c5a904.sample"
+
+[deps]
+
+source_file="res://src/Ships/Player/Thrust_Start.wav"
+dest_files=[ "res://.import/Thrust_Start.wav-645aa5b52079f2b2373b3fa8a8c5a904.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0

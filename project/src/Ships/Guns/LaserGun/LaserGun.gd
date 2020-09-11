@@ -9,6 +9,8 @@ export var damage_per_second := 200.0
 onready var laser_beam := $LaserBeam2D
 onready var shooter := owner
 
+onready var audio: LoopingAudioStreamPlayer2D = $LoopingAudioStreamPlayer2D
+
 var is_firing := false setget set_is_firing
 var collision_mask := 0 setget set_collision_mask
 
@@ -28,6 +30,10 @@ func set_is_firing(firing: bool) -> void:
 
 	set_physics_process(is_firing)
 	laser_beam.is_casting = is_firing
+	if is_firing:
+		audio.start()
+	else:
+		audio.end()
 
 
 func set_collision_mask(new_mask: int) -> void:

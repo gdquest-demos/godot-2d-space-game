@@ -22,6 +22,8 @@ var _docking_phase := 0
 var _current_docking_point: Node2D
 var _controls_disabled := false
 
+onready var audio: AudioStreamPlayer = $AudioStreamPlayer
+
 
 func _ready() -> void:
 	yield(owner, "ready")
@@ -101,7 +103,7 @@ func physics_process(delta: float) -> void:
 				Events.connect("force_undock", self, "_on_Ship_force_undock")
 				ship.vfx.create_ripple()
 				ship.vfx.create_dust()
-				return
+				audio.play()
 
 
 func unhandled_input(event: InputEvent) -> void:

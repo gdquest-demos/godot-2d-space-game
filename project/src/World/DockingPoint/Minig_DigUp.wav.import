@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Minig_DigUp.wav-ff02a0b0f9aff083ab0b7c8fd160a391.sample"
+
+[deps]
+
+source_file="res://src/World/DockingPoint/Minig_DigUp.wav"
+dest_files=[ "res://.import/Minig_DigUp.wav-ff02a0b0f9aff083ab0b7c8fd160a391.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0

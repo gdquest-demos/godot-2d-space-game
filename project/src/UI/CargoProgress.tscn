@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/UI/CargoProgress.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/cargo_interface/cargo_outer.svg" type="Texture" id=2]
+[ext_resource path="res://src/Ships/Player/Mining_Unload.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/ui/cargo_interface/cargo_fill.svg" type="Texture" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -97,3 +98,6 @@ stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioUnload" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )

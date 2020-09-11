@@ -4,12 +4,19 @@
 extends PlayerState
 
 var reversing := false
+onready var audio_thrusters: LoopingAudioStreamPlayer2D = $ThrustersAudioPlayer
 
 
 func physics_process(delta: float) -> void:
 	var movement := get_movement()
 	reversing = movement.y > 0
 	var direction := GSAIUtils.angle_to_vector2(_parent.agent.orientation)
+	
+	audio_thrusters.global_position = owner.global_position
+	if movement.y < 0.0 and not audio_thrusters.playing:
+		audio_thrusters.start()
+	elif is_equal_approx(movement.y, 0.0) and not audio_thrusters.ending:
+		audio_thrusters.end()
 
 	_parent.linear_velocity += (
 		movement.y

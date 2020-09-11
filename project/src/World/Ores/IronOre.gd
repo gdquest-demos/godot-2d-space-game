@@ -1,6 +1,7 @@
 extends Sprite
 
 onready var tween := $Tween
+onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _init() -> void:
@@ -34,6 +35,11 @@ func animate_to(target_position: Vector2) -> void:
 		Tween.EASE_OUT,
 		0.4 + random_delay
 	)
+	tween.start()
+	scale = Vector2.ZERO
+	yield(get_tree().create_timer(random_delay), "timeout")
+	visible = true
+	yield(tween, "tween_all_completed")
 	tween.interpolate_property(
 		self,
 		"scale",
@@ -41,13 +47,10 @@ func animate_to(target_position: Vector2) -> void:
 		Vector2.ZERO,
 		0.25,
 		Tween.TRANS_BACK,
-		Tween.EASE_IN,
-		0.85 + random_delay
+		Tween.EASE_IN
 	)
+	audio.play()
 	tween.start()
-	scale = Vector2.ZERO
-	yield(get_tree().create_timer(random_delay), "timeout")
-	visible = true
 	yield(tween, "tween_all_completed")
 	queue_free()
 
