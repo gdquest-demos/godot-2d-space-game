@@ -44,6 +44,8 @@ drag_linear_coeff = 0.04
 script = ExtResource( 4 )
 
 [node name="ThrustersAudioPlayer" type="AudioStreamPlayer2D" parent="StateMachine/Move/Travel" index="0"]
+stream = ExtResource( 22 )
+bus = "Thrusters"
 script = ExtResource( 20 )
 start = ExtResource( 23 )
 loop = ExtResource( 22 )

@@ -126,6 +126,6 @@ amount = 3
 process_material = SubResource( 5 )
 texture = ExtResource( 6 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 autoplay = "Idle"
 anims/Idle = SubResource( 6 )
