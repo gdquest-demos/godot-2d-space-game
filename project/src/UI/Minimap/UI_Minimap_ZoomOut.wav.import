@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/UI_Minimap_ZoomOut.wav-74e4b883a0609968c604a72dda46fb8c.sample"
+
+[deps]
+
+source_file="res://src/UI/Minimap/UI_Minimap_ZoomOut.wav"
+dest_files=[ "res://.import/UI_Minimap_ZoomOut.wav-74e4b883a0609968c604a72dda46fb8c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
