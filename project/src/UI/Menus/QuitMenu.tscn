@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/ui/fonts/default_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/UI/Menus/Sounds/MenuSoundPlayer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/ui/fonts/default_font_bold.tres" type="DynamicFont" id=5]
-[ext_resource path="res://src/UI/QuitMenu.gd" type="Script" id=6]
+[ext_resource path="res://src/UI/Menus/QuitMenu.gd" type="Script" id=6]
 
 [node name="QuitMenu" type="MarginContainer"]
 anchor_left = 0.5
@@ -86,3 +87,7 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MenuSoundPlayer" parent="." instance=ExtResource( 2 )]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/YesButton" to="." method="_on_YesButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/NoButton" to="." method="_on_NoButton_pressed"]

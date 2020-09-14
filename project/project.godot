@@ -224,6 +224,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Utils/MathUtils.gd"
 }, {
+"base": "AudioStreamPlayer",
+"class": "MenuSoundPlayer",
+"language": "GDScript",
+"path": "res://src/UI/Menus/Sounds/MenuSoundPlayer.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "PirateShip",
 "language": "GDScript",
@@ -343,6 +348,7 @@ _global_script_class_icons={
 "MapSprite": "",
 "MapView": "",
 "MathUtils": "",
+"MenuSoundPlayer": "",
 "PirateShip": "",
 "PirateSpawner": "",
 "PirateState": "",

@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/ui/icons/upgrades/health_upgrade.svg" type="Texture" id=1]
 [ext_resource path="res://assets/ui/icons/upgrades/cargo_upgrade.svg" type="Texture" id=2]
 [ext_resource path="res://assets/ui/icons/upgrades/speed_upgrade.svg" type="Texture" id=3]
-[ext_resource path="res://src/UI/Upgrades/UpgradeMenu.gd" type="Script" id=4]
+[ext_resource path="res://src/UI/Menus/UpgradeMenu.gd" type="Script" id=4]
 [ext_resource path="res://assets/ui/icons/upgrades/weapon_upgrade.svg" type="Texture" id=5]
-[ext_resource path="res://src/UI/Upgrades/UpgradeButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/UI/Menus/UpgradeButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/ui/icons/upgrades/mining_upgrade.svg" type="Texture" id=7]
+[ext_resource path="res://src/UI/Menus/Sounds/MenuSoundPlayer.tscn" type="PackedScene" id=8]
 
 [node name="UpgradeMenu" type="Control"]
 anchor_right = 1.0
@@ -57,3 +58,5 @@ margin_left = 528.0
 margin_right = 656.0
 texture = ExtResource( 5 )
 text = "Weapon"
+
+[node name="MenuSoundPlayer" parent="." instance=ExtResource( 8 )]

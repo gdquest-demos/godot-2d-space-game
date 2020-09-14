@@ -14,13 +14,14 @@
 [ext_resource path="res://src/VFX/Shaders/distorted_view.shader" type="Shader" id=13]
 [ext_resource path="res://src/World/GameWorld.gd" type="Script" id=14]
 [ext_resource path="res://src/World/Spawners/PirateSpawner.gd" type="Script" id=15]
-[ext_resource path="res://src/UI/Upgrades/UpgradeMenu.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/UI/Menus/UpgradeMenu.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/UI/UI.gd" type="Script" id=17]
-[ext_resource path="res://src/UI/QuitMenu.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/UI/Menus/QuitMenu.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/UI/ScreenFader.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/VFX/DistortMaskView.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/VFX/PostProcessGameView.gd" type="Script" id=21]
 [ext_resource path="res://src/UI/HUD/HUD.tscn" type="PackedScene" id=22]
+
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("MapView/Viewport")

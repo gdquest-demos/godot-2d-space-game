@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/UI/MainScreen/MainScreen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/UI/Menus/Sounds/MenuSoundPlayer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/ui/theme_main_menu.tres" type="Theme" id=3]
 [ext_resource path="res://assets/ui/icons/gamepads/xbox_a_button.svg" type="Texture" id=4]
 [ext_resource path="res://assets/ui/icons/gamepads/playstation_cross_buttton.svg" type="Texture" id=5]
@@ -140,3 +141,5 @@ layer = 3
 
 [node name="ScreenFader" parent="FadeLayer" instance=ExtResource( 9 )]
 duration_fade_out = 1.0
+
+[node name="MenuSoundPlayer" parent="." instance=ExtResource( 2 )]

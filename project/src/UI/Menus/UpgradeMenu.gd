@@ -9,6 +9,7 @@ onready var cargo_button := $HBoxContainer/CargoUpgrade
 onready var mine_button := $HBoxContainer/MiningUpgrade
 onready var weapon_button := $HBoxContainer/WeaponUpgrade
 onready var hbox_container := $HBoxContainer
+onready var menu_sounds: MenuSoundPlayer = $MenuSoundPlayer
 
 onready var buttons := hbox_container.get_children()
 
@@ -24,6 +25,7 @@ func _ready() -> void:
 func open() -> void:
 	get_tree().paused = true
 	health_button.grab_focus()
+	menu_sounds.play_open()
 	for button in buttons:
 		button.appear(button.get_index() * 0.1)
 	show()
@@ -33,6 +35,7 @@ func open() -> void:
 func select_upgrade(type: int) -> void:
 	get_tree().paused = false
 	Events.emit_signal("upgrade_chosen", type)
+	menu_sounds.play_confirm()
 	for button in buttons:
 		button.disappear(button.get_index() * 0.1)
 	yield(buttons[-1], "disappeared")
