@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Radar.wav-264ea5b38c3801e8b8ff2503fdc94fee.sample"
+
+[deps]
+
+source_file="res://World/DockingPoint/Radar.wav"
+dest_files=[ "res://.import/Radar.wav-264ea5b38c3801e8b8ff2503fdc94fee.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0
