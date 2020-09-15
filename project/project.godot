@@ -194,7 +194,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Ships/Guns/Gun.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "LaserGun",
 "language": "GDScript",
 "path": "res://Ships/Guns/LaserGun/LaserGun.gd"
@@ -224,7 +224,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Utils/MathUtils.gd"
 }, {
-"base": "Reference",
+"base": "AudioStreamPlayer",
 "class": "MenuSoundPlayer",
 "language": "GDScript",
 "path": "res://UI/Menus/Sounds/MenuSoundPlayer.gd"

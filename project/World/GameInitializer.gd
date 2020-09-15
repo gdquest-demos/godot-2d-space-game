@@ -27,6 +27,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = not OS.window_fullscreen
 		get_tree().set_input_as_handled()
+	if event.is_action_pressed("ui_cancel"):
+		Events.emit_signal("upgrade_unlocked")
 
 
 func _on_Spawner_pirate_spawned(pirate: PirateShip) -> void:
