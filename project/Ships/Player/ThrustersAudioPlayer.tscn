@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Common/LoopingAudioStreamPlayer2D.gd" type="Script" id=1]
+[ext_resource path="res://Ships/Player/Thrust_Loop.wav" type="AudioStream" id=2]
+[ext_resource path="res://Ships/Player/Thrust_Start.wav" type="AudioStream" id=3]
+[ext_resource path="res://Ships/Player/Thrust_End.wav" type="AudioStream" id=4]
+
+[node name="ThrustersAudioPlayer" type="AudioStreamPlayer2D"]
+stream = ExtResource( 2 )
+bus = "Thrusters"
+script = ExtResource( 1 )
+sound_start = ExtResource( 3 )
+sound_loop = ExtResource( 2 )
+sound_tail = ExtResource( 4 )

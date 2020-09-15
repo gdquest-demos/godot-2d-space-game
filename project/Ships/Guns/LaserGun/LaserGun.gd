@@ -9,7 +9,7 @@ export var damage_per_second := 200.0
 onready var laser_beam := $LaserBeam2D
 onready var shooter := owner
 
-onready var audio: LoopingAudioStreamPlayer2D = $LoopingAudioStreamPlayer2D
+onready var audio: LoopingAudioStreamPlayer2D = $LaserGunSounds
 
 var is_firing := false setget set_is_firing
 var collision_mask := 0 setget set_collision_mask
