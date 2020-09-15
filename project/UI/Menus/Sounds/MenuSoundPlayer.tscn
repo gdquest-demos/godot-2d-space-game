@@ -1,0 +1,17 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://UI/Menus/Sounds/MenuSoundPlayer.gd" type="Script" id=1]
+[ext_resource path="res://UI/Menus/Sounds/UI_Open.wav" type="AudioStream" id=2]
+[ext_resource path="res://UI/Menus/Sounds/UI_Hide.wav" type="AudioStream" id=3]
+[ext_resource path="res://UI/Menus/Sounds/UI_Close.wav" type="AudioStream" id=4]
+[ext_resource path="res://UI/Menus/Sounds/UI_Select.wav" type="AudioStream" id=5]
+[ext_resource path="res://UI/Menus/Sounds/UI_Confirm.wav" type="AudioStream" id=6]
+
+
+[node name="MenuSoundPlayer" type="AudioStreamPlayer"]
+script = ExtResource( 1 )
+sound_close = ExtResource( 4 )
+sound_confirm = ExtResource( 6 )
+sound_hide = ExtResource( 3 )
+sound_open = ExtResource( 2 )
+sound_select = ExtResource( 5 )

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/UI_Hide.wav-62813934a44269ed8ae98a88eb4d07c5.sample"
+
+[deps]
+
+source_file="res://UI/Menus/Sounds/UI_Hide.wav"
+dest_files=[ "res://.import/UI_Hide.wav-62813934a44269ed8ae98a88eb4d07c5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

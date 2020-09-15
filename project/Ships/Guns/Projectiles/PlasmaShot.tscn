@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Ships/Guns/Projectiles/Projectile.gd" type="Script" id=1]
+[ext_resource path="res://Ships/Guns/Projectiles/plasma_ball.png" type="Texture" id=2]
+[ext_resource path="res://VFX/Shaders/glow_sprite.shader" type="Shader" id=3]
+[ext_resource path="res://VFX/DistortionEmitter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Ships/Guns/Projectiles/Weapons_Plasma_Shot_01.wav" type="AudioStream" id=5]
+
+
+
+
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/alpha_intensity_front = 0.5
+shader_param/tint_front = Color( 0.972549, 0.92549, 0.92549, 1 )
+shader_param/alpha_intensity_back = 1.39583
+shader_param/tint_back = Color( 0.94902, 0.054902, 0.054902, 1 )
+shader_param/blend_amount = 1.0
+shader_param/fade_amount = 1.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 15.6706
+
+[sub_resource type="Animation" id=3]
+resource_name = "Flicker"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/alpha_intensity_back")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 3.0, 1.25 ]
+}
+
+[node name="PlasmaShot" type="KinematicBody2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 1 )
+distortion_emitter = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+scale = Vector2( 0.387347, 0.387347 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Lifespan" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+autostart = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Flicker = SubResource( 3 )
+
+[node name="DistortionTransform" type="RemoteTransform2D" parent="."]
+position = Vector2( 0, 15 )
+update_rotation = false
+update_scale = false
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+scale = Vector2( 2.47902, 2.47902 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+attenuation = 0.535888

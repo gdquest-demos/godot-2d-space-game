@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Ships/Player/PlayerCamera.gd" type="Script" id=1]
+
+
+[node name="Camera" type="Camera2D" groups=[
+"Camera",
+]]
+current = true
+zoom = Vector2( 1.2, 1.2 )
+process_mode = 0
+smoothing_enabled = true
+editor_draw_drag_margin = true
+script = ExtResource( 1 )
+max_zoom = 6.0
+
+[node name="Tween" type="Tween" parent="."]
+playback_process_mode = 0
+
+[node name="RemoteMap" type="RemoteTransform2D" parent="."]
+
+[node name="RemoteDistort" type="RemoteTransform2D" parent="."]
+
+[node name="ShakeDuration" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="ShakeDuration" to="." method="_on_ShakeDuration_timeout"]

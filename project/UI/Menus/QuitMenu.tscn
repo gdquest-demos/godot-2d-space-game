@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UI/fonts/default_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/Menus/Sounds/MenuSoundPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/fonts/default_font_bold.tres" type="DynamicFont" id=5]
+[ext_resource path="res://UI/Menus/QuitMenu.gd" type="Script" id=6]
+
+
+
+[node name="QuitMenu" type="MarginContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -155.0
+margin_top = -60.0
+margin_right = 155.0
+margin_bottom = 60.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 290.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 270, 80 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 290.0
+margin_bottom = 100.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 270.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "Really quit?"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 36.0
+margin_right = 270.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 0, 32 )
+alignment = 1
+
+[node name="YesButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 5.0
+margin_right = 133.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 128, 0 )
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/YesButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 5 )
+text = "Yes"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NoButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 137.0
+margin_right = 265.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 128, 0 )
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/NoButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 5 )
+text = "No"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuSoundPlayer" parent="." instance=ExtResource( 2 )]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/YesButton" to="." method="_on_YesButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/NoButton" to="." method="_on_NoButton_pressed"]

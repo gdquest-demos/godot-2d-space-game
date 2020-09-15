@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://World/DockingPoint/DockingPoint.gd" type="Script" id=1]
+[ext_resource path="res://World/DockingPoint/dock-aura.svg" type="Texture" id=2]
+[ext_resource path="res://World/DockingPoint/asteroid_map_icon.tres" type="Resource" id=3]
+[ext_resource path="res://World/DockingPoint/TweenAura.gd" type="Script" id=4]
+
+
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 81.3653
+
+[node name="DockingPoint" type="Node2D" groups=[
+"mini-map",
+"world_objects",
+]]
+script = ExtResource( 1 )
+map_icon = ExtResource( 3 )
+
+[node name="TweenAura" type="Tween" parent="."]
+script = ExtResource( 4 )
+
+[node name="DockingAura" type="Sprite" parent="."]
+visible = false
+position = Vector2( -7.39098e-06, 9.53674e-07 )
+z_index = -5
+z_as_relative = false
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.703517, 0.703517 )
+
+[node name="PlayerRotationRig" type="Node2D" parent="Sprite"]
+
+[node name="PlayerRotationRemoteTransform" type="RemoteTransform2D" parent="Sprite/PlayerRotationRig"]
+update_scale = false
+
+[node name="DockingArea" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DockingArea"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+collision_layer = 2
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+visible = false
+shape = SubResource( 2 )
+
+[node name="MapTransform" type="RemoteTransform2D" parent="."]

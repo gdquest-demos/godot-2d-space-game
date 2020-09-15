@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://UI/Menus/Upgrades/Icons/health_upgrade.svg" type="Texture" id=1]
+[ext_resource path="res://UI/Menus/Upgrades/Icons/cargo_upgrade.svg" type="Texture" id=2]
+[ext_resource path="res://UI/Menus/Upgrades/Icons/speed_upgrade.svg" type="Texture" id=3]
+[ext_resource path="res://UI/Menus/Upgrades/UpgradeMenu.gd" type="Script" id=4]
+[ext_resource path="res://UI/Menus/Upgrades/Icons/weapon_upgrade.svg" type="Texture" id=5]
+[ext_resource path="res://UI/Menus/Upgrades/UpgradeButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/Menus/Upgrades/Icons/mining_upgrade.svg" type="Texture" id=7]
+[ext_resource path="res://UI/Menus/Sounds/MenuSoundPlayer.tscn" type="PackedScene" id=8]
+
+
+
+
+[node name="UpgradeMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -328.0
+margin_top = -64.0
+margin_right = 328.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
+texture = ExtResource( 1 )
+text = "Health"
+
+[node name="SpeedUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
+margin_left = 132.0
+margin_right = 260.0
+texture = ExtResource( 3 )
+text = "Speed"
+
+[node name="CargoUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
+margin_left = 264.0
+margin_right = 392.0
+texture = ExtResource( 2 )
+text = "Cargo"
+
+[node name="MiningUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
+margin_left = 396.0
+margin_right = 524.0
+texture = ExtResource( 7 )
+text = "Mining"
+
+[node name="WeaponUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
+margin_left = 528.0
+margin_right = 656.0
+texture = ExtResource( 5 )
+text = "Weapon"
+
+[node name="MenuSoundPlayer" parent="." instance=ExtResource( 8 )]

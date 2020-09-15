@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://UI/HUD/shield_bar_over.svg" type="Texture" id=1]
+[ext_resource path="res://UI/HUD/shield_bar_progress.svg" type="Texture" id=2]
+[ext_resource path="res://UI/HUD/shield_bar_under.svg" type="Texture" id=3]
+[ext_resource path="res://UI/HUD/ShieldBar.gd" type="Script" id=4]
+[ext_resource path="res://Ships/Player/player_stats.tres" type="Resource" id=5]
+
+
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 0.269531, 0.269531, 1, 0.294118, 0.356863, 0.670588, 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "damage"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.16, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 4, 4, 4, 1 ), Color( 1, 1, 1, 1 ), Color( 4, 4, 4, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "danger"
+length = 0.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.262745, 0.262745, 0.435294 ), Color( 1, 0.262745, 0.262745, 1 ) ]
+}
+
+[node name="ShieldBar" type="TextureProgress"]
+margin_right = 224.0
+margin_bottom = 33.0
+value = 50.0
+texture_under = ExtResource( 3 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+tint_progress = Color( 1, 0.262745, 0.262745, 1 )
+nine_patch_stretch = true
+stretch_margin_left = 37
+stretch_margin_top = 10
+stretch_margin_right = 46
+stretch_margin_bottom = 23
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+gradient = SubResource( 1 )
+stats = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/damage = SubResource( 2 )
+anims/danger = SubResource( 3 )

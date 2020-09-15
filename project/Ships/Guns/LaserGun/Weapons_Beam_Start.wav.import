@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Weapons_Beam_Start.wav-bc8c78856c09da6607c85de96ac36b4e.sample"
+
+[deps]
+
+source_file="res://Ships/Guns/LaserGun/Weapons_Beam_Start.wav"
+dest_files=[ "res://.import/Weapons_Beam_Start.wav-bc8c78856c09da6607c85de96ac36b4e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0

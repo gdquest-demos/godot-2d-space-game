@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://World/DockingPoint/DockingPoint.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/DockingPoint/Asteroid.gd" type="Script" id=2]
+[ext_resource path="res://World/DockingPoint/asteroid-round.svg" type="Texture" id=3]
+[ext_resource path="res://World/DockingPoint/Minig_DigUp.wav" type="AudioStream" id=4]
+
+
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 117.956
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 48.0012
+
+[sub_resource type="Animation" id=3]
+resource_name = "spin"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends AnimationPlayer
+
+
+func _ready() -> void:
+	playback_speed = rand_range(0.5, 2.0)
+"
+
+[sub_resource type="Animation" id=5]
+resource_name = "pulse"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 2, 0.5, 2 ),
+"update": 0,
+"values": [ Vector2( 0.449401, 0.449401 ), Vector2( 0.505533, 0.505533 ), Vector2( 0.449401, 0.449401 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="AudioStreamRandomPitch" id=6]
+audio_stream = ExtResource( 4 )
+
+[node name="Asteroid" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="2"]
+scale = Vector2( 0.449401, 0.449401 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="DockingArea" index="0"]
+visible = true
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="KinematicBody2D" index="0"]
+visible = true
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+autoplay = "spin"
+anims/spin = SubResource( 3 )
+script = SubResource( 4 )
+
+[node name="FXAnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+anims/pulse = SubResource( 5 )
+
+[node name="FXTween" type="Tween" parent="." index="8"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="9"]
+stream = SubResource( 6 )

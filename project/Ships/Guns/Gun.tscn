@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Ships/Guns/Gun.gd" type="Script" id=1]
+[ext_resource path="res://Ships/Guns/projectile-enemy.svg" type="Texture" id=2]
+
+
+
+[sub_resource type="GDScript" id=1]
+script/source = "class_name Projectile
+extends KinematicBody2D
+
+export var speed := 750.0
+export var damage := 10.0
+
+var direction := Vector2.ZERO
+var shooter: Node
+
+onready var lifespan_timer := $Lifespan
+
+
+func _ready() -> void:
+	direction = -GSAIUtils.angle_to_vector2(rotation)
+	# warning-ignore:return_value_discarded
+	lifespan_timer.connect(\"timeout\", self, \"_on_Lifespan_timeout\")
+
+
+func _physics_process(delta: float) -> void:
+	var collision := move_and_collide(direction * speed * delta)
+	if collision:
+		Events.emit_signal(\"damaged\", collision.collider, damage, shooter)
+		queue_free()
+
+
+func _on_Lifespan_timeout() -> void:
+	queue_free()
+"
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 4.715
+height = 10.212
+
+[sub_resource type="PackedScene" id=3]
+_bundled = {
+"conn_count": 0,
+"conns": PoolIntArray(  ),
+"editable_instances": [  ],
+"names": PoolStringArray( "PlasmaShot", "KinematicBody2D", "collision_layer", "collision_mask", "script", "Sprite", "Sprite", "rotation", "scale", "texture", "CollisionShape2D", "CollisionShape2D", "shape", "Lifespan", "Timer", "wait_time", "one_shot", "autostart" ),
+"node_count": 4,
+"node_paths": [ NodePath("."), NodePath("."), NodePath(".") ],
+"nodes": PoolIntArray( -1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0, 1073741824, 0, 6, 5, -1, 3, 7, 3, 8, 4, 9, 5, 0, 1073741825, 0, 11, 10, -1, 1, 12, 6, 0, 1073741826, 0, 14, 13, -1, 3, 15, 7, 16, 8, 17, 9, 0 ),
+"variants": [ 16, 0, SubResource( 1 ), -1.5708, Vector2( 0.25, 0.25 ), ExtResource( 2 ), SubResource( 2 ), 0.75, true, true ],
+"version": 2
+}
+
+[node name="Gun" type="Node2D"]
+script = ExtResource( 1 )
+Projectile = SubResource( 3 )
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

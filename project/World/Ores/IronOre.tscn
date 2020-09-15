@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://World/Ores/iron_ore.svg" type="Texture" id=1]
+[ext_resource path="res://World/Ores/IronOre.gd" type="Script" id=2]
+[ext_resource path="res://Ships/Player/Minig_Swallow.wav" type="AudioStream" id=3]
+
+
+
+[node name="IronOre" type="Sprite"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )

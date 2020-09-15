@@ -1,0 +1,133 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://World/Spawners/AsteroidSpawner.gd" type="Script" id=1]
+[ext_resource path="res://World/Spawners/StationSpawner.gd" type="Script" id=2]
+[ext_resource path="res://Ships/Enemies/Pirate/PirateShip.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/DockingPoint/Station.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Ships/Player/PlayerShip.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/Minimap/MapView.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/GameInitializer.gd" type="Script" id=7]
+[ext_resource path="res://VFX/BackgroundStars.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UI/Minimap/MapDisplay.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Main/white.png" type="Texture" id=11]
+[ext_resource path="res://World/ShakingCamera.tscn" type="PackedScene" id=12]
+[ext_resource path="res://VFX/Shaders/distorted_view.shader" type="Shader" id=13]
+[ext_resource path="res://World/GameWorld.gd" type="Script" id=14]
+[ext_resource path="res://World/Spawners/PirateSpawner.gd" type="Script" id=15]
+[ext_resource path="res://UI/Menus/Upgrades/UpgradeMenu.tscn" type="PackedScene" id=16]
+[ext_resource path="res://UI/UI.gd" type="Script" id=17]
+[ext_resource path="res://UI/Menus/QuitMenu.tscn" type="PackedScene" id=18]
+[ext_resource path="res://UI/ScreenFader.tscn" type="PackedScene" id=19]
+[ext_resource path="res://VFX/DistortMaskView.tscn" type="PackedScene" id=20]
+[ext_resource path="res://VFX/PostProcessGameView.gd" type="Script" id=21]
+[ext_resource path="res://UI/HUD/HUD.tscn" type="PackedScene" id=22]
+
+
+
+
+
+
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("MapView/Viewport")
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("DistortMaskView/Viewport")
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 13 )
+shader_param/displacement_amount = 12.0
+shader_param/displacement_mask = SubResource( 2 )
+
+[sub_resource type="Environment" id=4]
+background_mode = 4
+glow_enabled = true
+glow_blend_mode = 0
+glow_bicubic_upscale = true
+
+[node name="GameInitializer" type="Node"]
+script = ExtResource( 7 )
+
+[node name="GameWorld" type="Node2D" parent="."]
+script = ExtResource( 14 )
+radius = 3000.0
+iron_amount_balance_level = 750.0
+refresh_threshold_range = 350.0
+
+[node name="BackgroundStars" parent="GameWorld" instance=ExtResource( 8 )]
+
+[node name="Camera" parent="GameWorld" instance=ExtResource( 12 )]
+
+[node name="StationSpawner" type="Node2D" parent="GameWorld"]
+script = ExtResource( 2 )
+Station = ExtResource( 4 )
+
+[node name="PlayerShip" parent="GameWorld/StationSpawner" instance=ExtResource( 5 )]
+
+[node name="AsteroidSpawner" type="Node2D" parent="GameWorld"]
+script = ExtResource( 1 )
+
+[node name="PirateSpawner" type="Node2D" parent="GameWorld"]
+script = ExtResource( 15 )
+PirateScene = ExtResource( 3 )
+spawn_radius = 350.0
+
+[node name="MapView" parent="." instance=ExtResource( 6 )]
+mouse_filter = 2
+
+[node name="BlackBackground" parent="MapView/Viewport/CanvasLayer" index="0"]
+mouse_filter = 2
+
+[node name="DistortMaskView" parent="." instance=ExtResource( 20 )]
+mouse_filter = 2
+
+[node name="BlackBackground" parent="DistortMaskView/Viewport/CanvasLayer" index="0"]
+mouse_filter = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+pause_mode = 2
+layer = 2
+script = ExtResource( 17 )
+
+[node name="HUD" parent="UI" instance=ExtResource( 22 )]
+mouse_filter = 2
+
+[node name="MapDisplay" parent="UI" instance=ExtResource( 10 )]
+pause_mode = 1
+texture = SubResource( 1 )
+flip_v = true
+
+[node name="UpgradeUI" parent="UI" instance=ExtResource( 16 )]
+visible = false
+mouse_filter = 2
+
+[node name="ScreenFader" parent="UI" instance=ExtResource( 19 )]
+
+[node name="QuitMenu" parent="UI" instance=ExtResource( 18 )]
+visible = false
+mouse_filter = 2
+
+[node name="PostProcessedLayer" type="CanvasLayer" parent="."]
+
+[node name="GameView" type="TextureRect" parent="PostProcessedLayer"]
+visible = false
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 1
+flip_v = true
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 4 )
+
+[editable path="MapView"]
+
+[editable path="DistortMaskView"]

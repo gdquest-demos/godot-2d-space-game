@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Ships/Player/StatsGun.gd" type="Script" id=1]
+
+
+[resource]
+script = ExtResource( 1 )
+_damage = 2.0
+_cooldown = 0.5
+_spread = 5.0

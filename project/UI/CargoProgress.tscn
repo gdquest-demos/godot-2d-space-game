@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://UI/CargoProgress.gd" type="Script" id=1]
+[ext_resource path="res://UI/HUD/cargo_outer.svg" type="Texture" id=2]
+[ext_resource path="res://Ships/Player/Mining_Unload.wav" type="AudioStream" id=3]
+[ext_resource path="res://UI/HUD/cargo_fill.svg" type="Texture" id=4]
+
+
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="Animation" id=3]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("ArcBottom:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ArcTop:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="CargoProgress" type="ProgressBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1152.0
+margin_bottom = -592.0
+rect_pivot_offset = Vector2( 64, 64 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+percent_visible = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArcTop" type="TextureProgress" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 64, 64 )
+value = 50.0
+texture_progress = ExtResource( 2 )
+fill_mode = 8
+radial_fill_degrees = 180.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArcBottom" type="TextureProgress" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 64, 64 )
+value = 50.0
+texture_progress = ExtResource( 2 )
+fill_mode = 8
+radial_initial_angle = 180.0
+radial_fill_degrees = 180.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Fill" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = -64.0
+margin_right = 64.0
+margin_bottom = 64.0
+rect_scale = Vector2( 1e-05, 1e-05 )
+rect_pivot_offset = Vector2( 64, 64 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioUnload" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )

@@ -1,0 +1,465 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://UI/MainScreen/envelope-foreground.png" type="Texture" id=1]
+[ext_resource path="res://UI/MainScreen/envelope-background.png" type="Texture" id=2]
+[ext_resource path="res://UI/MainScreen/MainScreen.gd" type="Script" id=3]
+[ext_resource path="res://UI/MainScreen/gdquest-logo.png" type="Texture" id=4]
+[ext_resource path="res://VFX/star.png" type="Texture" id=5]
+[ext_resource path="res://UI/MainScreen/title.png" type="Texture" id=6]
+[ext_resource path="res://UI/MainScreen/title-background.png" type="Texture" id=7]
+[ext_resource path="res://World/DockingPoint/asteroid-round.svg" type="Texture" id=8]
+[ext_resource path="res://Ships/Player/topdown-player.svg" type="Texture" id=9]
+[ext_resource path="res://UI/MainScreen/mask.png" type="Texture" id=10]
+[ext_resource path="res://Ships/Enemies/topdown-enemy.svg" type="Texture" id=11]
+
+
+
+
+
+
+
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.248804, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.502392, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.746412, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 250, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 50.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.5
+scale_random = 1.0
+scale_curve = SubResource( 2 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "idle"
+length = 7.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 0 ),
+"update": 0,
+"values": [ Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 1036, 820 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Enemy3:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4.5, 5.2, 6.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 0 ),
+"update": 0,
+"values": [ Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 932, 812 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Enemy2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4.5, 5.5 ),
+"transitions": PoolRealArray( 1, 1, 0 ),
+"update": 0,
+"values": [ Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 932, 812 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Enemy:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 4.5, 5, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 0 ),
+"update": 0,
+"values": [ Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 15, 12 ), Vector2( 932, 812 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 4.0
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Foreground/GDQuestLogo:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.25, 1, 2.2, 3 ),
+"transitions": PoolRealArray( 0.517633, 1.93187, 0.517633, 1.93187 ),
+"update": 0,
+"values": [ 0.0, 3.0, 0.0, -3.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Foreground/GDQuestLogo:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.95, 1.95, 2.95, 3.85 ),
+"transitions": PoolRealArray( 1.46409, 0.707107, 1.46409, 0.707107 ),
+"update": 0,
+"values": [ Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Foreground/GDQuestLogo:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05, 0.35, 0.65, 0.85, 0.9 ),
+"transitions": PoolRealArray( 0.287175, 0.287175, 3.73213, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 526, 728 ), Vector2( 526, 728 ), Vector2( 526, 512 ), Vector2( 526, 545 ), Vector2( 526, 545 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Foreground/HarvesterLogo:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.05, 0.2, 0.5, 0.75 ),
+"transitions": PoolRealArray( 0.34151, 0.34151, 2.92817, 0.353553 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 1.16, 1.16 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Foreground/HarvesterLogo:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.05, 0.2, 0.4, 0.65, 0.8 ),
+"transitions": PoolRealArray( 0.329877, 0.329877, 0.554785, 1.31951, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 2.15657, -2.05776, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Foreground/GDQuestLogo:rect_rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.05, 0.3, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 9.62309, 9.62309, -1.05059 ]
+}
+
+[sub_resource type="GDScript" id=10]
+script/source = "extends TextureButton
+
+func _pressed() -> void:
+	OS.shell_open(\"https://gdquest.com\")
+"
+
+[node name="MainScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnvelopeBackground" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 60
+custom_constants/margin_top = 60
+custom_constants/margin_left = 60
+custom_constants/margin_bottom = 60
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+margin_left = 60.0
+margin_top = 60.0
+margin_right = 1220.0
+margin_bottom = 660.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+margin_left = 60.0
+margin_top = 60.0
+margin_right = 1220.0
+margin_bottom = 660.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 1145.0
+margin_bottom = 585.0
+color = Color( 0.278431, 0.231373, 0.470588, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stars" type="Particles2D" parent="MarginContainer/MarginContainer"]
+position = Vector2( 588, 316 )
+amount = 24
+lifetime = 5.0
+preprocess = 5.0
+randomness = 1.0
+process_material = SubResource( 3 )
+texture = ExtResource( 5 )
+
+[node name="Asteroids" type="Node2D" parent="MarginContainer/MarginContainer"]
+
+[node name="Asteroid" type="Sprite" parent="MarginContainer/MarginContainer/Asteroids"]
+position = Vector2( 164, 292 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/Asteroids/Asteroid"]
+autoplay = "idle"
+playback_speed = 1.5
+anims/idle = SubResource( 4 )
+
+[node name="Asteroid2" type="Sprite" parent="MarginContainer/MarginContainer/Asteroids"]
+position = Vector2( 908, 524 )
+rotation = 1.25664
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/Asteroids/Asteroid2"]
+autoplay = "idle"
+playback_speed = 1.7
+anims/idle = SubResource( 5 )
+
+[node name="Asteroid3" type="Sprite" parent="MarginContainer/MarginContainer/Asteroids"]
+position = Vector2( 1020, 148 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/Asteroids/Asteroid3"]
+autoplay = "idle"
+playback_speed = 0.7
+anims/idle = SubResource( 6 )
+
+[node name="Ships" type="Node2D" parent="MarginContainer/MarginContainer"]
+position = Vector2( 132, -52 )
+
+[node name="Mask2D" type="Light2D" parent="MarginContainer/MarginContainer/Ships"]
+position = Vector2( 448, 1274.5 )
+scale = Vector2( 20, 20 )
+texture = ExtResource( 10 )
+energy = 0.0
+mode = 3
+range_z_min = 1
+range_z_max = 2
+
+[node name="Player" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
+position = Vector2( 15, 12 )
+rotation = 2.35619
+scale = Vector2( 0.7, 0.7 )
+z_index = 1
+texture = ExtResource( 9 )
+
+[node name="Enemy" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
+position = Vector2( 15, 12 )
+rotation = 2.35619
+scale = Vector2( 0.7, 0.7 )
+z_index = 1
+texture = ExtResource( 11 )
+
+[node name="Enemy2" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
+position = Vector2( 15, 12 )
+rotation = 2.35619
+scale = Vector2( 0.7, 0.7 )
+z_index = 1
+texture = ExtResource( 11 )
+
+[node name="Enemy3" type="Sprite" parent="MarginContainer/MarginContainer/Ships"]
+position = Vector2( 15, 12 )
+rotation = 2.35619
+scale = Vector2( 0.7, 0.7 )
+z_index = 1
+texture = ExtResource( 11 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/Ships"]
+autoplay = "idle"
+anims/idle = SubResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "intro"
+anims/idle = SubResource( 8 )
+anims/intro = SubResource( 9 )
+
+[node name="Foreground" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="HarvesterLogo" type="TextureRect" parent="Foreground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -261.0
+margin_top = -103.0
+margin_right = 261.0
+margin_bottom = 104.0
+rect_pivot_offset = Vector2( 261, 103 )
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="TextureRect" parent="Foreground/HarvesterLogo"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -204.0
+margin_top = -55.5
+margin_right = 205.0
+margin_bottom = 28.5
+rect_scale = Vector2( 0.956783, 0.956783 )
+rect_pivot_offset = Vector2( 204, 42 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnvelopeForeground" type="TextureRect" parent="Foreground"]
+anchor_right = 1.0
+margin_bottom = 176.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GDQuestLogo" type="TextureButton" parent="Foreground"]
+light_mask = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -114.0
+margin_top = -175.0
+margin_right = 114.0
+margin_bottom = -104.0
+rect_rotation = -1.05059
+rect_scale = Vector2( 1.01872, 1.01872 )
+rect_pivot_offset = Vector2( 114, 35 )
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+script = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Mask2D" type="Light2D" parent="Foreground"]
+position = Vector2( 640.003, 1288 )
+scale = Vector2( 20, 20 )
+texture = ExtResource( 10 )
+energy = 0.0
+mode = 3
+range_z_min = 0
+range_layer_min = 2
+range_layer_max = 4
+range_item_cull_mask = 2
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Weapons_Plasma_Shot_03.wav-e320fb0a553161522ee289a7f4f9d986.sample"
+
+[deps]
+
+source_file="res://Ships/Guns/Projectiles/Weapons_Plasma_Shot_03.wav"
+dest_files=[ "res://.import/Weapons_Plasma_Shot_03.wav-e320fb0a553161522ee289a7f4f9d986.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0
