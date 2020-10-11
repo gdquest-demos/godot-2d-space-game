@@ -100,7 +100,8 @@ func physics_process(delta: float) -> void:
 				_current_docking_point = collision.collider.owner
 				Events.emit_signal("docked", _current_docking_point)
 				_current_docking_point.set_docking_remote(ship, _agent.bounding_radius * 0.75)
-				Events.connect("force_undock", self, "_on_Ship_force_undock")
+				if not Events.is_connected("force_undock", self, "_on_Ship_force_undock"):
+					Events.connect("force_undock", self, "_on_Ship_force_undock")
 				ship.vfx.create_ripple()
 				ship.vfx.create_dust()
 				audio.play()
