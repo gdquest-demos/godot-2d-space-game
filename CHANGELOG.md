@@ -24,6 +24,7 @@ This document lists the new features, improvements, changes, and bug fixes in ea
 ## Bug fixes
 
 - Fixed an error with a nonexistent stat when getting a weapon upgrade.
+- Fixed a debugger error related to a signal connection whenever undocking.
 
 ## Harvester: 2D Space Game 0.1.0
 
