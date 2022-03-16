@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/Menus/Upgrades/Icons/health_upgrade.svg" type="Texture" id=1]
 [ext_resource path="res://UI/Menus/Upgrades/Icons/cargo_upgrade.svg" type="Texture" id=2]
@@ -8,17 +8,12 @@
 [ext_resource path="res://UI/Menus/Upgrades/UpgradeButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Menus/Upgrades/Icons/mining_upgrade.svg" type="Texture" id=7]
 [ext_resource path="res://UI/Menus/Sounds/MenuSoundPlayer.tscn" type="PackedScene" id=8]
-
-
-
+[ext_resource path="res://UI/Menus/Upgrades/hover.svg" type="Texture" id=9]
 
 [node name="UpgradeMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 pause_mode = 2
@@ -35,30 +30,35 @@ __meta__ = {
 }
 
 [node name="HealthUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
+texture_focused = ExtResource( 9 )
 texture = ExtResource( 1 )
 text = "Health"
 
 [node name="SpeedUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
 margin_left = 132.0
 margin_right = 260.0
+texture_focused = ExtResource( 9 )
 texture = ExtResource( 3 )
 text = "Speed"
 
 [node name="CargoUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
 margin_left = 264.0
 margin_right = 392.0
+texture_focused = ExtResource( 9 )
 texture = ExtResource( 2 )
 text = "Cargo"
 
 [node name="MiningUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
 margin_left = 396.0
 margin_right = 524.0
+texture_focused = ExtResource( 9 )
 texture = ExtResource( 7 )
 text = "Mining"
 
 [node name="WeaponUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
 margin_left = 528.0
 margin_right = 656.0
+texture_focused = ExtResource( 9 )
 texture = ExtResource( 5 )
 text = "Weapon"
 
