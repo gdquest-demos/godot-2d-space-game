@@ -10,9 +10,6 @@
 [ext_resource path="res://UI/MainMenu.gd" type="Script" id=8]
 [ext_resource path="res://UI/ScreenFader.tscn" type="PackedScene" id=9]
 
-
-
-
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
