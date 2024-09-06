@@ -1,14 +1,12 @@
 # Calculates angular acceleration to rotate a target to face its target's
 # position. The behavior attemps to arrive with zero remaining angular velocity.
-# category: Individual behaviors
+# @category - Individual behaviors
 class_name GSAIFace
 extends GSAIMatchOrientation
 
 
-func _init(agent: GSAISteeringAgent, target: GSAIAgentLocation, use_z := false).(
-	agent, target, use_z
-) -> void:
-	pass
+func _init(agent: GSAISteeringAgent, target: GSAIAgentLocation, use_z := false) -> void:
+	super._init(agent, target, use_z)
 
 
 func _face(acceleration: GSAITargetAcceleration, target_position: Vector3) -> void:

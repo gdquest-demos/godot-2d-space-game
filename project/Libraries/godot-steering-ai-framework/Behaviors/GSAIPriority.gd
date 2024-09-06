@@ -1,6 +1,6 @@
 # Container for multiple behaviors that returns the result of the first child
 # behavior with non-zero acceleration.
-# category: Combination behaviors
+# @category - Combination behaviors
 class_name GSAIPriority
 extends GSAISteeringBehavior
 
@@ -13,7 +13,8 @@ var last_selected_index: int
 var zero_threshold: float
 
 
-func _init(agent: GSAISteeringAgent, _zero_threshold := 0.001).(agent) -> void:
+func _init(agent: GSAISteeringAgent, _zero_threshold := 0.001) -> void:
+	super._init(agent)
 	self.zero_threshold = _zero_threshold
 
 

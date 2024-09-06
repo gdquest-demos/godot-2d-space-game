@@ -1,12 +1,12 @@
 # Calculates an angular acceleration to match an agent's orientation to its
 # direction of travel.
-# category: Individual behaviors
+# @category - Individual behaviors
 class_name GSAILookWhereYouGo
 extends GSAIMatchOrientation
 
 
-func _init(agent: GSAISteeringAgent, use_z := false).(agent, null, use_z) -> void:
-	pass
+func _init(agent: GSAISteeringAgent, use_z := false) -> void:
+	super._init(agent, null, use_z)
 
 
 func _calculate_steering(accel: GSAITargetAcceleration) -> void:

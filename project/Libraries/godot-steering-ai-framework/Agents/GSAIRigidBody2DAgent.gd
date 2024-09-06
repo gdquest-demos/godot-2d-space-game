@@ -1,11 +1,11 @@
 # A specialized steering agent that updates itself every frame so the user does
 # not have to using a RigidBody2D
-# category: Specialized agents
-extends GSAISpecializedAgent
+# @category - Specialized agents
 class_name GSAIRigidBody2DAgent
+extends GSAISpecializedAgent
 
 # The RigidBody2D to keep track of
-var body: RigidBody2D setget _set_body
+var body: RigidBody2D: set = _set_body
 
 var _last_position: Vector2
 var _body_ref: WeakRef
@@ -13,15 +13,15 @@ var _body_ref: WeakRef
 
 func _init(_body: RigidBody2D) -> void:
 	if not _body.is_inside_tree():
-		yield(_body, "ready")
+		await(_body).ready
+	self.body = _body
 
-	_body_ref = weakref(_body)
 	# warning-ignore:return_value_discarded
-	_body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
+	_body.get_tree().physics_frame.connect(_on_SceneTree_frame)
 
 
 # Moves the agent's `body` by target `acceleration`.
-# tags: virtual
+# @tags - virtual
 func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> void:
 	var _body: RigidBody2D = _body_ref.get_ref()
 	if not _body:
@@ -36,6 +36,7 @@ func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> voi
 
 
 func _set_body(value: RigidBody2D) -> void:
+	body = value
 	_body_ref = weakref(value)
 
 	_last_position = value.global_position
@@ -49,9 +50,12 @@ func _on_SceneTree_frame() -> void:
 	var _body: RigidBody2D = _body_ref.get_ref()
 	if not _body:
 		return
+	
+	if not _body.is_inside_tree():
+		return
 
-	var current_position := body.global_position
-	var current_orientation := body.rotation
+	var current_position := _body.global_position
+	var current_orientation := _body.rotation
 
 	position = GSAIUtils.to_vector3(current_position)
 	orientation = current_orientation
@@ -60,5 +64,5 @@ func _on_SceneTree_frame() -> void:
 		if _applied_steering:
 			_applied_steering = false
 		else:
-			linear_velocity = GSAIUtils.to_vector3(body.linear_velocity)
-			angular_velocity = body.angular_velocity
+			linear_velocity = GSAIUtils.to_vector3(_body.linear_velocity)
+			angular_velocity = _body.angular_velocity

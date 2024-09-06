@@ -1,6 +1,6 @@
 # Calculates acceleration to take an agent to its target's location. The
 # calculation attempts to arrive with zero remaining velocity.
-# category: Individual behaviors
+# @category - Individual behaviors
 class_name GSAIArrive
 extends GSAISteeringBehavior
 
@@ -15,7 +15,8 @@ var deceleration_radius: float
 var time_to_reach := 0.1
 
 
-func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation).(agent) -> void:
+func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation) -> void:
+	super._init(agent)
 	self.target = _target
 
 
