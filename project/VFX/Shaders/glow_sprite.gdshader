@@ -7,9 +7,9 @@ shader_type canvas_item;
 // glow.
 
 uniform float alpha_intensity_front : hint_range(0.0, 3.0) = 1.0;
-uniform vec4 tint_front : hint_color = vec4(1.0,1.0,1.0,1.0);
+uniform vec4 tint_front : source_color = vec4(1.0,1.0,1.0,1.0);
 uniform float alpha_intensity_back : hint_range(0.0, 3.0) = 1.0;
-uniform vec4 tint_back : hint_color = vec4(1.0,1.0,1.0,1.0);
+uniform vec4 tint_back : source_color = vec4(1.0,1.0,1.0,1.0);
 uniform float blend_amount : hint_range(0.0, 1.0) = 1.0;
 uniform float fade_amount : hint_range(0.0, 1.0) = 1.0;
 
