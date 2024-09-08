@@ -4,7 +4,7 @@ This document lists the new features, improvements, changes, and bug fixes in ea
 
 ## Harvester: 2D Space Game 1.0.0
 
-## New Features
+### New Features
 
 - Visual redesign: new asteroids, animated star field in the background, and more.
 - New visual effects:
@@ -15,7 +15,7 @@ This document lists the new features, improvements, changes, and bug fixes in ea
     - Animated shield bar.
     = Animated mining, with ore that goes from asteroids to the UI, and vice-versa when unloading in the station.
 
-## Changes
+### Changes
 
 - Updated QuitMenu to quit the game instead of reseting to the main menu.
 - Refactored the mini-map's code to remove coupling.
