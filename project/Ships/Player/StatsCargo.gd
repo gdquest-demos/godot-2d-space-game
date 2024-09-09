@@ -4,14 +4,15 @@
 class_name StatsCargo
 extends Stats
 
-export var _max_cargo := 100.0
-export var _mining_rate := 10.0
-export var _unload_rate := 35.0
+@export var _max_cargo := 100.0
+@export var _mining_rate := 10.0
+@export var _unload_rate := 35.0
 
-var cargo := 0.0 setget set_cargo
+var cargo := 0.0: set = set_cargo
 
 
 func _init() -> void:
+	super()
 	_update_all()
 
 
