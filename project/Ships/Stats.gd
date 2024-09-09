@@ -87,6 +87,7 @@ func _update_all() -> void:
 # Returns a list of stat properties as strings.
 func _get_stats_list() -> Dictionary:
 	var ignore := [
+		"resource_scene_unique_id",
 		"resource_local_to_scene",
 		"resource_name",
 		"resource_path",
