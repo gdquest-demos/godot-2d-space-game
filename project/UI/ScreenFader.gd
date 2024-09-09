@@ -4,53 +4,46 @@ extends TextureRect
 
 signal animation_finished
 
-export var duration_fade_in := 0.5
-export var duration_fade_out := 2.5
+@export var duration_fade_in := 0.5
+@export var duration_fade_out := 2.5
 
 var is_playing := false
 
-onready var tween := $Tween
-
-
-func _ready() -> void:
-	tween.connect("tween_completed", self, "_on_Tween_tween_completed")
+var tween : Tween
 
 
 # Animate from the current modulate color until the node is fully transparent.
 func fade_in() -> void:
-	tween.interpolate_property(
+	tween = create_tween()
+	tween.connect("finished", Callable(self, "_on_Tween_tween_completed"))
+	tween.tween_property(
 		self,
 		"modulate",
-		modulate,
-		Color.transparent,
-		duration_fade_in,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT
-	)
+		Color.TRANSPARENT,
+		duration_fade_in
+	).from_current().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
 	show()
-	tween.start()
+	tween.play()
 	is_playing = true
 
 
 # Animate from the current modulate color until the node is fully black.
 func fade_out(is_delayed: bool = false) -> void:
-	tween.interpolate_property(
+	tween = create_tween()
+	tween.connect("finished", Callable(self, "_on_Tween_tween_completed"))
+	tween.tween_property(
 		self,
 		"modulate",
-		modulate,
-		Color.white,
-		duration_fade_out,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT,
-		duration_fade_out if is_delayed else 0.0
-	)
+		Color.WHITE,
+		duration_fade_out
+	).from_current().set_delay(duration_fade_out if is_delayed else 0.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
 	show()
-	tween.start()
+	tween.play()
 	is_playing = true
 
 
-func _on_Tween_tween_completed(_object: Object, _key: NodePath) -> void:
+func _on_Tween_tween_completed() -> void:
 	emit_signal("animation_finished")
-	if modulate == Color.transparent:
+	if modulate == Color.TRANSPARENT:
 		hide()
 	is_playing = false
