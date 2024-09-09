@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://VFX/LaserBeam/LaserBeam.gd" type="Script" id=1]
-[ext_resource path="res://VFX/glowing_circle.png" type="Texture" id=2]
+[ext_resource type="Texture2D" uid="uid://hxgijmy8uqyx" path="res://VFX/glowing_circle.png" id="2"]
 
 
 

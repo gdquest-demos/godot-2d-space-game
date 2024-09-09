@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://UI/HUD/shield_bar_over.svg" type="Texture" id=1]
-[ext_resource path="res://UI/HUD/shield_bar_progress.svg" type="Texture" id=2]
-[ext_resource path="res://UI/HUD/shield_bar_under.svg" type="Texture" id=3]
 [ext_resource path="res://UI/HUD/ShieldBar.gd" type="Script" id=4]
 [ext_resource path="res://Ships/Player/player_stats.tres" type="Resource" id=5]
+[ext_resource type="Texture2D" uid="uid://c1m08atpui1qq" path="res://UI/HUD/shield_bar_over.svg" id="1"]
+[ext_resource type="Texture2D" uid="uid://wc1jgcryb66m" path="res://UI/HUD/shield_bar_progress.svg" id="2"]
+[ext_resource type="Texture2D" uid="uid://b6ug68cnhqdad" path="res://UI/HUD/shield_bar_under.svg" id="3"]
 
 
 

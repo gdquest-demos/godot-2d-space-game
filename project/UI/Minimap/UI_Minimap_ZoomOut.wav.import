@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/UI_Minimap_ZoomOut.wav-29e27ab0833cb5ae3859d201f5060a5d.sample"
+type="AudioStreamWAV"
+uid="uid://kgumh24fs7ic"
+path="res://.godot/imported/UI_Minimap_ZoomOut.wav-29e27ab0833cb5ae3859d201f5060a5d.sample"
 
 [deps]
 
 source_file="res://UI/Minimap/UI_Minimap_ZoomOut.wav"
-dest_files=[ "res://.import/UI_Minimap_ZoomOut.wav-29e27ab0833cb5ae3859d201f5060a5d.sample" ]
+dest_files=["res://.godot/imported/UI_Minimap_ZoomOut.wav-29e27ab0833cb5ae3859d201f5060a5d.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

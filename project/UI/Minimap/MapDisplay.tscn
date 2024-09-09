@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/Minimap/MapDisplay.gd" type="Script" id=1]
-[ext_resource path="res://UI/Minimap/UI_Minimap_ZoomIn.wav" type="AudioStream" id=2]
+[ext_resource type="AudioStream" uid="uid://b5rwtdrww00e7" path="res://UI/Minimap/UI_Minimap_ZoomIn.wav" id="2"]
 
 
 [sub_resource type="Animation" id=1]

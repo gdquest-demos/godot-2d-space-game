@@ -3,15 +3,15 @@
 [ext_resource path="res://UI/MainScreen/MainScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/Menus/Sounds/MenuSoundPlayer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/theme_main_menu.tres" type="Theme" id=3]
-[ext_resource path="res://UI/MainScreen/gamepads/xbox_a_button.svg" type="Texture" id=4]
-[ext_resource path="res://UI/MainScreen/gamepads/playstation_cross_buttton.svg" type="Texture" id=5]
-[ext_resource path="res://UI/MainScreen/gamepads/nintendob_button.svg" type="Texture" id=6]
 [ext_resource path="res://UI/MainMenuTexts.gd" type="Script" id=7]
 [ext_resource path="res://UI/MainMenu.gd" type="Script" id=8]
 [ext_resource path="res://UI/ScreenFader.tscn" type="PackedScene" id=9]
 
 
 
+[ext_resource type="Texture2D" uid="uid://c2tqk03snyo2y" path="res://UI/MainScreen/gamepads/xbox_a_button.svg" id="4"]
+[ext_resource type="Texture2D" uid="uid://c0bavtgts8dwh" path="res://UI/MainScreen/gamepads/playstation_cross_buttton.svg" id="5"]
+[ext_resource type="Texture2D" uid="uid://b01jiu5efjmmg" path="res://UI/MainScreen/gamepads/nintendob_button.svg" id="6"]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0

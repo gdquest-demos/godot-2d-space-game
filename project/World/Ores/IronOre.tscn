@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://World/Ores/iron_ore.svg" type="Texture" id=1]
 [ext_resource path="res://World/Ores/IronOre.gd" type="Script" id=2]
-[ext_resource path="res://Ships/Player/Minig_Swallow.wav" type="AudioStream" id=3]
+[ext_resource type="Texture2D" uid="uid://b6l0eydeqr4y0" path="res://World/Ores/iron_ore.svg" id="1"]
+[ext_resource type="AudioStream" uid="uid://so0382buwi3f" path="res://Ships/Player/Minig_Swallow.wav" id="3"]
 
 
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/CargoProgress.gd" type="Script" id=1]
-[ext_resource path="res://UI/HUD/cargo_outer.svg" type="Texture" id=2]
-[ext_resource path="res://Ships/Player/Mining_Unload.wav" type="AudioStream" id=3]
-[ext_resource path="res://UI/HUD/cargo_fill.svg" type="Texture" id=4]
+[ext_resource type="Texture2D" uid="uid://8d7d8iv3amlr" path="res://UI/HUD/cargo_outer.svg" id="2"]
+[ext_resource type="AudioStream" uid="uid://c4s4nigv8vjkg" path="res://Ships/Player/Mining_Unload.wav" id="3"]
+[ext_resource type="Texture2D" uid="uid://fkn27pspvdu6" path="res://UI/HUD/cargo_fill.svg" id="4"]
 
 
 

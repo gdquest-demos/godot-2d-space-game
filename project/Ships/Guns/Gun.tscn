@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Ships/Guns/Gun.gd" type="Script" id=1]
-[ext_resource path="res://Ships/Guns/projectile-enemy.svg" type="Texture" id=2]
+[ext_resource type="Texture2D" uid="uid://rcbxfl1l8gji" path="res://Ships/Guns/projectile-enemy.svg" id="2"]
 
 
 

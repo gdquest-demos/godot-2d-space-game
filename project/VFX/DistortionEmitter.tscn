@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://VFX/fade_cicle_deformed.png" type="Texture" id=1]
+[ext_resource path="res://VFX/fade_cicle_deformed.png" type="Texture2D" id=1]
 [ext_resource path="res://VFX/DistortionEmitter.gd" type="Script" id=2]
 
 

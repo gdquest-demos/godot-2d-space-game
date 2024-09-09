@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://UI/fonts/default_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/fonts/default_font.tres" type="FontFile" id=1]
 [ext_resource path="res://UI/Menus/Sounds/MenuSoundPlayer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://UI/fonts/default_font_bold.tres" type="DynamicFont" id=5]
+[ext_resource path="res://UI/fonts/default_font_bold.tres" type="FontFile" id=5]
 [ext_resource path="res://UI/Menus/QuitMenu.gd" type="Script" id=6]
 
 

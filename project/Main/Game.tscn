@@ -9,7 +9,6 @@
 [ext_resource path="res://World/GameInitializer.gd" type="Script" id=7]
 [ext_resource path="res://VFX/BackgroundStars.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/Minimap/MapDisplay.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Main/white.png" type="Texture" id=11]
 [ext_resource path="res://World/ShakingCamera.tscn" type="PackedScene" id=12]
 [ext_resource path="res://VFX/Shaders/distorted_view.shader" type="Shader" id=13]
 [ext_resource path="res://World/GameWorld.gd" type="Script" id=14]
@@ -35,6 +34,7 @@ viewport_path = NodePath("MapView/Viewport")
 viewport_path = NodePath("DistortMaskView/Viewport")
 
 [sub_resource type="ShaderMaterial" id=3]
+[ext_resource type="Texture2D" uid="uid://bxv8xsooyour0" path="res://Main/white.png" id="11"]
 resource_local_to_scene = true
 shader = ExtResource( 13 )
 shader_param/displacement_amount = 12.0

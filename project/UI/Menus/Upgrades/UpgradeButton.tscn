@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://UI/Menus/Upgrades/normal.svg" type="Texture" id=2]
-[ext_resource path="res://UI/Menus/Upgrades/pressed.svg" type="Texture" id=3]
-[ext_resource path="res://UI/Menus/Upgrades/hover.svg" type="Texture" id=4]
-[ext_resource path="res://UI/fonts/default_font_bold.tres" type="DynamicFont" id=5]
+[ext_resource path="res://UI/Menus/Upgrades/normal.svg" type="Texture2D" id=2]
+[ext_resource path="res://UI/Menus/Upgrades/pressed.svg" type="Texture2D" id=3]
+[ext_resource path="res://UI/Menus/Upgrades/hover.svg" type="Texture2D" id=4]
+[ext_resource path="res://UI/fonts/default_font_bold.tres" type="FontFile" id=5]
 [ext_resource path="res://UI/Menus/Upgrades/UpgradeButton.gd" type="Script" id=6]
 
 

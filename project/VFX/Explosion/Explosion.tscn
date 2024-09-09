@@ -1,11 +1,11 @@
 [gd_scene load_steps=26 format=2]
 
-[ext_resource path="res://VFX/Explosion/sparkle.png" type="Texture" id=1]
-[ext_resource path="res://VFX/Explosion/explosion_gradient_2.tres" type="Texture" id=2]
-[ext_resource path="res://VFX/Explosion/puff.png" type="Texture" id=3]
+[ext_resource path="res://VFX/Explosion/sparkle.png" type="Texture2D" id=1]
+[ext_resource path="res://VFX/Explosion/explosion_gradient_2.tres" type="Texture2D" id=2]
+[ext_resource path="res://VFX/Explosion/puff.png" type="Texture2D" id=3]
 [ext_resource path="res://VFX/Explosion/Explosion.gd" type="Script" id=4]
-[ext_resource path="res://VFX/Explosion/puff_smooth.png" type="Texture" id=5]
-[ext_resource path="res://VFX/Explosion/scraps_gradient.tres" type="Texture" id=6]
+[ext_resource path="res://VFX/Explosion/puff_smooth.png" type="Texture2D" id=5]
+[ext_resource path="res://VFX/Explosion/scraps_gradient.tres" type="Texture2D" id=6]
 [ext_resource path="res://VFX/ShockwaveEmitter.tscn" type="PackedScene" id=7]
 [ext_resource path="res://VFX/Explosion/Explosion_01.wav" type="AudioStream" id=8]
 

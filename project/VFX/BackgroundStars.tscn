@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://VFX/star.png" type="Texture" id=1]
+[ext_resource type="Texture2D" uid="uid://bnsth1ku11n0g" path="res://VFX/star.png" id="1"]
 
 
 [sub_resource type="Curve" id=1]

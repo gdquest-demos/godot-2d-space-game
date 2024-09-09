@@ -1,16 +1,6 @@
 [gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://UI/MainScreen/envelope-foreground.png" type="Texture" id=1]
-[ext_resource path="res://UI/MainScreen/envelope-background.png" type="Texture" id=2]
 [ext_resource path="res://UI/MainScreen/MainScreen.gd" type="Script" id=3]
-[ext_resource path="res://UI/MainScreen/gdquest-logo.png" type="Texture" id=4]
-[ext_resource path="res://VFX/star.png" type="Texture" id=5]
-[ext_resource path="res://UI/MainScreen/title.png" type="Texture" id=6]
-[ext_resource path="res://UI/MainScreen/title-background.png" type="Texture" id=7]
-[ext_resource path="res://World/DockingPoint/asteroid-round.svg" type="Texture" id=8]
-[ext_resource path="res://Ships/Player/topdown-player.svg" type="Texture" id=9]
-[ext_resource path="res://UI/MainScreen/mask.png" type="Texture" id=10]
-[ext_resource path="res://Ships/Enemies/topdown-enemy.svg" type="Texture" id=11]
 
 
 
@@ -39,6 +29,15 @@ scale_random = 1.0
 scale_curve = SubResource( 2 )
 
 [sub_resource type="Animation" id=4]
+[ext_resource type="Texture2D" uid="uid://gso271go2fev" path="res://UI/MainScreen/envelope-foreground.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cbujfepgfuvom" path="res://UI/MainScreen/envelope-background.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cl37op10gaek8" path="res://UI/MainScreen/gdquest-logo.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bnsth1ku11n0g" path="res://VFX/star.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://c8fufq6lxck4o" path="res://UI/MainScreen/title.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://ds6idne4h5k7v" path="res://UI/MainScreen/title-background.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://4cefpybwxeud" path="res://World/DockingPoint/asteroid-round.svg" id="8"]
+[ext_resource type="Texture2D" uid="uid://dnglxou5iix8d" path="res://Ships/Player/topdown-player.svg" id="9"]
+[ext_resource type="Texture2D" uid="uid://c4na7gwglmb05" path="res://Ships/Enemies/topdown-enemy.svg" id="11"]
 resource_name = "idle"
 length = 4.0
 loop = true

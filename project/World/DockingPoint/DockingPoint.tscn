@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://World/DockingPoint/DockingPoint.gd" type="Script" id=1]
-[ext_resource path="res://World/DockingPoint/dock-aura.svg" type="Texture" id=2]
-[ext_resource path="res://World/DockingPoint/asteroid_map_icon.tres" type="Resource" id=3]
 [ext_resource path="res://World/DockingPoint/TweenAura.gd" type="Script" id=4]
+[ext_resource type="Texture2D" uid="uid://mfwn106yxb0b" path="res://World/DockingPoint/dock-aura.svg" id="2"]
+[ext_resource type="Resource" path="res://World/DockingPoint/asteroid_map_icon.tres" id="3"]
 
 
 
