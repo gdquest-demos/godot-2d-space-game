@@ -1,13 +1,13 @@
 class_name MenuSoundPlayer
 extends AudioStreamPlayer
 
-export var sound_close: AudioStream
-export var sound_confirm: AudioStream
-export var sound_hide: AudioStream
-export var sound_open: AudioStream
-export var sound_select: AudioStream
+@export var sound_close: AudioStream
+@export var sound_confirm: AudioStream
+@export var sound_hide: AudioStream
+@export var sound_open: AudioStream
+@export var sound_select: AudioStream
 
-var _current_sound := stream setget _set_current_sound
+var _current_sound := stream: set = _set_current_sound
 
 func play_close() -> void:
 	self._current_sound =sound_close
@@ -22,14 +22,14 @@ func play_confirm() -> void:
 func play_hide(delay := 0.0) -> void:
 	self._current_sound =sound_hide
 	if delay > 0.0:
-		yield(get_tree().create_timer(delay), "timeout")
+		await get_tree().create_timer(delay).timeout
 	play()
 
 
 func play_open(delay := 0.0) -> void:
 	self._current_sound =sound_open
 	if delay > 0.0:
-		yield(get_tree().create_timer(delay), "timeout")
+		await get_tree().create_timer(delay).timeout
 	play()
 
 

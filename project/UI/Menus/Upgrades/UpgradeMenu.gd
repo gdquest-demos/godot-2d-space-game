@@ -3,25 +3,25 @@
 # and pirates spawn.
 extends Control
 
-onready var health_button := $HBoxContainer/HealthUpgrade
-onready var speed_button := $HBoxContainer/SpeedUpgrade
-onready var cargo_button := $HBoxContainer/CargoUpgrade
-onready var mine_button := $HBoxContainer/MiningUpgrade
-onready var weapon_button := $HBoxContainer/WeaponUpgrade
-onready var menu_sounds: MenuSoundPlayer = $MenuSoundPlayer
+@onready var health_button := $HBoxContainer/HealthUpgrade
+@onready var speed_button := $HBoxContainer/SpeedUpgrade
+@onready var cargo_button := $HBoxContainer/CargoUpgrade
+@onready var mine_button := $HBoxContainer/MiningUpgrade
+@onready var weapon_button := $HBoxContainer/WeaponUpgrade
+@onready var menu_sounds: MenuSoundPlayer = $MenuSoundPlayer
 
-onready var buttons := $HBoxContainer.get_children()
+@onready var buttons := $HBoxContainer.get_children()
 
 
 func _ready() -> void:
-	health_button.connect("button_down", self, "select_upgrade", [Events.UpgradeChoices.HEALTH])
-	speed_button.connect("button_down", self, "select_upgrade", [Events.UpgradeChoices.SPEED])
-	cargo_button.connect("button_down", self, "select_upgrade", [Events.UpgradeChoices.CARGO])
-	mine_button.connect("button_down", self, "select_upgrade", [Events.UpgradeChoices.MINING])
-	weapon_button.connect("button_down", self, "select_upgrade", [Events.UpgradeChoices.WEAPON])
+	health_button.connect("button_down", select_upgrade.bind(Events.UpgradeChoices.HEALTH))
+	speed_button.connect("button_down", Callable(self, "select_upgrade").bind(Events.UpgradeChoices.SPEED))
+	cargo_button.connect("button_down", Callable(self, "select_upgrade").bind(Events.UpgradeChoices.CARGO))
+	mine_button.connect("button_down", Callable(self, "select_upgrade").bind(Events.UpgradeChoices.MINING))
+	weapon_button.connect("button_down", Callable(self, "select_upgrade").bind(Events.UpgradeChoices.WEAPON))
 
 	for button in buttons:
-		button.connect("focus_entered", self, "_on_Button_focus_entered")
+		button.connect("focus_entered", Callable(self, "_on_Button_focus_entered"))
 
 
 func open() -> void:
@@ -42,7 +42,7 @@ func select_upgrade(type: int) -> void:
 	for button in buttons:
 		var delay: float = button.get_index() * 0.1
 		button.disappear(delay)
-	yield(buttons[-1], "disappeared")
+	await buttons[-1].disappeared
 	hide()
 
 

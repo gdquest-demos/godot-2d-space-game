@@ -21,15 +21,15 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-pause_mode = 2
+process_mode = 3
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -328.0
-margin_top = -64.0
-margin_right = 328.0
-margin_bottom = 64.0
+offset_left = -328.0
+offset_top = -64.0
+offset_right = 328.0
+offset_bottom = 64.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -39,26 +39,26 @@ texture = ExtResource( 1 )
 text = "Health"
 
 [node name="SpeedUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
-margin_left = 132.0
-margin_right = 260.0
+offset_left = 132.0
+offset_right = 260.0
 texture = ExtResource( 3 )
 text = "Speed"
 
 [node name="CargoUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
-margin_left = 264.0
-margin_right = 392.0
+offset_left = 264.0
+offset_right = 392.0
 texture = ExtResource( 2 )
 text = "Cargo"
 
 [node name="MiningUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
-margin_left = 396.0
-margin_right = 524.0
+offset_left = 396.0
+offset_right = 524.0
 texture = ExtResource( 7 )
 text = "Mining"
 
 [node name="WeaponUpgrade" parent="HBoxContainer" instance=ExtResource( 6 )]
-margin_left = 528.0
-margin_right = 656.0
+offset_left = 528.0
+offset_right = 656.0
 texture = ExtResource( 5 )
 text = "Weapon"
 
