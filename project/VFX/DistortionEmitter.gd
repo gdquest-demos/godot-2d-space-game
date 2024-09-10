@@ -1,7 +1,7 @@
 # One-shot particle emitter that recycles itself after use.
-extends Particles2D
+extends GPUParticles2D
 
-onready var timer := $Timer
+@onready var timer := $Timer
 var is_dying := false
 
 
@@ -18,5 +18,5 @@ func _process(_delta: float) -> void:
 func die() -> void:
 	is_dying = true
 	timer.start(lifetime)
-	yield(timer, "timeout")
+	await timer.timeout
 	queue_free()

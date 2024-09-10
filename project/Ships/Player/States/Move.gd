@@ -4,10 +4,10 @@
 # movement style between Travel and Precision.
 extends PlayerState
 
-export var drag_linear_coeff := 0.05
-export var reverse_multiplier := 0.25
+@export var drag_linear_coeff := 0.05
+@export var reverse_multiplier := 0.25
 
-export var drag_angular_coeff := 0.1
+@export var drag_angular_coeff := 0.1
 
 var acceleration_max := 0.0
 var linear_speed_max := 0.0
@@ -19,11 +19,12 @@ var angular_velocity := 0.0
 var is_reversing := false
 var can_fire := true
 
-onready var agent := GSAIKinematicBody2DAgent.new(owner)
+@onready var agent := await GSAICharacterBody2DAgent.new(owner)
 
 
 func _ready() -> void:
-	yield(owner, "ready")
+	super()
+	await owner.ready
 
 	acceleration_max = ship.stats.get_acceleration_max()
 	linear_speed_max = ship.stats.get_linear_speed_max()
@@ -32,19 +33,21 @@ func _ready() -> void:
 
 	agent.linear_acceleration_max = acceleration_max * reverse_multiplier
 	agent.linear_speed_max = linear_speed_max
-	agent.angular_acceleration_max = deg2rad(angular_acceleration_max)
-	agent.angular_speed_max = deg2rad(angular_speed_max)
+	agent.angular_acceleration_max = deg_to_rad(angular_acceleration_max)
+	agent.angular_speed_max = deg_to_rad(angular_speed_max)
 	agent.bounding_radius = (MathUtils.get_triangle_circumcircle_radius(ship.shape.polygon))
 
 
 func physics_process(delta: float) -> void:
-	linear_velocity = linear_velocity.clamped(linear_speed_max)
-	linear_velocity = (linear_velocity.linear_interpolate(Vector2.ZERO, drag_linear_coeff))
+	linear_velocity = linear_velocity.limit_length(linear_speed_max)
+	linear_velocity = (linear_velocity.lerp(Vector2.ZERO, drag_linear_coeff))
 
-	angular_velocity = clamp(angular_velocity, -agent.angular_speed_max, agent.angular_speed_max)
-	angular_velocity = lerp(angular_velocity, 0, drag_angular_coeff)
+	angular_velocity = clampf(angular_velocity, -agent.angular_speed_max, agent.angular_speed_max)
+	angular_velocity = lerpf(angular_velocity, 0, drag_angular_coeff)
 
-	linear_velocity = ship.move_and_slide(linear_velocity)
+	ship.set_velocity(linear_velocity)
+	ship.move_and_slide()
+	linear_velocity = ship.velocity
 	ship.rotation += angular_velocity * delta
 	ship.vfx.make_trail(linear_velocity.length())
 

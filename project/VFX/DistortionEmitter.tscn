@@ -6,13 +6,13 @@
 
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.0449438, 0.149813, 0.524345, 1 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0.0449438, 0.149813, 0.524345, 1 )
+colors = PackedColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=2]
+[sub_resource type="GradientTexture2D" id=2]
 gradient = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticleProcessMaterial" id=3]
 flag_disable_z = true
 direction = Vector3( 0, 1, 0 )
 spread = 30.59
@@ -31,7 +31,7 @@ scale = 2.0
 scale_random = 0.64
 color_ramp = SubResource( 2 )
 
-[node name="DistortionEmitter" type="Particles2D"]
+[node name="DistortionEmitter" type="GPUParticles2D"]
 modulate = Color( 1, 1, 1, 0.8 )
 amount = 30
 lifetime = 0.75

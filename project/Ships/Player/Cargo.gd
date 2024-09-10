@@ -5,7 +5,7 @@ extends Node
 
 enum States { IDLE, MINING, UNLOADING }
 
-export var stats: Resource = preload("res://Ships/Player/cargo_stats.tres") as StatsCargo
+@export var stats: Resource = preload("res://Ships/Player/cargo_stats.tres") as StatsCargo
 
 var state: int = States.IDLE
 var is_mining := false
@@ -15,9 +15,9 @@ var dockable_weakref: WeakRef
 
 func _ready() -> void:
 	stats.initialize()
-	Events.connect("docked", self, "_on_Player_docked")
-	Events.connect("undocked", self, "_on_Player_undocked")
-	yield(owner, "ready")
+	Events.connect("docked", Callable(self, "_on_Player_docked"))
+	Events.connect("undocked", Callable(self, "_on_Player_undocked"))
+	await owner.ready
 
 
 func _physics_process(delta: float) -> void:
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 				state = States.IDLE
 				Events.emit_signal("force_undock")
 			else:
-				var export_amount := min(stats.get_unload_rate() * delta, stats.cargo)
+				var export_amount : float = min(stats.get_unload_rate() * delta, stats.cargo)
 				stats.cargo -= export_amount
 				_station.accumulated_iron += export_amount
 		States.IDLE:

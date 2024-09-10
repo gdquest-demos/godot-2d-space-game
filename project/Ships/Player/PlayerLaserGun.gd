@@ -2,7 +2,7 @@
 
 extends LaserGun
 
-export var fire_action := "fire2"
+@export var fire_action := "fire2"
 
 
 func _unhandled_input(event: InputEvent) -> void:

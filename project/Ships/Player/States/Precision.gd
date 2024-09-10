@@ -5,20 +5,21 @@
 # a controller is pointing towards.
 extends PlayerState
 
-export var speed_multiplier := 0.75
+@export var speed_multiplier := 0.75
 
 var _face: GSAIFace
 var _toggled := false
 
-onready var _target_location := GSAIAgentLocation.new()
-onready var acceleration := GSAITargetAcceleration.new()
+@onready var _target_location := GSAIAgentLocation.new()
+@onready var acceleration := GSAITargetAcceleration.new()
 
 
 func _ready() -> void:
-	yield(owner, "ready")
+	super()
+	await owner.ready
 	_face = GSAIFace.new(_parent.agent, _target_location)
-	_face.alignment_tolerance = deg2rad(5)
-	_face.deceleration_radius = deg2rad(45)
+	_face.alignment_tolerance = deg_to_rad(5)
+	_face.deceleration_radius = deg_to_rad(45)
 
 
 func enter(msg := {}) -> void:

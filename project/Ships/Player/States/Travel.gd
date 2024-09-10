@@ -4,7 +4,7 @@
 extends PlayerState
 
 var reversing := false
-onready var audio_thrusters: LoopingAudioStreamPlayer2D = $ThrustersAudioPlayer
+@onready var audio_thrusters: LoopingAudioStreamPlayer2D = $ThrustersAudioPlayer
 
 
 func physics_process(delta: float) -> void:
