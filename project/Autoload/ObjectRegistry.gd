@@ -2,9 +2,9 @@
 # objects that should be untied from their spawners' lifespan when freed.
 extends Node
 
-onready var _effects := $Effects
-onready var _projectiles := $Projectiles
-onready var _distortions: Viewport
+@onready var _effects := $Effects
+@onready var _projectiles := $Projectiles
+@onready var _distortions: SubViewport
 
 
 func register_effect(effect: Node) -> void:
@@ -20,5 +20,5 @@ func register_distortion_effect(effect: Node2D) -> void:
 		_distortions.add_child(effect)
 
 
-func register_distortion_parent(viewport: Viewport) -> void:
+func register_distortion_parent(viewport: SubViewport) -> void:
 	_distortions = viewport
