@@ -7,8 +7,8 @@ const AUDIO_STREAMS := {
 	disappear = preload("UI_Minimap_ZoomOut.wav"),
 }
 
-onready var _anim_player: AnimationPlayer = $AnimationPlayer
-onready var _audio_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var _anim_player: AnimationPlayer = $AnimationPlayer
+@onready var _audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func toggle() -> void:

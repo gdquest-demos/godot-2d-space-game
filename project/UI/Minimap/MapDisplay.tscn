@@ -1,110 +1,112 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://cwemfag6mespp"]
 
-[ext_resource path="res://UI/Minimap/MapDisplay.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://UI/Minimap/MapDisplay.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://b5rwtdrww00e7" path="res://UI/Minimap/UI_Minimap_ZoomIn.wav" id="2"]
 
-
-[sub_resource type="Animation" id=1]
-resource_name = "SETUP"
+[sub_resource type="Animation" id="Animation_nu50f"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id=2]
-length = 0.6
+[sub_resource type="Animation" id="Animation_b071f"]
+resource_name = "appear"
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.6 ),
-"transitions": PoolRealArray( 0.482968 ),
-"update": 3,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(0.482968),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 
-[sub_resource type="Animation" id=3]
-length = 0.6
+[sub_resource type="Animation" id="Animation_qviax"]
+resource_name = "disappear"
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.6 ),
-"transitions": PoolRealArray( 0.517632 ),
-"update": 3,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"times": PackedFloat32Array(0.633333),
+"transitions": PackedFloat32Array(0.517632),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.6 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0.633333),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_118x6"]
+_data = {
+"RESET": SubResource("Animation_nu50f"),
+"appear": SubResource("Animation_b071f"),
+"disappear": SubResource("Animation_qviax")
 }
 
 [node name="MapDisplay" type="TextureRect"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-expand = true
+expand_mode = 1
 stretch_mode = 5
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "SETUP"
-anims/SETUP = SubResource( 1 )
-anims/appear = SubResource( 2 )
-anims/disappear = SubResource( 3 )
+libraries = {
+"": SubResource("AnimationLibrary_118x6")
+}
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource("2")
 volume_db = -5.465

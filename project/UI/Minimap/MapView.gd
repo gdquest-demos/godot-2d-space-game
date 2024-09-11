@@ -1,15 +1,15 @@
 # Controls the minimap viewport, and adding and removing proxy objects on the minimap.
 class_name MapView
-extends ViewportContainer
+extends SubViewportContainer
 
-export var MapSprite: PackedScene = preload("res://UI/Minimap/MapSprite.tscn")
+@export var map_sprite: PackedScene = preload("res://UI/Minimap/MapSprite.tscn")
 
-onready var sprites: Node2D = $Viewport/Sprites
-onready var viewport: Viewport = $Viewport
+@onready var sprites: Node2D = $SubViewport/Sprites
+@onready var viewport: SubViewport = $SubViewport
 
 
 func _ready() -> void:
-	Events.connect("node_spawned", self, "_on_Spawner_node_spawned")
+	Events.node_spawned.connect(_on_Spawner_node_spawned)
 
 
 func register_camera(camera: Camera2D) -> void:
@@ -17,7 +17,7 @@ func register_camera(camera: Camera2D) -> void:
 
 
 func register_map_object(remote_transform: RemoteTransform2D, icon: MapIcon) -> MapSprite:
-	var map_sprite: MapSprite = MapSprite.instance()
+	var map_sprite: MapSprite = map_sprite.instantiate()
 	map_sprite.global_position = remote_transform.global_position
 	sprites.add_child(map_sprite)
 	map_sprite.setup(remote_transform, icon)
@@ -30,4 +30,4 @@ func _on_Spawner_node_spawned(node: Node) -> void:
 	assert(node.has_node("MapTransform"))
 	assert(node.get("map_icon") != null)
 	var map_sprite := register_map_object(node.get_node("MapTransform"), node.map_icon)
-	node.connect("tree_exiting", map_sprite, "queue_free")
+	node.tree_exiting.connect(map_sprite.queue_free)

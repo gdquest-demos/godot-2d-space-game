@@ -1,7 +1,7 @@
 # Holds a sprite representation of itself and moves in the 
 # minimap world using a remote transform that ties it to the original.
 class_name MapSprite
-extends Sprite
+extends Sprite2D
 
 var acting_remote_transform: RemoteTransform2D
 

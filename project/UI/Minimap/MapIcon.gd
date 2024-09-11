@@ -2,6 +2,6 @@
 class_name MapIcon
 extends Resource
 
-export var texture: Texture
-export var color := Color.white
-export var scale := 1.0
+@export var texture: Texture2D
+@export var color := Color.WHITE
+@export var scale := 1.0
