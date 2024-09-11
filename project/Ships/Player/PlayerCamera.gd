@@ -8,33 +8,33 @@ extends Camera2D
 
 const SHAKE_EXPONENT := 1.8
 
-export var max_zoom := 5.0
-export var decay_rate := 1.0
-export var max_offset := Vector2(100.0, 100.0)
-export var max_rotation := 0.1
+@export var max_zoom := 5.0
+@export var decay_rate := 1.0
+@export var max_offset := Vector2(100.0, 100.0)
+@export var max_rotation := 0.1
 
-var shake_amount := 0.0 setget set_shake_amount
+var shake_amount := 0.0: set = set_shake_amount
 var noise_y := 0.0
 
 var _start_zoom := zoom
 var _start_position := Vector2.ZERO
 
-onready var remote_map := $RemoteMap
-onready var remote_distort := $RemoteDistort
-onready var tween := $Tween
-onready var noise := OpenSimplexNoise.new()
+@onready var remote_map := $RemoteMap
+@onready var remote_distort := $RemoteDistort
+@onready var tween
+@onready var noise := FastNoiseLite.new()
 
 
 func _ready() -> void:
 	set_physics_process(false)
 
-	Events.connect("map_toggled", self, "_toggle_map")
-	Events.connect("explosion_occurred", self, "_on_Events_explosion_occurred")
+	Events.map_toggled.connect(_toggle_map)
+	Events.explosion_occurred.connect(_on_Events_explosion_occurred)
 
 	randomize()
 	noise.seed = randi()
-	noise.period = 4
-	noise.octaves = 2
+	noise.frequency = 4
+	noise.fractal_octaves = 2
 
 
 func _physics_process(delta):
@@ -70,23 +70,24 @@ func setup_distortion_camera() -> void:
 	remote_distort.remote_path = distort_camera.get_path()
 
 
-func _toggle_map(show: bool, duration: float) -> void:
-	if show:
-		tween.interpolate_property(
-			self, "zoom", zoom, _start_zoom, duration, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN
-		)
-	else:
-		_start_position = position
-		tween.interpolate_property(
+func _toggle_map(display: bool, duration: float) -> void:
+	tween = create_tween()
+	if display:
+		tween.tween_property(
 			self,
 			"zoom",
-			zoom,
+			_start_zoom,
+			duration
+		).from_current().set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_LINEAR)
+	else:
+		_start_position = position
+		tween.tween_property(
+			self,
+			"zoom",
 			Vector2(max_zoom, max_zoom),
-			duration,
-			Tween.TRANS_LINEAR,
-			Tween.EASE_OUT_IN
-		)
-	tween.start()
+			duration
+		).from_current().set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_LINEAR)
+	tween.play()
 
 
 func _on_Events_explosion_occurred() -> void:

@@ -8,7 +8,7 @@ var _spawned_positions := []
 var _world_objects := []
 
 @onready var map: MapView = $MapView
-@onready var camera := $GameWorld/Camera3D
+@onready var camera := $GameWorld/Camera
 @onready var hud := $UI/HUD
 
 
