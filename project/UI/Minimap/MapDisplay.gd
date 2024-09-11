@@ -10,6 +10,12 @@ const AUDIO_STREAMS := {
 @onready var _anim_player: AnimationPlayer = $AnimationPlayer
 @onready var _audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
+# Viewports are still sort of buggy in Godot 4, 
+# sometimes the path gets set to the Game scene's top-level object; GameInitializer
+# so hard-coding it here...
+func _ready() -> void:
+	var t = texture as ViewportTexture
+	t.viewport_path = "MapView"
 
 func toggle() -> void:
 	if visible:
