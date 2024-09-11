@@ -20,11 +20,11 @@
 [ext_resource type="PackedScene" path="res://UI/Menus/QuitMenu.tscn" id="18"]
 [ext_resource type="PackedScene" uid="uid://bv00wk2go2l6s" path="res://UI/ScreenFader.tscn" id="19"]
 [ext_resource type="PackedScene" uid="uid://53pcfgby5by6" path="res://VFX/DistortMaskView.tscn" id="20"]
-[ext_resource type="Script" path="res://VFX/PostProcessGameView.gd" id="21"]
 [ext_resource type="PackedScene" uid="uid://dn2lyjt0cp57p" path="res://UI/HUD/HUD.tscn" id="22"]
+[ext_resource type="Script" path="res://VFX/PostProcessGameView.gd" id="22_apqpn"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_drsak"]
-viewport_path = NodePath("MapView")
+viewport_path = NodePath(".")
 
 [sub_resource type="Animation" id="Animation_nu50f"]
 length = 0.001
@@ -114,14 +114,14 @@ _data = {
 "disappear": SubResource("Animation_qviax")
 }
 
-[sub_resource type="ViewportTexture" id="2"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_qbgeu"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="3"]
 resource_local_to_scene = true
 shader = ExtResource("13")
-shader_parameter/displacement_amount = 7.408
-shader_parameter/displacement_mask = SubResource("2")
+shader_parameter/displacement_amount = 12.0
+shader_parameter/displacement_mask = SubResource("ViewportTexture_qbgeu")
 
 [sub_resource type="Environment" id="4"]
 background_mode = 3
@@ -140,7 +140,7 @@ refresh_threshold_range = 350.0
 
 [node name="BackgroundStars" parent="GameWorld" instance=ExtResource("8")]
 
-[node name="Camera3D" parent="GameWorld" instance=ExtResource("12")]
+[node name="Camera" parent="GameWorld" instance=ExtResource("12")]
 enabled = true
 process_callback = 0
 max_zoom = 0.2
@@ -162,16 +162,7 @@ spawn_radius = 350.0
 [node name="MapView" parent="." instance=ExtResource("6")]
 
 [node name="DistortMaskView" parent="." instance=ExtResource("20")]
-visible = false
-mouse_filter = 2
-
-[node name="SubViewport" parent="DistortMaskView" index="0"]
-render_target_update_mode = 0
-
-[node name="BlackBackground" parent="DistortMaskView/SubViewport/CanvasLayer" index="0"]
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+self_modulate = Color(1, 1, 1, 0)
 
 [node name="UI" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -218,10 +209,8 @@ anchors_preset = 8
 mouse_filter = 2
 
 [node name="PostProcessedLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="GameView" type="TextureRect" parent="PostProcessedLayer"]
-visible = false
 material = SubResource("3")
 anchors_preset = 15
 anchor_right = 1.0
@@ -231,29 +220,10 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("11")
 expand_mode = 1
-stretch_mode = 1
-flip_v = true
-script = ExtResource("21")
+script = ExtResource("22_apqpn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("4")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(1280, 720)
-render_target_update_mode = 0
-
-[node name="Polygon2D" type="Polygon2D" parent="SubViewportContainer/SubViewport"]
-polygon = PackedVector2Array(389, 411, 560, 399, 581, 510, 413, 519)
 
 [editable path="MapView"]
 [editable path="DistortMaskView"]
