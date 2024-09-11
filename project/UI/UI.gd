@@ -1,16 +1,16 @@
 # Handles the input that brings up the minimap or the quit menu.
 extends CanvasLayer
 
-onready var screen_fader: TextureRect = $ScreenFader
-onready var map: TextureRect = $MapDisplay
-onready var upgrade_menu := $UpgradeUI
-onready var quit_menu := $QuitMenu
+@onready var screen_fader: TextureRect = $ScreenFader
+@onready var map: TextureRect = $MapDisplay
+@onready var upgrade_menu := $UpgradeUI
+@onready var quit_menu := $QuitMenu
 
 
 func _ready() -> void:
-	Events.connect("player_died", self, "reset", [true])
-	Events.connect("quit_requested", self, "quit")
-	Events.connect("upgrade_unlocked", upgrade_menu, "open")
+	Events.player_died.connect(reset.bind(true))
+	Events.quit_requested.connect(quit)
+	Events.upgrade_unlocked.connect(upgrade_menu.open)
 	screen_fader.fade_in()
 
 
@@ -30,5 +30,5 @@ func quit() -> void:
 
 func reset(with_delay: bool) -> void:
 	screen_fader.fade_out(with_delay)
-	yield(screen_fader, "animation_finished")
-	get_tree().change_scene("res://UI/MainMenu.tscn")
+	await screen_fader.animation_finished
+	get_tree().change_scene_to_file("res://UI/MainMenu.tscn")

@@ -1,40 +1,38 @@
 # Animated shield bar for the Player's ship.
-extends TextureProgress
+extends TextureProgressBar
 
-export var gradient: Gradient
-export var stats: Resource = preload("res://Ships/Player/player_stats.tres") as StatsShip
-export var danger_threshold := 0.3
+@export var gradient: Gradient
+@export var stats: Resource = preload("res://Ships/Player/player_stats.tres") as StatsShip
+@export var danger_threshold := 0.3
 
-onready var tween := $Tween
-onready var anim_player := $AnimationPlayer
-
-
-func _ready() -> void:
-	tween.connect("tween_step", self, "_on_Tween_tween_step")
+@onready var tween : Tween
+@onready var anim_player := $AnimationPlayer
 
 
 func initialize(player: PlayerShip) -> void:
-	player.stats.connect("stat_changed", self, "_on_Stats_stat_changed")
+	player.stats.connect("stat_changed", Callable(self, "_on_Stats_stat_changed"))
 	max_value = player.stats.get_max_health()
 	value = player.stats.get("health")
-	tint_progress = gradient.interpolate(value / max_value)
+	tint_progress = gradient.sample(value / max_value)
 
 
 func _on_Stats_stat_changed(stat: String, value_start: float, current_value: float) -> void:
 	if not stat == "health":
 		return
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(
-		self, "value", value_start, current_value, 0.25, Tween.TRANS_ELASTIC, Tween.EASE_OUT
-	)
-	tween.start()
+	if tween and tween.is_running():
+		tween.kill()
+	tween = create_tween()
+	tween.connect("step_finished", Callable(self, "_on_Tween_step_finished"))
+	tween.tween_property(
+		self, "value", current_value, 0.25
+	).from(value_start).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	tween.play()
 	anim_player.play("damage")
 
 
-func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _tween_value: Object) -> void:
+func _on_Tween_step_finished(_idx: int) -> void:
 	var shield_ratio := value / max_value
-	var gradient_color := gradient.interpolate(shield_ratio)
+	var gradient_color := gradient.sample(shield_ratio)
 	tint_progress = gradient_color
 
 	if shield_ratio <= danger_threshold:
