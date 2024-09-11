@@ -1,11 +1,10 @@
 # Controls the minimap viewport, and adding and removing proxy objects on the minimap.
 class_name MapView
-extends SubViewportContainer
+extends SubViewport
 
 @export var map_sprite: PackedScene = preload("res://UI/Minimap/MapSprite.tscn")
 
-@onready var sprites: Node2D = $SubViewport/Sprites
-@onready var viewport: SubViewport = $SubViewport
+@onready var sprites: Node2D = $Sprites
 
 
 func _ready() -> void:
@@ -13,7 +12,7 @@ func _ready() -> void:
 
 
 func register_camera(camera: Camera2D) -> void:
-	viewport.add_child(camera)
+	add_child(camera)
 
 
 func register_map_object(remote_transform: RemoteTransform2D, icon: MapIcon) -> MapSprite:

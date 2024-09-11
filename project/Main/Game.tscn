@@ -62,10 +62,10 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.6),
-"transitions": PackedFloat32Array(0.482968),
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 0.482968),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -89,10 +89,10 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.633333),
-"transitions": PackedFloat32Array(0.517632),
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 0.517632),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -101,10 +101,10 @@ tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.633333),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_118x6"]
@@ -143,7 +143,7 @@ refresh_threshold_range = 350.0
 [node name="Camera3D" parent="GameWorld" instance=ExtResource("12")]
 enabled = true
 process_callback = 0
-max_zoom = 0.5
+max_zoom = 0.2
 
 [node name="StationSpawner" type="Node2D" parent="GameWorld"]
 script = ExtResource("2")

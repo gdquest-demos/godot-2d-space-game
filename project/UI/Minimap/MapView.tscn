@@ -10,32 +10,24 @@ colors = PackedColorArray(0, 0, 0, 1)
 gradient = SubResource("1")
 width = 1
 
-[node name="MapView" type="SubViewportContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-script = ExtResource("1")
-
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport"]
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
+script = ExtResource("1")
 
-[node name="Sprites" type="Node2D" parent="SubViewport"]
+[node name="Sprites" type="Node2D" parent="."]
 
-[node name="Polygon2D" type="Polygon2D" parent="SubViewport/Sprites"]
+[node name="Polygon2D" type="Polygon2D" parent="Sprites"]
 visible = false
 polygon = PackedVector2Array(176, 152, 288, 100, 388, 168, 260, 252)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -100
 
-[node name="BlackBackground" type="TextureRect" parent="SubViewport/CanvasLayer"]
+[node name="BlackBackground" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
