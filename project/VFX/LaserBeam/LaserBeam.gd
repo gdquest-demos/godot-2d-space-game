@@ -1,17 +1,17 @@
 extends RayCast2D
 
-export var cast_speed := 7000.0
-export var max_length := 1400
-export var growth_time := 0.1
+@export var cast_speed := 7000.0
+@export var max_length := 1400
+@export var growth_time := 0.1
 
-onready var casting_particles := $CastingParticles2D
-onready var collision_particles := $CollisionParticles2D
-onready var beam_particles := $BeamParticles2D
-onready var fill := $FillLine2D
-onready var tween := $Tween
-onready var line_width: float = fill.width
+@onready var casting_particles := $CastingParticles2D
+@onready var collision_particles := $CollisionParticles2D
+@onready var beam_particles := $BeamParticles2D
+@onready var fill := $FillLine2D
+@onready var tween : Tween
+@onready var line_width: float = fill.width
 
-var is_casting := false setget set_is_casting
+var is_casting := false: set = set_is_casting
 
 
 func _ready() -> void:
@@ -20,7 +20,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	cast_to = (cast_to + Vector2.RIGHT * cast_speed * delta).clamped(max_length)
+	target_position = (target_position + Vector2.RIGHT * cast_speed * delta).limit_length(max_length)
 	cast_beam()
 
 
@@ -28,8 +28,8 @@ func set_is_casting(cast: bool) -> void:
 	is_casting = cast
 
 	if is_casting:
-		cast_to = Vector2.ZERO
-		fill.points[1] = cast_to
+		target_position = Vector2.ZERO
+		fill.points[1] = target_position
 		appear()
 	else:
 		collision_particles.emitting = false
@@ -41,7 +41,7 @@ func set_is_casting(cast: bool) -> void:
 
 
 func cast_beam() -> void:
-	var cast_point := cast_to
+	var cast_point := target_position
 
 	# Required, the raycast's collisions update one frame after moving otherwise, making the laser
 	# overshoot the collision point.
@@ -61,14 +61,16 @@ func cast_beam() -> void:
 
 
 func appear() -> void:
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(fill, "width", 0, line_width, growth_time * 2)
-	tween.start()
+	if tween and tween.is_running():
+		tween.kill()
+	tween = create_tween()
+	tween.tween_property(fill, "width", line_width, growth_time * 2).from(0.0)
+	tween.play()
 
 
 func disappear() -> void:
-	if tween.is_active():
-		tween.stop_all()
-	tween.interpolate_property(fill, "width", fill.width, 0, growth_time)
-	tween.start()
+	if tween and tween.is_running():
+		tween.kill()
+	tween = create_tween()
+	tween.tween_property(fill, "width", 0, growth_time).from(fill.width)
+	tween.play()
