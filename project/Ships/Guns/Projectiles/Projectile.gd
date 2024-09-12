@@ -3,6 +3,7 @@
 # damage.
 class_name Projectile
 extends KinematicBody2D
+extends CharacterBody2D
 
 const _AUDIO_SAMPLES = [
 	preload("Weapons_Plasma_Shot_01.wav"),
