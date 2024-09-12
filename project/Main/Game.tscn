@@ -24,7 +24,7 @@
 [ext_resource type="Script" path="res://VFX/PostProcessGameView.gd" id="22_apqpn"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_drsak"]
-viewport_path = NodePath(".")
+viewport_path = NodePath("MapView")
 
 [sub_resource type="Animation" id="Animation_nu50f"]
 length = 0.001
@@ -114,14 +114,14 @@ _data = {
 "disappear": SubResource("Animation_qviax")
 }
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qbgeu"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_yngfm"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="3"]
 resource_local_to_scene = true
 shader = ExtResource("13")
 shader_parameter/displacement_amount = 12.0
-shader_parameter/displacement_mask = SubResource("ViewportTexture_qbgeu")
+shader_parameter/displacement_mask = SubResource("ViewportTexture_yngfm")
 
 [sub_resource type="Environment" id="4"]
 background_mode = 3
@@ -143,7 +143,7 @@ refresh_threshold_range = 350.0
 [node name="Camera" parent="GameWorld" instance=ExtResource("12")]
 enabled = true
 process_callback = 0
-max_zoom = 0.2
+max_zoom = 0.167
 
 [node name="StationSpawner" type="Node2D" parent="GameWorld"]
 script = ExtResource("2")
