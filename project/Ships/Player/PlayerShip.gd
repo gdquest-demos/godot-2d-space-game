@@ -1,34 +1,34 @@
 # Main class to represent the player's physics body. Controls the player's
 # current health and how to operate when an upgrade choice has been made.
 class_name PlayerShip
-extends KinematicBody2D
+extends CharacterBody2D
 
 signal died
 
-export var stats: Resource = preload("res://Ships/Player/player_stats.tres")
-export (int, LAYERS_2D_PHYSICS) var projectile_mask := 0
-export var ExplosionEffect: PackedScene
+@export var stats: Resource = preload("res://Ships/Player/player_stats.tres")
+@export var projectile_mask := 0 # (int, LAYERS_2D_PHYSICS)
+@export var ExplosionEffect: PackedScene
 # Represents the ship on the minimap. Use a MapIcon resource.
-export var map_icon: Resource
+@export var map_icon: Resource
 
 var dockables := []
 
-onready var shape := $CollisionShape
-onready var agent: GSAISteeringAgent = $StateMachine/Move.agent
-onready var camera_transform := $CameraTransform
-onready var timer := $MapTimer
-onready var cargo := $Cargo
-onready var move_state := $StateMachine/Move
-onready var gun := $Gun
-onready var laser_gun := $LaserGun
-onready var vfx := $VFX
+@onready var shape := $CollisionShape3D
+@onready var agent: GSAISteeringAgent = $StateMachine/Move.agent
+@onready var camera_transform := $CameraTransform
+@onready var timer := $MapTimer
+@onready var cargo := $Cargo
+@onready var move_state := $StateMachine/Move
+@onready var gun := $Gun
+@onready var laser_gun := $LaserGun
+@onready var vfx := $VFX
 
 
 func _ready() -> void:
 	stats.initialize()
-	Events.connect("damaged", self, "_on_damaged")
-	Events.connect("upgrade_chosen", self, "_on_upgrade_chosen")
-	stats.connect("health_depleted", self, "die")
+	Events.damaged.connect(_on_damaged)
+	Events.upgrade_chosen.connect(_on_upgrade_chosen)
+	stats.health_depleted.connect(die)
 	gun.collision_mask = projectile_mask
 	laser_gun.collision_mask = projectile_mask
 
@@ -36,17 +36,17 @@ func _ready() -> void:
 func _toggle_map(map_up: bool, tween_time: float) -> void:
 	if not map_up:
 		timer.start(tween_time)
-		yield(timer, "timeout")
+		await timer.timeout
 	camera_transform.update_position = not map_up
 
 
 func die() -> void:
-	var effect := ExplosionEffect.instance()
+	var effect := ExplosionEffect.instantiate()
 	effect.global_position = global_position
 	ObjectRegistry.register_effect(effect)
 
-	emit_signal("died")
-	Events.emit_signal("player_died")
+	died.emit()
+	Events.player_died.emit()
 
 	queue_free()
 

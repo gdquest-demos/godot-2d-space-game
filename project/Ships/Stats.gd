@@ -75,7 +75,7 @@ func _update(stat: String = "") -> void:
 	for modifier in _modifiers[stat]:
 		value += modifier
 	_cache[stat] = value
-	emit_signal("stat_changed", stat, value_start, value)
+	stat_changed.emit(stat, value_start, value)
 
 
 # Recalculates every stat from the base stat, with modifiers.

@@ -8,7 +8,7 @@ extends PirateState
 const PATROL_TIME_MIN := 15.0
 const PATROL_TIME_MAX := 30.0
 
-export var patrol_radius := 500.0
+@export var patrol_radius := 500.0
 
 var patrol_point := Vector2.ZERO
 var acceleration := GSAITargetAcceleration.new()
@@ -17,14 +17,14 @@ var pursue: GSAIPursue
 var initialized := false
 var _timer: Timer
 
-onready var path: GSAIPath
-onready var priority: GSAIPriority
+@onready var path: GSAIPath
+@onready var priority: GSAIPriority
 
 
 func _ready() -> void:
-	yield(owner, "ready")
+	super()
 	set_behaviors()
-	ship.connect("squad_leader_changed", self, "_on_Leader_changed")
+	ship.squad_leader_changed.connect(_on_Leader_changed)
 
 
 func enter(msg := {}) -> void:
@@ -49,7 +49,7 @@ func enter(msg := {}) -> void:
 		]
 
 		if ship.rng.randf() > 0.5:
-			patrol_points.invert()
+			patrol_points.reverse()
 
 		if not path:
 			path = GSAIPath.new(patrol_points, false)
@@ -57,18 +57,18 @@ func enter(msg := {}) -> void:
 		else:
 			path.create_path(patrol_points)
 
-		_timer.connect("timeout", self, "_on_Timer_timeout")
+		_timer.timeout.connect(_on_Timer_timeout)
 		_timer.start(ship.rng.randf_range(PATROL_TIME_MIN, PATROL_TIME_MAX))
 	else:
-		Events.connect("end_patrol", self, "_on_SquadLeader_end_patrol")
+		Events.end_patrol.connect(_on_SquadLeader_end_patrol)
 
 
 func exit() -> void:
 	if ship.is_squad_leader:
 		if _timer:
-			_timer.disconnect("timeout", self, "_on_Timer_timeout")
+			_timer.timeout.disconnect(_on_Timer_timeout)
 	else:
-		Events.disconnect("end_patrol", self, "_on_SquadLeader_end_patrol")
+		Events.end_patrol.disconnect(_on_SquadLeader_end_patrol)
 
 
 func physics_process(_delta: float) -> void:
@@ -117,7 +117,7 @@ func set_behaviors() -> void:
 
 
 func _on_Timer_timeout() -> void:
-	Events.emit_signal("end_patrol", ship)
+	Events.end_patrol.emit(ship)
 	_state_machine.transition_to("Rest")
 
 

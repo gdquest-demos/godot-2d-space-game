@@ -27,7 +27,6 @@ var _controls_disabled := false
 
 func _ready() -> void:
 	super()
-	await owner.ready
 
 	_agent = _parent.agent
 
@@ -99,10 +98,10 @@ func physics_process(delta: float) -> void:
 			if collision.get_collider().collision_layer == 2:
 				_docking_phase = DockingProcess.DOCKED
 				_current_docking_point = collision.get_collider().owner
-				Events.emit_signal("docked", _current_docking_point)
+				Events.docked.emit(_current_docking_point)
 				_current_docking_point.set_docking_remote(ship, _agent.bounding_radius * 0.75)
-				if not Events.is_connected("force_undock", Callable(self, "_on_Ship_force_undock")):
-					Events.connect("force_undock", Callable(self, "_on_Ship_force_undock"))
+				if not Events.force_undock.is_connected(_on_Ship_force_undock):
+					Events.force_undock.connect(_on_Ship_force_undock)
 				ship.vfx.create_ripple()
 				ship.vfx.create_dust()
 				audio.play()
@@ -111,8 +110,8 @@ func physics_process(delta: float) -> void:
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_dock") and not _controls_disabled:
 		if _docking_phase == DockingProcess.DOCKED:
-			Events.emit_signal("undocked")
-			Events.disconnect("force_undock", Callable(self, "_on_Ship_force_undock"))
+			Events.undocked.emit()
+			Events.force_undock.disconnect(_on_Ship_force_undock)
 
 			var direction: Vector2 = (ship.global_position - Vector2(_dock_position.position.x, _dock_position.position.y)).normalized()
 
@@ -123,5 +122,5 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func _on_Ship_force_undock() -> void:
-	Events.disconnect("force_undock", Callable(self, "_on_Ship_force_undock"))
+	Events.force_undock.disconnect(_on_Ship_force_undock)
 	_state_machine.transition_to("Move/Travel")
