@@ -16,7 +16,7 @@ func register_projectile(projectile: Node) -> void:
 
 
 func register_distortion_effect(effect: Node2D) -> void:
-	if _distortions:
+	if is_instance_valid(_distortions):
 		_distortions.add_child(effect)
 
 
