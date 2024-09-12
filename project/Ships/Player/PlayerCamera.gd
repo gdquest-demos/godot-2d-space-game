@@ -10,18 +10,17 @@ const SHAKE_EXPONENT := 1.8
 
 @export var max_zoom := 5.0
 @export var decay_rate := 1.0
-@export var max_offset := Vector2(100.0, 100.0)
-@export var max_rotation := 0.1
+@export var shake_offset_multiplier := Vector2(100.0, 100.0)
 
 var shake_amount := 0.0: set = set_shake_amount
-var noise_y := 0.0
+var noise_y : float = 0.0
 
 var _start_zoom := zoom
 var _start_position := Vector2.ZERO
 
 @onready var remote_map := $RemoteMap
 @onready var remote_distort := $RemoteDistort
-@onready var tween
+@onready var tween: Tween
 @onready var noise := FastNoiseLite.new()
 
 
@@ -35,26 +34,29 @@ func _ready() -> void:
 	noise.seed = randi()
 	noise.frequency = 4
 	noise.fractal_octaves = 2
+	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 
 
 func _physics_process(delta):
 	self.shake_amount -= decay_rate * delta
+	noise_y += delta
 	shake()
 
 
 func shake():
-	var amount := pow(shake_amount, SHAKE_EXPONENT)
-
-	noise_y += 1.0
-	rotation = max_rotation * amount * noise.get_noise_2d(noise.seed, noise_y)
+	var amount : float = pow(shake_amount, SHAKE_EXPONENT)
+	
+	if amount == 0:
+		return
+		
 	offset = Vector2(
-		max_offset.x * amount * noise.get_noise_2d(noise.seed * 2, noise_y),
-		max_offset.y * amount * noise.get_noise_2d(noise.seed * 3, noise_y)
+		shake_offset_multiplier.x * amount * noise.get_noise_2d(noise_y, noise_y / amount),
+		shake_offset_multiplier.y * amount * noise.get_noise_2d(noise_y / amount, noise_y)
 	)
 
 
 func set_shake_amount(value):
-	shake_amount = clamp(value, 0.0, 1.0)
+	shake_amount = clampf(value, 0.0, 1.0)
 	set_physics_process(shake_amount != 0.0)
 
 
@@ -71,6 +73,8 @@ func setup_distortion_camera() -> void:
 
 
 func _toggle_map(display: bool, duration: float) -> void:
+	if tween and tween.is_running:
+		tween.kill()
 	tween = create_tween()
 	if display:
 		tween.tween_property(
@@ -87,7 +91,6 @@ func _toggle_map(display: bool, duration: float) -> void:
 			Vector2(max_zoom, max_zoom),
 			duration
 		).from_current().set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_LINEAR)
-	tween.play()
 
 
 func _on_Events_explosion_occurred() -> void:
