@@ -27,6 +27,7 @@ var _controls_disabled := false
 
 func _ready() -> void:
 	super()
+	await owner.ready
 
 	_agent = _parent.agent
 
