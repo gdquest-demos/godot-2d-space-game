@@ -15,16 +15,16 @@ var _player_is_mining := false
 
 
 func _ready() -> void:
-	Events.connect("docked", Callable(self, "_on_Events_docked"))
-	Events.connect("mine_started", Callable(self, "_on_Events_mine_started"))
-	Events.connect("mine_finished", Callable(self, "_on_Events_mine_finished"))
-	self.connect("value_changed", Callable(self, "_on_value_changed"))
+	Events.docked.connect(_on_Events_docked)
+	Events.mine_started.connect(_on_Events_mine_started)
+	Events.mine_finished.connect(_on_Events_mine_finished)
+	self.value_changed.connect(_on_value_changed)
 	share(arc_bottom)
 	share(arc_top)
 
 
 func initialize(player: PlayerShip) -> void:
-	player.cargo.stats.connect("stat_changed", Callable(self, "_on_Stats_stat_changed"))
+	player.cargo.stats.stat_changed.connect(_on_Stats_stat_changed)
 	max_value = player.cargo.stats.get_max_cargo()
 	value = player.cargo.stats.get_stat("cargo")
 

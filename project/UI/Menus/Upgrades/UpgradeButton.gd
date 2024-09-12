@@ -47,6 +47,6 @@ func set_text(value: String) -> void:
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	match anim_name:
 		"show":
-			emit_signal("appeared")
+			appeared.emit()
 		"hide":
-			emit_signal("disappeared")
+			disappeared.emit()

@@ -14,14 +14,14 @@ extends Control
 
 
 func _ready() -> void:
-	health_button.connect("button_down", select_upgrade.bind(Events.UpgradeChoices.HEALTH))
-	speed_button.connect("button_down", Callable(self, "select_upgrade").bind(Events.UpgradeChoices.SPEED))
-	cargo_button.connect("button_down", Callable(self, "select_upgrade").bind(Events.UpgradeChoices.CARGO))
-	mine_button.connect("button_down", Callable(self, "select_upgrade").bind(Events.UpgradeChoices.MINING))
-	weapon_button.connect("button_down", Callable(self, "select_upgrade").bind(Events.UpgradeChoices.WEAPON))
+	health_button.button_down.connect(select_upgrade.bind(Events.UpgradeChoices.HEALTH))
+	speed_button.button_down.connect(select_upgrade.bind(Events.UpgradeChoices.SPEED))
+	cargo_button.button_down.connect(select_upgrade.bind(Events.UpgradeChoices.CARGO))
+	mine_button.button_down.connect(select_upgrade.bind(Events.UpgradeChoices.MINING))
+	weapon_button.button_down.connect(select_upgrade.bind(Events.UpgradeChoices.WEAPON))
 
 	for button in buttons:
-		button.connect("focus_entered", Callable(self, "_on_Button_focus_entered"))
+		button.focus_entered.connect(_on_Button_focus_entered)
 
 
 func open() -> void:
@@ -37,7 +37,7 @@ func open() -> void:
 # Emit a signal through the Events signal bus to unlock the upgrade selected by the player.
 func select_upgrade(type: int) -> void:
 	get_tree().paused = false
-	Events.emit_signal("upgrade_chosen", type)
+	Events.upgrade_chosen.emit(type)
 	menu_sounds.play_confirm()
 	for button in buttons:
 		var delay: float = button.get_index() * 0.1

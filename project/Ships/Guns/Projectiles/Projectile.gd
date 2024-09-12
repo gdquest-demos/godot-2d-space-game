@@ -2,7 +2,6 @@
 # into something that it's able to collide with, at which point it signals
 # damage.
 class_name Projectile
-extends KinematicBody2D
 extends CharacterBody2D
 
 const _AUDIO_SAMPLES = [
@@ -44,6 +43,7 @@ func _ready() -> void:
 
 	appear()
 
+#E 0:01:17:0974   Projectile.gd:50 @ _physics_process(): Error calling from signal 'damaged' to callable: 'CharacterBody2D(PirateShip.gd)::_on_self_damaged': Cannot convert argument 3 from Object to Object.
 
 func _physics_process(delta: float) -> void:
 	var collision := move_and_collide(direction * speed * delta)

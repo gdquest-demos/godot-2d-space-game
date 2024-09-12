@@ -26,7 +26,7 @@ func toggle() -> void:
 		_anim_player.play("appear")
 		_audio_player.stream = AUDIO_STREAMS.disappear
 		_audio_player.play()
-	Events.emit_signal("map_toggled", visible, _anim_player.current_animation_length)
+	Events.map_toggled.emit(visible, _anim_player.current_animation_length)
 
 
 func is_animating() -> bool:

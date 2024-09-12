@@ -30,4 +30,4 @@ func spawn_pirate_group(
 		)
 		p.setup_faction(get_tree().get_nodes_in_group("Pirates"))
 		add_child(p)
-		Events.emit_signal("pirate_spawned", p)
+		Events.pirate_spawned.emit(p)

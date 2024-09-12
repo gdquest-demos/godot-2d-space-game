@@ -29,7 +29,7 @@ func setup(rng: RandomNumberGenerator) -> void:
 func mine_amount(value: float) -> float:
 	var mined_amnt : float = min(iron_amount, value)
 	iron_amount -= mined_amnt
-	emit_signal("mined", mined_amnt)
+	mined.emit(mined_amnt)
 
 	if is_equal_approx(iron_amount, 0.0):
 		undock()

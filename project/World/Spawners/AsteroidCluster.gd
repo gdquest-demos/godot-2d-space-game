@@ -38,16 +38,16 @@ func spawn_asteroids(
 
 		var asteroid = _create_asteroid(rng, spawn_position)
 		add_child(asteroid)
-		asteroid.connect("mined", Callable(self, "_on_Asteroid_mined"))
-		asteroid.connect("depleted", Callable(self, "_on_Asteroid_depleted"))
+		asteroid.mined.connect(_on_Asteroid_mined)
+		asteroid.depleted.connect(_on_Asteroid_depleted)
 		iron_amount += asteroid.iron_amount
-		Events.emit_signal("asteroid_spawned", asteroid)
+		Events.asteroid_spawned.emit(asteroid)
 
 
 func set_iron_amount(value: float) -> void:
 	iron_amount = max(value, 0.0)
 	if is_equal_approx(iron_amount, 0.0):
-		emit_signal("cluster_depleted")
+		cluster_depleted.emit()
 		queue_free()
 
 
@@ -66,4 +66,4 @@ func _on_Asteroid_mined(amount: float) -> void:
 
 func _on_Asteroid_depleted() -> void:
 	if get_child_count() == 1:
-		emit_signal("cluster_depleted")
+		cluster_depleted.emit()

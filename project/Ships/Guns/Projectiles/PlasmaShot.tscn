@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Ships/Guns/Projectiles/Projectile.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bq0xspacaqs4q" path="res://Ships/Guns/Projectiles/plasma_ball.png" id="2"]
 [ext_resource type="Shader" path="res://VFX/Shaders/glow_sprite.gdshader" id="3"]
-[ext_resource type="PackedScene" path="res://VFX/DistortionEmitter.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://pk1wnkaywdkt" path="res://VFX/DistortionEmitter.tscn" id="4"]
 [ext_resource type="AudioStream" uid="uid://c8p2obduroe8p" path="res://Ships/Guns/Projectiles/Weapons_Plasma_Shot_01.wav" id="5"]
 
 [sub_resource type="ShaderMaterial" id="1"]

@@ -68,4 +68,4 @@ func _create_cluster(rng: RandomNumberGenerator, spawn_position: Vector2) -> Ast
 
 
 func _on_AsteroidCluster_depleted() -> void:
-	emit_signal("cluster_depleted", calculate_remaining_iron())
+	cluster_depleted.emit(calculate_remaining_iron())

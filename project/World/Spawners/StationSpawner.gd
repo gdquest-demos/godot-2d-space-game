@@ -16,7 +16,7 @@ func spawn_station(rng: RandomNumberGenerator) -> void:
 		station_inst.global_position
 		+ (Vector2.UP.rotated(rng.randf_range(0, PI * 2)) * radius_player_near_station)
 	)
-	Events.emit_signal("station_spawned", station_inst, player_ship)
+	Events.station_spawned.emit(station_inst, player_ship)
 
 
 func get_player() -> PlayerShip:

@@ -15,5 +15,5 @@ func _set_accumulated_iron(value: float) -> void:
 	accumulated_iron = value
 	if accumulated_iron >= upgrade_iron_amount:
 		accumulated_iron = 0
-		Events.emit_signal("upgrade_unlocked")
+		Events.upgrade_unlocked.emit()
 		upgrade_iron_amount *= 1.25

@@ -10,7 +10,7 @@ extends TextureProgressBar
 
 
 func initialize(player: PlayerShip) -> void:
-	player.stats.connect("stat_changed", Callable(self, "_on_Stats_stat_changed"))
+	player.stats.stat_changed.connect(_on_Stats_stat_changed)
 	max_value = player.stats.get_max_health()
 	value = player.stats.get("health")
 	tint_progress = gradient.sample(value / max_value)
@@ -22,7 +22,7 @@ func _on_Stats_stat_changed(stat: String, value_start: float, current_value: flo
 	if tween and tween.is_running():
 		tween.kill()
 	tween = create_tween()
-	tween.connect("step_finished", Callable(self, "_on_Tween_step_finished"))
+	tween.step_finished.connect(_on_Tween_step_finished)
 	tween.tween_property(
 		self, "value", current_value, 0.25
 	).from(value_start).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)

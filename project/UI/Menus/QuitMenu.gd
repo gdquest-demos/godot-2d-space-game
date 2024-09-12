@@ -36,7 +36,7 @@ func close() -> void:
 
 
 func request_quit() -> void:
-	Events.emit_signal("quit_requested")
+	Events.quit_requested.emit()
 	close()
 
 

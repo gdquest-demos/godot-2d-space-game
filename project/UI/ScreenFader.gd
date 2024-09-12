@@ -15,7 +15,7 @@ var tween : Tween
 # Animate from the current modulate color until the node is fully transparent.
 func fade_in() -> void:
 	tween = create_tween()
-	tween.connect("finished", Callable(self, "_on_Tween_tween_completed"))
+	tween.finished.connect(_on_Tween_tween_completed)
 	tween.tween_property(
 		self,
 		"modulate",
@@ -30,7 +30,7 @@ func fade_in() -> void:
 # Animate from the current modulate color until the node is fully black.
 func fade_out(is_delayed: bool = false) -> void:
 	tween = create_tween()
-	tween.connect("finished", Callable(self, "_on_Tween_tween_completed"))
+	tween.finished.connect(_on_Tween_tween_completed)
 	tween.tween_property(
 		self,
 		"modulate",
@@ -43,7 +43,7 @@ func fade_out(is_delayed: bool = false) -> void:
 
 
 func _on_Tween_tween_completed() -> void:
-	emit_signal("animation_finished")
+	animation_finished.emit()
 	if modulate == Color.TRANSPARENT:
 		hide()
 	is_playing = false

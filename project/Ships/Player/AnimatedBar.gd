@@ -12,7 +12,7 @@ var stat_max := ""
 func initialize(stats: Stats, _stat_value: String, _stat_max: String) -> void:
 	stat_value = _stat_value
 	stat_max = _stat_max
-	stats.connect("stat_changed", Callable(self, "_on_Stats_stat_changed"))
+	stats.stat_changed.connect(_on_Stats_stat_changed)
 	max_value = stats.get_stat(stat_max)
 	animate(stats.get_stat(stat_value))
 
