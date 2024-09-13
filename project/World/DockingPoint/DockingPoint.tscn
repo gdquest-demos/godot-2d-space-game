@@ -33,7 +33,6 @@ update_scale = false
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DockingArea"]
-visible = false
 shape = SubResource("1")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
@@ -41,7 +40,6 @@ collision_layer = 2
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-visible = false
 shape = SubResource("2")
 
 [node name="MapTransform" type="RemoteTransform2D" parent="."]

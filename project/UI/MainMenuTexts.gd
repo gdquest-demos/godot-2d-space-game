@@ -23,57 +23,20 @@ func _ready() -> void:
 
 
 func _fade_in(target: Control, total_time: float) -> float:
-	"""
-	tween.interpolate_property(
-		target,
-		"modulate",
-		Color.TRANSPARENT,
-		Color.WHITE,
-		FADE_DURATION,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT,
-		total_time
-	)"""
-	
-	"""
-	tween.interpolate_property(
-		target,			#object
-		"modulate",		#property nodepath
-		Color.TRANSPARENT,	#initial val
-		Color.WHITE,		#final val
-		FADE_DURATION,		#duration
-		Tween.TRANS_LINEAR,	#TransitionType
-		Tween.EASE_OUT,		#EaseType
-		total_time			#delay
-	)"""
 	tween.tween_property(
 		target,
 		"modulate",
 		Color.WHITE,
 		FADE_DURATION
-	#).from(Color.TRANSPARENT).set_delay(total_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
 	).from(Color.TRANSPARENT).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
 	return FADE_DURATION
 
 
 func _fade_out(target: Control, total_time: float) -> float:
-	"""
-	tween.interpolate_property(
-		target,
-		"modulate",
-		Color.WHITE,
-		Color.TRANSPARENT,
-		FADE_DURATION,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT,
-		total_time + EXPOSE_DURATION
-	)
-	"""
 	tween.tween_property(
 		target,
 		"modulate",
 		Color.TRANSPARENT,
 		FADE_DURATION
-	#).from(Color.WHITE).set_delay(total_time + EXPOSE_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
 	).from(Color.WHITE).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
 	return FADE_DURATION + EXPOSE_DURATION

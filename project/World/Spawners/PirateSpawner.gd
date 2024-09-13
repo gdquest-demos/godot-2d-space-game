@@ -5,7 +5,7 @@
 class_name PirateSpawner
 extends Node2D
 
-@export var PirateScene: PackedScene
+@export var pirate_scene: PackedScene = null
 @export var count_min := 1
 @export var count_max := 5
 @export var spawn_radius := 150.0
@@ -18,7 +18,7 @@ func spawn_pirate_group(
 
 	var pirates_in_cluster := []
 	for _i in range(rng.randi_range(count_min, count_max)):
-		var pirate := PirateScene.instantiate()
+		var pirate := pirate_scene.instantiate()
 		pirate.position = (
 			spawn_position
 			+ Vector2.UP.rotated(rng.randf_range(0, PI * 2)) * spawn_radius

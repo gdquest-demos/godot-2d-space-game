@@ -114,20 +114,21 @@ _data = {
 "disappear": SubResource("Animation_qviax")
 }
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_yngfm"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_0tkgw"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="3"]
 resource_local_to_scene = true
 shader = ExtResource("13")
 shader_parameter/displacement_amount = 12.0
-shader_parameter/displacement_mask = SubResource("ViewportTexture_yngfm")
+shader_parameter/displacement_mask = SubResource("ViewportTexture_0tkgw")
 
 [sub_resource type="Environment" id="4"]
 background_mode = 3
 glow_enabled = true
-glow_blend_mode = 0
-glow_hdr_threshold = 0.25
+glow_levels/5 = 0.0
+glow_blend_mode = 1
+glow_hdr_threshold = 0.3
 
 [node name="GameInitializer" type="Node"]
 script = ExtResource("7")
@@ -147,7 +148,7 @@ max_zoom = 0.167
 
 [node name="StationSpawner" type="Node2D" parent="GameWorld"]
 script = ExtResource("2")
-station = ExtResource("4")
+station_scene = ExtResource("4")
 
 [node name="PlayerShip" parent="GameWorld/StationSpawner" instance=ExtResource("5")]
 
@@ -156,7 +157,7 @@ script = ExtResource("1")
 
 [node name="PirateSpawner" type="Node2D" parent="GameWorld"]
 script = ExtResource("15")
-PirateScene = ExtResource("3")
+pirate_scene = ExtResource("3")
 spawn_radius = 350.0
 
 [node name="MapView" parent="." instance=ExtResource("6")]

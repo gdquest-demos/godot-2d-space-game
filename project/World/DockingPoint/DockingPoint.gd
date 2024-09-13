@@ -7,7 +7,7 @@ extends Node2D
 
 signal died
 
-@export var map_icon: Resource = MapIcon.new()
+@export var map_icon := MapIcon.new()
 @export var docking_distance := 200.0: set = _set_docking_distance
 
 var angle_proportion := 1.0

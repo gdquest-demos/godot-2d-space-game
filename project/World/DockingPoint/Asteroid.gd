@@ -10,16 +10,17 @@ signal depleted
 @export var max_iron_amount := 100.0
 @export var min_scale := 0.2
 
-@onready var anim_player := $AnimationPlayer
-@onready var fx_anim_player := $FXAnimationPlayer
-@onready var sprite : Sprite2D = $Sprite2D
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var fx_anim_player: AnimationPlayer = $FXAnimationPlayer
+@onready var sprite: Sprite2D = $Sprite2D
 
-var iron_amount: float
+var iron_amount := 0.0
 
 
 func _ready() -> void:
 	super()
 	anim_player.speed_scale = randf_range(0.5, 2.0)
+
 
 func setup(rng: RandomNumberGenerator) -> void:
 	iron_amount = rng.randf_range(min_iron_amount, max_iron_amount)
@@ -27,9 +28,9 @@ func setup(rng: RandomNumberGenerator) -> void:
 
 
 func mine_amount(value: float) -> float:
-	var mined_amnt : float = min(iron_amount, value)
-	iron_amount -= mined_amnt
-	mined.emit(mined_amnt)
+	var mined_amount: float = min(iron_amount, value)
+	iron_amount -= mined_amount
+	mined.emit(mined_amount)
 
 	if is_equal_approx(iron_amount, 0.0):
 		undock()
@@ -37,7 +38,7 @@ func mine_amount(value: float) -> float:
 	elif not anim_player.is_playing():
 		fx_anim_player.play("pulse")
 
-	return mined_amnt
+	return mined_amount
 
 
 # Animates the asteroid shrinking down and frees it.

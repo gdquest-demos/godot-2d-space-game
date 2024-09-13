@@ -79,11 +79,9 @@ scale = Vector2(0.449401, 0.449401)
 texture = ExtResource("3")
 
 [node name="CollisionShape2D" parent="DockingArea" index="0"]
-visible = true
 shape = SubResource("1")
 
 [node name="CollisionShape2D" parent="CharacterBody2D" index="0"]
-visible = true
 shape = SubResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
