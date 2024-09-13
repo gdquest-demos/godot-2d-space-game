@@ -2,22 +2,22 @@
 # the game back to the main menu or not.
 extends MarginContainer
 
-onready var yes_button := $VBoxContainer/HBoxContainer/YesButton
-onready var no_button := $VBoxContainer/HBoxContainer/NoButton
-onready var menu_sounds: MenuSoundPlayer = $MenuSoundPlayer
+@onready var yes_button := $VBoxContainer/HBoxContainer/YesButton
+@onready var no_button := $VBoxContainer/HBoxContainer/NoButton
+@onready var menu_sounds: MenuSoundPlayer = $MenuSoundPlayer
 
 
 func _ready() -> void:
 	visible = false
 	set_process_input(false)
 	for button in [yes_button, no_button]:
-		button.connect("focus_entered", self, "_on_Button_focus_entered")
+		button.connect("focus_entered", _on_Button_focus_entered)
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		close()
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 
 func open() -> void:
@@ -36,7 +36,7 @@ func close() -> void:
 
 
 func request_quit() -> void:
-	Events.emit_signal("quit_requested")
+	Events.quit_requested.emit()
 	close()
 
 

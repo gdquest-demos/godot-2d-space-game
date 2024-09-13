@@ -8,22 +8,23 @@ const ARRIVAL_TOLERANCE := 350 * 350
 
 var _initialized := false
 
-onready var priority := GSAIPriority.new(owner.agent)
-onready var patrol_target := GSAIAgentLocation.new()
-onready var acceleration := GSAITargetAcceleration.new()
+@onready var priority := GSAIPriority.new(owner.agent)
+@onready var patrol_target := GSAIAgentLocation.new()
+@onready var acceleration := GSAITargetAcceleration.new()
 
 
 func _ready() -> void:
-	yield(owner, "ready")
-	ship.connect("squad_leader_changed", self, "_on_Leader_changed")
+	super()
+	await owner.ready
+	ship.squad_leader_changed.connect(_on_Leader_changed)
 	set_behaviors()
 
 	if not ship.is_squad_leader:
-		Events.connect("reached_cluster", self, "_on_Leader_reached_cluster")
+		Events.reached_cluster.connect(_on_Leader_reached_cluster)
 	else:
 		var timer := Timer.new()
 		add_child(timer)
-		timer.connect("timeout", self, "_on_Timer_timeout")
+		timer.timeout.connect(_on_Timer_timeout)
 		timer.start(30)
 
 
@@ -37,7 +38,7 @@ func physics_process(delta: float) -> void:
 			GSAIUtils.to_vector3(ship.global_position)
 		)
 		if distance_to <= ARRIVAL_TOLERANCE:
-			Events.emit_signal("reached_cluster", ship)
+			Events.reached_cluster.emit(ship)
 			_state_machine.transition_to("Rest")
 
 	priority.calculate_steering(acceleration)
@@ -92,12 +93,12 @@ func _on_Leader_reached_cluster(leader: Node) -> void:
 
 
 func _on_Timer_timeout() -> void:
-	Events.emit_signal("reached_cluster", ship)
+	Events.reached_cluster.emit( ship)
 	_state_machine.transition_to("Rest")
 
 
 func _on_Leader_changed(
-	_old_leader: KinematicBody2D, _new_leader: KinematicBody2D, _current_patrol_point: Vector2
+	_old_leader: CharacterBody2D, _new_leader: CharacterBody2D, _current_patrol_point: Vector2
 ) -> void:
 	set_behaviors()
 	_state_machine.transition_to("Spawn")

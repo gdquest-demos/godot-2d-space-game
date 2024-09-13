@@ -7,7 +7,7 @@ extends Node
 # The circumscribed circle or circumcircle of a polygon is a circle that passes
 # through all the vertices of the polygon.
 # Adapted from an algorithm by [mutoo](https://gist.github.com/mutoo/5617691)
-static func get_triangle_circumcircle_radius(vertices: PoolVector2Array) -> float:
+static func get_triangle_circumcircle_radius(vertices: PackedVector2Array) -> float:
 	assert(vertices.size() == 3)
 
 	var a := vertices[0]

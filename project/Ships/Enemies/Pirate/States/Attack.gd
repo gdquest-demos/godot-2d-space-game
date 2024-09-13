@@ -3,9 +3,9 @@
 # or when to break off pursuit and return to patrol, and when to fire the gun.
 extends PirateState
 
-export var distance_from_player_min := 200.0
-export var firing_alignment_tolerance_percentage := 0.15
-export var pursuit_distance_max := 800.0
+@export var distance_from_player_min := 200.0
+@export var firing_alignment_tolerance_percentage := 0.15
+@export var pursuit_distance_max := 800.0
 
 var target: GSAISteeringAgent
 var pursue: GSAIPursue
@@ -17,7 +17,8 @@ var target_separate: GSAIRadiusProximity
 
 
 func _ready() -> void:
-	yield(owner, "ready")
+	super()
+	await owner.ready
 	pursue = GSAIPursue.new(ship.agent, target)
 	var avoid := GSAIAvoidCollisions.new(ship.agent, ship.world_proximity)
 	var squad_avoid := GSAIAvoidCollisions.new(ship.agent, ship.squad_proximity)
@@ -46,12 +47,12 @@ func enter(msg := {}) -> void:
 	if ship.is_squad_leader:
 		starting_position = ship.global_position
 	else:
-		Events.connect("call_off_pursuit", self, "_on_Leader_call_off_pursuit")
+		Events.call_off_pursuit.connect(_on_Leader_call_off_pursuit)
 
 
 func exit() -> void:
 	if not ship.is_squad_leader:
-		Events.disconnect("call_off_pursuit", self, "_on_Leader_call_off_pursuit")
+		Events.call_off_pursuit.disconnect(_on_Leader_call_off_pursuit)
 
 
 func physics_process(delta: float) -> void:
@@ -66,7 +67,7 @@ func physics_process(delta: float) -> void:
 	if ship.is_squad_leader:
 		var distance_to := starting_position.distance_squared_to(ship.global_position)
 		if distance_to > pursuit_distance_max * pursuit_distance_max:
-			Events.emit_signal("call_off_pursuit", ship)
+			Events.call_off_pursuit.emit(ship)
 			_state_machine.transition_to("Patrol", {patrol_point = ship.patrol_point})
 
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/UI_Close.wav-8573426c77038b776de3248cb4c95116.sample"
+type="AudioStreamWAV"
+uid="uid://dqemn8k1vlcen"
+path="res://.godot/imported/UI_Close.wav-8573426c77038b776de3248cb4c95116.sample"
 
 [deps]
 
 source_file="res://UI/Menus/Sounds/UI_Close.wav"
-dest_files=[ "res://.import/UI_Close.wav-8573426c77038b776de3248cb4c95116.sample" ]
+dest_files=["res://.godot/imported/UI_Close.wav-8573426c77038b776de3248cb4c95116.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=true
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

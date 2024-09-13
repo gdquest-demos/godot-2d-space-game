@@ -8,13 +8,13 @@ signal cluster_depleted
 const AsteroidScene := preload("res://World/DockingPoint/Asteroid.tscn")
 
 # Ore left in the cluster.
-var iron_amount := 0.0 setget set_iron_amount
+var iron_amount := 0.0: set = set_iron_amount
 # If `true`, the cluster is occupied, e.g. by a pirate squad.
 var is_occupied := false
 
 
 func _init() -> void:
-	set_as_toplevel(true)
+	set_as_top_level(true)
 
 
 # Spawns a new random count of asteroids and adds them as children.
@@ -38,22 +38,22 @@ func spawn_asteroids(
 
 		var asteroid = _create_asteroid(rng, spawn_position)
 		add_child(asteroid)
-		asteroid.connect("mined", self, "_on_Asteroid_mined")
-		asteroid.connect("depleted", self, "_on_Asteroid_depleted")
+		asteroid.mined.connect(_on_Asteroid_mined)
+		asteroid.depleted.connect(_on_Asteroid_depleted)
 		iron_amount += asteroid.iron_amount
-		Events.emit_signal("asteroid_spawned", asteroid)
+		Events.asteroid_spawned.emit(asteroid)
 
 
 func set_iron_amount(value: float) -> void:
 	iron_amount = max(value, 0.0)
 	if is_equal_approx(iron_amount, 0.0):
-		emit_signal("cluster_depleted")
+		cluster_depleted.emit()
 		queue_free()
 
 
 # Creates, initializes, and returns a new Asteroid.
 func _create_asteroid(rng: RandomNumberGenerator, location: Vector2) -> Asteroid:
-	var asteroid: Asteroid = AsteroidScene.instance()
+	var asteroid: Asteroid = AsteroidScene.instantiate()
 	asteroid.setup(rng)
 	asteroid.global_position = location
 	asteroid.rotation = rng.randf_range(0, PI * 2)
@@ -66,4 +66,4 @@ func _on_Asteroid_mined(amount: float) -> void:
 
 func _on_Asteroid_depleted() -> void:
 	if get_child_count() == 1:
-		emit_signal("cluster_depleted")
+		cluster_depleted.emit()

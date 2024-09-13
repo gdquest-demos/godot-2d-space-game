@@ -6,35 +6,35 @@ class_name GameWorld
 extends Node2D
 
 # Radius of the world in pixels.
-export var radius := 8000.0
+@export var radius := 8000.0
 
 # Minimum amount of iron that must be added when the world spawns new asteroids.
 # Used in `_spawn_asteroids`.
-export var iron_amount_balance_level := 100.0
+@export var iron_amount_balance_level := 100.0
 # If the amouns of iron in the world goes below this threshold, spawns new asteroids.
-export var refresh_threshold_range := 25.0
+@export var refresh_threshold_range := 25.0
 
 var _spawned_positions := []
 var _world_objects := []
 var _iron_clusters := {}
 
-onready var rng := RandomNumberGenerator.new()
+@onready var rng := RandomNumberGenerator.new()
 
-onready var station_spawner: StationSpawner = $StationSpawner
-onready var asteroid_spawner: AsteroidSpawner = $AsteroidSpawner
-onready var pirate_spawner: PirateSpawner = $PirateSpawner
+@onready var station_spawner: StationSpawner = $StationSpawner
+@onready var asteroid_spawner: AsteroidSpawner = $AsteroidSpawner
+@onready var pirate_spawner: PirateSpawner = $PirateSpawner
 
 
 func _ready() -> void:
-	yield(owner, "ready")
+	await owner.ready
 	setup()
 
 
 func setup() -> void:
 	rng.randomize()
 
-	Events.connect("upgrade_chosen", self, "_on_Events_upgrade_chosen")
-	asteroid_spawner.connect("cluster_depleted", self, "_on_AsteroidSpawner_cluster_depleted")
+	Events.upgrade_chosen.connect(_on_Events_upgrade_chosen)
+	asteroid_spawner.cluster_depleted.connect(_on_AsteroidSpawner_cluster_depleted)
 
 	station_spawner.spawn_station(rng)
 	asteroid_spawner.spawn_asteroid_clusters(rng, iron_amount_balance_level, radius)

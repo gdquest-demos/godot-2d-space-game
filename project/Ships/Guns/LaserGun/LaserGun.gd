@@ -4,15 +4,15 @@
 class_name LaserGun
 extends Node2D
 
-export var damage_per_second := 200.0
+@export var damage_per_second := 200.0
 
-onready var laser_beam := $LaserBeam2D
-onready var shooter := owner
+@onready var laser_beam := $LaserBeam2D
+@onready var shooter := owner
 
-onready var audio: LoopingAudioStreamPlayer2D = $LaserGunSounds
+@onready var audio: LoopingAudioStreamPlayer2D = $LaserGunSounds
 
-var is_firing := false setget set_is_firing
-var collision_mask := 0 setget set_collision_mask
+var is_firing := false: set = set_is_firing
+var collision_mask := 0: set = set_collision_mask
 
 
 func _ready() -> void:
@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if laser_beam.is_colliding():
-		Events.emit_signal("damaged", laser_beam.get_collider(), damage_per_second * delta, shooter)
+		Events.damaged.emit(laser_beam.get_collider(), damage_per_second * delta, shooter)
 
 
 func set_is_firing(firing: bool) -> void:

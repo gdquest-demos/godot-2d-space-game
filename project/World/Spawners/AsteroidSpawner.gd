@@ -8,15 +8,15 @@ extends Node2D
 
 signal cluster_depleted(iron_left)
 
-export var count_min := 1
-export var count_max := 5
+@export var count_min := 1
+@export var count_max := 5
 
-export var min_distance_from_station := 800.0
-export var min_distance_between_clusters := 600.0
+@export var min_distance_from_station := 800.0
+@export var min_distance_between_clusters := 600.0
 
-export var cluster_radius := 150.0
-export var asteroid_radius := 75.0
-export var randomize_rotation := true
+@export var cluster_radius := 150.0
+@export var asteroid_radius := 75.0
+@export var randomize_rotation := true
 
 
 # Spawns new asteroids until there's enough resources to mine in the world.
@@ -68,4 +68,4 @@ func _create_cluster(rng: RandomNumberGenerator, spawn_position: Vector2) -> Ast
 
 
 func _on_AsteroidCluster_depleted() -> void:
-	emit_signal("cluster_depleted", calculate_remaining_iron())
+	cluster_depleted.emit(calculate_remaining_iron())

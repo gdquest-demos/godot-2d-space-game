@@ -6,13 +6,13 @@ extends Stats
 
 signal health_depleted
 
-export var _max_health := 100.0
-export var _acceleration_max := 15.0
-export var _linear_speed_max := 350.0
-export var _angular_speed_max := 120.0
-export var _angular_acceleration_max := 45.0
+@export var _max_health := 100.0
+@export var _acceleration_max := 15.0
+@export var _linear_speed_max := 350.0
+@export var _angular_speed_max := 120.0
+@export var _angular_acceleration_max := 45.0
 
-var health: float = _max_health setget set_health
+var health: float = _max_health: set = set_health
 
 
 func get_max_health() -> float:
@@ -38,5 +38,5 @@ func get_angular_acceleration_max() -> float:
 func set_health(value: float) -> void:
 	health = clamp(value, 0.0, _max_health)
 	if is_equal_approx(health, 0.0):
-		emit_signal("health_depleted")
+		health_depleted.emit()
 	_update("health")

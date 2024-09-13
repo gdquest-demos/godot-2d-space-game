@@ -7,5 +7,5 @@ var ship: PlayerShip
 
 
 func _ready() -> void:
-	yield(owner, "ready")
+	super()
 	ship = owner

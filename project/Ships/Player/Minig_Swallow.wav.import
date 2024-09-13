@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Minig_Swallow.wav-75d6e2b54d478097b513ec452812d6bb.sample"
+type="AudioStreamWAV"
+uid="uid://so0382buwi3f"
+path="res://.godot/imported/Minig_Swallow.wav-75d6e2b54d478097b513ec452812d6bb.sample"
 
 [deps]
 
 source_file="res://Ships/Player/Minig_Swallow.wav"
-dest_files=[ "res://.import/Minig_Swallow.wav-75d6e2b54d478097b513ec452812d6bb.sample" ]
+dest_files=["res://.godot/imported/Minig_Swallow.wav-75d6e2b54d478097b513ec452812d6bb.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=true
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

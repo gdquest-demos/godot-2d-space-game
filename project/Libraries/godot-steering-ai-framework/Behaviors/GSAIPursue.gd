@@ -1,6 +1,6 @@
 # Calculates an acceleration to make an agent intercept another based on the
 # target agent's movement.
-# category: Individual behaviors
+# @category - Individual behaviors
 class_name GSAIPursue
 extends GSAISteeringBehavior
 
@@ -11,7 +11,8 @@ var target: GSAISteeringAgent
 var predict_time_max: float
 
 
-func _init(agent: GSAISteeringAgent, _target: GSAISteeringAgent, _predict_time_max := 1.0).(agent) -> void:
+func _init(agent: GSAISteeringAgent, _target: GSAISteeringAgent, _predict_time_max := 1.0) -> void:
+	super._init(agent)
 	self.target = _target
 	self.predict_time_max = _predict_time_max
 

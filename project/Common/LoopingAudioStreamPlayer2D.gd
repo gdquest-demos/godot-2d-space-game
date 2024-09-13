@@ -1,15 +1,15 @@
 class_name LoopingAudioStreamPlayer2D
 extends AudioStreamPlayer2D
 
-export var sound_start: AudioStream
-export var sound_loop: AudioStream
-export var sound_tail: AudioStream
+@export var sound_start: AudioStream
+@export var sound_loop: AudioStream
+@export var sound_tail: AudioStream
 
 var ending := false
 
 
 func _ready() -> void:
-	connect("finished", self, "_on_finished")
+	finished.connect(_on_finished)
 
 
 func start() -> void:

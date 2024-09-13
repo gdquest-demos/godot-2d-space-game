@@ -75,7 +75,7 @@ func _update(stat: String = "") -> void:
 	for modifier in _modifiers[stat]:
 		value += modifier
 	_cache[stat] = value
-	emit_signal("stat_changed", stat, value_start, value)
+	stat_changed.emit(stat, value_start, value)
 
 
 # Recalculates every stat from the base stat, with modifiers.
@@ -87,6 +87,7 @@ func _update_all() -> void:
 # Returns a list of stat properties as strings.
 func _get_stats_list() -> Dictionary:
 	var ignore := [
+		"resource_scene_unique_id",
 		"resource_local_to_scene",
 		"resource_name",
 		"resource_path",

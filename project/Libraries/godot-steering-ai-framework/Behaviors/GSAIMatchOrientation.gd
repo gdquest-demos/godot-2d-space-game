@@ -1,7 +1,7 @@
 # Calculates an angular acceleration to match an agent's orientation to that of
 # its target. Attempts to make the agent arrive with zero remaining angular
 # velocity.
-# category: Individual behaviors
+# @category - Individual behaviors
 class_name GSAIMatchOrientation
 extends GSAISteeringBehavior
 
@@ -19,7 +19,8 @@ var time_to_reach: float = 0.1
 var use_z: bool
 
 
-func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation, _use_z := false).(agent) -> void:
+func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation, _use_z := false) -> void:
+	super._init(agent)
 	self.use_z = _use_z
 	self.target = _target
 
@@ -27,7 +28,7 @@ func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation, _use_z := false
 func _match_orientation(acceleration: GSAITargetAcceleration, desired_orientation: float) -> void:
 	var rotation := wrapf(desired_orientation - agent.orientation, -PI, PI)
 
-	var rotation_size := abs(rotation)
+	var rotation_size := absf(rotation)
 
 	if rotation_size <= alignment_tolerance:
 		acceleration.set_zero()
@@ -41,7 +42,7 @@ func _match_orientation(acceleration: GSAITargetAcceleration, desired_orientatio
 
 		acceleration.angular = ((desired_rotation - agent.angular_velocity) / time_to_reach)
 
-		var limited_acceleration := abs(acceleration.angular)
+		var limited_acceleration := absf(acceleration.angular)
 		if limited_acceleration > agent.angular_acceleration_max:
 			acceleration.angular *= (agent.angular_acceleration_max / limited_acceleration)
 

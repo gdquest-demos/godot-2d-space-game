@@ -1,9 +1,9 @@
 # A base class for a specialized steering agent that updates itself every frame
 # so the user does not have to. All other specialized agents derive from this.
-# category: Specialized agents
-# tags: abstract
-extends GSAISteeringAgent
+# @category - Specialized agents
+# @tags - abstract
 class_name GSAISpecializedAgent
+extends GSAISteeringAgent
 
 # If `true`, calculates linear and angular velocities based on the previous
 # frame. When `false`, the user must keep those values updated.
@@ -34,6 +34,6 @@ var _applied_steering := false
 
 
 # Moves the agent's body by target `acceleration`.
-# tags: virtual
+# @tags - virtual
 func _apply_steering(_acceleration: GSAITargetAcceleration, _delta: float) -> void:
 	pass

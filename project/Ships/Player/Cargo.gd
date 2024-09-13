@@ -5,7 +5,7 @@ extends Node
 
 enum States { IDLE, MINING, UNLOADING }
 
-export var stats: Resource = preload("res://Ships/Player/cargo_stats.tres") as StatsCargo
+@export var stats: Resource = preload("res://Ships/Player/cargo_stats.tres") as StatsCargo
 
 var state: int = States.IDLE
 var is_mining := false
@@ -15,9 +15,9 @@ var dockable_weakref: WeakRef
 
 func _ready() -> void:
 	stats.initialize()
-	Events.connect("docked", self, "_on_Player_docked")
-	Events.connect("undocked", self, "_on_Player_undocked")
-	yield(owner, "ready")
+	Events.docked.connect(_on_Player_docked)
+	Events.undocked.connect(_on_Player_undocked)
+	await owner.ready
 
 
 func _physics_process(delta: float) -> void:
@@ -29,13 +29,13 @@ func _physics_process(delta: float) -> void:
 			var _asteroid: Asteroid = dockable_weakref.get_ref()
 			if not _asteroid:
 				state = States.IDLE
-				Events.emit_signal("force_undock")
+				Events.force_undock.emit()
 			else:
 				var mined: float = _asteroid.mine_amount(
 					min(stats.get_max_cargo(), stats.get_mining_rate() * delta)
 				)
 				if mined == 0:
-					Events.emit_signal("force_undock")
+					Events.force_undock.emit()
 					state = States.IDLE
 				else:
 					stats.cargo += mined
@@ -46,13 +46,13 @@ func _physics_process(delta: float) -> void:
 			var _station: Station = dockable_weakref.get_ref()
 			if not _station:
 				state = States.IDLE
-				Events.emit_signal("force_undock")
+				Events.force_undock.emit()
 			else:
-				var export_amount := min(stats.get_unload_rate() * delta, stats.cargo)
+				var export_amount : float = min(stats.get_unload_rate() * delta, stats.cargo)
 				stats.cargo -= export_amount
 				_station.accumulated_iron += export_amount
 		States.IDLE:
-			Events.emit_signal("mine_finished")
+			Events.mine_finished.emit()
 
 
 func _on_Player_docked(dockable: Node) -> void:
@@ -62,7 +62,7 @@ func _on_Player_docked(dockable: Node) -> void:
 	elif dockable is Asteroid:
 		state = States.MINING
 		var asteroid_position: Vector2 = dockable.get_global_transform_with_canvas().origin
-		Events.emit_signal("mine_started", asteroid_position)
+		Events.mine_started.emit(asteroid_position)
 
 
 func _on_Player_undocked() -> void:

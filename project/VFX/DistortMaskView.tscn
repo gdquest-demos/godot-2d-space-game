@@ -1,35 +1,34 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://53pcfgby5by6"]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 0, 0, 0, 1 )
+[sub_resource type="Gradient" id="Gradient_ut1r6"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture2D" id="2"]
+gradient = SubResource("Gradient_ut1r6")
 width = 1
 
-[node name="DistortMaskView" type="ViewportContainer"]
-self_modulate = Color( 1, 1, 1, 0 )
+[node name="SubViewportContainer" type="SubViewportContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 stretch = true
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "Black and white viewport that will be used to generate distortion masks for heattrails and shockwaves."
-}
 
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 1280, 720 )
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
 handle_input_locally = false
-usage = 0
-render_target_update_mode = 3
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Viewport"]
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport"]
 layer = -1
 
-[node name="BlackBackground" type="TextureRect" parent="Viewport/CanvasLayer"]
+[node name="BlackBackground" type="TextureRect" parent="SubViewport/CanvasLayer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = SubResource( 2 )
-expand = true
+texture = SubResource("2")
+expand_mode = 1
 stretch_mode = 1

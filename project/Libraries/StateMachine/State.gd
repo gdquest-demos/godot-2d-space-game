@@ -6,12 +6,12 @@
 extends Node
 class_name State
 
-onready var _state_machine := _get_state_machine(self)
+@onready var _state_machine := _get_state_machine(self)
 var _parent: State = null
 
 
 func _ready() -> void:
-	yield(owner, "ready")
+	await owner.ready
 	_parent = get_parent() as State
 
 

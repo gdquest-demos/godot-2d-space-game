@@ -5,8 +5,8 @@ extends PlayerState
 
 enum DockingProcess { CLEARING, DOCKING, DOCKED }
 
-export var docking_release_speed := 150.0
-export var docking_speed_multiplier := 0.65
+@export var docking_release_speed := 150.0
+@export var docking_speed_multiplier := 0.65
 
 var _acceleration := GSAITargetAcceleration.new()
 var _agent: GSAISteeringAgent
@@ -22,11 +22,12 @@ var _docking_phase := 0
 var _current_docking_point: Node2D
 var _controls_disabled := false
 
-onready var audio: AudioStreamPlayer = $AudioStreamPlayer
+@onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
-	yield(owner, "ready")
+	super()
+	await owner.ready
 
 	_agent = _parent.agent
 
@@ -37,8 +38,8 @@ func _ready() -> void:
 	var flee := GSAIFlee.new(_agent, _dock_position)
 	# Face makes sure we face away from the docking point
 	var face := GSAIFace.new(_agent, _reverse_face_position)
-	face.alignment_tolerance = deg2rad(15)
-	face.deceleration_radius = deg2rad(45)
+	face.alignment_tolerance = deg_to_rad(15)
+	face.deceleration_radius = deg_to_rad(45)
 
 	_flee_blend = GSAIBlend.new(_agent)
 	_flee_blend.add(flee, 1)
@@ -90,18 +91,18 @@ func physics_process(delta: float) -> void:
 	_parent.physics_process(delta)
 
 	if _docking_phase == DockingProcess.DOCKING:
-		var slide_count: int = ship.get_slide_count()
+		var slide_count: int = ship.get_slide_collision_count()
 
 		for s in range(slide_count):
 			var collision: KinematicCollision2D = ship.get_slide_collision(s)
 
-			if collision.collider.collision_layer == 2:
+			if collision.get_collider().collision_layer == 2:
 				_docking_phase = DockingProcess.DOCKED
-				_current_docking_point = collision.collider.owner
-				Events.emit_signal("docked", _current_docking_point)
+				_current_docking_point = collision.get_collider().owner
+				Events.docked.emit(_current_docking_point)
 				_current_docking_point.set_docking_remote(ship, _agent.bounding_radius * 0.75)
-				if not Events.is_connected("force_undock", self, "_on_Ship_force_undock"):
-					Events.connect("force_undock", self, "_on_Ship_force_undock")
+				if not Events.force_undock.is_connected(_on_Ship_force_undock):
+					Events.force_undock.connect(_on_Ship_force_undock)
 				ship.vfx.create_ripple()
 				ship.vfx.create_dust()
 				audio.play()
@@ -110,8 +111,8 @@ func physics_process(delta: float) -> void:
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_dock") and not _controls_disabled:
 		if _docking_phase == DockingProcess.DOCKED:
-			Events.emit_signal("undocked")
-			Events.disconnect("force_undock", self, "_on_Ship_force_undock")
+			Events.undocked.emit()
+			Events.force_undock.disconnect(_on_Ship_force_undock)
 
 			var direction: Vector2 = (ship.global_position - Vector2(_dock_position.position.x, _dock_position.position.y)).normalized()
 
@@ -122,5 +123,5 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func _on_Ship_force_undock() -> void:
-	Events.disconnect("force_undock", self, "_on_Ship_force_undock")
+	Events.force_undock.disconnect(_on_Ship_force_undock)
 	_state_machine.transition_to("Move/Travel")
