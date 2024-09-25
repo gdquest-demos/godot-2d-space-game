@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://cej2yui5vls48"]
+
+[ext_resource type="Texture2D" uid="uid://cgiaugfbqfpgk" path="res://vfx/dust.svg" id="1"]
+
+[sub_resource type="Curve" id="1"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, -183.648), 0.0, 396.07, 0, 0, Vector2(1, -13.466), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="2"]
+width = 2048
+curve = SubResource("1")
+
+[sub_resource type="Gradient" id="3"]
+offsets = PackedFloat32Array(0, 0.816479, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="4"]
+gradient = SubResource("3")
+
+[sub_resource type="Curve" id="5"]
+_data = [Vector2(0, 0.420918), 0.0, 1.95026, 0, 0, Vector2(0.395683, 1), 0.156573, 0.156573, 0, 0, Vector2(1, 0.0446429), -3.76918, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="6"]
+curve = SubResource("5")
+
+[sub_resource type="ParticleProcessMaterial" id="9"]
+direction = Vector3(1, -0.3, 0)
+spread = 20.0
+initial_velocity_max = 150.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 300.0
+angular_velocity_curve = SubResource("2")
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("6")
+color_ramp = SubResource("4")
+
+[node name="DustEmitter" type="GPUParticles2D"]
+emitting = false
+amount = 6
+process_material = SubResource("9")
+texture = ExtResource("1")
+one_shot = true
+explosiveness = 0.92
+randomness = 1.0

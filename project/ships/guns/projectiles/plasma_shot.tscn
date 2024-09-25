@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://qu00x7v3bugx"]
+
+[ext_resource type="Script" path="res://ships/guns/projectiles/projectile.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bq0xspacaqs4q" path="res://ships/guns/projectiles/plasma_ball.png" id="2"]
+[ext_resource type="Shader" path="res://vfx/shaders/glow_sprite.gdshader" id="3"]
+[ext_resource type="PackedScene" uid="uid://pk1wnkaywdkt" path="res://vfx/distortion_emitter.tscn" id="4"]
+[ext_resource type="AudioStream" uid="uid://c8p2obduroe8p" path="res://ships/guns/projectiles/weapons_plasma_shot_01.wav" id="5"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("3")
+shader_parameter/alpha_intensity_front = 0.5
+shader_parameter/tint_front = Color(0.972549, 0.92549, 0.92549, 1)
+shader_parameter/alpha_intensity_back = 3.0
+shader_parameter/tint_back = Color(0.94902, 0.054902, 0.054902, 1)
+shader_parameter/blend_amount = 1.0
+shader_parameter/fade_amount = 1.0
+
+[sub_resource type="CircleShape2D" id="2"]
+radius = 15.6706
+
+[sub_resource type="Animation" id="3"]
+resource_name = "Flicker"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/alpha_intensity_back")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.0, 1.25]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qfuyi"]
+_data = {
+"Flicker": SubResource("3")
+}
+
+[node name="PlasmaShot" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1")
+distortion_emitter = ExtResource("4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("1")
+scale = Vector2(0.387347, 0.387347)
+texture = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("2")
+
+[node name="Lifespan" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qfuyi")
+}
+
+[node name="DistortionTransform" type="RemoteTransform2D" parent="."]
+position = Vector2(0, 15)
+update_rotation = false
+update_scale = false
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(2.47902, 2.47902)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5")
+attenuation = 0.535888

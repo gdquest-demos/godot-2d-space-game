@@ -1,0 +1,97 @@
+[gd_scene load_steps=22 format=3 uid="uid://b07d5oc6kv45w"]
+
+[ext_resource type="PackedScene" uid="uid://dtrlskyqvhnj" path="res://ships/ship.tscn" id="1"]
+[ext_resource type="Script" path="res://libraries/state_machine/state_machine.gd" id="2"]
+[ext_resource type="Script" path="res://ships/player/states/move.gd" id="3"]
+[ext_resource type="Script" path="res://ships/player/states/travel.gd" id="4"]
+[ext_resource type="Script" path="res://ships/player/states/dock.gd" id="5"]
+[ext_resource type="Script" path="res://ships/player/player_ship.gd" id="6"]
+[ext_resource type="Script" path="res://ships/player/states/precision.gd" id="7"]
+[ext_resource type="Resource" path="res://ships/player/player_map_icon.tres" id="8"]
+[ext_resource type="Script" path="res://ships/player/player_gun.gd" id="9"]
+[ext_resource type="Script" path="res://ships/player/cargo.gd" id="10"]
+[ext_resource type="PackedScene" uid="uid://debxx26bk78ai" path="res://vfx/explosion/explosion.tscn" id="11"]
+[ext_resource type="Script" path="res://ships/player/player_laser_gun.gd" id="12"]
+[ext_resource type="PackedScene" path="res://ships/guns/laser_gun/laser_gun.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://cjuatqq8dyqtm" path="res://ships/guns/projectiles/plasma_shot_player.tscn" id="14"]
+[ext_resource type="PackedScene" uid="uid://2fqnfiy88gkx" path="res://vfx/shockwave_emitter.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://beqq502j6iba3" path="res://vfx/ripple_emitter.tscn" id="16"]
+[ext_resource type="PackedScene" uid="uid://deuvir5eklb28" path="res://vfx/move_trail.tscn" id="17"]
+[ext_resource type="Script" path="res://ships/player/vfx.gd" id="18"]
+[ext_resource type="PackedScene" uid="uid://cej2yui5vls48" path="res://vfx/dust_emitter.tscn" id="19"]
+[ext_resource type="PackedScene" path="res://ships/player/thrusters_audio_player.tscn" id="20"]
+[ext_resource type="AudioStream" uid="uid://ggje1b48aghh" path="res://ships/player/player_landing.wav" id="24"]
+
+[node name="PlayerShip" instance=ExtResource("1")]
+collision_mask = 14
+script = ExtResource("6")
+projectile_mask = 6
+ExplosionEffect = ExtResource("11")
+map_icon = ExtResource("8")
+
+[node name="StateMachine" type="Node" parent="." index="2"]
+script = ExtResource("2")
+initial_state = NodePath("Move/Travel")
+
+[node name="Move" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("3")
+drag_linear_coeff = 0.04
+
+[node name="Travel" type="Node" parent="StateMachine/Move" index="0"]
+script = ExtResource("4")
+
+[node name="ThrustersAudioPlayer" parent="StateMachine/Move/Travel" index="0" instance=ExtResource("20")]
+bus = &"Thrusters"
+
+[node name="Dock" type="Node" parent="StateMachine/Move" index="1"]
+script = ExtResource("5")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StateMachine/Move/Dock" index="0"]
+stream = ExtResource("24")
+
+[node name="Precision" type="Node" parent="StateMachine/Move" index="2"]
+script = ExtResource("7")
+
+[node name="Gun" parent="." index="3"]
+position = Vector2(0, -30.5)
+script = ExtResource("9")
+fire_action = "fire"
+projectile = ExtResource("14")
+
+[node name="CameraTransform" type="RemoteTransform2D" parent="." index="4"]
+
+[node name="MapTimer" type="Timer" parent="." index="5"]
+
+[node name="Cargo" type="Node" parent="." index="6"]
+script = ExtResource("10")
+
+[node name="VFX" type="Node2D" parent="." index="8"]
+script = ExtResource("18")
+
+[node name="MoveTrail" parent="VFX" index="0" instance=ExtResource("17")]
+z_index = -1
+lifetime = 0.3
+particle_flag_align_y = true
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+
+[node name="Shockwave" parent="VFX" index="1" instance=ExtResource("15")]
+
+[node name="Ripple" parent="VFX" index="2" instance=ExtResource("16")]
+position = Vector2(0, 20)
+
+[node name="DustRight" parent="VFX" index="3" instance=ExtResource("19")]
+z_index = -1
+position = Vector2(0, 20.2518)
+
+[node name="DustLeft" parent="VFX" index="4" instance=ExtResource("19")]
+z_index = -1
+position = Vector2(0, 20.2518)
+rotation = 3.66519
+
+[node name="LaserGun" parent="." index="9" instance=ExtResource("13")]
+rotation = -1.57079
+script = ExtResource("12")
+fire_action = "fire2"

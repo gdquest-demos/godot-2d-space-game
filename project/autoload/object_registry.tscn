@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dybp5bg5uv6ob"]
+
+[ext_resource type="Script" path="res://autoload/object_registry.gd" id="1"]
+
+[node name="ObjectRegistry" type="Node"]
+script = ExtResource("1")
+
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]

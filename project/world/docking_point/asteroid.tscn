@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=3 uid="uid://bijqggsg45ten"]
+
+[ext_resource type="PackedScene" uid="uid://bakjlpon86qit" path="res://world/docking_point/docking_point.tscn" id="1"]
+[ext_resource type="Script" path="res://world/docking_point/asteroid.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://4cefpybwxeud" path="res://world/docking_point/asteroid-round.svg" id="3"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 117.956
+
+[sub_resource type="CircleShape2D" id="2"]
+radius = 48.0012
+
+[sub_resource type="Animation" id="3"]
+resource_name = "spin"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 360.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ue24"]
+_data = {
+"spin": SubResource("3")
+}
+
+[sub_resource type="Animation" id="5"]
+resource_name = "pulse"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(2, 0.5, 2),
+"update": 0,
+"values": [Vector2(0.449401, 0.449401), Vector2(0.505533, 0.505533), Vector2(0.449401, 0.449401)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n33l1"]
+_data = {
+"pulse": SubResource("5")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="6"]
+
+[node name="Asteroid" instance=ExtResource("1")]
+script = ExtResource("2")
+min_iron_amount = 5.0
+max_iron_amount = 100.0
+min_scale = 0.2
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(0.449401, 0.449401)
+texture = ExtResource("3")
+
+[node name="CollisionShape2D" parent="DockingArea" index="0"]
+shape = SubResource("1")
+
+[node name="CollisionShape2D" parent="CharacterBody2D" index="0"]
+shape = SubResource("2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_4ue24")
+}
+autoplay = "spin"
+
+[node name="FXAnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_n33l1")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="7"]
+stream = SubResource("6")

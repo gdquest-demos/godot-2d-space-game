@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://do18uq3pp0ix7"]
+
+[ext_resource type="Texture2D" uid="uid://bnsth1ku11n0g" path="res://vfx/star.png" id="1"]
+
+[sub_resource type="Curve" id="Curve_ut37e"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498099, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4vy2t"]
+curve = SubResource("Curve_ut37e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v7ani"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(500, 250, 1)
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_4vy2t")
+
+[node name="BackgroundStars" type="ParallaxBackground"]
+scroll_base_scale = Vector2(0.5, 0.5)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1280, 720)
+
+[node name="Stars" type="GPUParticles2D" parent="ParallaxLayer"]
+position = Vector2(553, 294)
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_v7ani")
+texture = ExtResource("1")
+lifetime = 5.0
+visibility_rect = Rect2(-100, -100, 243.09, 200)
+local_coords = true
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.05, 0.05)
+motion_mirroring = Vector2(1280, 720)
+
+[node name="Stars" type="GPUParticles2D" parent="ParallaxLayer2"]
+position = Vector2(553, 294)
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_v7ani")
+texture = ExtResource("1")
+lifetime = 5.0
+visibility_rect = Rect2(-100, -100, 243.09, 200)
+local_coords = true

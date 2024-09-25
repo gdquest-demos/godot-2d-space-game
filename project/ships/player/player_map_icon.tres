@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://ui/minimap/map_icon.gd" type="Script" id=1]
+[ext_resource path="res://ships/spike.svg" type="Texture2D" id=2]
+
+
+
+
+[resource]
+script = ExtResource( 1 )
+texture = ExtResource( 2 )
+color = Color( 0.0156863, 0.87451, 0.988235, 1 )
+scale = 0.75

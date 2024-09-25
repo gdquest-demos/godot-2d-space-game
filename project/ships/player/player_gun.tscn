@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7nxlyo2uyo4j"]
+
+[ext_resource type="PackedScene" uid="uid://debtp1yb0jkjh" path="res://ships/guns/gun.tscn" id="1"]
+[ext_resource type="Script" path="res://ships/player/player_gun.gd" id="2"]
+[ext_resource type="PackedScene" path="res://ships/guns/projectiles/plasma_shot_player.tscn" id="3"]
+
+[node name="PlayerGun" instance=ExtResource("1")]
+script = ExtResource("2")
+fire_action = "fire"
+Projectile = ExtResource("3")

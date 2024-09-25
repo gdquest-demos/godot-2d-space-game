@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cogv17qglx7wi"]
+
+[ext_resource type="Script" path="res://ui/minimap/map_sprite.gd" id="1"]
+
+[node name="MapSprite" type="Sprite2D"]
+script = ExtResource("1")

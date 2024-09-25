@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://djnuo61p8l4dp"]
+
+[ext_resource type="Texture2D" uid="uid://b6l0eydeqr4y0" path="res://world/ores/iron_ore.svg" id="1"]
+[ext_resource type="Script" path="res://world/ores/iron_ore.gd" id="2"]
+[ext_resource type="AudioStream" uid="uid://so0382buwi3f" path="res://ships/player/minig_swallow.wav" id="3"]
+
+[node name="IronOre" type="Sprite2D"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1")
+script = ExtResource("2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3")

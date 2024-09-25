@@ -1,0 +1,8 @@
+[gd_resource type="FontFile" load_steps=2 format=2]
+
+[ext_resource path="res://ui/fonts/montserrat/montserrat-_bold.ttf" type="FontFile" id=1]
+
+
+[resource]
+use_filter = true
+font_data = ExtResource( 1 )

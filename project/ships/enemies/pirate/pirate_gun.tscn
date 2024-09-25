@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtdqyk0f6xtiq"]
+
+[ext_resource type="PackedScene" uid="uid://debtp1yb0jkjh" path="res://ships/guns/gun.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://ddji58yq46iww" path="res://ships/guns/projectiles/plasma_shot_enemy.tscn" id="2_s84j3"]
+
+[node name="PirateGun" instance=ExtResource("1")]
+projectile = ExtResource("2_s84j3")

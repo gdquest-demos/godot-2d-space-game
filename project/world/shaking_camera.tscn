@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmrr8sydhyk0t"]
+
+[ext_resource type="Script" path="res://ships/player/player_camera.gd" id="1"]
+
+[node name="Camera2D" type="Camera2D"]
+enabled = false
+zoom = Vector2(1.2, 1.2)
+position_smoothing_enabled = true
+editor_draw_drag_margin = true
+script = ExtResource("1")
+max_zoom = 6.0
+
+[node name="RemoteMap" type="RemoteTransform2D" parent="."]
+
+[node name="RemoteDistort" type="RemoteTransform2D" parent="."]

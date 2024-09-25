@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv00wk2go2l6s"]
+
+[ext_resource type="Script" path="res://ui/screen_fader.gd" id="1"]
+
+[sub_resource type="Gradient" id="1"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="2"]
+gradient = SubResource("1")
+
+[node name="ScreenFader" type="TextureRect"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = SubResource("2")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("1")

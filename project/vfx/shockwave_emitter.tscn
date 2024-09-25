@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://2fqnfiy88gkx"]
+
+[ext_resource type="Texture2D" uid="uid://b6vwf2vpiuhqy" path="res://vfx/annulus-mask.png" id="1"]
+
+[sub_resource type="Gradient" id="1"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="2"]
+gradient = SubResource("1")
+
+[sub_resource type="Curve" id="3"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="4"]
+width = 2048
+curve = SubResource("3")
+
+[sub_resource type="ParticleProcessMaterial" id="5"]
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("4")
+color_ramp = SubResource("2")
+
+[node name="ShockwaveEmitter" type="GPUParticles2D"]
+emitting = false
+amount = 1
+process_material = SubResource("5")
+texture = ExtResource("1")
+one_shot = true
+
+[node name="LifeSpan" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="LifeSpan" to="." method="queue_free"]

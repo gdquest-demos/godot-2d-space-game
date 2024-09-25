@@ -1,0 +1,57 @@
+[gd_scene load_steps=14 format=3 uid="uid://cb1q0bw0inr12"]
+
+[ext_resource type="PackedScene" uid="uid://dtrlskyqvhnj" path="res://ships/ship.tscn" id="1"]
+[ext_resource type="Script" path="res://ships/enemies/pirate/pirate_ship.gd" id="2"]
+[ext_resource type="Resource" path="res://ships/enemies/enemy_map_icon.tres" id="3"]
+[ext_resource type="PackedScene" uid="uid://debxx26bk78ai" path="res://vfx/explosion/explosion.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://c4na7gwglmb05" path="res://ships/enemies/topdown-enemy.svg" id="5"]
+[ext_resource type="Script" path="res://libraries/state_machine/state_machine.gd" id="6"]
+[ext_resource type="Script" path="res://ships/enemies/pirate/states/rest.gd" id="7"]
+[ext_resource type="Script" path="res://ships/enemies/pirate/states/attack.gd" id="8"]
+[ext_resource type="Script" path="res://ships/enemies/pirate/states/patrol.gd" id="9"]
+[ext_resource type="Script" path="res://ships/enemies/pirate/states/spawn.gd" id="10"]
+[ext_resource type="PackedScene" uid="uid://ddji58yq46iww" path="res://ships/guns/projectiles/plasma_shot_enemy.tscn" id="11"]
+[ext_resource type="Resource" uid="uid://33g1tgu87v1p" path="res://ships/enemies/pirate/pirate_gun_stats.tres" id="12"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 302.669
+
+[node name="PirateShip" groups=["Enemies", "Pirates"] instance=ExtResource("1")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("2")
+map_icon = ExtResource("3")
+acceleration_max = 900.0
+angular_acceleration_max = 900
+projectile_mask = 3
+explosion_effect = ExtResource("4")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("5")
+
+[node name="AggroArea" type="Area2D" parent="." index="2"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroArea" index="0"]
+shape = SubResource("1")
+
+[node name="Gun" parent="." index="3"]
+projectile = ExtResource("11")
+stats = ExtResource("12")
+
+[node name="StateMachine" type="Node" parent="." index="5"]
+script = ExtResource("6")
+initial_state = NodePath("Spawn")
+
+[node name="Spawn" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("10")
+
+[node name="Patrol" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("9")
+
+[node name="Rest" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("7")
+
+[node name="Attack" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("8")
+firing_alignment_tolerance_percentage = 0.05

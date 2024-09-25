@@ -12,14 +12,14 @@ config_version=5
 
 config/name="Harvester"
 config/description="Harvester is a top down space mining game meant to showcase the Godot Steering AI Framework for AI agents."
-run/main_scene="res://UI/MainMenu.tscn"
+run/main_scene="res://ui/main_menu.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 
 [autoload]
 
-Events="*res://Autoload/Events.gd"
-ObjectRegistry="*res://Autoload/ObjectRegistry.tscn"
+Events="*res://autoload/events.gd"
+ObjectRegistry="*res://autoload/object_registry.tscn"
 
 [debug]
 

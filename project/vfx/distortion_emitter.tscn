@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://pk1wnkaywdkt"]
+
+[ext_resource type="Texture2D" uid="uid://b12k1follp0uy" path="res://vfx/fade_cicle_deformed.png" id="1"]
+[ext_resource type="Script" path="res://vfx/distortion_emitter.gd" id="2"]
+
+[sub_resource type="Gradient" id="Gradient_o3ipc"]
+offsets = PackedFloat32Array(0.103806, 0.252595, 0.560554, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_83xwk"]
+gradient = SubResource("Gradient_o3ipc")
+
+[sub_resource type="ParticleProcessMaterial" id="3"]
+direction = Vector3(0, 1, 0)
+spread = 30.59
+flatness = 0.13
+initial_velocity_min = 10.0
+initial_velocity_max = 163.39
+gravity = Vector3(0, 0, 0)
+damping_min = 24.079
+damping_max = 35.977
+scale_min = 0.5
+scale_max = 2.5
+color_ramp = SubResource("GradientTexture1D_83xwk")
+
+[node name="DistortionEmitter" type="GPUParticles2D"]
+modulate = Color(1, 1, 1, 0.8)
+amount = 30
+process_material = SubResource("3")
+texture = ExtResource("1")
+lifetime = 0.75
+randomness = 0.33
+visibility_rect = Rect2(-4000, -4000, 8000, 8000)
+script = ExtResource("2")
+
+[node name="Timer" type="Timer" parent="."]

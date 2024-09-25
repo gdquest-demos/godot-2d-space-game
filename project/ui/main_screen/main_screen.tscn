@@ -1,0 +1,469 @@
+[gd_scene load_steps=26 format=3 uid="uid://bjne51x01i88h"]
+
+[ext_resource type="Texture2D" uid="uid://gso271go2fev" path="res://ui/main_screen/envelope-foreground.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cbujfepgfuvom" path="res://ui/main_screen/envelope-background.png" id="2"]
+[ext_resource type="Script" path="res://ui/main_screen/main_screen.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://cl37op10gaek8" path="res://ui/main_screen/gdquest-logo.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bnsth1ku11n0g" path="res://vfx/star.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://c8fufq6lxck4o" path="res://ui/main_screen/title.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://ds6idne4h5k7v" path="res://ui/main_screen/title-background.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://4cefpybwxeud" path="res://world/docking_point/asteroid-round.svg" id="8"]
+[ext_resource type="Texture2D" uid="uid://dnglxou5iix8d" path="res://ships/player/topdown-player.svg" id="9"]
+[ext_resource type="Texture2D" uid="uid://c4na7gwglmb05" path="res://ships/enemies/topdown-enemy.svg" id="11"]
+
+[sub_resource type="Curve" id="Curve_wuurf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498099, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_17s7k"]
+curve = SubResource("Curve_wuurf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xn6er"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(500, 250, 1)
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_17s7k")
+
+[sub_resource type="Animation" id="4"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 360.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gxh32"]
+_data = {
+"idle": SubResource("4")
+}
+
+[sub_resource type="Animation" id="5"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 360.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ihgpq"]
+_data = {
+"idle": SubResource("5")
+}
+
+[sub_resource type="Animation" id="6"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 360.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tvt5v"]
+_data = {
+"idle": SubResource("6")
+}
+
+[sub_resource type="Animation" id="7"]
+resource_name = "idle"
+length = 7.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 0),
+"update": 0,
+"values": [Vector2(15, 12), Vector2(15, 12), Vector2(1036, 820)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Enemy3:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.5, 5.2, 6.2),
+"transitions": PackedFloat32Array(1, 1, 1, 0),
+"update": 0,
+"values": [Vector2(15, 12), Vector2(15, 12), Vector2(15, 12), Vector2(932, 812)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Enemy2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.5, 5.5),
+"transitions": PackedFloat32Array(1, 1, 0),
+"update": 0,
+"values": [Vector2(15, 12), Vector2(15, 12), Vector2(932, 812)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Enemy:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4.5, 5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 0),
+"update": 0,
+"values": [Vector2(15, 12), Vector2(15, 12), Vector2(15, 12), Vector2(932, 812)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7t1un"]
+_data = {
+"idle": SubResource("7")
+}
+
+[sub_resource type="Animation" id="8"]
+length = 4.0
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Foreground/MarginContainer/ColorRect/GDQuestLogo:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25, 1, 2.2, 3),
+"transitions": PackedFloat32Array(0.517633, 1.93187, 0.517633, 1.93187),
+"update": 0,
+"values": [0.0, 0.0523599, 0.0, -0.0523599]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Foreground/MarginContainer/ColorRect/GDQuestLogo:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.95, 1.95, 2.95, 3.85),
+"transitions": PackedFloat32Array(1.46409, 0.707107, 1.46409, 0.707107),
+"update": 0,
+"values": [Vector2(1.1, 1.1), Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="9"]
+length = 0.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Foreground/MarginContainer/ColorRect/GDQuestLogo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 0.35, 0.85, 0.9),
+"transitions": PackedFloat32Array(0.287175, 0.287175, 1, 1),
+"update": 0,
+"values": [Vector2(466, 728), Vector2(466, 728), Vector2(466, 450), Vector2(466, 450)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Foreground/MarginContainer/ColorRect/HarvesterLogo:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.05, 0.2, 0.5, 0.75),
+"transitions": PackedFloat32Array(0.34151, 0.34151, 2.92817, 0.353553),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1e-05, 1e-05), Vector2(1.16, 1.16), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Foreground/MarginContainer/ColorRect/HarvesterLogo:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05, 0.2, 0.4, 0.65, 0.8),
+"transitions": PackedFloat32Array(0.329877, 0.329877, 0.554785, 1.31951, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0383972, -0.0366519, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Foreground/MarginContainer/ColorRect/GDQuestLogo:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.05, 0.3, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.167552, 0.167552, -0.0191986]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cg3t5"]
+_data = {
+"idle": SubResource("8"),
+"intro": SubResource("9")
+}
+
+[sub_resource type="GDScript" id="10"]
+script/source = "extends TextureButton
+
+func _pressed() -> void:
+	OS.shell_open(\"https://gdquest.com\")
+"
+
+[node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3")
+
+[node name="EnvelopeBackground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+color = Color(0.278431, 0.231373, 0.470588, 1)
+
+[node name="Stars" type="GPUParticles2D" parent="MarginContainer/MarginContainer/ColorRect"]
+position = Vector2(553, 294)
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_xn6er")
+texture = ExtResource("5")
+lifetime = 5.0
+visibility_rect = Rect2(-100, -100, 243.09, 200)
+local_coords = true
+
+[node name="Asteroids" type="Node2D" parent="MarginContainer/MarginContainer/ColorRect"]
+position = Vector2(-15, -15)
+
+[node name="Asteroid" type="Sprite2D" parent="MarginContainer/MarginContainer/ColorRect/Asteroids"]
+position = Vector2(164, 292)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/ColorRect/Asteroids/Asteroid"]
+libraries = {
+"": SubResource("AnimationLibrary_gxh32")
+}
+autoplay = "idle"
+
+[node name="Asteroid2" type="Sprite2D" parent="MarginContainer/MarginContainer/ColorRect/Asteroids"]
+position = Vector2(908, 524)
+rotation = 1.25664
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/ColorRect/Asteroids/Asteroid2"]
+libraries = {
+"": SubResource("AnimationLibrary_ihgpq")
+}
+autoplay = "idle"
+
+[node name="Asteroid3" type="Sprite2D" parent="MarginContainer/MarginContainer/ColorRect/Asteroids"]
+position = Vector2(1020, 148)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/ColorRect/Asteroids/Asteroid3"]
+libraries = {
+"": SubResource("AnimationLibrary_tvt5v")
+}
+autoplay = "idle"
+
+[node name="Ships" type="Node2D" parent="MarginContainer/MarginContainer/ColorRect"]
+position = Vector2(117, -67)
+
+[node name="Player" type="Sprite2D" parent="MarginContainer/MarginContainer/ColorRect/Ships"]
+z_index = 1
+position = Vector2(15, 12)
+rotation = 2.35619
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9")
+
+[node name="Enemy" type="Sprite2D" parent="MarginContainer/MarginContainer/ColorRect/Ships"]
+z_index = 1
+position = Vector2(15, 12)
+rotation = 2.35619
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("11")
+
+[node name="Enemy2" type="Sprite2D" parent="MarginContainer/MarginContainer/ColorRect/Ships"]
+z_index = 1
+position = Vector2(15, 12)
+rotation = 2.35619
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("11")
+
+[node name="Enemy3" type="Sprite2D" parent="MarginContainer/MarginContainer/ColorRect/Ships"]
+z_index = 1
+position = Vector2(15, 12)
+rotation = 2.35619
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("11")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/MarginContainer/ColorRect/Ships"]
+libraries = {
+"": SubResource("AnimationLibrary_7t1un")
+}
+autoplay = "idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cg3t5")
+}
+autoplay = "intro"
+
+[node name="Foreground" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Foreground"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="ColorRect" type="ColorRect" parent="Foreground/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+color = Color(1, 1, 1, 0.0588235)
+
+[node name="HarvesterLogo" type="TextureRect" parent="Foreground/MarginContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.0
+offset_top = -103.0
+offset_right = 261.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(261, 103)
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Title" type="TextureRect" parent="Foreground/MarginContainer/ColorRect/HarvesterLogo"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = -55.5
+offset_right = 205.0
+offset_bottom = 28.5
+scale = Vector2(0.956783, 0.956783)
+pivot_offset = Vector2(204, 42)
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="GDQuestLogo" type="TextureButton" parent="Foreground/MarginContainer/ColorRect"]
+light_mask = 2
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = 128.0
+offset_right = 114.0
+offset_bottom = 199.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.167552
+scale = Vector2(1.01872, 1.01872)
+pivot_offset = Vector2(114, 35)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4")
+stretch_mode = 5
+script = SubResource("10")
+
+[node name="EnvelopeForeground" type="TextureRect" parent="Foreground"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 176.0
+texture = ExtResource("1")
+expand_mode = 1
+stretch_mode = 6
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
